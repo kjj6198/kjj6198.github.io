@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>如何從 legacy code 中尋找出口（中）- CSS 篇 | 前端曬衣場</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="重構,前端" />
+    
+    <meta name="description" content="前言我們的第一步是先從 CSS 下手，因為 css 是相對於其他前端部分來說比較容易重構的部分。很容易髒亂的 code 也是 CSS。
+上一篇描述了在大型專案中引入新框架及技術的困難點，這一篇主要會專注在如何透過現有的工具及框架來重構現有的代碼。
+本次的重構技巧會以 SCSS 為主，所以在閱讀本文之前，我先假設你已經有基本的 SCSS 以及 CSS 的基礎。其他預處理器的概念應該是相通的。
+引入">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何從 legacy code 中尋找出口（中）- CSS 篇">
+<meta property="og:url" content="http://kjj6198.github.io/2016/06/14/legacy-code2/index.html">
+<meta property="og:site_name" content="前端曬衣場">
+<meta property="og:description" content="前言我們的第一步是先從 CSS 下手，因為 css 是相對於其他前端部分來說比較容易重構的部分。很容易髒亂的 code 也是 CSS。
+上一篇描述了在大型專案中引入新框架及技術的困難點，這一篇主要會專注在如何透過現有的工具及框架來重構現有的代碼。
+本次的重構技巧會以 SCSS 為主，所以在閱讀本文之前，我先假設你已經有基本的 SCSS 以及 CSS 的基礎。其他預處理器的概念應該是相通的。
+引入">
+<meta property="og:updated_time" content="2016-10-18T11:32:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="如何從 legacy code 中尋找出口（中）- CSS 篇">
+<meta name="twitter:description" content="前言我們的第一步是先從 CSS 下手，因為 css 是相對於其他前端部分來說比較容易重構的部分。很容易髒亂的 code 也是 CSS。
+上一篇描述了在大型專案中引入新框架及技術的困難點，這一篇主要會專注在如何透過現有的工具及框架來重構現有的代碼。
+本次的重構技巧會以 SCSS 為主，所以在閱讀本文之前，我先假設你已經有基本的 SCSS 以及 CSS 的基礎。其他預處理器的概念應該是相通的。
+引入">
+    
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+    
+
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">一位在台北努力求生存的大學生。喜歡看日劇、喝☕️、吃🍖。</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">主頁</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/前端/">前端</a></li></ul>
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">關於</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜尋" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要找..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '頁面',
+            CATEGORIES: '分類',
+            TAGS: '標籤',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/前端/">前端</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-legacy-code2" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        如何從 legacy code 中尋找出口（中）- CSS 篇
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-subtitle">
+                <a href="/2016/06/14/legacy-code2/" class="article-date">
+    <time datetime="2016-06-14T04:01:52.000Z" itemprop="datePublished">2016-06-14</time>
+</a>
+                
+    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/重構/">重構</a></li></ul>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>我們的第一步是先從 CSS 下手，因為 css 是相對於其他前端部分來說比較容易重構的部分。很容易髒亂的 code 也是 CSS。</p>
+<p>上一篇描述了在大型專案中引入新框架及技術的困難點，這一篇主要會專注在如何透過現有的工具及框架來重構現有的代碼。</p>
+<p>本次的重構技巧會以 SCSS 為主，所以在閱讀本文之前，我先假設你已經有基本的 SCSS 以及 CSS 的基礎。其他預處理器的概念應該是相通的。</p>
+<h2 id="引入-style-linter-及-editorconfig"><a href="#引入-style-linter-及-editorconfig" class="headerlink" title="引入 style linter 及 editorconfig"></a>引入 style linter 及 editorconfig</h2><p>我們採取的第一步是先引入審查代碼工具。目前比較流行的 css linter 是 stylelinter，他能夠針對 scss sass 語法做 lint。也可以搭配其他 IDE、文字編輯器 plugin。這邊的範例是使用 sublime，其他的 IDE 應該也有類似的功能。</p>
+<h3 id="1-加入-stylelint"><a href="#1-加入-stylelint" class="headerlink" title="1. 加入 stylelint"></a>1. 加入 stylelint</h3><p>stylelint 除了可以針對 scss 語法做 lint 之外。由於其本身是用 js 撰寫的，可以客製化自己的 rule 跟加入其他開源的 plugin。</p>
+<p>因為 stylelint 是以 AST 的方式解析，所以可以很容易的對文件中的節點做操作。</p>
+<p>關於 stylelint 的深入使用，已經超過本文篇幅，有興趣的人可以參考 css trick 的<a href="https://css-tricks.com/stylelint/" target="_blank" rel="external">教學</a></p>
+<p>首先，先來安裝 <code>stylelint</code>，run <code>npm install -g stylelint</code>。</p>
+<p>再來設置 .stylelintrc 檔，詳細的 rules 可以到<a href="http://stylelint.io/user-guide/rules/" target="_blank" rel="external">這裡</a> 查看。如果你不想要那麼麻煩自己手動一個一個設定的話。可以考慮使用 <a href="https://github.com/stylelint/stylelint-config-standard" target="_blank" rel="external">stylelint-config-standard</a> 這個插件，再根據自己的需求做調整。</p>
+<p><code>npm install --save-dev stylelint-config-standard</code></p>
+<p><strong>這邊還是建議花時間瞭解一下專案的需求來制定 rule，不然有時候太嚴格的 rule，滿江紅看到也懶得改了。</strong></p>
+<h3 id="2-加入-editorconfig"><a href="#2-加入-editorconfig" class="headerlink" title="2. 加入 .editorconfig"></a>2. 加入 .editorconfig</h3><p>EditorConfig 是一個為了統一代碼風格的解決方案。每個人文字編輯器的環境可能不盡相同，為了統一彼此之間的環境，這邊我們採用的 <code>editorconfig</code></p>
+<p>設定非常簡單，只要新增一個檔案就好。<a href="http://EditorConfig.org" target="_blank" rel="external">editorconfig</a>。</p>
+<p>目前幾乎主流的文字編輯器都有支援 editorconfig。</p>
+<h2 id="常見的-code-smell-以及-refactor-方式"><a href="#常見的-code-smell-以及-refactor-方式" class="headerlink" title="常見的 code smell 以及 refactor 方式"></a>常見的 code smell 以及 refactor 方式</h2><p>在開始捲起袖子做事之前，還是先來確認一下目前的專案是否需要 refactor：</p>
+<ul>
+<li>許多元件（如 button input）等放在同一個檔案內，查找非常不易。</li>
+<li>覆寫了許多 class 造成預期之外的行為發生</li>
+<li>早期沒有統一的代碼規範，tab、空白夾雜在一起，閱讀性大幅降低</li>
+<li>!important 四散各處</li>
+<li>變數的命名跟管理不夠統一</li>
+<li>團隊開始擴增</li>
+<li>相關的文件不足</li>
+</ul>
+<p>接下來介紹一些比較常見的 code smell</p>
+<h3 id="Order"><a href="#Order" class="headerlink" title="Order"></a>Order</h3><p>class 變多之後，如果 rule 裡面沒有一定的排列順序的話，其實查找很不方便。而且易讀性並不高，像是下列的 code</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.class</span> &#123;</div><div class="line">	<span class="attribute">position</span>: absolute;</div><div class="line">	<span class="attribute">display</span>: none;</div><div class="line">	<span class="attribute">padding</span>: <span class="number">30px</span>;</div><div class="line">	<span class="attribute">cursor</span>: pointer;</div><div class="line">	<span class="attribute">list-style</span>: none;</div><div class="line">	<span class="attribute">font-size</span>: <span class="number">20px</span>;</div><div class="line">	<span class="attribute">background</span>: white;</div><div class="line">	<span class="attribute">margin</span>:<span class="number">0</span>;</div><div class="line">	<span class="attribute">top</span>:<span class="number">0</span>;</div><div class="line">	<span class="attribute">left</span>:<span class="number">0</span>;</div><div class="line">	<span class="attribute">width</span>: <span class="number">250px</span>;</div><div class="line">	<span class="attribute">padding-left</span>: <span class="number">15px</span>;</div><div class="line">	<span class="attribute">overflow-y</span>: scroll;</div><div class="line">	<span class="attribute">overflow-x</span>: hidden;</div><div class="line">	<span class="attribute">border</span>: <span class="number">1px</span> solid $hr-gray;</div><div class="line">	<span class="attribute">z-index</span>: <span class="number">9999999</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>那麼要怎樣排序會比較好呢？這邊提供幾個大原則：</p>
+<ol>
+<li>display、position</li>
+<li>box-model</li>
+<li>font、typography</li>
+<li>layout(包含 color、border-radius 等)</li>
+<li>其他屬性(如animation)</li>
+</ol>
+<p>原因：對一個 class 來說，最重要的就是 display 與 position ，所以應該擺在最上面。而其次重要的內容是文字，所以擺第二，最後才是 <code>layout</code> 與其他屬性。<br>至於屬於同屬性的話不限制順序，例如 padding margin 順序調換沒有關係，因為找起來都很方便。只要維持一定的邏輯即可。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.class</span> &#123;</div><div class="line">	<span class="attribute">display</span>: none;</div><div class="line">	<span class="attribute">position</span>: absolute;</div><div class="line">	<span class="attribute">top</span>:<span class="number">0</span>;</div><div class="line">	<span class="attribute">left</span>:<span class="number">0</span>;</div><div class="line">	<span class="attribute">z-index</span>: <span class="number">9999999</span>;</div><div class="line">	</div><div class="line">	<span class="attribute">width</span>: <span class="number">250px</span>;</div><div class="line"></div><div class="line">	<span class="attribute">padding</span>: <span class="number">30px</span>;</div><div class="line">	<span class="attribute">padding-left</span>: <span class="number">15px</span>;</div><div class="line">	<span class="attribute">margin</span>:<span class="number">0</span>;</div><div class="line"></div><div class="line">	<span class="attribute">font-size</span>: <span class="number">20px</span>;</div><div class="line"></div><div class="line">	<span class="attribute">background</span>: white;</div><div class="line">	<span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#aaa</span>;</div><div class="line"></div><div class="line">	<span class="attribute">list-style</span>: none;</div><div class="line">	<span class="attribute">cursor</span>: pointer;</div><div class="line">	</div><div class="line">	<span class="attribute">overflow-y</span>: scroll;</div><div class="line">	<span class="attribute">overflow-x</span>: hidden;	</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="善用-sass-map-管理變數"><a href="#善用-sass-map-管理變數" class="headerlink" title="善用 sass map 管理變數"></a>善用 sass map 管理變數</h3><p>style 檔案變多了之後，相對的要管理的變數也會變得越來越多。<br>除了在命名時加上前綴之外，我們也可以利用 sass map 的方式來統一管理。而且 sass map 提供了一些很方便的 <a href="http://sass-lang.com/documentation/Sass/Script/Functions.html" target="_blank" rel="external">function</a> 來操作，像是 <code>map-get</code> <code>map-has-key</code>等等，可以很有效地把變數 group 起來。很像 js 的 object。</p>
+<p>以 <code>z-index</code> 來說，我們可以改寫下面的 code</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">/* before */</div><div class="line">$zindex-navbar: 100;</div><div class="line">$zindex-dropdown: 200;</div><div class="line">$zindex-tooltip: 300;</div><div class="line">$zindex-modal: 400;</div><div class="line"></div><div class="line">.navbar &#123;</div><div class="line">	z-index: $zindex-navbar;</div><div class="line">&#125;</div><div class="line"></div><div class="line">/* after */</div><div class="line">$zindex: (</div><div class="line">  navbar: 100,</div><div class="line">  dropdown: 200,</div><div class="line">  tooltip: 300,</div><div class="line">  modal: 400</div><div class="line">);</div><div class="line"></div><div class="line">.navbar &#123;</div><div class="line">	z-index: map-get($zindex, 'navbar');</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>用 <code>map</code> 的方式取值，看起來好像比較厚工一點，我們可以用 sass 的 function 包裝起來：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * z alias for z-index</div><div class="line"> * get zindex map value</div><div class="line"> */</div><div class="line">@<span class="keyword">function</span> z($key) &#123;</div><div class="line">	@<span class="keyword">if</span>(<span class="keyword">map</span>-<span class="keyword">has</span>-<span class="keyword">key</span>($<span class="keyword">zindex</span>, $key))&#123;</div><div class="line">    @<span class="keyword">return</span> map-get($zindex, $key);</div><div class="line">  &#125; @<span class="keyword">else</span> &#123;</div><div class="line">    @<span class="keyword">error</span> <span class="string">"unknown key #&#123;$key&#125;"</span>;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.navbar</span> &#123;</div><div class="line">	<span class="attribute">z-index</span>: <span class="built_in">z</span>($zindex, <span class="string">'navbar'</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>當然還有其他的應用像是 <code>color</code> <code>typography</code> 等等，都可以搭配 sass map 的方式來操作。</p>
+<p>如果你認為上述的方式跟用前綴的方式分類變數沒有什麼不同的話，不套用也沒關係，重構是為了讓之後的開發更舒服。</p>
+<h3 id="大量的巢狀-class"><a href="#大量的巢狀-class" class="headerlink" title="大量的巢狀 class"></a>大量的巢狀 class</h3><p>我的建議是不要超過三層，第一是易讀性非常低，再來很容易覆蓋到權重。<br>可以採用一些目前比較熱門的 css 命名規範如 OOCSS 或是 BEM，或者搭配兩者一起使用。</p>
+<p>但最重要的一點是自己寫起來的感覺，不要讓規範箝制你了。</p>
+<p>如果想要使用 scss 的巢狀功能方便閱讀，又不想要讓巢狀 class 覆蓋權重的話，可以使用 @at-root，@at-root 在編譯的時候會幫你把巢狀拆出來到 root。</p>
+<p>另外可以使用 <code>&gt;</code> 子元素選擇器來取代後代選擇器。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">.classA &#123;</div><div class="line">	@at-root .classB &#123;</div><div class="line">    // bla</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// compiled</div><div class="line"></div><div class="line">.classA &#123;</div><div class="line">	</div><div class="line">&#125;</div><div class="line">  .classB &#123;</div><div class="line">    // bla</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p>實際的 use case 如下：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">.alert-modal &#123;</div><div class="line">  @at-root &amp;__header &#123;</div><div class="line"></div><div class="line">  &#125;</div><div class="line"></div><div class="line">  @at-root &amp;__body &#123;</div><div class="line"></div><div class="line">  &#125;</div><div class="line"></div><div class="line">  @at-root &amp;__footer &#123;</div><div class="line"></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>以上的代碼好像沒有想像中的好看，等下可以搭配 mixin 把它進一步做簡化。</p>
+<h2 id="善用-Mixin-簡化程式"><a href="#善用-Mixin-簡化程式" class="headerlink" title="善用 Mixin 簡化程式"></a>善用 Mixin 簡化程式</h2><p>除了一般使用 mixin 來加入 <code>prefixer</code> 之外，mixin 能夠做的事情還有很多，這邊提出幾個方法給大家參考。</p>
+<h3 id="BEM-mixin"><a href="#BEM-mixin" class="headerlink" title="BEM mixin"></a>BEM mixin</h3><p>BEM 的命名方式，如果一直手動 key 的話，感覺也挺麻煩的，而且 key 錯的機率也蠻高的，我們可以利用 mixin 來簡化他。</p>
+<p>順便一提，如果你的專案已經套用了 <code>postCSS</code>，可以使用 <a href="https://www.npmjs.com/package/postcss-bem" target="_blank" rel="external">postcss-bem</a> 來幫助命名。</p>
+<p>如果你不喜歡他的命名方式，或是當前還無法套用 postCSS 的話也沒關係，我們可以自己做一個。</p>
+<p>上面的 code 可以改成下面的形式：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">@mixin block($block_name) &#123;</div><div class="line">  .#&#123;$block_name&#125; &#123; @content; &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">@mixin element($element_name) &#123; </div><div class="line">  @at-root &amp;__#&#123;$element_name&#125; &#123; @content; &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">@mixin modifier($modifier_name) &#123;</div><div class="line">  @at-root &amp;-#&#123;$modifier_name&#125; &#123; @content; &#125;	</div><div class="line">&#125;</div><div class="line"></div><div class="line">@mixin state($state_name) &#123;</div><div class="line">	&amp;.is-$&#123;#state_name&#125; &#123;@content;&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// modal.scss</div><div class="line"></div><div class="line">// before</div><div class="line">.alert-modal &#123;</div><div class="line">  @at-root &amp;__header &#123;</div><div class="line"></div><div class="line">  &#125;</div><div class="line"></div><div class="line">  @at-root &amp;__body &#123;</div><div class="line"></div><div class="line">  &#125;</div><div class="line"></div><div class="line">  @at-root &amp;__footer &#123;</div><div class="line"></div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// after</div><div class="line">@include block("alert-modal") &#123;</div><div class="line">	@include element("header") &#123;&#125;</div><div class="line">	@include element("body") &#123;&#125;</div><div class="line">	@include element("footer") &#123;&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>這樣一來簡單的 BEM mixins 就製作完成了。注意到這邊我們使用 <code>at-root</code> 的方式來避免巢狀 class。</p>
+<p>可以按照自己的喜好來調整命名方式，或者嚴謹一點對參數做一些處理（轉為小寫等等）、加入判斷式等等，或者今天你想要使用巢狀 class 的話可以加入額外的判斷參數。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">@mixin element($element_name, $at-root: true) &#123; </div><div class="line">  @if($at-root) &#123;</div><div class="line">    @at-root &amp;__#&#123;$element_name&#125; &#123; @content; &#125;</div><div class="line">  &#125;</div><div class="line">  @else &#123;</div><div class="line">    &amp;__#&#123;$element_name&#125; &#123; @content; &#125;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="util-mixin"><a href="#util-mixin" class="headerlink" title="util mixin"></a>util mixin</h3><p>舉例來說，在設置 padding margin 的時候，我們常常會將上下或是左右的值設為一樣。寫久了難免會嫌麻煩，這時候就可以拜託 mixin 了。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">// before</div><div class="line">.classA &#123;</div><div class="line">	margin-right: 10px;</div><div class="line">	margin-left: 10px;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// after</div><div class="line"></div><div class="line">/*</div><div class="line"> * lr Alias for left right</div><div class="line"> */</div><div class="line">@mixin lr($box_model, $value) &#123;</div><div class="line">	#&#123;$box_model&#125;-left: $value;</div><div class="line">	#&#123;$box_model&#125;-right: $value;</div><div class="line">&#125;;</div><div class="line">.classA &#123;</div><div class="line">	@include lr("margin", 10px);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>這邊沒有寫得很嚴謹，你可以另外加入判斷式來保證輸入的值是合法的，類似的概念也能套用到 top left 設值上。</p>
+<p>或是常常遇到的 clearfix。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">@mixin clearfix() &#123;</div><div class="line">	&amp;:before, &amp;:after &#123;</div><div class="line">    display: table;</div><div class="line">    content: "";</div><div class="line">		clear: both;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.column &#123;</div><div class="line">	@include clearfix;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="child-selector-mixin"><a href="#child-selector-mixin" class="headerlink" title="child selector mixin"></a>child selector mixin</h3><p>常常會遇到使用 child selector 的情境。我們可以用 mixin 進一步包裝起來。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">// before</div><div class="line">.list &#123;</div><div class="line">	&amp;:first-child &#123;</div><div class="line">	  //bla</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	&amp;:nth-child(2n) &#123;</div><div class="line">	  //bla</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">// after </div><div class="line">@mixin first() &#123;</div><div class="line">	&amp;:first-child &#123; @content; &#125;</div><div class="line">&#125;</div><div class="line">.list &#123;</div><div class="line">	@include first() &#123;&#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>這邊推薦 <a href="http://lukyvj.github.io/family.scss/" target="_blank" rel="external">Family.scss</a>，搜集了許多好用 child selector mixin。</p>
+<p><strong>p.s：我認為剛入門 CSS 的人還是從純 CSS 開始學習比較好，以免被 SCSS 的語法糖給寵壞了</strong></p>
+<h2 id="善用-Comment"><a href="#善用-Comment" class="headerlink" title="善用 Comment"></a>善用 Comment</h2><p>在缺乏 function 的 css 下，使用 comment 來解釋 class 更為重要。這邊提供一些，comment 的技巧。</p>
+<p>註解不但方便自己閱讀，之後別人接手也會比較快理解這個 class 該如何使用、在哪個場景使用。</p>
+<h3 id="目錄"><a href="#目錄" class="headerlink" title="目錄"></a>目錄</h3><p>如果文件包含的 class 較多，可以考慮在文件最前面加入目錄，方便之後查找。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * INPUT</div><div class="line"> *  text</div><div class="line"> *  select</div><div class="line"> *  number</div><div class="line"> * BUTTON</div><div class="line"> *  primary</div><div class="line"> *  warn</div><div class="line"> */</div></pre></td></tr></table></figure>
+<h3 id="魔術數字、HACK、使用方式"><a href="#魔術數字、HACK、使用方式" class="headerlink" title="魔術數字、HACK、使用方式"></a>魔術數字、HACK、使用方式</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">/*</div><div class="line"> * for input[type="text"]</div><div class="line"> * e.g: &lt;input type="text" /&gt;</div><div class="line"> */</div><div class="line"> </div><div class="line">.text-input[type="text"] &#123;</div><div class="line">  padding: 20px;</div><div class="line"></div><div class="line">  /* page offset */</div><div class="line">	top: 27px;</div><div class="line">  /* IE 8+ hack */</div><div class="line">  // ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="CSS-結構"><a href="#CSS-結構" class="headerlink" title="CSS 結構"></a>CSS 結構</h2><p>基本上分成幾個大方向：<code>module</code> <code>base</code> <code>config</code> <code>helper</code></p>
+<h3 id="module"><a href="#module" class="headerlink" title="module"></a>module</h3><p>module 資料夾裡存放所有模組化的元件，像是 button input modal 等等。如果元件拆得更細的話，可以再另外開資料夾，像是 button 有可能樣式比較多，這時候我們可以另外開一個 <code>button</code> 資料夾，裡頭存放所有 button 的樣式。</p>
+<h3 id="base"><a href="#base" class="headerlink" title="base"></a>base</h3><p>base 裡頭放置了像是 <code>grid</code> <code>normalize</code> <code>reset</code> <code>typography</code> 等比較基本的架構。</p>
+<h3 id="config"><a href="#config" class="headerlink" title="config"></a>config</h3><p>存放變數跟 color 的地方，設定的內容統一存放在這個資料夾統一管理。</p>
+<h3 id="helper"><a href="#helper" class="headerlink" title="helper"></a>helper</h3><p>存放客製化的 function 跟 mixin。</p>
+<h2 id="寫在最後"><a href="#寫在最後" class="headerlink" title="寫在最後"></a>寫在最後</h2><p>如果你有額外的時間，建議你還是可以去看看像是 <a href="https://github.com/postcss/postcss" target="_blank" rel="external">postCSS</a>、<a href="https://github.com/css-modules/css-modules" target="_blank" rel="external">css-modules</a>、<a href="https://github.com/webpack/webpack" target="_blank" rel="external">webpack</a> 等優秀的開源工具。<br>不然整天跟 CSS 打架總有一天會精神耗弱的XD。</p>
+<p>做了一個<a href="https://github.com/kjj6198/css-structure-example" target="_blank" rel="external">DEMO</a>，非常陽春。</p>
+<p>如果你也想分享自己在前端跟 legacy code 奮鬥的過程，或是有更好的解決方案，歡迎在下面留言。</p>
+<h2 id="持續關注前端趨勢"><a href="#持續關注前端趨勢" class="headerlink" title="持續關注前端趨勢"></a>持續關注前端趨勢</h2><p>這裡分享幾個覺得蠻優質的資源。</p>
+<p><a href="http://gold.xitu.io/" target="_blank" rel="external">掘金網</a></p>
+<p><a href="http://weekly.codetengu.com/" target="_blank" rel="external">碼天狗（但最近前端的分享不多）</a></p>
+<p><a href="https://www.techbridge.cc/" target="_blank" rel="external">TechBrige</a></p>
+<p><a href="http://csswizardry.com/" target="_blank" rel="external">CSS wizard</a></p>
+<h3 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h3><p><a href="http://cssguidelin.es/" target="_blank" rel="external">CSS guideline</a></p>
+<p><a href="https://www.smashingmagazine.com/2016/05/stylelint-the-style-sheet-linter-weve-always-wanted/" target="_blank" rel="external">Why Stylelint</a></p>
+<p><a href="https://hacks.mozilla.org/2016/05/css-coding-techniques/?utm_campaign=CodeTengu&amp;utm_medium=email&amp;utm_source=CodeTengu_44" target="_blank" rel="external">CSS coding techniques</a></p>
+<p><a href="http://seesparkbox.com/foundry/why_you_need_to_refactor_your_css" target="_blank" rel="external">why you should refactor your css</a></p>
+<p><a href="http://rscss.io/" target="_blank" rel="external">rsscss.io</a></p>
+<h4 id="Legacy-Code-專欄"><a href="#Legacy-Code-專欄" class="headerlink" title="Legacy Code 專欄"></a>Legacy Code 專欄</h4><ul>
+<li><a href="/2016/06/11/legacy-code/" title="從 legacy code 中尋找出口（上）">從 legacy code 中尋找出口（上）</a></li>
+<li><a href="/2016/09/17/legacy-code3/" title="從 legacy code 中尋找出口（中）- HTML 篇">從 legacy code 中尋找出口（中）- HTML 篇</a>
+</li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://kjj6198.github.io/2016/06/14/legacy-code2/" data-id="cizc55nlj0001vw5t6kez8c89" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>關注我 :</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="https://twitter.com/kalanyei" target="_blank">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/kjj6198" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2016/09/17/legacy-code3/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">下一篇</strong>
+        <p class="article-nav-title">
+        
+            從 legacy code 中尋找出口（中）- HTML 篇
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2016/06/11/legacy-code/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">從 legacy code 中尋找出口（上）</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/09/17/legacy-code3/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2016/09/17/legacy-code3/" class="title">從 legacy code 中尋找出口（中）- HTML 篇</a></p>
+                            <p class="item-date"><time datetime="2016-09-17T02:40:16.000Z" itemprop="datePublished">2016-09-17</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/06/14/legacy-code2/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2016/06/14/legacy-code2/" class="title">如何從 legacy code 中尋找出口（中）- CSS 篇</a></p>
+                            <p class="item-date"><time datetime="2016-06-14T04:01:52.000Z" itemprop="datePublished">2016-06-14</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/06/11/legacy-code/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2016/06/11/legacy-code/" class="title">從 legacy code 中尋找出口（上）</a></p>
+                            <p class="item-date"><time datetime="2016-06-11T00:56:15.000Z" itemprop="datePublished">2016-06-11</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">分類</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">歸檔</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">連結</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2017 Kalan</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'http://kjj6198.github.io/2016/06/14/legacy-code2/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>從 legacy code 中尋找出口（上） | 前端曬衣場</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="重構,前端" />
+    
+    <meta name="description" content="在我第一次進入主產品開發後，把代碼從 Github 上面 pull 下來。
+「這是什麼鬼東西？」
+結構混亂，大量覆寫的 class 各處都是，以及很可怕的巢狀 ID。view 的部分也有些地方非常雜亂……。看來 legacy code 跟 refactor 永遠都在進行式。
+對於日新月異的前端來說，要接觸一個新技術、框架並不是太困難的事。但困難點在於如何在現有的大型專案中做取捨，我們常常會有其他考">
+<meta property="og:type" content="article">
+<meta property="og:title" content="從 legacy code 中尋找出口（上）">
+<meta property="og:url" content="http://kjj6198.github.io/2016/06/11/legacy-code/index.html">
+<meta property="og:site_name" content="前端曬衣場">
+<meta property="og:description" content="在我第一次進入主產品開發後，把代碼從 Github 上面 pull 下來。
+「這是什麼鬼東西？」
+結構混亂，大量覆寫的 class 各處都是，以及很可怕的巢狀 ID。view 的部分也有些地方非常雜亂……。看來 legacy code 跟 refactor 永遠都在進行式。
+對於日新月異的前端來說，要接觸一個新技術、框架並不是太困難的事。但困難點在於如何在現有的大型專案中做取捨，我們常常會有其他考">
+<meta property="og:updated_time" content="2016-10-18T11:31:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="從 legacy code 中尋找出口（上）">
+<meta name="twitter:description" content="在我第一次進入主產品開發後，把代碼從 Github 上面 pull 下來。
+「這是什麼鬼東西？」
+結構混亂，大量覆寫的 class 各處都是，以及很可怕的巢狀 ID。view 的部分也有些地方非常雜亂……。看來 legacy code 跟 refactor 永遠都在進行式。
+對於日新月異的前端來說，要接觸一個新技術、框架並不是太困難的事。但困難點在於如何在現有的大型專案中做取捨，我們常常會有其他考">
+    
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+    
+
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">一位在台北努力求生存的大學生。喜歡看日劇、喝☕️、吃🍖。</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">主頁</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/前端/">前端</a></li></ul>
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">關於</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜尋" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要找..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '頁面',
+            CATEGORIES: '分類',
+            TAGS: '標籤',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/前端/">前端</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-legacy-code" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        從 legacy code 中尋找出口（上）
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-subtitle">
+                <a href="/2016/06/11/legacy-code/" class="article-date">
+    <time datetime="2016-06-11T00:56:15.000Z" itemprop="datePublished">2016-06-11</time>
+</a>
+                
+    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/重構/">重構</a></li></ul>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <p>在我第一次進入主產品開發後，把代碼從 Github 上面 pull 下來。</p>
+<p>「這是什麼鬼東西？」</p>
+<p>結構混亂，大量覆寫的 class 各處都是，以及很可怕的巢狀 ID。<br>view 的部分也有些地方非常雜亂……。看來 legacy code 跟 refactor 永遠都在進行式。</p>
+<p>對於日新月異的前端來說，要接觸一個新技術、框架並不是太困難的事。但困難點在於如何在現有的大型專案中做取捨，我們常常會有其他考量。例如團隊的接受度、team leader、其他政治因素等等而無法輕易地將新框架套用在目前的專案上。</p>
+<p>這個系列的文章主要會分享如何在既有的專案中小心地進行重構。希望對各位有些幫助。</p>
+<h2 id="目前遇到的問題"><a href="#目前遇到的問題" class="headerlink" title="目前遇到的問題"></a>目前遇到的問題</h2><p>HTML 的架構混亂肥大，許多 <code>util class</code> 四散各處，在 CSS 中更可以看到大量的覆寫 class。雖然聽說之前已經有整理過了，但顯然這個房間還充滿許多灰塵。</p>
+<p>我認為前端常常遇到的 smell 問題有：</p>
+<ul>
+<li>復用性不足：儘管已經採用 React，但仍有許多高耦合的 component。而且其中還夾雜著 flux 與 redux 兩種不同的 library</li>
+<li>大量混雜業務邏輯的代碼（如 API ability 的判斷等），不僅要實際去了解業務流程外，還要知道檔案放在哪，必要時可能還要去看後端的程式碼</li>
+<li>HTML 的撰寫不夠語義化，充斥太多 <code>util class</code> 及 <code>atomic class</code>，後面接手的人比較難搞懂這行 view 裡頭所要表達的東西。</li>
+<li>CSS 檔案的撰寫不夠模組化。有太多混雜的模組都放在同一隻檔案中，查找非常不方便。</li>
+<li>大量的覆寫 class 造成上版時有很多意外的狀況發生。</li>
+</ul>
+<p>沒有統一的規範跟撰寫方式，很快代碼就會往指數性的肥大邁進。</p>
+<p>身為一個前端工程師，經驗還稍嫌不足的我來說，雖然目前正在孤軍奮戰中，但其實還能做一些事。有問題對我來說是一件非常值得興奮的事，至少對我來說，那是一個可以捲起袖子來做事的大好機會。</p>
+<h2 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h2><p>那麼，到底該怎麼做呢？我認為可以從以下幾點開始下手</p>
+<ul>
+<li>著手撰寫 <code>styleguide</code>，讓自己與之後的前端團隊快速上手，並且有一定的準則可以遵守</li>
+<li>技術選型：自動化工具、code quality 工具、選擇與淘汰</li>
+<li>test 框架：前端代碼大部分都還沒寫 test，未來等架構穩定的時候希望可以趕快補上。</li>
+<li>讓重構變得簡單</li>
+<li>讓 comment 及 doc 變成習慣： comment 的 doc 永遠是工程師的好朋友！</li>
+<li>提交代碼的規範</li>
+</ul>
+<p>本系列的文章主要會著重在重構的部分，最後一篇會再跟大家分享文件應該寫些什麼，以及前端如何提交代碼及發送 pull request 給 code reviewer。</p>
+<p>目前已經大致撰寫了 styguide 的架構，下一步是逐漸重整 CSS 的架構以及拆分 HTML 組件。</p>
+<p>這不是一朝一夕就能完成的東西，甚至就某種角度來看會拖延到專案的進度。有點像是默默付出的工作吧…！畢竟在原有的專案中做改變本來就有較大的阻力。</p>
+<h2 id="何時應該重構"><a href="#何時應該重構" class="headerlink" title="何時應該重構"></a>何時應該重構</h2><p>隨時重構，不要為了重構而重構。再來可以參考<a href="http://www.wikiwand.com/zh-tw/%E4%B8%89%E6%AC%A1%E6%B3%95%E5%88%99_(%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1" target="_blank" rel="external">三次法則</a>)</p>
+<ul>
+<li>上版的時候對現有的 HTML 及 CSS 重構，或者對應的 component</li>
+<li>寫新的 js 模組時重構，順便撰寫 Comment 及文件</li>
+<li>送 pull request 的時候：不過要確定自己有寫上詳細的 comment 及 doc，才能提高 code reviewer 的 review 意願，而 senior 總是能更快看出代碼裡面的問題。</li>
+</ul>
+<p>我們常常對一些既有代碼的架構感到心癢，或者很想要趕快重構。但在 workaround 的情況下，有時重構的成本是非常大的。</p>
+<h2 id="何時不應該重構"><a href="#何時不應該重構" class="headerlink" title="何時不應該重構"></a>何時不應該重構</h2><p>其實比起重構來說，更重要的應該是拿捏不應該重構的程度。身為工程師或多或少都會對別人的代碼嗤之以鼻，恨不得趕快把 code 清掉。<br>但，既然 code 有某種程度的肥大，代表他或多或少解決了問題。而且重構是需要<strong>成本</strong>的。就算是以目前的開發來說，通常也是先著重於將功能實作後，在有限度地作小幅度的調整以及逐漸補齊文件及註解。對於重構來說，最重要的是 <code>consistency</code>。s</p>
+<ul>
+<li>目前的解法雖然不漂亮，但確實解決問題的時候。</li>
+<li>目前的代碼重複率還不高的時候</li>
+<li>重構的成本太大，甚至影響到系統本身的時候。</li>
+</ul>
+<h2 id="保持心平氣和"><a href="#保持心平氣和" class="headerlink" title="保持心平氣和"></a>保持心平氣和</h2><p>重構的時候記得控制自己的情緒。我們很可能一不小心就在咒罵代碼或前任，然後在情緒上頭反而過度重構，造成更多的問題也說不定。</p>
+<blockquote>
+<p>代碼的存在是有歷史的</p>
+</blockquote>
+<p>有可能是進度太趕、有可能是政治因素、又或者當時的技術還沒到位。但可以確定的是，情緒化完全無法解決問題。</p>
+<p><a href="http://www.apa.org/topics/anger/control.aspx" target="_blank" rel="external">don’t let anger contol you</a></p>
+<blockquote>
+<p>Talk is cheap. Show me the code.</p>
+</blockquote>
+<p>下一篇，我會開始分享一些重構的技巧。</p>
+<h2 id="Final-Word"><a href="#Final-Word" class="headerlink" title="Final Word"></a>Final Word</h2><p>最後還是要聲明一下，這篇文章雖然會著重在一些重構的技巧上，但其實從 legacy code 中尋找出口的方法不只是重構而已。希望大家不要過往矯正，一看到髒 code 就急著捲起袖子重構。退一步評估一下成本跟重構的價值再做決定。</p>
+<h4 id="Legacy-Code-專欄"><a href="#Legacy-Code-專欄" class="headerlink" title="Legacy Code 專欄"></a>Legacy Code 專欄</h4><ul>
+<li><a href="/2016/06/14/legacy-code2/" title="如何從 legacy code 中尋找出口（中）- CSS 篇">如何從 legacy code 中尋找出口（中）- CSS 篇</a></li>
+<li><a href="/2016/09/17/legacy-code3/" title="從 legacy code 中尋找出口（中）- HTML 篇">從 legacy code 中尋找出口（中）- HTML 篇</a>
+</li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://kjj6198.github.io/2016/06/11/legacy-code/" data-id="cizc55nla0000vw5tiwoa9udc" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>關注我 :</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="https://twitter.com/kalanyei" target="_blank">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/kjj6198" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2016/06/14/legacy-code2/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">下一篇</strong>
+        <p class="article-nav-title">
+        
+            如何從 legacy code 中尋找出口（中）- CSS 篇
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/09/17/legacy-code3/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2016/09/17/legacy-code3/" class="title">從 legacy code 中尋找出口（中）- HTML 篇</a></p>
+                            <p class="item-date"><time datetime="2016-09-17T02:40:16.000Z" itemprop="datePublished">2016-09-17</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/06/14/legacy-code2/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2016/06/14/legacy-code2/" class="title">如何從 legacy code 中尋找出口（中）- CSS 篇</a></p>
+                            <p class="item-date"><time datetime="2016-06-14T04:01:52.000Z" itemprop="datePublished">2016-06-14</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/06/11/legacy-code/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2016/06/11/legacy-code/" class="title">從 legacy code 中尋找出口（上）</a></p>
+                            <p class="item-date"><time datetime="2016-06-11T00:56:15.000Z" itemprop="datePublished">2016-06-11</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">分類</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">歸檔</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">連結</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2017 Kalan</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'http://kjj6198.github.io/2016/06/11/legacy-code/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

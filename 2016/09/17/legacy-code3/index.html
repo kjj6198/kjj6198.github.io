@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>從 legacy code 中尋找出口（中）- HTML 篇 | 前端曬衣場</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="重構,HTML,aria" />
+    
+    <meta name="description" content="講完 CSS 的重構技巧之後，接下來會專注在 HTML 的重構技巧上。本系列的文章將不會談論 js 的重構部分，因為牽扯到較多的程式撰寫技巧，而且網路上類似的文章應該是不勝枚舉。
+前言其實 HTML 能夠重構的點並不多，主要就是標籤的正確使用以及顧慮 accessibility 等小細節。
+所以這篇文章會著重在如何使用正確的標籤以及語義化；基本的 accessiblity 認識跟 aria 標籤的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="從 legacy code 中尋找出口（中）- HTML 篇">
+<meta property="og:url" content="http://kjj6198.github.io/2016/09/17/legacy-code3/index.html">
+<meta property="og:site_name" content="前端曬衣場">
+<meta property="og:description" content="講完 CSS 的重構技巧之後，接下來會專注在 HTML 的重構技巧上。本系列的文章將不會談論 js 的重構部分，因為牽扯到較多的程式撰寫技巧，而且網路上類似的文章應該是不勝枚舉。
+前言其實 HTML 能夠重構的點並不多，主要就是標籤的正確使用以及顧慮 accessibility 等小細節。
+所以這篇文章會著重在如何使用正確的標籤以及語義化；基本的 accessiblity 認識跟 aria 標籤的">
+<meta property="og:updated_time" content="2016-10-18T11:32:18.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="從 legacy code 中尋找出口（中）- HTML 篇">
+<meta name="twitter:description" content="講完 CSS 的重構技巧之後，接下來會專注在 HTML 的重構技巧上。本系列的文章將不會談論 js 的重構部分，因為牽扯到較多的程式撰寫技巧，而且網路上類似的文章應該是不勝枚舉。
+前言其實 HTML 能夠重構的點並不多，主要就是標籤的正確使用以及顧慮 accessibility 等小細節。
+所以這篇文章會著重在如何使用正確的標籤以及語義化；基本的 accessiblity 認識跟 aria 標籤的">
+    
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+    
+
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">一位在台北努力求生存的大學生。喜歡看日劇、喝☕️、吃🍖。</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">主頁</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/前端/">前端</a></li></ul>
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">關於</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜尋" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要找..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '頁面',
+            CATEGORIES: '分類',
+            TAGS: '標籤',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/前端/">前端</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-legacy-code3" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        從 legacy code 中尋找出口（中）- HTML 篇
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-subtitle">
+                <a href="/2016/09/17/legacy-code3/" class="article-date">
+    <time datetime="2016-09-17T02:40:16.000Z" itemprop="datePublished">2016-09-17</time>
+</a>
+                
+    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTML/">HTML</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/aria/">aria</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/重構/">重構</a></li></ul>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <p>講完 CSS 的重構技巧之後，接下來會專注在 HTML 的重構技巧上。本系列的文章將不會談論 js 的重構部分，因為牽扯到較多的程式撰寫技巧，而且網路上類似的文章應該是不勝枚舉。</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>其實 HTML 能夠重構的點並不多，主要就是標籤的正確使用以及顧慮 accessibility 等小細節。</p>
+<p>所以這篇文章會著重在如何使用正確的標籤以及語義化；基本的 accessiblity 認識跟 aria 標籤的使用，不僅對 screen reader 較友善，語義化的標籤使用也能夠在之後修改 HTML 時更有效率；最後是模板語言的技巧應用，這邊會用 rails 的 views 為例，不過概念的部分應該是相通的。 </p>
+<hr>
+<h3 id="語義化"><a href="#語義化" class="headerlink" title="語義化"></a>語義化</h3><p>首先，我們先來看看 HTML5 新增的 tag 有哪些</p>
+<h4 id="section"><a href="#section" class="headerlink" title="section"></a>section</h4><ul>
+<li><p>用來表示網頁裡的一個<strong>段落</strong>，常見的誤解是用來表示一篇文章。</p>
+</li>
+<li><p>基本上跟 div 沒有太大的差別，只有語義化的表現。</p>
+</li>
+</ul>
+<h4 id="article"><a href="#article" class="headerlink" title="article"></a>article</h4><ul>
+<li>用來表示一篇<strong>文章</strong></li>
+</ul>
+<h4 id="datalist"><a href="#datalist" class="headerlink" title="datalist"></a>datalist</h4><h4 id="dl-dt-dd"><a href="#dl-dt-dd" class="headerlink" title="dl dt dd"></a>dl dt dd</h4><ul>
+<li><p>如果資訊是以條列式來呈現，可以使用 dt, dd 來區分。</p>
+<blockquote>
+<p>Definition lists, created using the DL element, generally consist of a series of term\/definition pairs (although definition lists may have other applications). Thus, when advertising a product, one might use a definition list:</p>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">dl</span> <span class="attr">class</span>=<span class="string">"information"</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">dt</span>&gt;</span>薪水：<span class="tag">&lt;/<span class="name">dt</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">dd</span>&gt;</span>100000 ~ 300000<span class="tag">&lt;<span class="name">dd</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">dt</span>&gt;</span>工作地點：<span class="tag">&lt;/<span class="name">dt</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">dd</span>&gt;</span>台北市<span class="tag">&lt;/<span class="name">dd</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">dl</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>任何以成對方式呈現的資訊都可以使用 dt, dd 包裝，像是範例中的：薪水搭配 100000 ~ 300000、工作地點搭配台北市。不過要注意的一點是 dl 預設會將內容縮排（就跟 ul, ol 一樣）。可以將 padding 設置為 0 來解決。</p>
+<h4 id="figure-figcaption"><a href="#figure-figcaption" class="headerlink" title="figure figcaption"></a>figure figcaption</h4><ul>
+<li><p>使用在和主內容相關的圖片、代碼，或其他資訊，不一定只能放圖而已</p>
+</li>
+<li><p>搭配 figcaption 來定義標題</p>
+</li>
+</ul>
+<h4 id="legend"><a href="#legend" class="headerlink" title="legend"></a>legend</h4><ul>
+<li><p>搭配 fieldset 使用，用來表示輸入表單的內容</p>
+</li>
+<li><p>預設的邊框很醜，如果要使用這樣的結構可能要重置一下 CSS</p>
+</li>
+</ul>
+<iframe height="265" scrolling="no" src="//codepen.io/kjj6198/embed/LRkQAB/?height=265&theme-id=0&default-tab=html,result&embed-version=2" frameborder="no" allowtransparency="true" allowfullscreen="true" style="width: 100%;">See the Pen <a href="http://codepen.io/kjj6198/pen/LRkQAB/" target="_blank" rel="external">fieldset</a> by 愷開 (<a href="http://codepen.io/kjj6198" target="_blank" rel="external">@kjj6198</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.<br></iframe>
+
+<p>族繁不及備載，tag 的部分就在此告一段落。我個人覺得有一大部分是因為<strong>不知道</strong>才沒有使用這些 tag 的，詳情可以到<a href="http://www.w3school.com.cn/tags/tag_legend.asp" target="_blank" rel="external">w3c</a> 的網站看看。之後會再將其他 tag 的使用方式補上。</p>
+<h4 id="如果都沒辦法滿足怎麼辦？"><a href="#如果都沒辦法滿足怎麼辦？" class="headerlink" title="如果都沒辦法滿足怎麼辦？"></a>如果都沒辦法滿足怎麼辦？</h4><p>如果以上的 tag 都沒有辦法滿足你的需求，最常見的做法就是用純 div。而 HTML 為了因應這樣的需求，也提出的 ARIA 的 spec，讓開發者可以更容易製作客製化的元件。如果我們想要使用 div 來模擬按鈕的行為，除了在 class 加上 <code>btn</code> 之外，我們同時可以加上 role attribute，並且使用相對應的 aria-* 標籤來做對應的狀態處理（是否按下、disabled、haspopup 等等），除了更加語義化之外，這些看起來有點麻煩的細節，都會大幅地改善使用 screen reader 的體驗。</p>
+<p>但是，盡量不要取代原本語義化的標籤的含義，例如將 button 標籤加入 <code>role=&quot;modal&quot;</code>  之後當作 modal 使用。</p>
+<blockquote>
+<p>Web developers <em>must not</em> use the ARIA <code>role</code> and <code>aria-*</code> attributes in a manner that conflicts with the semantics described in the <a href="https://www.w3.org/TR/html-aria/#docconformance" target="_blank" rel="external">Document conformance requirements for use of ARIA attributes in HTML</a>table. Web developers <em>should not</em> set the ARIA <code>role</code> and <code>aria-*</code> attributes to values that match the default implicit ARIA semantics defined in the table. - <a href="https://www.w3.org/TR/html-aria/#rules-wd" target="_blank" rel="external">w3c spec</a></p>
+</blockquote>
+<p>當然，雖然 spec 這麼說，但某些 tag 像是 <code>input + label</code> 的 hack 對前端開發來講真的很方便。這部分或許就看大家的取捨了。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"btn"</span> <span class="attr">role</span>=<span class="string">"button"</span> <span class="attr">aria-disabled</span>=<span class="string">"false"</span>&gt;</span>Click to Signup<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="Accessibility"><a href="#Accessibility" class="headerlink" title="Accessibility"></a>Accessibility</h3><p>accessibility 其實可以另外再寫一篇文章來討論，但因為不再本篇的討論範圍內，這邊只列幾點關於 accessibility 的注意要點。</p>
+<ul>
+<li><p>文字的大小</p>
+</li>
+<li><p>顏色的對比</p>
+</li>
+<li><p>是否加入適當的 attr。（img 的 alt, link 的 title 等）</p>
+</li>
+<li><p>適當的 aria-* 使用</p>
+</li>
+</ul>
+<p>如果對 accessility 有興趣，建議大家看看：</p>
+<ul>
+<li><p><a href="https://www.w3.org/TR/html-aria/" target="_blank" rel="external">ARIA</a> w3c 的 aria 標準。</p>
+</li>
+<li><p><a href="http://webaim.org/standards/wcag/checklist" target="_blank" rel="external">WebAIM checklist</a> WCAG 的 checklist</p>
+</li>
+<li><p><a href="http://webaim.org/techniques/css/invisiblecontent/" target="_blank" rel="external">WebAIM inviblecontent</a> 關於 CSS invisible content 的介紹</p>
+</li>
+</ul>
+<h3 id="模板語言（已-rails-views-為例）"><a href="#模板語言（已-rails-views-為例）" class="headerlink" title="模板語言（已 rails views 為例）"></a>模板語言（已 rails views 為例）</h3><p>目前市面上有很多模板引擎，像是 <code>ejs</code> <code>erb</code> <code>handlebar</code> <code>jade</code> 等等，都有一套特定的語法、partial、客製化的函數等等幫助你簡化冗長的 HTML。</p>
+<p>就 rails views 來說</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">%=</span> <span class="attr">render</span> '<span class="attr">partial</span>/<span class="attr">buttons</span>/<span class="attr">primary</span>', <span class="attr">locals:</span> &#123;</span></div><div class="line"></div><div class="line">  <span class="attr">:name</span> =&gt; 'foo'</div><div class="line"></div><div class="line">  :title =&gt; 'bar'</div><div class="line"></div><div class="line">&#125; %&gt;</div></pre></td></tr></table></figure>
+<p>將常用的元件拆成 partial，並且放在對應的資料夾（我的習慣是將所有 partial 檔統一資料夾管理，除非那個 partial 只有在某一個特定頁面使用）。這樣一來就可以很容易地引入已經撰寫好的 HTML 架構。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">%=</span> <span class="attr">render</span> '<span class="attr">partial</span>/<span class="attr">modal</span>', <span class="attr">locals:</span> &#123;</span></div><div class="line"> <span class="attr">:name</span> =&gt; 'foo',</div><div class="line"> :title =&gt; 'bar',</div><div class="line"> :image =&gt; image_path('a.png')</div><div class="line">&#125; %&gt;</div></pre></td></tr></table></figure>
+<h2 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h2><p>HTML 的重構比起 CSS 跟 JS，算是簡單許多（只要 css 撰寫的時候不用 tag 做 styling），不過從頭看下來，要顧慮的事情也不少。正確的使用 tag 以及顧慮 accessibility，能夠有效地增加 UX，同時自己在修改的時候也不會看到一大堆 div 看到心癢癢。</p>
+<h4 id="Legacy-Code-專欄"><a href="#Legacy-Code-專欄" class="headerlink" title="Legacy Code 專欄"></a>Legacy Code 專欄</h4><ul>
+<li><a href="/2016/06/11/legacy-code/" title="從 legacy code 中尋找出口（上）">從 legacy code 中尋找出口（上）</a></li>
+<li><a href="/2016/06/14/legacy-code2/" title="如何從 legacy code 中尋找出口（中）- CSS 篇">如何從 legacy code 中尋找出口（中）- CSS 篇</a>
+</li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://kjj6198.github.io/2016/09/17/legacy-code3/" data-id="cizc55nls0004vw5ts1w727dz" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>關注我 :</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="https://twitter.com/kalanyei" target="_blank">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/kjj6198" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2016/06/14/legacy-code2/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">如何從 legacy code 中尋找出口（中）- CSS 篇</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/09/17/legacy-code3/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2016/09/17/legacy-code3/" class="title">從 legacy code 中尋找出口（中）- HTML 篇</a></p>
+                            <p class="item-date"><time datetime="2016-09-17T02:40:16.000Z" itemprop="datePublished">2016-09-17</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/06/14/legacy-code2/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2016/06/14/legacy-code2/" class="title">如何從 legacy code 中尋找出口（中）- CSS 篇</a></p>
+                            <p class="item-date"><time datetime="2016-06-14T04:01:52.000Z" itemprop="datePublished">2016-06-14</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/06/11/legacy-code/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2016/06/11/legacy-code/" class="title">從 legacy code 中尋找出口（上）</a></p>
+                            <p class="item-date"><time datetime="2016-06-11T00:56:15.000Z" itemprop="datePublished">2016-06-11</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">分類</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">歸檔</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">連結</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2017 Kalan</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'http://kjj6198.github.io/2016/09/17/legacy-code3/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
