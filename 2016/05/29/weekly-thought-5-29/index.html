@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    <title>weekly-thought-5/29 | 前端曬衣場</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="js,draft-js,flow" />
+    
+    <meta name="description" content="發現的新東西flow第一次聽到，是從 henry 的口中。第二次看到，是從看了 draftjs 的 source code。
+當前端的 code 無可避免地增肥之後（尤其是 js 跟 css)，我們也應該尋找更有效的代碼管理方式。像是逐漸引入的 eslinter 跟 stylelint 都是。
+而 flow 給我的感覺有點像 Typescript，但優點是你可以完全用寫 js 的方式，也不需要改變">
+<meta property="og:type" content="article">
+<meta property="og:title" content="weekly-thought-5/29">
+<meta property="og:url" content="http://kjj6198.github.io/2016/05/29/weekly-thought-5-29/index.html">
+<meta property="og:site_name" content="前端曬衣場">
+<meta property="og:description" content="發現的新東西flow第一次聽到，是從 henry 的口中。第二次看到，是從看了 draftjs 的 source code。
+當前端的 code 無可避免地增肥之後（尤其是 js 跟 css)，我們也應該尋找更有效的代碼管理方式。像是逐漸引入的 eslinter 跟 stylelint 都是。
+而 flow 給我的感覺有點像 Typescript，但優點是你可以完全用寫 js 的方式，也不需要改變">
+<meta property="og:updated_time" content="2017-02-19T11:19:08.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="weekly-thought-5/29">
+<meta name="twitter:description" content="發現的新東西flow第一次聽到，是從 henry 的口中。第二次看到，是從看了 draftjs 的 source code。
+當前端的 code 無可避免地增肥之後（尤其是 js 跟 css)，我們也應該尋找更有效的代碼管理方式。像是逐漸引入的 eslinter 跟 stylelint 都是。
+而 flow 給我的感覺有點像 Typescript，但優點是你可以完全用寫 js 的方式，也不需要改變">
+    
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-56408806-4', 'auto');
+ga('send', 'pageview');
+
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+    
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">一位在台北求生存的大學生。喜歡看日劇、喝☕️、吃🍖。</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">主頁</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://kjj6198.github.io/resume/normal/">關於</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜尋" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要找..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '頁面',
+            CATEGORIES: '分類',
+            TAGS: '標籤',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/前端週刊/">前端週刊</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-weekly-thought-5-29" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        weekly-thought-5/29
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-subtitle">
+                <a href="/2016/05/29/weekly-thought-5-29/" class="article-date">
+    <time datetime="2016-05-29T13:09:36.000Z" itemprop="datePublished">2016-05-29</time>
+</a>
+                
+    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/draft-js/">draft-js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/flow/">flow</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <h3 id="發現的新東西"><a href="#發現的新東西" class="headerlink" title="發現的新東西"></a>發現的新東西</h3><h2 id="flow"><a href="#flow" class="headerlink" title="flow"></a>flow</h2><p>第一次聽到，是從 henry 的口中。第二次看到，是從看了 draftjs 的 source code。</p>
+<p>當前端的 code 無可避免地增肥之後（尤其是 js 跟 css)，我們也應該尋找更有效的代碼管理方式。像是逐漸引入的 eslinter 跟 stylelint 都是。</p>
+<p>而 flow 給我的感覺有點像 Typescript，但優點是你可以完全用寫 js 的方式，也不需要改變副檔名（typescript 要寫成 a.ts)。不過還是會害怕抽象化滲透，所以一樣會先觀望一段陣子再套用到主站上吧。</p>
+<h2 id="draft"><a href="#draft" class="headerlink" title="draft"></a>draft</h2><p>假日閒來無事、天氣燥熱，在咖啡廳喝咖啡、聽音樂、寫 code 也蠻愜意的。所以就趁著假日的時光研究了一下科科所說的<a href="https://facebook.github.io/draft-js/" target="_blank" rel="external">draft-js</a></p>
+<p>所有的骯髒事（selection 兼容、檔案拖曳、編輯器內的樣式）draft-js 幾乎都幫你搞定了。當然因為這個 open source 還非常新（react conf 的時候才推出來），有時候噴錯也不知道從哪邊找起。但這的確是值得令人關注的 editor 解決方案。</p>
+<h3 id="目前編輯器會遇到的問題"><a href="#目前編輯器會遇到的問題" class="headerlink" title="目前編輯器會遇到的問題"></a>目前編輯器會遇到的問題</h3><h4 id="1-input-跟-textarea-是有極限的"><a href="#1-input-跟-textarea-是有極限的" class="headerlink" title="1. input 跟 textarea 是有極限的"></a>1. input 跟 textarea 是有極限的</h4><ul>
+<li>他們只能渲染 plain text，如果想要對文字做加粗、斜體、標記等動作，需要花很大的功實作</li>
+<li>當你的文字輸入到下一行時，textarea 高度不足不會自動幫你移位。你可能需要計算下一行文字的位置，然後做相關的操作。這也很費工，而且對使用者的體驗非常糟糕。(備註：現在已經有了新的解法 <a href=""></a>)</li>
+</ul>
+<h4 id="2-contenteditable-is-terrible"><a href="#2-contenteditable-is-terrible" class="headerlink" title="2. contenteditable is terrible"></a>2. <a href="https://medium.engineering/why-contenteditable-is-terrible-122d8a40e480#.7cqtr19fk" target="_blank" rel="external">contenteditable is terrible</a></h4><p>因為是將文字內容放在非 input 的 tag 裡面，每種瀏覽器的實作都不太一樣，也很容易就會有意想不到的問題發生。不過 contenteditable 的好處是他活得夠久，瀏覽器也都幾乎實作了，所以反而可以利用這樣的特性來解決當前編輯器遇到的問題。</p>
+<p>draft 的概念其實也跟 react 很像，將 editor 跟 content 的狀態存放起來，而非依賴在 DOM 上面。而且他們的狀態不是用純 string 去儲存，而是用 Record(他們實作的資料結構)來代表每個節點。</p>
+<p>而 API 文件也寫得挺清楚的，同時也完全實作 immutable 的概念。每次對編輯的內容做操作，就是完全更新狀態。剛開始會覺得很麻煩，我明明只是要一段 text，還要呼叫 getCurrentContent() 回傳的竟然還是一個 <code>Map</code> 在從裡面呼叫 getText()；或者我想要更動狀態時，還要做類似這樣的操作：<code>RichUtils.toggleInlineStyle(curState,&#39;BOLD&#39;)</code>，然後再把新的 state 傳進去。看似麻煩，不過這樣的方式到後期的開發顯然是有好處的。<br>容易測試，易讀性高，容易修改、除錯。</p>
+<p>facebook 也提供了蠻實用的<a href="https://github.com/facebook/draft-js" target="_blank" rel="external">範例</a> 看完之後可以更瞭解 draft 到底是怎樣運作的。</p>
+<p>這邊是我看了官方文件之後實作的範例：<a href="https://github.com/kjj6198/redux-setup" target="_blank" rel="external">draft-example</a> 。還不算太完整，之後會再慢慢補上。</p>
+<p><strong>reference</strong></p>
+<p><a href="https://medium.com/@adrianli/a-beginner-s-guide-to-draft-js-d1823f58d8cc#.3apelia5r" target="_blank" rel="external">a guide to draftJS</a></p>
+<h2 id="重新思考-rails-helper"><a href="#重新思考-rails-helper" class="headerlink" title="重新思考 rails helper"></a>重新思考 rails helper</h2><p>在逐漸重構 css 跟 html 的過程中，常常會忘記 helper 的存在，最近寫一寫才恍然大悟，對啊！我不是有 helper 嗎？目前對於比較複雜的邏輯判斷已經會習慣性地去使用 helper，但在 view 裡頭，有沒有 helper 可以幫上忙的可能性？</p>
+<p>雖然用 partial 也可以做到類似的事情，但跟 helper 做搭配會更強大啊！</p>
+<p>而且因為 partial 有時候還要去對應路徑，而 helper 則是全域都可以使用。對高度重複的頁面來說或許用 helper 會更加簡單！</p>
+<p><strong>例如我們很常用到的 tags。</strong></p>
+<p>當初 sudo tags 改版的時候花了不少時間去更動，因為幾乎每個 tag 裡面都重寫了一次 each，class 命名有時候也不盡相同。</p>
+<p>不過使用 partial 又好像太小題大作，畢竟 tag 的架構並沒有如此複雜。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">tag_of_tags</span><span class="params">(tags, options = &#123;&#125;, html_options)</span></span></div><div class="line"></div><div class="line">  raw tags.collect &#123; <span class="params">|tag|</span> content_tag(<span class="symbol">:span</span>,tag.name, options, html_options)&#125;</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>這樣一來，每次我需要用到 tag 的時候就只要</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">%=</span> <span class="attr">tag_of_tags</span>(@<span class="attr">post.tags</span>) %&gt;</span></div></pre></td></tr></table></figure>
+<p>當然也可以做一些調整，例如加入 namespace 來符合我們的使用情境。<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">tag_of_tags</span><span class="params">(tags, namespace,options = &#123;&#125;, html_options)</span></span></div><div class="line"></div><div class="line">  raw tags.collect &#123; <span class="params">|tag|</span> content_tag(<span class="symbol">:span</span>,tag.name, <span class="symbol">:class</span> =&gt; namespace)</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">%=</span> <span class="attr">tag_of_tags</span>(@<span class="attr">post.tags</span>, "<span class="attr">sudo</span>") %&gt;</span></div></pre></td></tr></table></figure>
+<p>這樣一來每次 tag 要更新的時候，我只要安心修改 helper，其他地方全部都會生效。寫起來自然輕鬆！</p>
+<p>以上只是一小部分的例子，舉凡 <code>navbar</code> <code>button</code> <code>dropdown</code> 等，幾乎是每個網站開發必備的元素。我們在新增 partial 的同時，說不定也可以搭配 helper 一起思考更多的可能性！</p>
+<h2 id="關於文件，我有話要說"><a href="#關於文件，我有話要說" class="headerlink" title="關於文件，我有話要說"></a>關於文件，我有話要說</h2><p>最近因為想要讓 legacy 漸漸減少，會盡量地用重用性的角度來思考。</p>
+<p>不過科科給了我一句話「太早談重用性，反而會掉入過度設計的陷阱」。仔細想過之後，的確如此吧！</p>
+<p>但我認為，這樣的嘗試是好的，對自己來講是從更寬的角度來看自己的 code，也可以減少一些自己以前的盲點等等。</p>
+<p>而想要讓 code review 變得輕鬆的辦法，就是寫文件。不管對 senior 也好對 junior 也好都是有幫助。雖然我的 code 現階段還沒有達到很高的水準，可是透過寫文件這件事情，code reviewer 可以快速理解我的想法，為什麼我要這麼做。</p>
+<p>而不是讓 reviewer 從頭看我的 code，揣測我到底在幹嘛？像是 modal 對我來說就是一個很好的嘗試，科科很快地就指出其中的問題跟盲點。</p>
+<p>這樣一來，對我來說，我可以從自己的想法裡面寫出品質更好的 code；而 reviewer 因為容易理解我的想法，給予 feedback 的意願也就相對提高了。</p>
+<p>當然，可能目前寫得還不夠多，想法也還不夠成熟也說不定，但是從這樣的練習過程中，我想也會慢慢進步吧！</p>
+<p>這是我為什麼很用心在寫文件的原因，因為對彼此來講都是節省時間。我省掉以後再看 code 時回想的時間，而 code reviewer 則是省下從頭開始理解的時間。</p>
+<p>目前還在磨合期中，希望科科也可以提供建議！</p>
+<h3 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h3><p><a href="https://speakerdeck.com/yinghau76/the-elements-of-good-commit-messages?utm_campaign=CodeTengu&amp;utm_medium=email&amp;utm_source=CodeTengu_44" target="_blank" rel="external">good commit message</a></p>
+<h2 id="javascipt-test"><a href="#javascipt-test" class="headerlink" title="javascipt test"></a>javascipt test</h2><p><a href="https://rmurphey.com/blog/2014/07/13/unit-tests" target="_blank" rel="external">how to write test in existing javascript</a></p>
+<p>很多人都是從前任接手 code 的，這篇文章教你如何從現存的 code 當中進行 refactor。裡頭有很多想法值得一提：</p>
+<ul>
+<li>不要怪罪前任，要知道代碼的由來通常是有歷史的（每個人都會寫爛 code）</li>
+<li>如果沒有 unit test 也沒關係，至少從自己做起</li>
+<li>用消極的態度、因為情緒而過度設計，反而會造成更多問題</li>
+<li>永遠不要情緒化寫 code</li>
+<li><strong>don’t use !important with anger</strong></li>
+</ul>
+<p>目前也正在找尋適合主站的測試工具中，希望有一天我們可以達到超過…百分之五十的測試率。</p>
+<h2 id="日本工作三個月"><a href="#日本工作三個月" class="headerlink" title="日本工作三個月"></a><a href="http://wangyung.blogspot.tw/2016/05/blog-post.html?utm_content=bufferd71fd&amp;utm_medium=social&amp;utm_source=facebook.com&amp;utm_campaign=buffer" target="_blank" rel="external">日本工作三個月</a></h2>
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://kjj6198.github.io/2016/05/29/weekly-thought-5-29/" data-id="cizps2siv00169r5t25lotb2q" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>關注我 :</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="https://twitter.com/kalanyei" target="_blank">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/kjj6198" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2016/06/06/weekly-6-6/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">下一篇</strong>
+        <p class="article-nav-title">
+        
+            weekly-6/6
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2016/03/20/readble-code-art/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">【筆記】易讀程式碼之美學</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="no-thumbnail">
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/02/28/webgl-it/" class="title">IT 鐵人幫完賽心得</a></p>
+                            <p class="item-date"><time datetime="2017-02-28T15:44:42.000Z" itemprop="datePublished">2017-02-28</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/01/01/code-review-101/" class="title">code-review-101</a></p>
+                            <p class="item-date"><time datetime="2016-12-31T16:00:00.000Z" itemprop="datePublished">2017-01-01</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端週刊/">前端週刊</a></p>
+                            <p class="item-title"><a href="/2016/11/14/weekly-thought-5-30/" class="title">weekly-thought-5/30</a></p>
+                            <p class="item-date"><time datetime="2016-11-14T11:51:39.000Z" itemprop="datePublished">2016-11-14</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端週刊/">前端週刊</a></p>
+                            <p class="item-title"><a href="/2016/11/14/frontend-weekly/" class="title">frontend collection - 5/23</a></p>
+                            <p class="item-date"><time datetime="2016-11-14T11:45:21.000Z" itemprop="datePublished">2016-11-14</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2016/11/14/css-variable/" class="title">css variable + sass variable = 😍</a></p>
+                            <p class="item-date"><time datetime="2016-11-14T11:44:20.000Z" itemprop="datePublished">2016-11-14</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">分類</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端週刊/">前端週刊</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/程式筆記/">程式筆記</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/讀書心得/">讀書心得</a><span class="category-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">歸檔</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit" style="text-align: center;">
+                <p>&copy; 2017 Kalan</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_shortname = 'frontendclothesline';
+    
+    
+    var disqus_url = 'http://kjj6198.github.io/2016/05/29/weekly-thought-5-29/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+</body>
+</html>

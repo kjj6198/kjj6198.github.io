@@ -32,7 +32,7 @@
 .widget h6,
 .article-entry h6 {
   font-size: 1em;
-  color: #aaa;
+  color: #888;
 }
 .widget hr,
 .article-entry hr {
@@ -224,7 +224,7 @@ body {
   -webkit-font-smoothing: antialiased;
   font-weight: 400;
   background: #eaeaea;
-  font: 14px "Noto Sans CJK TC", "PingFang TC", "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", sans-serif;
+  font: 16px "Noto Sans CJK TC", "PingFang TC", "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", sans-serif;
   -webkit-text-size-adjust: 100%;
 }
 code {
@@ -268,14 +268,14 @@ code {
 .logo {
   display: block;
   padding: 10px 0;
-  width: 165px;
+  width: 80px;
   height: 60px;
+  background-position: center;
   background-image: url("images/logo-header.png");
-  background-position: 0px 10px;
   background-repeat: no-repeat;
-  -webkit-background-size: 165px 60px;
-  -moz-background-size: 165px 60px;
-  background-size: 165px 60px;
+  -webkit-background-size: contain;
+  -moz-background-size: contain;
+  background-size: contain;
 }
 .main-body {
   margin-top: -60px;
@@ -327,7 +327,7 @@ code {
 }
 #main .main-body-header em,
 #main .main-body-header a {
-  color: #aaa;
+  color: #888;
 }
 #main .main-body-content:before,
 #main .main-body-content:after {
@@ -413,7 +413,7 @@ code {
   line-height: 20px;
   padding: 15px 14px;
   text-align: center;
-  font-size: 14px;
+  font-size: 16px;
   position: relative;
   cursor: pointer;
 }
@@ -649,7 +649,7 @@ code {
   position: relative;
   margin-top: 0;
   display: block;
-  color: #aaa;
+  color: #888;
   padding: 16px 40px 24px;
   border-bottom: 1px solid #ddd;
   -webkit-transition: 0.2s ease-in;
@@ -682,7 +682,7 @@ code {
 .article-nav-caption {
   display: block;
   font-size: 12px;
-  color: #aaa;
+  color: #888;
   letter-spacing: 0.5px;
   line-height: 24px;
   font-weight: normal;
@@ -753,7 +753,7 @@ code {
 .widget-list ul li,
 .widget-list ol li {
   padding: 10px 0;
-  font-size: 15px;
+  font-size: 17px;
   border-bottom: 1px solid #e4e4e4;
 }
 .widget-list ul li a,
@@ -795,7 +795,7 @@ code {
   padding-bottom: 0px;
 }
 .widget-float a {
-  font-size: 15px;
+  font-size: 17px;
 }
 #recent-post li {
   padding: 10px 0 10px 94px;
@@ -848,7 +848,7 @@ code {
 }
 #recent-post li .item-inner a,
 #recent-post li .item-inner .item-category {
-  font-size: 13px;
+  font-size: 0.8rem;
   text-transform: uppercase;
 }
 #recent-post li .item-inner a a,
@@ -877,7 +877,7 @@ code {
 }
 #recent-post li .item-inner .item-date {
   color: #aaa;
-  font-size: 13px;
+  font-size: 0.7em;
   text-transform: uppercase;
 }
 #recent-post li:hover .item-thumbnail {
@@ -890,7 +890,7 @@ code {
 .tag-list-count,
 .archive-list-count {
   padding-left: 5px;
-  color: #aaa;
+  color: #888;
   font-size: 0.85em;
 }
 .category-list-count:before,
@@ -955,7 +955,7 @@ code {
   clear: both;
 }
 .article-summary {
-  width: 50%;
+  width: 100%;
   float: left;
   margin-bottom: 30px;
 }
@@ -1020,7 +1020,7 @@ code {
 }
 .article-summary .article-summary-inner .article-title {
   margin-bottom: 10px;
-  font-size: 22px;
+  font-size: 1.2em;
   font-weight: 400;
   line-height: 1.5em;
   word-wrap: break-word;
@@ -1034,8 +1034,8 @@ code {
 }
 .article-summary .article-summary-inner .article-excerpt {
   position: relative;
-  color: #aaa;
-  font-size: 16px;
+  color: #787878;
+  font-size: 1.1em;
   line-height: 1.6em;
   overflow: hidden;
   height: 6.4em;
@@ -1101,9 +1101,9 @@ a.article-title:hover {
 }
 .article-entry {
   color: #555;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 400;
-  line-height: 1.6em;
+  line-height: 1.65;
 }
 .article-entry:before,
 .article-entry:after {
@@ -1198,7 +1198,7 @@ a.article-title:hover {
   font-family: 'FontAwesome';
 }
 .article-entry blockquote footer {
-  font-size: 14px;
+  font-size: 16px;
   margin: 1.6em 0;
   font-family: "Noto Sans CJK TC", "PingFang TC", "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", sans-serif;
 }
@@ -1220,7 +1220,7 @@ a.article-title:hover {
   margin-left: 1em;
 }
 .article-entry .caption {
-  color: #aaa;
+  color: #888;
   display: block;
   font-size: 0.9em;
   margin-top: 0.5em;
@@ -1249,7 +1249,7 @@ a.article-title:hover {
   padding: 6px 15px;
   border-radius: 15px;
   background: #eaeaea;
-  color: #aaa;
+  color: #888;
   text-shadow: 0 1px #fff;
   text-decoration: none;
 }
@@ -1260,7 +1260,7 @@ a.article-title:hover {
   text-shadow: 0 1px #0056b2;
 }
 .article-footer {
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.6em;
   border-top: 1px solid #ddd;
   padding-top: 1.6em;
@@ -1274,7 +1274,7 @@ a.article-title:hover {
   clear: both;
 }
 .article-footer a {
-  color: #aaa;
+  color: #888;
   text-decoration: none;
 }
 .article-footer a:hover {
@@ -1476,7 +1476,7 @@ a.article-title:hover {
 }
 .archive-year-wrap {
   padding: 18px 30px 17px;
-  font-size: 16px;
+  font-size: 18px;
   color: #666;
   border-bottom: 1px solid #eee;
 }
@@ -1523,7 +1523,7 @@ a.article-title:hover {
   margin-top: 1em;
 }
 .archive-article-date {
-  color: #aaa;
+  color: #888;
   text-decoration: none;
   font-size: 0.85em;
   line-height: 1em;
@@ -1536,7 +1536,7 @@ a.article-title:hover {
   display: block;
   margin: 30px 0px 45px 0px;
   text-align: center;
-  color: #aaa;
+  color: #888;
 }
 #page-nav:before,
 #page-nav:after {
@@ -1592,7 +1592,7 @@ a.article-title:hover {
 #footer {
   background: #33363b;
   margin-top: 60px;
-  color: #aaa;
+  color: #888;
   line-height: 1.6em;
 }
 #footer a {
@@ -1626,11 +1626,11 @@ a.article-title:hover {
   line-height: 22px;
 }
 #footer .logo {
-  width: 132px;
+  width: 64px;
   height: 48px;
-  -webkit-background-size: 132px 48px;
-  -moz-background-size: 132px 48px;
-  background-size: 132px 48px;
+  -webkit-background-size: 64px 48px;
+  -moz-background-size: 64px 48px;
+  background-size: 64px 48px;
 }
 i.icon {
   display: inline-block;
@@ -1785,9 +1785,9 @@ i.icon:before {
   display: block;
   overflow-x: auto;
   padding: 15px 20px;
-  font-size: 14px;
+  font-size: 16px;
   font-family: Monaco, "Consolas", "Source Code Pro", Menlo, Consolas, monospace;
-  line-height: 22.400000000000002px;
+  line-height: 25.6px;
 }
 .highlight table {
   margin: 0;
@@ -2017,7 +2017,7 @@ i.icon:before {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    font-size: 14px;
+    font-size: 16px;
   }
   #header .nav-container #main-nav .main-nav-list-item:before,
   #header .nav-container #main-nav .main-nav-list-link:before,
@@ -2061,10 +2061,10 @@ i.icon:before {
     float: none;
   }
   #header .nav-container #sub-nav .search-form:before {
-    font-size: 14px;
+    font-size: 16px;
   }
   #header .nav-container #sub-nav .search-form-input {
-    font-size: 14px;
+    font-size: 16px;
     width: 90%;
   }
   .main-body-inner {

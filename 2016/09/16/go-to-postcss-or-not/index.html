@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    <title>令人期待的 PostCSS | 前端曬衣場</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="postcss,sass" />
+    
+    <meta name="description" content="從 SASS 到 PostCSS大約在一年前，PostCSS 開始竄紅在前端生態圈裡，不外乎就是所謂的 preprocessor 的特性、高度客製化自己的 plugin、搶先使用 cssnext 的功能，還能夠搭配各種建構工具（gulp, webpack），用起來非常輕鬆寫意。
+變數雖然剛開始看到 PostCSS 的時候還挺興奮的，但隨即思考了一下：「真的有必要馬上把 SASS 取代掉嗎？」。
+P">
+<meta property="og:type" content="article">
+<meta property="og:title" content="令人期待的 PostCSS">
+<meta property="og:url" content="http://kjj6198.github.io/2016/09/16/go-to-postcss-or-not/index.html">
+<meta property="og:site_name" content="前端曬衣場">
+<meta property="og:description" content="從 SASS 到 PostCSS大約在一年前，PostCSS 開始竄紅在前端生態圈裡，不外乎就是所謂的 preprocessor 的特性、高度客製化自己的 plugin、搶先使用 cssnext 的功能，還能夠搭配各種建構工具（gulp, webpack），用起來非常輕鬆寫意。
+變數雖然剛開始看到 PostCSS 的時候還挺興奮的，但隨即思考了一下：「真的有必要馬上把 SASS 取代掉嗎？」。
+P">
+<meta property="og:updated_time" content="2017-02-28T15:04:08.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="令人期待的 PostCSS">
+<meta name="twitter:description" content="從 SASS 到 PostCSS大約在一年前，PostCSS 開始竄紅在前端生態圈裡，不外乎就是所謂的 preprocessor 的特性、高度客製化自己的 plugin、搶先使用 cssnext 的功能，還能夠搭配各種建構工具（gulp, webpack），用起來非常輕鬆寫意。
+變數雖然剛開始看到 PostCSS 的時候還挺興奮的，但隨即思考了一下：「真的有必要馬上把 SASS 取代掉嗎？」。
+P">
+    
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-56408806-4', 'auto');
+ga('send', 'pageview');
+
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+    
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">一位在台北求生存的大學生。喜歡看日劇、喝☕️、吃🍖。</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">主頁</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://kjj6198.github.io/resume/normal/">關於</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜尋" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要找..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '頁面',
+            CATEGORIES: '分類',
+            TAGS: '標籤',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/前端/">前端</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-go-to-postcss-or-not" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        令人期待的 PostCSS
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-subtitle">
+                <a href="/2016/09/16/go-to-postcss-or-not/" class="article-date">
+    <time datetime="2016-09-16T15:58:02.000Z" itemprop="datePublished">2016-09-16</time>
+</a>
+                
+    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/postcss/">postcss</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sass/">sass</a></li></ul>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <h2 id="從-SASS-到-PostCSS"><a href="#從-SASS-到-PostCSS" class="headerlink" title="從 SASS 到 PostCSS"></a>從 SASS 到 PostCSS</h2><p>大約在一年前，PostCSS 開始竄紅在前端生態圈裡，不外乎就是所謂的 preprocessor 的特性、高度客製化自己的 plugin、搶先使用 cssnext 的功能，還能夠搭配各種建構工具（gulp, webpack），用起來非常輕鬆寫意。</p>
+<h3 id="變數"><a href="#變數" class="headerlink" title="變數"></a>變數</h3><p>雖然剛開始看到 PostCSS 的時候還挺興奮的，但隨即思考了一下：「真的有必要馬上把 SASS 取代掉嗎？」。</p>
+<p>PostCSS 的優點在於你能夠選擇你想要的 plugin，需要時再使用就好。舉變數的功能為例好了，<a href="https://github.com/postcss/postcss-simple-vars" target="_blank" rel="external">postcss-simple-vars</a> 能夠模擬 SASS 的變數宣告及使用行為。對我來說怎麼看都彆扭，因為 SASS 除了變數本身宣告之外，還有 map, list 的型別，而且具備了相當完整的 API 操作。例如：取值、判斷式、迴圈功能等。</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="variable">$colors</span>: (</div><div class="line">  main: <span class="number">#abc</span>,</div><div class="line">  sub: <span class="number">#bac</span>,</div><div class="line">  word: <span class="number">#333</span></div><div class="line">);</div><div class="line"></div><div class="line"><span class="selector-class">.container</span> &#123;</div><div class="line">  <span class="attribute">background-color</span>: map-get(<span class="variable">$colors</span>, <span class="variable">$main</span>);</div><div class="line">  <span class="attribute">color</span>: map-get(<span class="variable">$colors</span>, word);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>就算使用 css spec 的 var 也是一樣，沒有 map 或 list 取值的功能。</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">:root &#123;</div><div class="line">  --wordColor: <span class="number">#333</span>;</div><div class="line">  --bgColor: <span class="number">#fafafa</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-tag">body</span> &#123;</div><div class="line">  <span class="attribute">background-color</span>: var(--wordColor);</div><div class="line">  <span class="attribute">color</span>: var(--bgColor);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>（o.s：而且這樣子寫其實有點醜<del>很醜</del>）</p>
+<p>或者，SASS 的 @function 也能夠進一步將 <code>map-get</code>做包裝</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="variable">$colors</span>: (</div><div class="line"></div><div class="line"> main: <span class="number">#abc</span>,</div><div class="line"></div><div class="line"> sub: <span class="number">#bac</span>,</div><div class="line"></div><div class="line"> word: <span class="number">#333</span></div><div class="line"></div><div class="line">);</div><div class="line"></div><div class="line"><span class="comment">/* alias method for getting color from $colors map</span></div><div class="line"></div><div class="line">/// @param &#123;$key&#125; the key you want to choose</div><div class="line"></div><div class="line">///</div><div class="line"></div><div class="line">/// eg:</div><div class="line"></div><div class="line"> color: c($word); </div><div class="line"></div><div class="line">*/</div><div class="line"></div><div class="line">@function c(<span class="variable">$key</span>) &#123;</div><div class="line"></div><div class="line">  @<span class="keyword">if</span> map-has-key(<span class="variable">$colors</span>, <span class="variable">$key</span>) &#123;</div><div class="line"></div><div class="line">    @return map-get(<span class="variable">$colors</span>, <span class="variable">$key</span>);</div><div class="line"></div><div class="line">  &#125;</div><div class="line"></div><div class="line">  @<span class="keyword">else</span> &#123;</div><div class="line"></div><div class="line">    @error <span class="string">"Unknown key #&#123;$key&#125;"</span>;</div><div class="line"></div><div class="line">  &#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.container</span> &#123;</div><div class="line"></div><div class="line"> <span class="attribute">background-color</span>: map-get(<span class="variable">$colors</span>, <span class="variable">$main</span>);</div><div class="line"></div><div class="line"> <span class="attribute">color</span>: map-get(<span class="variable">$colors</span>, word);</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>因為 PostCSS 生態圈廣泛的原因，不少獨立開發者的插件很可能因為沒有在維護，或是因為疏忽而導致編譯錯誤有小 bug 等等的問題，相對之下 SASS 本身具有的功能相對完整的多。</p>
+<h3 id="mixins-跟-function"><a href="#mixins-跟-function" class="headerlink" title="mixins 跟 function"></a>mixins 跟 function</h3><p>相對應的 plugin 有  <a href="https://github.com/postcss/postcss-mixins" target="_blank" rel="external">postcss-mixins</a> 跟 <a href="https://github.com/andyjansson/postcss-functions" target="_blank" rel="external">postcss-functions</a></p>
+<p>雖然模擬的 mixin 的行為，但如果要搭配判斷式使用的話，又要花一番功夫。</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">@<span class="keyword">mixin</span> state(<span class="variable">$state</span>,<span class="variable">$namespace</span>: <span class="string">''</span>) &#123;</div><div class="line"></div><div class="line">  @<span class="keyword">if</span> (<span class="variable">$namespace</span> != <span class="string">''</span>)&#123;</div><div class="line"></div><div class="line">   .#&#123;<span class="variable">$namespace</span>&#125;-#&#123;<span class="variable">$state</span>&#125; &#123;</div><div class="line"></div><div class="line">     <span class="attribute">text-transform</span>: uppercase;</div><div class="line"></div><div class="line">   &#125; </div><div class="line"></div><div class="line">  &#125;</div><div class="line"></div><div class="line">  @<span class="keyword">else</span> &#123;</div><div class="line"></div><div class="line">    .$&#123;state&#125; &#123;</div><div class="line"></div><div class="line">      <span class="attribute">text-transform</span>: uppercase;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">  &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>而 <code>function</code> 的部分也一樣，如果使用純 CSS 搭配 PostCSS 撰寫，沒有辦法使用 SASS 原生的 function。雖然能夠用 js 自定義 function，這一點其實還蠻吸引人的，但如果要模擬 SASS 相對應 function 的話，又要在重造一次輪子，不免顯得有些麻煩。</p>
+<h3 id="相較於-SASS-還不成熟"><a href="#相較於-SASS-還不成熟" class="headerlink" title="相較於 SASS 還不成熟"></a>相較於 SASS 還不成熟</h3><p>相對於 SASS 來說，PostCSS 其實還算蠻新的工具，雖然生態圈很廣泛，插件也多，但目前版本仍在快速變動中，也還有很多 issue 沒有解完，SASS 因為本身是使用 Ruby 撰寫，雖然速度會比 PostCSS 慢一些（好吧，應該是很多），但其穩定跟完善的 API 跟型別、語法，都是 PostCSS 還無法達到的程度。</p>
+<h2 id="PostCSS-的優勢"><a href="#PostCSS-的優勢" class="headerlink" title="PostCSS 的優勢"></a>PostCSS 的優勢</h2><p>來說說 PostCSS 的優勢吧！目前我最喜歡搭配使用的功能有 autoprefixer cssnano。</p>
+<p>autoprefixer 能夠幫你處理 CSS 麻煩的前綴，以往是使用 mixins 來解決，現在完全交給 PostCSS 處理就可以了，相對起來乾淨簡潔多了；cssnano 則是幫你處理 CSS minify，搭配 gulp 使用你可以只要安裝 gulp-postcss gulp-cssnano gulp-postcss gulp-sass 就可以進行 css 編譯跟最小化的動作了。</p>
+<p>除了上述的插件之外，我認為很棒的插件還有</p>
+<ul>
+<li><code>postcss-sorting</code>：根據定義的規則排序你的 css properties</li>
+<li><code>precss</code>：包含許多 sass-like 的功能</li>
+<li><code>stylelint</code>：lint 你的 CSS</li>
+<li><code>stylefmt</code>：根據 stylelint 的規則幫你 format css code</li>
+<li><code>doiuse</code>：幫你偵測目前 CSS 的瀏覽器支援度</li>
+<li>livereload：搭配 webpack 的淫威之下，css-loader 本身就幫你設定好了 hot reload 的配置，只要一改動 style 檔案，就可以在不用重新載入的情況下將新的 style 套入。</li>
+</ul>
+<h3 id="為什麼我不敢離開-SASS"><a href="#為什麼我不敢離開-SASS" class="headerlink" title="為什麼我不敢離開 SASS"></a>為什麼我不敢離開 SASS</h3><p>搭配 PostCSS 的確非常方便，但我不認為兩者同時套用能夠減少日常開發，畢竟一旦出錯，就得花時間去研究底下的運行機制。有可能 PostCSS 編譯完之後再給 SASS 編譯會報錯；又或者某個套件的 bug 導致檔案沒有完整編譯，某段的 CSS 代碼沒有生效等等，都是潛在的問題，目前的開發我也只有使用 <code>autoprefixer</code> <code>cssnano</code> <code>stylelint</code> 來幫助簡化、檢查 CSS 而已。</p>
+<h2 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h2><p>或許最後 SASS 會完全被 PostCSS 打敗也說不定，但 SASS 本身完整、成熟的架構跟語法，還是讓我不想要輕易完全使用 PostCSS 的最大主因，哪天等 PostCSS 成熟到能夠完全獨立於 SASS 的時候，我可能就會轉移過去了吧！就像當初在學 CSS 的時候，也是猶豫了很久才開始學習 SASS 那樣。不過，這兩者（sass, postCSS）是可以共存、互補的。</p>
+<p>既然享受了 PostCSS 高度彈性化的優點，我們接下來也不得不關心抽象化滲透，因為插件有可能因為時代的變遷，或是開發者不在維護的關係而出現錯誤。這些插件分別看來功能微小，但是全部加起來之後能夠省下的時間也是很巨大的。；而 SASS 完整的語法、變數系統雖然需要花一段時間學習，卻能夠用統一的語法大幅提升 CSS 維護度。</p>
+<p>在這個組件化盛行的年代，前端工程的開發逐漸傾向於維護模組化的檔案（react, css-modules 等），最後可能不需要那麼多繁雜的操作（此指 sass 的 function、變數等），而是回歸到最原始的純 css 也說不定。</p>
+<h3 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h3><ul>
+<li><a href="https://github.com/postcss/postcss" target="_blank" rel="external">PostCSS</a></li>
+<li><a href="http://davidtheclark.com/excited-about-postcss/" target="_blank" rel="external">I’m excited about Postcss, but I’m scared to leaving SASS</a></li>
+<li><a href="https://benfrain.com/breaking-up-with-sass-postcss/" target="_blank" rel="external">Breaking up with scss</a></li>
+<li><a href="http://cssnext.io/" target="_blank" rel="external">cssnext</a></li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://kjj6198.github.io/2016/09/16/go-to-postcss-or-not/" data-id="cizps2shk000a9r5tdiytqk4k" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>關注我 :</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="https://twitter.com/kalanyei" target="_blank">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/kjj6198" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2016/09/17/legacy-code3/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">下一篇</strong>
+        <p class="article-nav-title">
+        
+            從 legacy code 中尋找出口（中）- HTML 篇
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2016/07/31/weekly-thought-7-31/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">weekly-thought-7/31</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="no-thumbnail">
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/02/28/webgl-it/" class="title">IT 鐵人幫完賽心得</a></p>
+                            <p class="item-date"><time datetime="2017-02-28T15:44:42.000Z" itemprop="datePublished">2017-02-28</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/01/01/code-review-101/" class="title">code-review-101</a></p>
+                            <p class="item-date"><time datetime="2016-12-31T16:00:00.000Z" itemprop="datePublished">2017-01-01</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端週刊/">前端週刊</a></p>
+                            <p class="item-title"><a href="/2016/11/14/weekly-thought-5-30/" class="title">weekly-thought-5/30</a></p>
+                            <p class="item-date"><time datetime="2016-11-14T11:51:39.000Z" itemprop="datePublished">2016-11-14</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端週刊/">前端週刊</a></p>
+                            <p class="item-title"><a href="/2016/11/14/frontend-weekly/" class="title">frontend collection - 5/23</a></p>
+                            <p class="item-date"><time datetime="2016-11-14T11:45:21.000Z" itemprop="datePublished">2016-11-14</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2016/11/14/css-variable/" class="title">css variable + sass variable = 😍</a></p>
+                            <p class="item-date"><time datetime="2016-11-14T11:44:20.000Z" itemprop="datePublished">2016-11-14</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">分類</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端週刊/">前端週刊</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/程式筆記/">程式筆記</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/讀書心得/">讀書心得</a><span class="category-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">歸檔</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit" style="text-align: center;">
+                <p>&copy; 2017 Kalan</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_shortname = 'frontendclothesline';
+    
+    
+    var disqus_url = 'http://kjj6198.github.io/2016/09/16/go-to-postcss-or-not/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+</body>
+</html>

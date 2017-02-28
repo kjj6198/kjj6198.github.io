@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    <title>weekly-thought-5/30 | 前端曬衣場</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="css,javascript,html" />
+    
+    <meta name="description" content="這個禮拜不談「新」東西，多數會是關於網頁開發的重新思考。算是回過頭來漸漸補齊自己的技術債吧！比起前幾個禮拜所談的新東西，這一篇文章可能相對枯燥一點，當然篇幅也會比較長，但我認為這是必要的。
+這些東西在前端變化快速的時代下或許顯得不那麼重要，不過思考總是件好事。
+語義化標籤重新思考語義化這件事會有這個想法，是看到 instant article 的 html 架構，他們規範 instant arti">
+<meta property="og:type" content="article">
+<meta property="og:title" content="weekly-thought-5/30">
+<meta property="og:url" content="http://kjj6198.github.io/2016/11/14/weekly-thought-5-30/index.html">
+<meta property="og:site_name" content="前端曬衣場">
+<meta property="og:description" content="這個禮拜不談「新」東西，多數會是關於網頁開發的重新思考。算是回過頭來漸漸補齊自己的技術債吧！比起前幾個禮拜所談的新東西，這一篇文章可能相對枯燥一點，當然篇幅也會比較長，但我認為這是必要的。
+這些東西在前端變化快速的時代下或許顯得不那麼重要，不過思考總是件好事。
+語義化標籤重新思考語義化這件事會有這個想法，是看到 instant article 的 html 架構，他們規範 instant arti">
+<meta property="og:updated_time" content="2016-11-14T11:51:39.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="weekly-thought-5/30">
+<meta name="twitter:description" content="這個禮拜不談「新」東西，多數會是關於網頁開發的重新思考。算是回過頭來漸漸補齊自己的技術債吧！比起前幾個禮拜所談的新東西，這一篇文章可能相對枯燥一點，當然篇幅也會比較長，但我認為這是必要的。
+這些東西在前端變化快速的時代下或許顯得不那麼重要，不過思考總是件好事。
+語義化標籤重新思考語義化這件事會有這個想法，是看到 instant article 的 html 架構，他們規範 instant arti">
+    
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-56408806-4', 'auto');
+ga('send', 'pageview');
+
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+    
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">一位在台北求生存的大學生。喜歡看日劇、喝☕️、吃🍖。</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">主頁</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://kjj6198.github.io/resume/normal/">關於</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜尋" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要找..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '頁面',
+            CATEGORIES: '分類',
+            TAGS: '標籤',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/前端週刊/">前端週刊</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-weekly-thought-5-30" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        weekly-thought-5/30
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-subtitle">
+                <a href="/2016/11/14/weekly-thought-5-30/" class="article-date">
+    <time datetime="2016-11-14T11:51:39.000Z" itemprop="datePublished">2016-11-14</time>
+</a>
+                
+    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/html/">html</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <p>這個禮拜不談「新」東西，多數會是關於網頁開發的重新思考。算是回過頭來漸漸補齊自己的技術債吧！比起前幾個禮拜所談的新東西，這一篇文章可能相對枯燥一點，當然篇幅也會比較長，但我認為這是必要的。</p>
+<p>這些東西在前端變化快速的時代下或許顯得不那麼重要，不過思考總是件好事。</p>
+<h2 id="語義化標籤"><a href="#語義化標籤" class="headerlink" title="語義化標籤"></a>語義化標籤</h2><h3 id="重新思考語義化這件事"><a href="#重新思考語義化這件事" class="headerlink" title="重新思考語義化這件事"></a>重新思考語義化這件事</h3><p>會有這個想法，是看到 <code>instant article</code> 的 html 架構，他們規範 instant article 的架構必須符合他們的規範，而且結構的表達也很清楚。我在裡頭看到了好多我以前沒有注意過的 html tag。像是 <code>address</code> <code>figure</code> <code>caption</code> <code>summary</code> 。好奇之下查了一下<a href="http://www.w3schools.com/tags/tag_html.asp" target="_blank" rel="external">文件</a>等等。發現其實有很多語義化的標籤都已經支持目前主流的瀏覽器，spec 也寫得很清楚，但是目前主站多還是以 <code>div + class</code> 的方式做表達，雖然有些地方會套用 <code>header</code>，但我認為有更多適合的語義化標籤可以加入使用。除了減少不必要的 class 命名，也能夠提高 html 的易讀性跟 SEO，重點是，我們寫的是符合標準的 html。</p>
+<p>而且 w3c 在 html5 致力推廣語義化的標籤，諸如 <code>nav</code> <code>header</code> <code>dd</code> <code>dt</code> 等等，並且將一些沒有意義的 tag 刪除或是不推薦使用如 <code>b</code> <code>font</code> <code>center</code> 等等。</p>
+<h3 id="對於-class-的思考"><a href="#對於-class-的思考" class="headerlink" title="對於 class 的思考"></a>對於 class 的思考</h3><p><a href="http://www.w3cplus.com/css/semantic-css-with-intelligent-selectors.html" target="_blank" rel="external">語義化 css</a></p>
+<p>用了那麼久的 class，我回去找了找 spec，發現了 w3c 對 class 的描述。</p>
+<blockquote>
+<p>There are no additional restrictions on the tokens authors can use in the class attribute, but authors are encouraged to use values that describe the nature of the content, rather than values that describe the desired presentation of the content.  -w3c</p>
+</blockquote>
+<p>雖然 class 並沒有使用上的規定，但是鼓勵盡量將 class 用於表達元素內容而非描述元素的展現。也就是說那些 <code>col-md-*</code> 等表現性的 class 名稱其實在 w3c 的 spec 裡面是不符合規範的。但是會出現 unit class 的原因卻是因為我們沒有按照標準來而孵化出來的產物。雖然很多人擁護 unit class 的便利性跟節省開發的速度，但我認為比起開發上的時間節省，<strong>身為網頁開發人員，我們要注重的更應該是頁面的表達跟使用者的互動</strong>。</p>
+<p>當然不得不承認的是，在理想上跟實際上總是會有差異。因為嚴格說起來，facebook 也沒有符合規範，他們是用<code>css module</code>的方式進行開發。</p>
+<p>不過這裡想提出這樣子的想法跟大家討論。<br>雖然標準的定案到瀏覽器的實作，總是要花不少時間。</p>
+<p>為什麼要符合標準？</p>
+<ol>
+<li>標準規範是由一大堆科學家研究過後、大量的討論過後所制定出來的規範，給大家遵守以便達到統一性。</li>
+<li>通常這些規範是 best practice。</li>
+<li>為什麼我們要為了節省開發時間而寫出不符標準的網頁本末倒置？</li>
+</ol>
+<p>我們有更好的解決方案 &gt; SASS<br>take id rethink<br>我不會反對用挖掘機清理災難現場，但我不會拿來整理自己的家。<br>給後代選擇器一個平反的機會，搭配 id 使用效果佳</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 元素展現 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"margin-b-10"</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- 內容 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"user_info"</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>自己的理解是這樣。</p>
+<p>至於為什麼會造成這樣的原因，或許是因為在網頁發展初期，CSS 的支持性並不好，在語義化跟表現之間很難得到平衡，才會有當時純 style 的 <code>center</code> <code>width</code> 出現。但現在已經不是那個綁手綁腳的年代了。我們應該朝向語義化的年代前進，而且這也是<code>w3c</code>在推廣的事情，身為一個站在網路業尖端的優質網路招聘公司，就由我們來引領風騷吧！</p>
+<p>對 <code>unit class</code> 難道沒有其他辦法解決嗎？我自己非常喜歡語義化的 <code>class</code>，而且很討厭 <code>row</code> <code>col</code> <code>text-center</code>，每次寫起來都會有罪惡感…。</p>
+<p>至於用 unit class 的人，通常是因為不想花太多時間重寫 style 架構、節省開發時間、或是他根本不會 css，所以找個 <code>bootstrap</code> 直接套。但我們是前端工程師，我們有能力去組織 css。現在這個語義化年代，正是我們前端平反的好時機。</p>
+<ol>
+<li>推行標準的目的是為技術交流構建一個統一的上下文語境平台，提高溝通效率，避免雞同鴨講。</li>
+<li>同時標準跟規範的製定是經過一群資深開發者／科學家經過仔細研究及社區討論的，一套完整的一致的基礎架構系統是推進生態發展的必要條件。</li>
+<li>就Web語義化這件事情而言，如果你的HTML是基於標準來編寫的，意味著你的頁面具備更多的可能性。比如搜索引擎友好，多終端適配(不是響應式。。是指兼容各種閱讀設備、讀屏軟件等。參見microformats )，更智能的風格查錯能力。</li>
+<li>在前端開發體系裡，能體系專業性的地方不多。。拿程序複雜度而言，它跟大型後端系統差不止一個量級(前端的難度在於工程上)。。好不容易有一個能體現專業素養的領域(語義化Web)，為什麼我們不抓住機會為自己正名呢。。</li>
+</ol>
+<p>我覺得這並不會增加維護成本，反而會在長期內減少冗餘樣式、不可預知的樣式覆蓋等維護問題。唯一的成本可能就是你在開始一個頁面之前，需要去抽像一下可複用的單元，然後用sass表達出來。不過我感覺如果你採用的是正確的工作流(面向語義)，這些事情都是比較順理成章的。</p>
+<p>對於團隊開發如何確保面向語義，這確實是一個比較難解決的問題。除了需要提供一個清晰的團隊sass庫說明之外，貌似只能通過一些工程化手段解決了(加強code review流程、制定規範等等)。</p>
+<h3 id="grid-system-是個很棒的東西耶！"><a href="#grid-system-是個很棒的東西耶！" class="headerlink" title="grid system 是個很棒的東西耶！"></a>grid system 是個很棒的東西耶！</h3><p>我承認 grid system 的確是個非常好用的模式，在實際場景也會遇到 layout 無法用語義化來表示的問題，但根據語義化的定義，為了寫出更好看的 HTML 跟易讀性，我們或許總有一天還是要把 grid system 拔掉。這會是個大工程，但在目前主站說大不大，說小不小的架構上，還是越早開始越好吧！</p>
+<ul>
+<li>使用 susy</li>
+<li>@include @extend</li>
+</ul>
+<h2 id="Page-Visibility-API"><a href="#Page-Visibility-API" class="headerlink" title="Page Visibility API"></a>Page Visibility API</h2><p>能夠知道目前 user 是否 focus 在這個 page 上。<br>在很多情境下，我們希望當使用者沒有聚焦在這個網頁上（可能跳去別的應用程式、切換分頁時），可以盡量減少不必的請求或操作。facebook 好像也是當你回到網頁時才會有訊息的提示聲音。<br>比較常見的情景是播放影片時，如果使用者跳出頁面，我們可以先自動讓影片停止，等使用者回來之後，影片在繼續播放。</p>
+<h3 id="回頭看看-js-的事件傳播"><a href="#回頭看看-js-的事件傳播" class="headerlink" title="回頭看看 js 的事件傳播"></a>回頭看看 js 的事件傳播</h3><p>最近把犀牛書拿回來翻了翻，主要是為了釐清以前不是那麼明白的觀念。太多 js library 充斥在網路，我們是否已經忘記原生的 js 了？雖然高度的抽象化是科技趨於發達後一定會有的現象，但是了解一下內部的運作也是好的，對於之後寫 code 也會比較有概念！</p>
+<h4 id="js-事件傳播"><a href="#js-事件傳播" class="headerlink" title="js 事件傳播"></a>js 事件傳播</h4><p>js 的事件傳播主要分為兩大類型，<code>bubble</code> 跟 <code>capture</code>，大部分的傳播方式是用 <code>bubble</code>。什麼是 <code>bubble</code> 呢？在註冊對象元素的事件處理器被調用之後，事件就會開始往上漂浮（不包含某些元素的特定事件），然後再調用註冊於祖父元素上的處理器。這種現象會上升到 <code>document</code> 最後到達 <code>window</code>。</p>
+<p>在實際應用上，我們時常看到：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">".abc"</span>).on(<span class="string">'click'</span>, e =&gt; &#123;</div><div class="line">	</div><div class="line">&#125;);</div><div class="line"></div><div class="line">$(<span class="string">".ass"</span>).on(<span class="string">'click'</span>, e =&gt; &#123;</div><div class="line">	</div><div class="line">&#125;);</div><div class="line"></div><div class="line">$(<span class="string">".asass"</span>).on(<span class="string">'click'</span>, e =&gt; &#123;</div><div class="line">	</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>散亂的事件註冊在角落，不僅維護上困難，在尋找 code 的時候也沒有統一入口，非常難以除錯。於是我們可以利用 js 事件的冒泡特性，為 document 統一註冊事件。jQuery 的 on 第二個函數便提供了事件委託的功能，如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">'document'</span>).on(<span class="string">'click'</span>,<span class="string">'.sass'</span>, e =&gt; &#123;</div><div class="line"> </div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>這樣的好處不僅減少了散亂的事件註冊，還統一了入口。如果要新增事件，只要在 document 統一做擴充即可。我們還可以在 html 這樣寫：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">a</span>  <span class="attr">class</span>=<span class="string">"js_action"</span> <span class="attr">data-action</span>=<span class="string">"foo"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">a</span>  <span class="attr">class</span>=<span class="string">"js_action"</span> <span class="attr">data-action</span>=<span class="string">"bar"</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"> <span class="keyword">var</span> actionList = &#123;</div><div class="line"> 	<span class="attr">foo</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>),</span></div><div class="line"> 	<span class="title">bar</span>: <span class="title">function</span>(<span class="params"></span>)</div><div class="line">&#125;</div><div class="line"><span class="title">$</span>(<span class="params"><span class="string">'document'</span></span>).<span class="title">on</span>(<span class="params"><span class="string">'click'</span>,<span class="string">'.js_action'</span>, e =&gt; &#123;</span></div><div class="line">	if(typeof e.target.dataset.action === <span class="string">'function'</span>)&#123;</div><div class="line">		actionList[e.target.dataset.action]</div><div class="line">	&#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>像這樣，以後如果要增加新的 event handlder 只要在 acionList 新增就好，甚至搭配 extend 的方式，可以不用寫在 actionList 也沒關係。充分提高了擴充性</p>
+<p>那麼，為什麼那麼少人使用 capture 呢？最大的原因在於因為可愛的 IE 無法使用。再來事件捕捉只適用於 addEventListener 的方式。<br>事件捕捉有點像是反過來，會先從祖父開始，依序向下船，直到<strong>事件父元素的事件處理被被調用為止</strong>，註冊於事件元素的事件處理器永遠不會被調用。</p>
+<h4 id="事件取消"><a href="#事件取消" class="headerlink" title="事件取消"></a>事件取消</h4><p>我們也常常看到類似 <code>e.preventDefault()</code> 的方法。其實像是舊版的瀏覽器並不支援，我們可以用一些比較 tricky 的方式來做取消。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">cancelDefault</span>(<span class="params">event</span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> event = event || <span class="built_in">window</span>.event;</div><div class="line"></div><div class="line">	<span class="keyword">if</span>(event.preventDefault) event.preventDefault()</div><div class="line">	<span class="keyword">if</span>(event.returnValue) event.returnValue = <span class="literal">false</span></div><div class="line">	<span class="keyword">return</span> <span class="literal">false</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://kjj6198.github.io/2016/11/14/weekly-thought-5-30/" data-id="cizps2six00189r5tu7ugst4i" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>關注我 :</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="https://twitter.com/kalanyei" target="_blank">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/kjj6198" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2017/01/01/code-review-101/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">下一篇</strong>
+        <p class="article-nav-title">
+        
+            code-review-101
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2016/11/14/frontend-weekly/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">frontend collection - 5/23</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="no-thumbnail">
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/02/28/webgl-it/" class="title">IT 鐵人幫完賽心得</a></p>
+                            <p class="item-date"><time datetime="2017-02-28T15:44:42.000Z" itemprop="datePublished">2017-02-28</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/01/01/code-review-101/" class="title">code-review-101</a></p>
+                            <p class="item-date"><time datetime="2016-12-31T16:00:00.000Z" itemprop="datePublished">2017-01-01</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端週刊/">前端週刊</a></p>
+                            <p class="item-title"><a href="/2016/11/14/weekly-thought-5-30/" class="title">weekly-thought-5/30</a></p>
+                            <p class="item-date"><time datetime="2016-11-14T11:51:39.000Z" itemprop="datePublished">2016-11-14</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端週刊/">前端週刊</a></p>
+                            <p class="item-title"><a href="/2016/11/14/frontend-weekly/" class="title">frontend collection - 5/23</a></p>
+                            <p class="item-date"><time datetime="2016-11-14T11:45:21.000Z" itemprop="datePublished">2016-11-14</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2016/11/14/css-variable/" class="title">css variable + sass variable = 😍</a></p>
+                            <p class="item-date"><time datetime="2016-11-14T11:44:20.000Z" itemprop="datePublished">2016-11-14</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">分類</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端週刊/">前端週刊</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/程式筆記/">程式筆記</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/讀書心得/">讀書心得</a><span class="category-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">歸檔</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit" style="text-align: center;">
+                <p>&copy; 2017 Kalan</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_shortname = 'frontendclothesline';
+    
+    
+    var disqus_url = 'http://kjj6198.github.io/2016/11/14/weekly-thought-5-30/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+</body>
+</html>

@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    <title>用 Canvas 實作 low-poly art 心得 | 前端曬衣場</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="canvas,low poly" />
+    
+    <meta name="description" content="文章待補，圖片。
+前言說到 low poly，最讓我驚豔的是 species in pieces 這個網站，他使用 low-poly 的方式畫出 30 種現在地球上瀕臨絕種的動物，是用 CSS 的 clip-path 做出來的，為了兼容瀏覽器，甚至還有做 fallback 的圖片，非常的用心。
+之前有在知乎上有看見 low poly 的實作方式，但看了一下原始碼，回答是用 THREE.js 做的。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用 Canvas 實作 low-poly art 心得">
+<meta property="og:url" content="http://kjj6198.github.io/2016/11/01/low-poly-art/index.html">
+<meta property="og:site_name" content="前端曬衣場">
+<meta property="og:description" content="文章待補，圖片。
+前言說到 low poly，最讓我驚豔的是 species in pieces 這個網站，他使用 low-poly 的方式畫出 30 種現在地球上瀕臨絕種的動物，是用 CSS 的 clip-path 做出來的，為了兼容瀏覽器，甚至還有做 fallback 的圖片，非常的用心。
+之前有在知乎上有看見 low poly 的實作方式，但看了一下原始碼，回答是用 THREE.js 做的。">
+<meta property="og:updated_time" content="2017-02-28T15:41:53.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="用 Canvas 實作 low-poly art 心得">
+<meta name="twitter:description" content="文章待補，圖片。
+前言說到 low poly，最讓我驚豔的是 species in pieces 這個網站，他使用 low-poly 的方式畫出 30 種現在地球上瀕臨絕種的動物，是用 CSS 的 clip-path 做出來的，為了兼容瀏覽器，甚至還有做 fallback 的圖片，非常的用心。
+之前有在知乎上有看見 low poly 的實作方式，但看了一下原始碼，回答是用 THREE.js 做的。">
+    
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-56408806-4', 'auto');
+ga('send', 'pageview');
+
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+    
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">一位在台北求生存的大學生。喜歡看日劇、喝☕️、吃🍖。</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">主頁</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://kjj6198.github.io/resume/normal/">關於</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜尋" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要找..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '頁面',
+            CATEGORIES: '分類',
+            TAGS: '標籤',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/前端/">前端</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-low-poly-art" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        用 Canvas 實作 low-poly art 心得
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-subtitle">
+                <a href="/2016/11/01/low-poly-art/" class="article-date">
+    <time datetime="2016-11-01T03:40:41.000Z" itemprop="datePublished">2016-11-01</time>
+</a>
+                
+    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/low-poly/">low poly</a></li></ul>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <p>文章待補，圖片。</p>
+<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>說到 low poly，最讓我驚豔的是 <a href="http://species-in-pieces.com/" target="_blank" rel="external">species in pieces</a> 這個網站，他使用 low-poly 的方式畫出 30 種現在地球上瀕臨絕種的動物，是用 CSS 的 clip-path 做出來的，為了兼容瀏覽器，甚至還有做 fallback 的圖片，非常的用心。</p>
+<p>之前有在知乎上有看見 low poly 的實作方式，但看了一下原始碼，回答是用 THREE.js 做的。一來我對 three 的掌握程度還太低，再來是 2D 的圖形用 WebGL 加速實在有點奢侈啊。這邊記錄一下思路跟實現過程。</p>
+<p>其實要做到 low poly 的效果並不難，最直覺的方式就是在畫面上取點，然後把點連接成三角形。再把三角形著色就完成了。不過隨機取點的方式會造成圖片很大的失真。</p>
+<p>有以下四大步驟：</p>
+<ul>
+<li>轉為灰階</li>
+<li>使用 sobel 做邊緣偵測</li>
+<li>選擇 vertices</li>
+<li>使用 Delaunay 三角化</li>
+<li>幫三角形上色</li>
+</ul>
+<h4 id="圖片轉灰階"><a href="#圖片轉灰階" class="headerlink" title="圖片轉灰階"></a>圖片轉灰階</h4><p>有了 canvas 之後，我們可以使用 <code>getImageData</code> 這個 API 對圖片中的任何 pixel 做操作，這給 canvas 更大的彈性跟靈活度，代表圖片的操作有更多的可能性了。</p>
+<p>而灰階的實現並不難，將圖片中的 r g b 相加取平均即可。示意的程式碼大概像這樣：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> resultArr = [];</div><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> row = <span class="number">0</span>; row &lt; height; y++) &#123;</div><div class="line">  <span class="keyword">var</span> i = row * width * <span class="number">4</span> + <span class="number">4</span>;</div><div class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> col = <span class="number">1</span>; col &lt; width; col++, i+=<span class="number">4</span>) &#123;</div><div class="line">    </div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>其實在實際應用中，要取得邊緣的方式並不是那麼簡單，有可能會影響的因素有：</p>
+<ul>
+<li>陰影</li>
+<li>聚焦模糊</li>
+</ul>
+<h4 id="Sobel-取邊緣"><a href="#Sobel-取邊緣" class="headerlink" title="Sobel 取邊緣"></a>Sobel 取邊緣</h4><p>通常檢測邊界的算法原理在於，將此像素的資料與其他像素比較，如果比較起來發現差距很大（顏色），那麼即可判斷這一點是邊緣。取邊界的算法有很多種，一般最暴力也最直接的方法就是 Sobel。</p>
+<p>這邊就不解釋 Sobel 的原理了，<a href="https://www.wikiwand.com/zh-tw/%E7%B4%A2%E8%B2%9D%E7%88%BE%E7%AE%97%E5%AD%90" target="_blank" rel="external">維基百科</a>上面寫得蠻清楚的。<br><span>$$Gx = \begin{vmatrix} 
+\mathbf{-1} &amp; \mathbf{0} &amp; \mathbf{1} \\
+\mathbf{-2} &amp; \mathbf{0} &amp; \mathbf{2} \\
+\mathbf{-1} &amp; \mathbf{0} &amp; \mathbf{1}
+\end{vmatrix}
+Gy = \begin{vmatrix} 
+\mathbf{-1} &amp; \mathbf{-2} &amp; \mathbf{-1} \\
+\mathbf{0} &amp; \mathbf{0} &amp; \mathbf{0} \\
+\mathbf{1} &amp; \mathbf{2} &amp; \mathbf{1}
+\end{vmatrix}$$</span><!-- Has MathJax --><br>將矩陣做乘法之後就可以得到梯度大小了。</p>
+<p>取完邊界之後，重頭戲就是如何將它三角化了！</p>
+<h4 id="取點"><a href="#取點" class="headerlink" title="取點"></a>取點</h4><p>如果是隨機取點，很快就會發現一些盲點，邊緣常常沒有辦法很完整的保存下來，因為取點的方式隨機，三角形就會破壞邊緣的形狀，所以這邊的思路是三角形盡量不要出現在邊緣上，而是用邊緣當做三角形的點，這樣才能將邊緣比較完整的保存下來。</p>
+<p>但取邊緣的點也不能全部都取，不然這張圖就根本沒有任何藝術效果了，像這個樣子。</p>
+<p>醜不拉機，而且裡頭還有很多過小的三角形造成瑣碎的效果，這顯然不是我們想的樣子。那麼，如果都用邊緣的點當作組成三角形的點呢？</p>
+<p>我們來看看效果，因為都是用邊緣取點，很容易造成三角形過於尖銳的效果，為了避免這樣的情形發生，我們必須<strong>有限制地</strong>取邊緣的點。所以，除了邊緣上的點會被選中之外，我們也加入一些邊緣外的點，避免銳角三角形的情況發生。</p>
+<p>此外，為了更有效的避免銳角三角形發生，我們可以使用 Delaunay 三角化的算法更有效率的取點。這樣子的效果就更完美了，但顯然我的實作上還有一些小問題：</p>
+<ul>
+<li>在一些細節當中，如何保存比較完整的圖片訊息</li>
+<li>失真太大，有些圖片被三角化之後會完全走樣</li>
+</ul>
+<h4 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h4><p>關於圖學領域真的是一門很深奧的學問啊…，不但要有一定的數學基礎與背景，還需要跟 openCV 或是 webGL、canvas 打交道，而最重要的是創意。</p>
+<p>光是圖形的轉換跟變化，就足以寫一本厚厚的教科書了，更何況是用程式語言實作。不過第一次接觸這個領域，挺好玩的。</p>
+<p>這個演算法最重要的部分在於選取點的方式，如果更有技巧地取點，那麼三角化後的圖形失真會越少。許多論文跟網路上的實現都比我胡亂湊出來的算法屌多了。</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://kjj6198.github.io/2016/11/01/low-poly-art/" data-id="cizps2si6000m9r5tqr7krm15" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>關注我 :</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="https://twitter.com/kalanyei" target="_blank">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/kjj6198" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2016/11/14/css-variable/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">下一篇</strong>
+        <p class="article-nav-title">
+        
+            css variable + sass variable = 😍
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2016/10/27/context-switch/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">人類也是 context switch 的動物 - 違反直覺的做事方式</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="no-thumbnail">
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/02/28/webgl-it/" class="title">IT 鐵人幫完賽心得</a></p>
+                            <p class="item-date"><time datetime="2017-02-28T15:44:42.000Z" itemprop="datePublished">2017-02-28</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/01/01/code-review-101/" class="title">code-review-101</a></p>
+                            <p class="item-date"><time datetime="2016-12-31T16:00:00.000Z" itemprop="datePublished">2017-01-01</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端週刊/">前端週刊</a></p>
+                            <p class="item-title"><a href="/2016/11/14/weekly-thought-5-30/" class="title">weekly-thought-5/30</a></p>
+                            <p class="item-date"><time datetime="2016-11-14T11:51:39.000Z" itemprop="datePublished">2016-11-14</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端週刊/">前端週刊</a></p>
+                            <p class="item-title"><a href="/2016/11/14/frontend-weekly/" class="title">frontend collection - 5/23</a></p>
+                            <p class="item-date"><time datetime="2016-11-14T11:45:21.000Z" itemprop="datePublished">2016-11-14</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2016/11/14/css-variable/" class="title">css variable + sass variable = 😍</a></p>
+                            <p class="item-date"><time datetime="2016-11-14T11:44:20.000Z" itemprop="datePublished">2016-11-14</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">分類</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端週刊/">前端週刊</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/程式筆記/">程式筆記</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/讀書心得/">讀書心得</a><span class="category-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">歸檔</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit" style="text-align: center;">
+                <p>&copy; 2017 Kalan</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_shortname = 'frontendclothesline';
+    
+    
+    var disqus_url = 'http://kjj6198.github.io/2016/11/01/low-poly-art/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+</body>
+</html>
