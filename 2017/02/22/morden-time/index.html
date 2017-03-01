@@ -3,30 +3,35 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     
-    <title>code-review-101 | 前端曬衣場</title>
+    <title>伊坂幸太郎 - 摩登時代 | 前端曬衣場</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-        <meta name="keywords" content="" />
+        <meta name="keywords" content="伊坂幸太郎,卓别林,摩登時代" />
     
-    <meta name="description" content="前言身為前端工程師，通常在整個團隊裡面會是最常發送 pull request 的人。為了讓自己的 PR 更容易被測試，以及讓 reviewer 更容易的 review，總結了一些注意事項。
-pull request 的描述
-這個 pull request 的目的。例如：修正 layout、新增 feature、某個畫面的 style 等等
-記住每個公司的成員都可以看見 pull request ，">
+    <meta name="description" content="《摩登時代》原本是喜劇天王卓別林最著名的一部默劇電影。並且被認為是美國史上最偉大的電影之一。
+在討論社會學以及國家、個人、家庭之間的關係時，這部電影也常常會被拿出來討論。
+雖然是用戲謔而滑稽的手法詮釋的電影，卻將殘忍的事實完整的描述出來。
+從卓別林的眼中看見這個國家所隱含的殘酷現實，這就是我們所知的城市，儘管醜陋，卻是我們必須賴以維生的重要場所。這樣令人哭笑不得的劇情，是卓別林突出的功力。 
+摩登">
 <meta property="og:type" content="article">
-<meta property="og:title" content="code-review-101">
-<meta property="og:url" content="http://kjj6198.github.io/2017/01/01/code-review-101/index.html">
+<meta property="og:title" content="伊坂幸太郎 - 摩登時代">
+<meta property="og:url" content="http://kjj6198.github.io/2017/02/22/morden-time/index.html">
 <meta property="og:site_name" content="前端曬衣場">
-<meta property="og:description" content="前言身為前端工程師，通常在整個團隊裡面會是最常發送 pull request 的人。為了讓自己的 PR 更容易被測試，以及讓 reviewer 更容易的 review，總結了一些注意事項。
-pull request 的描述
-這個 pull request 的目的。例如：修正 layout、新增 feature、某個畫面的 style 等等
-記住每個公司的成員都可以看見 pull request ，">
-<meta property="og:updated_time" content="2017-02-28T16:19:16.000Z">
+<meta property="og:description" content="《摩登時代》原本是喜劇天王卓別林最著名的一部默劇電影。並且被認為是美國史上最偉大的電影之一。
+在討論社會學以及國家、個人、家庭之間的關係時，這部電影也常常會被拿出來討論。
+雖然是用戲謔而滑稽的手法詮釋的電影，卻將殘忍的事實完整的描述出來。
+從卓別林的眼中看見這個國家所隱含的殘酷現實，這就是我們所知的城市，儘管醜陋，卻是我們必須賴以維生的重要場所。這樣令人哭笑不得的劇情，是卓別林突出的功力。 
+摩登">
+<meta property="og:image" content="https://lh6.googleusercontent.com/gIDqGR6FPGQIX2h1DYM4Z7-Yr1geftISfKU6spUKKljcnAk8zyOThE0vbPmUXREVRRD5q6pOX6ugUpThHOf1X3tQTDRz14ZP75OR085AH2G6uNxEzHepY3sAK7pJhONplNnD8_4">
+<meta property="og:updated_time" content="2017-03-01T06:03:20.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="code-review-101">
-<meta name="twitter:description" content="前言身為前端工程師，通常在整個團隊裡面會是最常發送 pull request 的人。為了讓自己的 PR 更容易被測試，以及讓 reviewer 更容易的 review，總結了一些注意事項。
-pull request 的描述
-這個 pull request 的目的。例如：修正 layout、新增 feature、某個畫面的 style 等等
-記住每個公司的成員都可以看見 pull request ，">
+<meta name="twitter:title" content="伊坂幸太郎 - 摩登時代">
+<meta name="twitter:description" content="《摩登時代》原本是喜劇天王卓別林最著名的一部默劇電影。並且被認為是美國史上最偉大的電影之一。
+在討論社會學以及國家、個人、家庭之間的關係時，這部電影也常常會被拿出來討論。
+雖然是用戲謔而滑稽的手法詮釋的電影，卻將殘忍的事實完整的描述出來。
+從卓別林的眼中看見這個國家所隱含的殘酷現實，這就是我們所知的城市，儘管醜陋，卻是我們必須賴以維生的重要場所。這樣令人哭笑不得的劇情，是卓別林突出的功力。 
+摩登">
+<meta name="twitter:image" content="https://lh6.googleusercontent.com/gIDqGR6FPGQIX2h1DYM4Z7-Yr1geftISfKU6spUKKljcnAk8zyOThE0vbPmUXREVRRD5q6pOX6ugUpThHOf1X3tQTDRz14ZP75OR085AH2G6uNxEzHepY3sAK7pJhONplNnD8_4">
     
 
     
@@ -143,18 +148,18 @@ ga('send', 'pageview');
                         <div class="main-body-header">
     <h1 class="header">
     
-    <a class="page-title-link" href="/categories/前端/">前端</a>
+    <a class="page-title-link" href="/categories/讀書心得/">讀書心得</a>
     </h1>
 </div>
                         <div class="main-body-content">
-                            <article id="post-code-review-101" class="article article-single article-type-post" itemscope itemprop="blogPost">
+                            <article id="post-morden-time" class="article article-single article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
             <header class="article-header">
                 
     
         <h1 class="article-title" itemprop="name">
-        code-review-101
+        伊坂幸太郎 - 摩登時代
         </h1>
     
 
@@ -162,47 +167,50 @@ ga('send', 'pageview');
         
         
             <div class="article-subtitle">
-                <a href="/2017/01/01/code-review-101/" class="article-date">
-    <time datetime="2016-12-31T16:00:00.000Z" itemprop="datePublished">2017-01-01</time>
+                <a href="/2017/02/22/morden-time/" class="article-date">
+    <time datetime="2017-02-21T16:00:00.000Z" itemprop="datePublished">2017-02-22</time>
 </a>
                 
+    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/伊坂幸太郎/">伊坂幸太郎</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/卓别林/">卓别林</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/摩登時代/">摩登時代</a></li></ul>
+
             </div>
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>身為前端工程師，通常在整個團隊裡面會是最常發送 pull request 的人。為了讓自己的 PR 更容易被測試，以及讓 reviewer 更容易的 review，總結了一些注意事項。</p>
-<h3 id="pull-request-的描述"><a href="#pull-request-的描述" class="headerlink" title="pull request 的描述"></a>pull request 的描述</h3><ul>
-<li>這個 pull request 的目的。例如：修正 layout、新增 feature、某個畫面的 style 等等</li>
-<li>記住每個公司的成員都可以看見 pull request ，所以確保 pull request 的敘述提供夠完整的資訊。</li>
-<li>明確地說明你想要怎樣的 feedback。</li>
-<li>使用 prefix 來說明你的 pull request 狀態</li>
-<li>將需要看這個 code 的成員加入進來（可以使用 github 的 assign 功能）</li>
-</ul>
-<h3 id="提供-feedback"><a href="#提供-feedback" class="headerlink" title="提供 feedback"></a>提供 feedback</h3><ul>
-<li>如果你不同意 pull request 內的寫法，先停下來思考一下，為什麼你不同意。想清楚了再留下 comment</li>
-<li>用詢問代替命令。「為什麼你不採用這樣的寫法呢？」優於「不要這樣寫！」，先問問看對方的想法或是意見，說不定他們不那樣寫是有理由的，這時候就可以做適當的溝通與交流。</li>
-<li>解釋為什麼你覺得這些 code 需要被修改（不符合 style guide？不符合公司命名規範？沒有寫 test case？）</li>
-<li>提供更好的方法來改善目前的 code</li>
-<li>盡量避免具有攻擊性的評論。（ex:這樣寫很白痴。）</li>
-<li>保持謙虛。</li>
-<li>盡量避免斷定。（別這樣子寫 code！）</li>
-<li>在線上溝通的時候，難免會有某些誤解產生。這個時候可以考慮面對面溝通。</li>
-<li>用個 emoji 來加強你的語氣，例如：good job 👋 👍。 需要修正哦👻（這好像有點嘲諷？</li>
-</ul>
-<h3 id="回應-feedback"><a href="#回應-feedback" class="headerlink" title="回應 feedback"></a>回應 feedback</h3><ul>
-<li>感謝那些願意幫你 code review 的人。</li>
-<li>對於任何不清楚的地方，發問就對了。</li>
-<li>如果這個 feedback 有被實作或是在某個 commit 裡面，提供連結給他。</li>
-<li>如果討論越來越複雜而且一直得不到結論，試著當面跟他溝通。</li>
-</ul>
-<h3 id="每個人"><a href="#每個人" class="headerlink" title="每個人"></a>每個人</h3><ul>
-<li>必須理解大家都有不同的 coding 風格，而且寫程式總會有許多解法跟選擇，所以在討論的時候應該適當做權衡，並且充分解釋為什麼你覺得這樣比較好。</li>
-<li>用問的，不要用命令的。</li>
-<li>不要劃分責任（這是你寫的不關我的事、這部分是你要處理的）</li>
-<li>試著去理解一下作者的觀點和想法。</li>
-<li>如果有一個 pull request 被 merge 了，記得留言並且感謝發送 pull request 的人。（optional）</li>
-</ul>
-<h3 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h3><p>雖然以上總結了那麼多點，不過我覺得圍繞的點還是在於<strong>是否為對方著想吧！</strong>身為一位 deployer，或是 code reviewer，你會希望看到怎樣的 pull request，從這個角度切入，或許會更有感觸也說不定。畢竟如果出錯了，甚至是因為自己的疏忽，把 code 部署到 production 上了，還要再浪費整個團隊的時間重新找 bug，再重新部署一次。</p>
+            <p>《摩登時代》原本是喜劇天王卓別林最著名的一部默劇電影。並且被認為是美國史上最偉大的電影之一。</p>
+<p>在討論社會學以及國家、個人、家庭之間的關係時，這部電影也常常會被拿出來討論。</p>
+<p>雖然是用戲謔而滑稽的手法詮釋的電影，卻將殘忍的事實完整的描述出來。</p>
+<p>從卓別林的眼中看見這個國家所隱含的殘酷現實，這就是我們所知的城市，儘管醜陋，卻是我們必須賴以維生的重要場所。這樣令人哭笑不得的劇情，是卓別林突出的功力。<img src="https://lh6.googleusercontent.com/gIDqGR6FPGQIX2h1DYM4Z7-Yr1geftISfKU6spUKKljcnAk8zyOThE0vbPmUXREVRRD5q6pOX6ugUpThHOf1X3tQTDRz14ZP75OR085AH2G6uNxEzHepY3sAK7pJhONplNnD8_4" alt="getImage"> </p>
+<h2 id="摩登時代"><a href="#摩登時代" class="headerlink" title="摩登時代"></a>摩登時代</h2><p>這本書是伊坂幸太郎在2010發表的長篇小說，配上花澤健吾的插畫，更富有戲謔感。</p>
+<p>伊坂幸太郎將這個故事從頭說起，主軸仍然是在討論這個國家、組織的運作，卻更有戲劇性，雖然也有不少湊篇幅而出現的情節，不過這部小說是連載之後才出版成小說的。</p>
+<p>這次連伊坂幸太郎都跳入這個故事中，「我的小說無法改變世界」、「小說啊！只能滲進讀者的體內，然後溶解」似乎隱約道出他的無奈。但不管如何，唯一能確定的是，他深厚的寫作功力以及架構，的確讓這篇故事相當精彩。</p>
+<p>「你有沒有勇氣？」是讀完小說後，最深刻的印象之一，男主角平凡的要命，膽小怕死又背著老婆外遇，這樣一位平凡人，就跟螺絲釘一樣。</p>
+<p>故事從一位系統工程師發現某個交友網站的程式內部隱藏著某種驚人的事實，愈是深入了解，愈發覺事情的不對勁，因為鍵入特定的關鍵字而受害，這位工程師開始深入調查，然後開始展開了一連串的故事。</p>
+<p>書中寫到了許多小故事，也是伊坂的特有風格之一。</p>
+<p>每本作品都會有個人物串場，而且不限於人而已，連湯瑪士小火車也曾出現在伊坂的筆中。不僅和劇情有呼應，也似乎在傳達著這個社會下所顯現出來的殘酷。</p>
+<h3 id="漢娜鄂蘭"><a href="#漢娜鄂蘭" class="headerlink" title="漢娜鄂蘭"></a>漢娜鄂蘭</h3><p><img src="https://lh5.googleusercontent.com/G_oMnIcF7R2uLH7YLqWT20RPt33rObkd7RBx1TrSzhj_ASrLbCRjio5TEQCmasUq1ZGIjRv4WyZUSyCTgoSXRrjwSfTFppvMwy83g0yETqgH2F7j84tDj07NTptCyiSO7NL3BD4" alt="content_womany_ying_mu_kuai_zhao_2014_10_14__shang_wu_9_58_57_1413255831-28769-9510"></p>
+<p>「邪惡的平庸」，強調平庸才是邪惡的源頭。</p>
+<p>事情拉回到二次世界大戰，猶太人被納粹黨大量屠殺的喋血事件。</p>
+<p>當時的劊子手「艾西曼」被批評為惡魔。後來發現，他並不是懷抱著對猶太人的憎恨而屠殺，<strong>而是依照著上級命令行事罷了。</strong></p>
+<p>然後呢？他就不需要懷有內疚感或是責任感，一切都只是遵照指示，不需要受到良心的譴責。</p>
+<p>每個人都只是機械性地完成工作，卻對整個工作流程一無所知。只是遵守著龐大的組織運作而已。然而這樣的思想並不只存在於當時。</p>
+<p>這是巧合嗎？</p>
+<p>還是一種帶有歷史性、諷刺的無奈輪迴？漢娜鄂蘭、伊坂幸太郎所要表達的觀念竟然不約而同地出現在現代。</p>
+<p>這是伊坂幸太郎的答案「如果因此做什麼都不會覺得不痛不癢的話，這個人就完了」。</p>
+<p>在這個資本過剩的年代，生活雖然不容易，卻已經比之前好太多了。更何況年輕時的機會成本出乎意料地低，真的要讓賺錢、找工作這件事變成放棄思考的藉口嗎？就算真的努力工作，存到不錯的存款，又能夠這樣認定這就是正確的嗎？</p>
+<p>邏輯上的確說得通，畢竟別人怎麼活是他們的事，能夠做自己喜歡、有回報、擅長的的事當然是個大幸運，但大部分的人都只能擇其一，並且這樣活下去。</p>
+<p>既然有實現夢想的人，那就有不得不放棄夢想的人在。</p>
+<p>但是，拿自己的職業做比喻好了。我是一個前端工程師，工作就是從實現設計師所產出的 mockup，儘管頭銜好聽了一點，但本質上也跟擰螺絲的卓别林沒什麼不同。</p>
+<p>任何重複性的工作，久了就會覺得枯燥，劇中的卓别林擰啊擰著，擰出病來，甚至把女生的胸部當作螺絲擰下去，結果被抓去監牢。</p>
+<p>從早打晚埋頭敲鍵盤，不去思考需求、不去思考這樣做對不對、功能的必要性，那麼的確就跟擰螺絲的工人差不多。</p>
+<p>「我只是按照上級指示行動。」這句話聽起來多令人心寒。很多人為了生活跟賺錢放棄思考。捨棄思考的我們、努力（而盲目？）工作的我們，真的只是完成工作就好了嗎？在這樣下去豈不是就像被操控的小丑一樣？</p>
+<p>在這個百花齊放的時代，更要不斷提醒自己，我是個活生生的人，有血肉之軀，被打會痛、開心會笑，而不是他人的工具，被動地為他人所用，而是應該要有自己的價值。</p>
+<h3 id="人是會習慣的動物"><a href="#人是會習慣的動物" class="headerlink" title="人是會習慣的動物"></a>人是會習慣的動物</h3><p>工作久了會習慣、反覆練習而純熟。面對不熟悉的領域最原始的情緒就是恐懼跟害怕，如果因為這樣而不敢接觸世界的話，未來也一定會更膽怯的吧！</p>
+<h3 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h3><p>想說的很多，但最完整能表現的大概是這一句吧！</p>
+<blockquote>
+<p>「比起支配人，我更想要幫助人」卓別林 -《大獨裁者》</p>
+</blockquote>
+<p>至少在年輕的時候，做什麼事情機會成本都還小的可以時，趕快接觸世界。</p>
 
         </div>
         <footer class="article-footer">
@@ -210,7 +218,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://kjj6198.github.io/2017/01/01/code-review-101/" data-id="cizqk7gaq0000245tvsfz8y5l" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://kjj6198.github.io/2017/02/22/morden-time/" data-id="cizqk7gco000r245tnr6o1dcc" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -315,20 +323,20 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/2017/02/01/responsive-flex/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/2017/02/28/webgl-it/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">下一篇</strong>
         <p class="article-nav-title">
         
-            高度相同的排版解決方案
+            IT 鐵人幫完賽心得
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
     </a>
     
     
-        <a href="/2016/11/14/weekly-thought-5-30/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2017/02/01/responsive-flex/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">上一篇</strong>
-        <p class="article-nav-title">weekly-thought-5/30</p>
+        <p class="article-nav-title">高度相同的排版解決方案</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -433,7 +441,7 @@ ga('send', 'pageview');
     var disqus_shortname = 'frontendclothesline';
     
     
-    var disqus_url = 'http://kjj6198.github.io/2017/01/01/code-review-101/';
+    var disqus_url = 'http://kjj6198.github.io/2017/02/22/morden-time/';
     
     (function() {
     var dsq = document.createElement('script');
