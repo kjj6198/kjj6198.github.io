@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    <title>Rails app 自動化部屬 - hubot 與 heaven | 前端曬衣場</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="devops,chatops,capistrano" />
+    
+    <meta name="description" content="前言目前所在的公司裡頭是直接在本地端的 terminal 跑 cap staging deploy 指令。 capistrano 作為自動部署化的工具非常方便，但難免會遇到幾個問題：
+
+不是團隊中的每個人都有相同的環境
+大家都在部署，結果 staging 上現在到底是哪個 branch，完全一頭霧水。
+deploy 這件事情卡在本地端。
+
+對一家新創來說，越穩定的開發效率和流程，就越能夠專注在產品">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Rails app 自動化部屬 - hubot 與 heaven">
+<meta property="og:url" content="http://kjj6198.github.io/2017/03/01/chatops/index.html">
+<meta property="og:site_name" content="前端曬衣場">
+<meta property="og:description" content="前言目前所在的公司裡頭是直接在本地端的 terminal 跑 cap staging deploy 指令。 capistrano 作為自動部署化的工具非常方便，但難免會遇到幾個問題：
+
+不是團隊中的每個人都有相同的環境
+大家都在部署，結果 staging 上現在到底是哪個 branch，完全一頭霧水。
+deploy 這件事情卡在本地端。
+
+對一家新創來說，越穩定的開發效率和流程，就越能夠專注在產品">
+<meta property="og:image" content="http://kjj6198.github.io/2017/03/01/chatops/process.png">
+<meta property="og:updated_time" content="2017-03-02T12:55:43.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Rails app 自動化部屬 - hubot 與 heaven">
+<meta name="twitter:description" content="前言目前所在的公司裡頭是直接在本地端的 terminal 跑 cap staging deploy 指令。 capistrano 作為自動部署化的工具非常方便，但難免會遇到幾個問題：
+
+不是團隊中的每個人都有相同的環境
+大家都在部署，結果 staging 上現在到底是哪個 branch，完全一頭霧水。
+deploy 這件事情卡在本地端。
+
+對一家新創來說，越穩定的開發效率和流程，就越能夠專注在產品">
+<meta name="twitter:image" content="http://kjj6198.github.io/2017/03/01/chatops/process.png">
+    
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-56408806-4', 'auto');
+ga('send', 'pageview');
+
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+    
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                      前端曬衣場
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">一位在台北求生存的大學生。喜歡看日劇、喝☕️、吃🍖。</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">主頁</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://kjj6198.github.io/resume/normal/">關於</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜尋" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要找..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '頁面',
+            CATEGORIES: '分類',
+            TAGS: '標籤',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/rails/">rails</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-chatops" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Rails app 自動化部屬 - hubot 與 heaven
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-subtitle">
+                <a href="/2017/03/01/chatops/" class="article-date">
+    <time datetime="2017-03-01T15:12:42.000Z" itemprop="datePublished">2017-03-01</time>
+</a>
+                
+    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/capistrano/">capistrano</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/chatops/">chatops</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/devops/">devops</a></li></ul>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>目前所在的公司裡頭是直接在本地端的 terminal 跑 <code>cap staging deploy</code> 指令。 <a href="https://github.com/capistrano/capistrano" target="_blank" rel="external">capistrano</a> 作為自動部署化的工具非常方便，但難免會遇到幾個問題：</p>
+<ul>
+<li>不是團隊中的每個人都有相同的環境</li>
+<li>大家都在部署，結果 staging 上現在到底是哪個 branch，完全一頭霧水。</li>
+<li>deploy 這件事情卡在本地端。</li>
+</ul>
+<p>對一家新創來說，越穩定的開發效率和流程，就越能夠專注在產品當中。所以我們希望做到幾件事：</p>
+<ul>
+<li>開發團隊都可以輕鬆的部署</li>
+<li>不用在本地端下指令部署，還要多設定 ssh。</li>
+<li>就算沒有開著電腦，也可以輕鬆地部署</li>
+<li>能夠記錄部署的狀況</li>
+<li>如果出問題了，可以快速 rollback 回上一個版本</li>
+</ul>
+<p>逐漸厭倦了在 terminal 打指令，ssh key 手動加的日子。於是打算自己研究有沒有更流暢的部署流程。</p>
+<p>之前在 Sudo 裡頭，幸好有 <a href="https://twitter.com/ocowchun" target="_blank" rel="external">@ocowchun</a> 跟 <a href="https://twitter.com/henry40408" target="_blank" rel="external">@henry</a> 兩位懶工，devops 做得非常完整，才能夠專注在開發功能，而不是一堆繁複的設定當中。（雖然才剛開發完就關閉服務了…）</p>
+<p>目前覺得最合適的解決方案是搭配 <code>hubot-deploy</code> 以及 <code>heaven</code> 來幫助部署。</p>
+<p>但 heaven 的文件實在寫的有夠爛。</p>
+<p>看了老半天，甚至看了一下 source code 才知道到底該怎麼設定。於是決定將整個設定流程分享給大家，希望能夠減少其他 devops 們走歪路的時間。</p>
+<h2 id="主要流程"><a href="#主要流程" class="headerlink" title="主要流程"></a>主要流程</h2><img src="/2017/03/01/chatops/process.png" alt="Github deployment process" title="Github deployment process">
+<p>hubot 接收到部署指令後，會發送 <a href="https://developer.github.com/v3/repos/deployments" target="_blank" rel="external">github deployment</a>，同時會觸發 <code>deployment</code> 這個事件，這時 github 就會發送 POST 給在 webhook 設置的 url（這邊接收者為 <code>heaven</code>），heaven 接收到請求之後，就會開始部署，再一一回傳我們想要知道的部數狀況。</p>
+<h3 id="hubot-deploy"><a href="#hubot-deploy" class="headerlink" title="hubot-deploy"></a>hubot-deploy</h3><p>hubot-deploy 能夠用 slack 對 slack-bot 下指令的方式建立 github 的 <a href="https://developer.github.com/v3/repos/deployments" target="_blank" rel="external">deployment</a> event。</p>
+<h3 id="heaven"><a href="#heaven" class="headerlink" title="heaven"></a>heaven</h3><p>是一個 Rails 的 application。主要有一個 <code>/events</code> 負責接收從 github deployment 傳來的 deployment 與 payload。</p>
+<h2 id="設定步驟"><a href="#設定步驟" class="headerlink" title="設定步驟"></a>設定步驟</h2><p><code>heaven</code> 的文件寫得不明所以<code>hubot-deploy</code> 也是草草帶過。幾乎只能靠著他們提供的流程圖，不斷的試錯與通靈。</p>
+<h3 id="設定-hubot-deploy"><a href="#設定-hubot-deploy" class="headerlink" title="設定 hubot-deploy"></a>設定 hubot-deploy</h3><ul>
+<li><a href="https://hubot.github.com/docs/" target="_blank" rel="external">getting started with hubot</a></li>
+</ul>
+<ol>
+<li><p>利用 yeoman 產生 hubot，並且選擇 <code>adapter</code> 為 <code>slack</code>。</p>
+</li>
+<li><p>在 <code>package.json</code> 中加入 <code>hubot-deploy</code>，或者 run <code>npm install hubot-deploy --save-dev</code></p>
+</li>
+<li><p>在 <code>external-scripts.json</code> 裡頭加入 <code>hubot-deploy</code>。</p>
+</li>
+<li><p>到  <code>apps.json</code> 中設定想要部署的 repos 有哪些：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;repo_name&quot;: &#123;</div><div class="line">    &quot;provider&quot;: &quot;capistrano&quot;,</div><div class="line">    &quot;auto_merge&quot;: false,</div><div class="line">    &quot;repository&quot;: &quot;kjj6198/deploy101&quot;,</div><div class="line">    &quot;environments&quot;: [&quot;production&quot;, &quot;staging&quot;]</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>這些資料在 hubot 送出 deployment 時會一併塞入 payload 當中。像是這樣：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">payload: &#123;</div><div class="line">  &quot;name&quot;: &quot;repo_name&quot;,</div><div class="line">  &quot;robotName&quot;: &quot;yourrobot&quot;,</div><div class="line">  &quot;hosts&quot;: &quot;&quot;,</div><div class="line">  &quot;notify&quot;: &#123;</div><div class="line">    &quot;adapter&quot;: &quot;slack&quot;,</div><div class="line">    &quot;room&quot;: &quot;123456789&quot;,</div><div class="line">    &quot;user&quot;: &quot;123456789&quot;,</div><div class="line">    &quot;user_name&quot;: &quot;kjj6198&quot;</div><div class="line">  &#125;,</div><div class="line">  &quot;config&quot;: &#123;</div><div class="line">    &quot;provider&quot;: &quot;capistrano&quot;,</div><div class="line">    &quot;auto_merge&quot;: false,</div><div class="line">    &quot;repository&quot;: &quot;kjj6198/deploy101&quot;,</div><div class="line">    &quot;environments&quot;: [</div><div class="line">      &quot;production&quot;,</div><div class="line">      &quot;staging&quot;</div><div class="line">    ]</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>特別要注意的是，provider 的欄位之後會送給 heaven，所以 provider 的值必須是 heaven 有的（之後會提到），或是自己實作 Provider。</p>
+<p>這樣子我們的 hubot 就算設定完成了。先部署到 heroku 上測試看看，部署到 heroku 很簡單：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">heroku login</div><div class="line">git init</div><div class="line">git add .</div><div class="line">git commit &quot;init&quot;</div><div class="line">heroku create</div><div class="line">git push heroku master</div></pre></td></tr></table></figure>
+<p>部署成功後，比較重要的變數有幾個：</p>
+<table>
+<thead>
+<tr>
+<th>變數名稱</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HUBOT_GITHUB_TOKEN</td>
+<td>GITHUB_TOKEN，到<strong>個人帳號</strong> &gt; settings &gt; personal access tokens 設定。設定好權限，因為 hubot 只是用來建立 repo 的 deployment，勾選 repo 即可。</td>
+</tr>
+<tr>
+<td>HUBOT_SLACK_TOKEN</td>
+<td>你的 slack-bot token。可以到<a href="https://slack.com/apps/A0F7XDU93-hubot" target="_blank" rel="external">這裡</a>設定</td>
+</tr>
+</tbody>
+</table>
+<p>全域變數可以到 heroku 的 dashboard 或是直接用 command line 設定：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">heroku config:set HUBOT_GITHUB_TOKEN=abcccc</div><div class="line">heroku config:set HUBOT_SLACK_TOKEN=abcccc</div></pre></td></tr></table></figure>
+<p>測試一下是否成功。在你設定的頻道中輸入 <code>hubot deploy:version</code></p>
+<img src="/2017/03/01/chatops/success.png" alt="success" title="success">
+<p>其中的 <code>hubot</code> 要跟你的機器人名稱相同，例如機器人的名稱為 tripmomo，那麼我就要輸入 <code>tripmomo deploy:version</code>。</p>
+<p>成功的話 hubot 會回應你目前的版本訊息。</p>
+<ol>
+<li><p>確認 hubot 有送出 deployment 事件。輸入 <code>hubot deploy app to statging</code></p>
+</li>
+<li><p>輸入  <code>curl -H &quot;Authorization: token YOUR_GITHUB_TOKEN&quot; https://api.github.com/repos/my-github/my-repo/deployments</code> 看看 deployment 是否建立成功。如果成功會回傳：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="string">"url"</span>: <span class="string">"https://api.github.com/repos/my-github/my-repo/deployments/28301325"</span>,</div><div class="line">    <span class="string">"id"</span>: <span class="number">123456</span>,</div><div class="line">    <span class="string">"sha"</span>: <span class="string">"2e3xxxxxxxaaaaaaabbbbbbb"</span>,</div><div class="line">    <span class="string">"ref"</span>: <span class="string">"develop"</span>,</div><div class="line">    <span class="string">"task"</span>: <span class="string">"deploy"</span>,</div><div class="line">    <span class="string">"payload"</span>: &#123; <span class="comment">// from apps.json</span></div><div class="line">      <span class="string">"name"</span>: <span class="string">"my-app"</span>,</div><div class="line">      <span class="string">"robotName"</span>: <span class="string">"tripmomo"</span>,</div><div class="line">      <span class="string">"hosts"</span>: <span class="string">""</span>,</div><div class="line">      <span class="string">"notify"</span>: &#123;</div><div class="line">        <span class="string">"adapter"</span>: <span class="string">"slack"</span>,</div><div class="line">        <span class="string">"room"</span>: <span class="string">"aabbccdd"</span>,</div><div class="line">        <span class="string">"user"</span>: <span class="string">"aabbccdd"</span>,</div><div class="line">        <span class="string">"user_name"</span>: <span class="string">"kalan.chen"</span></div><div class="line">      &#125;,</div><div class="line">      <span class="string">"config"</span>: &#123; </div><div class="line">        <span class="string">"provider"</span>: <span class="string">"capistrano"</span>,</div><div class="line">        <span class="string">"auto_merge"</span>: <span class="literal">false</span>,</div><div class="line">        <span class="string">"repository"</span>: <span class="string">"my-github/my-repo"</span>,</div><div class="line">        <span class="string">"environments"</span>: [</div><div class="line">          <span class="string">"production"</span>,</div><div class="line">          <span class="string">"staging"</span></div><div class="line">        ]</div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    <span class="string">"environment"</span>: <span class="string">"staging"</span>,</div><div class="line">    <span class="string">"description"</span>: <span class="string">"deploy on staging from hubot-deploy-v0.13.27"</span>,</div><div class="line">    <span class="string">"creator"</span>: &#123;</div><div class="line">      <span class="string">"login"</span>: <span class="string">"kjj6198"</span>,</div><div class="line">      <span class="string">"id"</span>: <span class="number">123456</span>,</div><div class="line">      <span class="string">"avatar_url"</span>: <span class="string">"https://avatars2.githubusercontent.com/u/123456?v=3"</span>,</div><div class="line">      <span class="string">"gravatar_id"</span>: <span class="string">""</span>,</div><div class="line">      <span class="string">"url"</span>: <span class="string">"https://api.github.com/users/kjj6198"</span>,</div><div class="line">      <span class="string">"html_url"</span>: <span class="string">"https://github.com/kjj6198"</span>,</div><div class="line">      <span class="string">"followers_url"</span>: <span class="string">"https://api.github.com/users/kjj6198/followers"</span>,</div><div class="line">      <span class="string">"following_url"</span>: <span class="string">"https://api.github.com/users/kjj6198/following&#123;/other_user&#125;"</span>,</div><div class="line">      <span class="string">"gists_url"</span>: <span class="string">"https://api.github.com/users/kjj6198/gists&#123;/gist_id&#125;"</span>,</div><div class="line">      <span class="string">"starred_url"</span>: <span class="string">"https://api.github.com/users/kjj6198/starred&#123;/owner&#125;&#123;/repo&#125;"</span>,</div><div class="line">      <span class="string">"subscriptions_url"</span>: <span class="string">"https://api.github.com/users/kjj6198/subscriptions"</span>,</div><div class="line">      <span class="string">"organizations_url"</span>: <span class="string">"https://api.github.com/users/kjj6198/orgs"</span>,</div><div class="line">      <span class="string">"repos_url"</span>: <span class="string">"https://api.github.com/users/kalanchen/repos"</span>,</div><div class="line">      <span class="string">"events_url"</span>: <span class="string">"https://api.github.com/users/kjj6198/events&#123;/privacy&#125;"</span>,</div><div class="line">      <span class="string">"received_events_url"</span>:<span class="string">"https://api.github.com/users/kjj6198/received_events"</span>,</div><div class="line">      <span class="string">"type"</span>: <span class="string">"User"</span>,</div><div class="line">      <span class="string">"site_admin"</span>: <span class="literal">false</span></div><div class="line">    &#125;,</div><div class="line">    <span class="string">"created_at"</span>: <span class="string">"2017-03-01T12:24:20Z"</span>,</div><div class="line">    <span class="string">"updated_at"</span>: <span class="string">"2017-03-01T12:24:20Z"</span>,</div><div class="line">    <span class="string">"statuses_url"</span>: <span class="string">"https://api.github.com/repos/my-github/my-repo/deployments/12345667/statuses"</span>,</div><div class="line">    <span class="string">"repository_url"</span>: <span class="string">"https://api.github.com/repos/my-github/my-repo"</span></div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p>更多 deployment API 可以到 <a href="https://developer.github.com/v3/repos/deployments/" target="_blank" rel="external">github deployment API</a> 看看。</p>
+</li>
+</ol>
+<h3 id="設定-heaven"><a href="#設定-heaven" class="headerlink" title="設定 heaven"></a>設定 heaven</h3><ul>
+<li>到 <a href="https://github.com/atmos/heaven" target="_blank" rel="external">heaven</a> 將 repo clone 下來。</li>
+<li>設定全域變數</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>變數名稱</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DEPLOYMENT_PRIVATE_KEY</td>
+<td>因為 heaven 是用 ssh 登入，需要 private key。如果 server 在 ec2 上，也可以用 pem 的方式來設定。</td>
+</tr>
+<tr>
+<td>GITHUB_CLIENT_ID</td>
+<td>到個人設定頁面 &gt; OAuth application 產生</td>
+</tr>
+<tr>
+<td>GITHUB_CLIENT_SECRET</td>
+<td>到個人設定頁面 &gt; OAuth application 產生</td>
+</tr>
+<tr>
+<td>DATABASE_URL</td>
+<td>heaven 會建立資料庫紀錄 deployment</td>
+</tr>
+<tr>
+<td>GITHUB_TOKEN</td>
+<td>heaven 會使用 gist 來當作 stdout stderr。所以在設定 token 時記得把 <code>gist</code> 打勾勾。</td>
+</tr>
+</tbody>
+</table>
+<p>其他的變數可以到 <a href="https://github.com/atmos/heaven/blob/master/doc/installation.md" target="_blank" rel="external">這裡</a> 查看。</p>
+<p>補充說明 <code>DEPLOYMENT_PRIVATE_KEY</code>：原始檔案長這樣</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">-----BEGIN RSA PRIVATE KEY-----</div><div class="line">MJVGa/WNT9aFs63ykxLCdGzav8CfQ5vKXrLrllHXUYFaB2yaN72L+fSsXAy9zMs2</div><div class="line">vy6wV2fB6j3YrVNCnBwUUNGTX9Ka6eeK98dCvHVyyE9Iz3CJAWZxaI03Px/xX9ps</div><div class="line">M4kDWe7IA6+mnuCVSzwQVWMdOoAXbQbhGdfeixbqljNhJrKW/jA9w4BNarwGYv4E</div><div class="line">0MwdU9x7zpk826ytza87yXHSdNuTKcsGQk4XHMYxJECj4EM8vTlVlEyEXZtCeh2z</div><div class="line">P4bjYkTcBom4nC/q7Ea7Pmy1iDJqs0qc1L/xtNMypMhx4iIaeDVawkvBaL6t9IPT</div><div class="line">KVuC9Y1uw5nJP1gwxXa5qoazhcikzqRYmaeWIzsZrcVShZBrJO9/a/APxXY7qJpJ</div><div class="line">0r1YYTykw7THYj2QYiv8cfF64/vh9cB0NELEp5hIuS82Mf6CjqRR7QYR+By3uIdD</div><div class="line">hQ77NMpQlmIC+TCJsLoADqwmEEZCiQSejtkXXtN/mNl581jP8+ViNkWZfPYWe7g6</div><div class="line">yUeXVN1cBPo6AIu+lStE+SlR8lbu7sdpn6lid1pJf50zeythabze81y/nrAdx+Jn</div><div class="line">scACBJBrERkhm2wdULkqwMV2g0U53YpYVAs2fFU1hGzRcE5zF1sdy9RLLX45Mzrm</div><div class="line">lRErTbSUcnoQJhhCso5uNY6MMnr/rQF920KA0Ufr40IBcQ8bOSX7lJucST5bZLDg</div><div class="line">H7g16rimHgK4I9rrvKy4plvbolfpuKGMYJDS3Q7IW5cL5lWLU3HaVSn+VyZe8p3A</div><div class="line">prVx0XmSCwpmUzbDI6FoqniVPVdgis2tV1uKdnJPVn0DoK0ersosGXmALytbYLeE</div><div class="line">arH/cIlGGCoGbIX+Iv3u8aICBEG2eR8eXmQSlGI5rp9hGK/JrlkL3PywVmPw4Efi</div><div class="line">atiS6Y12Tuu8bdpPxBTzXK3PoZ23Pc+1l7NXXIzBeGnj56bALOIbAY5kg+lIRdtP</div><div class="line">NSTAW8IVgFJUl4uzy/NXn/ewiE093ZVs59I2x4OoS14S20mkM/ldWbvlVm4Z3JxC</div><div class="line">xIWsIV8aLznttic5MJUGjGoqH1Brg0o1HyWdkoEcC1N0G57oO4pN4UTD5co5xY9j</div><div class="line">Ai2NIcFCYzqrdTfSlPWJBZLhjZ5hOXIwuTeJfRxDAVphaUqfpXb3o3URGRWiGENA</div><div class="line">kIYKiq4XeNguwrFBzg5CB7NEKvjbjJ31GI26yAPa7yrKpuNFAjPpO6JKdL8slvx8</div><div class="line">GXCOSbhGPFxzmtYzEeMxmnHqOa0Z953XeheKfJoipqRAyENxPBvclDonqVfxuTvw</div><div class="line">cZzqFD+XjDJCJ5INwuwk2WupVzQjzV6TagcIX63Kq1Z9HSoFIBiCrdLzTMDG4Ro3</div><div class="line">2wpN1tFQFz6alvwKtifGwhvG3qqmsfcQqw56gGY0DWIqG5x/thdG7UzZT7iMVDJV</div><div class="line">LAO5wNnBK6L+feov9LqP7ONAonBVawmTv0ArjVhhkYZEi6d+ymvPpL1ORFAymLne</div><div class="line">dpk4VmmmQvkUu0KudRqulavTIrnXFkuv2va+5X9mHGoNNMo1TXk2XX1eM4Rc7nAY</div><div class="line">6IwPyAuFEtT5ocWBklB/qUZtdu4fG876o0X87GklR9ZfPG+tWpH2F+1j1mMHKuiP</div><div class="line">-----END RSA PRIVATE KEY-----</div></pre></td></tr></table></figure>
+<p>要修改成：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">-----BEGIN RSA PRIVATE KEY-----\nMJVGa/WNT9aFs63ykxLCdGzav8CfQ5vKXrLrllHXUYFaB2yaN72L+fSsXAy9zMs2\nvy6wV2fB6j3YrVNCnBwUUNGTX9Ka6eeK98dCvHVyyE9Iz3CJAWZxaI03Px/xX9ps\nM4kDWe7IA6+mnuCVSzwQVWMdOoAXbQbhGdfeixbqljNhJrKW/jA9w4BNarwGYv4E\n0MwdU9x7zpk826ytza87yXHSdNuTKcsGQk4XHMYxJECj4EM8vTlVlEyEXZtCeh2z\nP4bjYkTcBom4nC/q7Ea7Pmy1iDJqs0qc1L/xtNMypMhx4iIaeDVawkvBaL6t9IPT\nKVuC9Y1uw5nJP1gwxXa5qoazhcikzqRYmaeWIzsZrcVShZBrJO9/a/APxXY7qJpJ\n0r1YYTykw7THYj2QYiv8cfF64/vh9cB0NELEp5hIuS82Mf6CjqRR7QYR+By3uIdD\nhQ77NMpQlmIC+TCJsLohtJEmEEZCiQSejtkXXtN/mNl581jP8+ViNkWZfPYWe7g6\nyUeXVN1cBPo6AIu+lStE+SlR8lbu7sdpn6lid1pJf50zeythabze81y/nrAdx+Jn\nscACBJBrERkhm2wdULkqwMV2g0U53YpYVAs2fFU1hGzRcE5zF1sdy9RLLX45Mzrm\nlRErTbSUcnoQJhhCso5uNY6MMnr/rQF920KA0Ufr40IBcQ8bOSX7lJucST5bZLDg\nH7g16rimHgK4I9rrvKy4plvbolfpuKGMYJDS3Q7IW5cL5lWLU3HaVSn+VyZe8p3A\nprVx0XmSCwpmUzbDI6FoqniVPVdgis2tV1uKdnJPVn0DoK0ersosGXmALytbYLeE\narH/cIlGGCoGbIX+Iv3u8aICBEG2eR8eXmQSlGI5rp9hGK/JrlkL3PywVmPw4Efi\natiS6Y12Tuu8bdpPxBTzXK3PoZ23Pc+1l7NXXIzBeGnj56bALOIbAY5kg+lIRdtP\nNSTAW8IVgFJUl4uzy/NXn/ewiE093ZVs59I2x4OoS14S20mkM/ldWbvlVm4Z3JxC\nxIWsIV8aLznttic5MJUGjGoqH1Brg0o1HyWdkoEcC1N0G57oO4pN4UTD5co5xY9j\nAi2NIcFCYzqrdTfSlPWJBZLhjZ5hOXIwuTeJfRxDAVphaUqfpXb3o3URGRWiGENA\nkIYKiq4XeNguwrFBzg5CB7NEKvjbjJ31GI26yAPa7yrKpuNFAjPpO6JKdL8slvx8\nGXCOSbhGPFxzmtYzEeMxmnHqOa0Z953XeheKfJoipqRAyENxPBvclDonqVfxuTvw\ncZzqFD+XjDJCJ5INwuwk2WupVzQjzV6TagcIX63Kq1Z9HSoFIBiCrdLzTMDG4Ro3\n2wpN1tFQFz6alvwKtifGwhvG3qqmsfcQqw56gGY0DWIqG5x/thdG7UzZT7iMVDJV\nLAO5wNnBK6L+feov9LqP7ONAonBVawmTv0ArjVhhkYZEi6d+ymvPpL1ORFAymLne\ndpk4VmmmQvkUu0KudRqulavTIrnXFkuv2va+5X9mHGoNNMo1TXk2XX1eM4Rc7nAY\n6IwPyAuFEtT5ocWBklB/qUZtdu4fG876o0X87GklR9ZfPG+tWpH2F+1j1mMHKuiP\n-----END RSA PRIVATE KEY-----</div></pre></td></tr></table></figure>
+<p><em>既然公開，這組 private key 當然報廢了</em></p>
+<h4 id="設定-Gemfile"><a href="#設定-Gemfile" class="headerlink" title="設定 Gemfile"></a>設定 Gemfile</h4><p>因為 heaven 的動作會是拉下最新的 repo 後，執行 <code>cap ... deploy</code> 的指令，所以capistrano 的版本必須跟要部署的那個版本相同。同時，也要注意任何 asset 相關的 gem 也要一併放入 heaven。舉例來說，如果我的 Capfile 有用到</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">gem <span class="string">'capistrano'</span>, <span class="string">'3.4.0'</span></div><div class="line">gem <span class="string">'capistrano3-unicorn'</span></div><div class="line">gem <span class="string">'capistrano-rails'</span></div><div class="line">gem <span class="string">'sitemap_generator'</span></div><div class="line">gem <span class="string">'capistrano-rvm'</span></div></pre></td></tr></table></figure>
+<p>那麼<strong>就要將這些 gem 加入 heaven 的 Gemfile 當中</strong>。因為 heaven 會將要部署的 repo 抓下來之後，進去資料夾輸入 <code>cap staging ... deploy</code> 的指令，所以如果沒有安裝相對應的 gem，heaven 就沒辦法部署了。</p>
+<h3 id="串接-github-deployment"><a href="#串接-github-deployment" class="headerlink" title="串接 github deployment"></a>串接 github deployment</h3><ul>
+<li>先到 repo 的 settings &gt; deploy key 加入 ssh-key。</li>
+<li>到 repo 的 settings &gt; webhooks &gt; add webhook</li>
+<li>Payload URL 填入你的 heaven 部署 host 的網址，例如：<a href="https://yourapp.com.tw/events。如果想要修改，可以到" target="_blank" rel="external">https://yourapp.com.tw/events。如果想要修改，可以到</a> heaven repo 的 <code>routes.rb</code> 中修改</li>
+<li>Content Type 選擇 <code>application/json</code></li>
+<li>Secret 依需求選填</li>
+<li>下面問你這個 webhook 要監聽哪些事件，我們是用 deployment 來做部署的，所以選擇 deployment 以及 deployment status。</li>
+</ul>
+<h4 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h4><p>如果是部署到 heroku 的話，因為 heaven 要開 redis 跟 resque。記得加入相對應的 add-on 以及 <code>REDIS_URL</code> 。</p>
+<p>同時別忘記了要建立資料庫 <code>heroku run rake db:migrate</code>。</p>
+<h2 id="hubot-deploy-常用指令"><a href="#hubot-deploy-常用指令" class="headerlink" title="hubot-deploy 常用指令"></a>hubot-deploy 常用指令</h2><ul>
+<li><code>hubot deploy:version</code> 目前版本</li>
+<li><code>hubot deploy repo</code>： 根據 <code>apps.json</code> deploy 指定的 repo name。</li>
+<li><code>hubot deploy repo/branch</code>：將指定 repo 的某一個 branch 部署到預設的 environment 中。可設定 <code>HUBOT_DEPLOY_DEFAULT_ENVIRONMENT</code> 來決定</li>
+<li><code>hubot deploy repo/branch to staging</code>：將指定 repo 中的 branch 部署到 <code>staging</code></li>
+</ul>
+<h2 id="筆記"><a href="#筆記" class="headerlink" title="筆記"></a>筆記</h2><ul>
+<li><p>heaven 的文件雖然不明所以，但是程式碼跟測試寫得蠻完整的，熟悉 ruby 的開發者甚至可以將整個 heaven 架設好，修改一下程式碼，加上 routes，直接建立 UI 一鍵部署。</p>
+</li>
+<li><p><code>OptionParser::AmbiguousOption: ambiguous option: -s</code>：不確定是不是 Capistrano 更新之後指令有變動。解決方法是到 <code>lib/heaven/provider/capistrano.rb</code> 修改 <code>deploy_command</code></p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">module</span> <span class="title">Heaven</span></span></div><div class="line">  <span class="comment"># Top-level module for providers.</span></div><div class="line">  <span class="class"><span class="keyword">module</span> <span class="title">Provider</span></span></div><div class="line">    <span class="comment"># The capistrano provider.</span></div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Capistrano</span> &lt; DefaultProvider</span></div><div class="line"> 	.....</div><div class="line">      <span class="function"><span class="keyword">def</span> <span class="title">execute</span></span></div><div class="line">        <span class="keyword">return</span> execute_and_log([<span class="string">"/usr/bin/true"</span>]) <span class="keyword">if</span> Rails.env.test?</div><div class="line"></div><div class="line">        unless File.exist?(checkout_directory)</div><div class="line">          log <span class="string">"Cloning <span class="subst">#&#123;repository_url&#125;</span> into <span class="subst">#&#123;checkout_directory&#125;</span>"</span></div><div class="line">          execute_and_log([<span class="string">"git"</span>, <span class="string">"clone"</span>, clone_url, checkout_directory])</div><div class="line">        <span class="keyword">end</span></div><div class="line"></div><div class="line">        Dir.chdir(checkout_directory) <span class="keyword">do</span></div><div class="line">          log <span class="string">"Fetching the latest code"</span></div><div class="line">          execute_and_log(<span class="string">%w&#123;git fetch&#125;</span>)</div><div class="line">          execute_and_log([<span class="string">"git"</span>, <span class="string">"reset"</span>, <span class="string">"--hard"</span>, sha])</div><div class="line">          deploy_command = [cap_path, environment, <span class="string">"部署的 cap 指令"</span>]</div><div class="line">          log <span class="string">"Executing capistrano: <span class="subst">#&#123;deploy_command.join(<span class="string">" "</span>)&#125;</span>"</span></div><div class="line">          execute_and_log(deploy_command)</div><div class="line">        <span class="keyword">end</span></div><div class="line">      <span class="keyword">end</span></div><div class="line">    <span class="keyword">end</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>因為 heaven 在部署時會使用 gist 當作 stdout 跟 stderr，在設定 GITHUB_TOKEN 的時候一定要記得把 gist 的 scope 打勾</p>
+</li>
+<li><p><code>Net::SSH::AuthenticationFailed: Authentication failed for user apps@staging.tripmoment.com</code> ：SSH private_key 設定有誤。先確定這組 ssh key 是否已經加入 github，再來確定將 <code>passphrase</code> 拿掉，並且將 ssh private key 變成一行加上 \n。</p>
+</li>
+<li><p><code>ArgumentError: Could not parse PKey: no start line</code> 沒有將 SSH private key 的 passphrase 移除</p>
+</li>
+</ul>
+<h2 id="後記"><a href="#後記" class="headerlink" title="後記"></a>後記</h2><p>通常在公司裡頭，開發團隊人數不多的話，devops 都是由後端兼任的，前端比較少接觸。不過用「我是前端，我不需要管 devops」這種藉口搪塞自己不去學習好像也說不太過去，畢竟開發一個健全的系統絕對不可能只有前端而已。</p>
+<p>這篇文章試著將文件中沒有提到或是省略的步驟整合起來，heaven 跟 hubot-deploy 的文件中有太多沒有提到的細節，導致整合起來時需要花不少時間試錯。希望能夠節省大家踩雷跟翻原始碼的時間。</p>
+<p>這篇文章還有許多 devops 的細節沒有詳述，畢竟建立一套完整的 devops pipeline 需要時間，自己對於 CI/CD 的設定也還不夠熟悉。</p>
+<h3 id="參考資源："><a href="#參考資源：" class="headerlink" title="參考資源："></a>參考資源：</h3><ul>
+<li><a href="https://github.com/ocowchun/many101/blob/master/devops/chatops.md" target="_blank" rel="external">顆顆 devops 筆記</a></li>
+<li><a href="http://lazier.cwchang.me/2015/01/24/ChatOps-Hubot-Capistrano-Heaven/" target="_blank" rel="external">chatops</a></li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://kjj6198.github.io/2017/03/01/chatops/" data-id="cizse9p3s0000b75toicfnouu" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>關注我 :</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="https://twitter.com/kalanyei" target="_blank">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/kjj6198" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2017/02/28/webgl-it/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">IT 鐵人幫完賽心得</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="no-thumbnail">
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/rails/">rails</a></p>
+                            <p class="item-title"><a href="/2017/03/01/chatops/" class="title">Rails app 自動化部屬 - hubot 與 heaven</a></p>
+                            <p class="item-date"><time datetime="2017-03-01T15:12:42.000Z" itemprop="datePublished">2017-03-01</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/02/28/webgl-it/" class="title">IT 鐵人幫完賽心得</a></p>
+                            <p class="item-date"><time datetime="2017-02-28T15:44:42.000Z" itemprop="datePublished">2017-02-28</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/讀書心得/">讀書心得</a></p>
+                            <p class="item-title"><a href="/2017/02/22/morden-time/" class="title">伊坂幸太郎 - 摩登時代</a></p>
+                            <p class="item-date"><time datetime="2017-02-21T16:00:00.000Z" itemprop="datePublished">2017-02-22</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/02/01/responsive-flex/" class="title">高度相同的排版解決方案</a></p>
+                            <p class="item-date"><time datetime="2017-02-01T07:33:41.000Z" itemprop="datePublished">2017-02-01</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/01/01/code-review-101/" class="title">code-review-101</a></p>
+                            <p class="item-date"><time datetime="2016-12-31T16:00:00.000Z" itemprop="datePublished">2017-01-01</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">分類</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/rails/">rails</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端週刊/">前端週刊</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/程式筆記/">程式筆記</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/讀書心得/">讀書心得</a><span class="category-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">歸檔</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit" style="text-align: center;">
+                <p>&copy; 2017 Kalan</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_shortname = 'frontendclothesline';
+    
+    
+    var disqus_url = 'http://kjj6198.github.io/2017/03/01/chatops/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+</body>
+</html>

@@ -20,6 +20,7 @@ float 及 inline-block如果是使用 float 排版，不但要先撐開父元素
 float 及 inline-block如果是使用 float 排版，不但要先撐開父元素容器(clearfix)，還要針對子元素設定 margin。所以一旦內容太多，或是高度不足就會跑版。
 而且，這樣的排版最大的缺陷就是，必須設定高度。
 那，如果不設置高度呢？就算">
+<meta property="og:image" content="http://kjj6198.github.io/2017/02/01/responsive-flex/example1.png">
 <meta property="og:updated_time" content="2017-03-01T03:04:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="高度相同的排版解決方案">
@@ -27,6 +28,7 @@ float 及 inline-block如果是使用 float 排版，不但要先撐開父元素
 float 及 inline-block如果是使用 float 排版，不但要先撐開父元素容器(clearfix)，還要針對子元素設定 margin。所以一旦內容太多，或是高度不足就會跑版。
 而且，這樣的排版最大的缺陷就是，必須設定高度。
 那，如果不設置高度呢？就算">
+<meta name="twitter:image" content="http://kjj6198.github.io/2017/02/01/responsive-flex/example1.png">
     
 
     
@@ -176,7 +178,7 @@ ga('send', 'pageview');
 <h3 id="float-及-inline-block"><a href="#float-及-inline-block" class="headerlink" title="float 及 inline-block"></a>float 及 inline-block</h3><p>如果是使用 float 排版，不但要先撐開父元素容器(clearfix)，還要針對子元素設定 margin。<br>所以一旦內容太多，或是高度不足就會跑版。</p>
 <p>而且，這樣的排版最大的缺陷就是，<strong>必須設定高度</strong>。</p>
 <p>那，如果不設置高度呢？<br>就算設定了 min-height 也一樣，當內容超出高度時，就必定會面臨 overflow 的危機。</p>
-
+<img src="/2017/02/01/responsive-flex/example1.png" alt="example1" title="example1">
 <p>後來決定直接用 css media query 在不同的螢幕寬度下分別給予不同的高度。<br>雖然解法比較麻煩，也比較醜一點，但的確解決了寬度過窄時會跑版的問題。</p>
 <p>這個問題後來一直深埋在心中，直到最近發現了 flex 的奧秘。</p>
 <h3 id="排版遇到困難，先想想-flex"><a href="#排版遇到困難，先想想-flex" class="headerlink" title="排版遇到困難，先想想 flex"></a>排版遇到困難，先想想 flex</h3><p>人生遇到挫折的時候，想想 flex，這個彈性盒子常常會救你一命。<br>flex 已經支援大部分的主流瀏覽器，而且真的很好用！</p>
@@ -203,7 +205,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://kjj6198.github.io/2017/02/01/responsive-flex/" data-id="cizqk7gcq000u245tfqn2vud2" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://kjj6198.github.io/2017/02/01/responsive-flex/" data-id="cizse9p8c0016b75tdyfm91ab" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -339,6 +341,14 @@ ga('send', 'pageview');
                 
                     <li>
                         <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/rails/">rails</a></p>
+                            <p class="item-title"><a href="/2017/03/01/chatops/" class="title">Rails app 自動化部屬 - hubot 與 heaven</a></p>
+                            <p class="item-date"><time datetime="2017-03-01T15:12:42.000Z" itemprop="datePublished">2017-03-01</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
                             <p class="item-title"><a href="/2017/02/28/webgl-it/" class="title">IT 鐵人幫完賽心得</a></p>
                             <p class="item-date"><time datetime="2017-02-28T15:44:42.000Z" itemprop="datePublished">2017-02-28</time></p>
@@ -369,14 +379,6 @@ ga('send', 'pageview');
                         </div>
                     </li>
                 
-                    <li>
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/前端週刊/">前端週刊</a></p>
-                            <p class="item-title"><a href="/2016/11/14/weekly-thought-5-30/" class="title">weekly-thought-5/30</a></p>
-                            <p class="item-date"><time datetime="2016-11-14T11:51:39.000Z" itemprop="datePublished">2016-11-14</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -387,7 +389,7 @@ ga('send', 'pageview');
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">分類</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端週刊/">前端週刊</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/程式筆記/">程式筆記</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/讀書心得/">讀書心得</a><span class="category-list-count">3</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/rails/">rails</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端週刊/">前端週刊</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/程式筆記/">程式筆記</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/讀書心得/">讀書心得</a><span class="category-list-count">3</span></li></ul>
         </div>
     </div>
 
@@ -397,7 +399,7 @@ ga('send', 'pageview');
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">歸檔</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">1</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">1</span></li></ul>
         </div>
     </div>
 
