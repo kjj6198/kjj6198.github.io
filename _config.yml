@@ -4,8 +4,8 @@
 
 # Site
 title: 前端曬衣場
-subtitle: 一位在台北努力求生存的大學生。喜歡看日劇、喝☕️、吃🍖。
-description: 一位在台北努力求生存的大學生，喜歡看日劇、喝☕️、吃🍖。在文青與前端徘徊的 context switch 工程師
+subtitle: 一位在台北求生存的大學生。喜歡看日劇、喝☕️、吃🍖。
+description: 一位在台北求生存的大學生。喜歡看日劇、喝☕️、吃🍖。
 keywords: 前端 工程師 實習 學生
 author: Kalan
 language: zh-TW
@@ -35,7 +35,7 @@ titlecase: false # Transform title into titlecase
 external_link: true # Open external links in new tab
 filename_case: 0
 render_drafts: false
-post_asset_folder: false
+post_asset_folder: true
 relative_link: false
 future: true
 highlight:
@@ -65,6 +65,8 @@ pagination_dir: page
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 theme: hueman
+pulgins:
+  - hexo-math
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html

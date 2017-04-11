@@ -8,9 +8,9 @@ index:
     tag: '標籤：'
 nav:
     current_page:
-        other: '第 %d 页，'
+        other: '第 %d 頁，'
     total_page:
-        other: '共 %d 页'
+        other: '共 %d 頁'
 sidebar:
     follow: '關注我 '
     newer: '下一篇'
