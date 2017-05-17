@@ -20,7 +20,7 @@ float 及 inline-block如果是使用 float 排版，不但要先撐開父元素
 float 及 inline-block如果是使用 float 排版，不但要先撐開父元素容器(clearfix)，還要針對子元素設定 margin。所以一旦內容太多，或是高度不足就會跑版。
 而且，這樣的排版最大的缺陷就是，必須設定高度。
 那，如果不設置高度呢？就算">
-<meta property="og:image" content="http://kjj6198.github.io/blog/2017/02/01/responsive-flex/example1.png">
+<meta property="og:image" content="http://kjj6198.github.io/blog/blog/2017/02/01/responsive-flex/example1.png">
 <meta property="og:updated_time" content="2017-03-01T03:04:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="高度相同的排版解決方案">
@@ -28,23 +28,23 @@ float 及 inline-block如果是使用 float 排版，不但要先撐開父元素
 float 及 inline-block如果是使用 float 排版，不但要先撐開父元素容器(clearfix)，還要針對子元素設定 margin。所以一旦內容太多，或是高度不足就會跑版。
 而且，這樣的排版最大的缺陷就是，必須設定高度。
 那，如果不設置高度呢？就算">
-<meta name="twitter:image" content="http://kjj6198.github.io/blog/2017/02/01/responsive-flex/example1.png">
+<meta name="twitter:image" content="http://kjj6198.github.io/blog/blog/2017/02/01/responsive-flex/example1.png">
     
 
     
 
     
 
-    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
-    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+    <link rel="stylesheet" href="/blog/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/blog/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/blog/libs/source-code-pro/styles.css">
 
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/blog/css/style.css">
 
-    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="/blog/libs/jquery/2.0.3/jquery.min.js"></script>
     
     
-        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+        <link rel="stylesheet" href="/blog/libs/lightgallery/css/lightgallery.min.css">
     
     
         <script type="text/javascript">
@@ -84,7 +84,7 @@ ga('send', 'pageview');
                         <ul id="main-nav">
                             
                                 <li class="main-nav-list-item" >
-                                    <a class="main-nav-list-link" href="/">主頁</a>
+                                    <a class="main-nav-list-link" href="/blog/">主頁</a>
                                 </li>
                             
                                 <li class="main-nav-list-item" >
@@ -121,13 +121,13 @@ ga('send', 'pageview');
             TAGS: '標籤',
             UNTITLED: '(未命名)',
         },
-        ROOT_URL: '/',
-        CONTENT_URL: '/content.json',
+        ROOT_URL: '/blog/',
+        CONTENT_URL: '/blog/content.json',
     };
     window.INSIGHT_CONFIG = INSIGHT_CONFIG;
 })(window);
 </script>
-<script src="/js/insight.js"></script>
+<script src="/blog/js/insight.js"></script>
 
 </div>
                         </nav>
@@ -145,7 +145,7 @@ ga('send', 'pageview');
                         <div class="main-body-header">
     <h1 class="header">
     
-    <a class="page-title-link" href="/categories/前端/">前端</a>
+    <a class="page-title-link" href="/blog/categories/前端/">前端</a>
     </h1>
 </div>
                         <div class="main-body-content">
@@ -164,11 +164,11 @@ ga('send', 'pageview');
         
         
             <div class="article-subtitle">
-                <a href="/2017/02/01/responsive-flex/" class="article-date">
+                <a href="/blog/2017/02/01/responsive-flex/" class="article-date">
     <time datetime="2017-02-01T07:33:41.000Z" itemprop="datePublished">2017-02-01</time>
 </a>
                 
-    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/flex/">flex</a></li></ul>
+    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/flex/">flex</a></li></ul>
 
             </div>
         
@@ -178,7 +178,7 @@ ga('send', 'pageview');
 <h3 id="float-及-inline-block"><a href="#float-及-inline-block" class="headerlink" title="float 及 inline-block"></a>float 及 inline-block</h3><p>如果是使用 float 排版，不但要先撐開父元素容器(clearfix)，還要針對子元素設定 margin。<br>所以一旦內容太多，或是高度不足就會跑版。</p>
 <p>而且，這樣的排版最大的缺陷就是，<strong>必須設定高度</strong>。</p>
 <p>那，如果不設置高度呢？<br>就算設定了 min-height 也一樣，當內容超出高度時，就必定會面臨 overflow 的危機。</p>
-<img src="/2017/02/01/responsive-flex/example1.png" alt="example1" title="example1">
+<img src="/blog/2017/02/01/responsive-flex/example1.png" alt="example1" title="example1">
 <p>後來決定直接用 css media query 在不同的螢幕寬度下分別給予不同的高度。<br>雖然解法比較麻煩，也比較醜一點，但的確解決了寬度過窄時會跑版的問題。</p>
 <p>這個問題後來一直深埋在心中，直到最近發現了 flex 的奧秘。</p>
 <h3 id="排版遇到困難，先想想-flex"><a href="#排版遇到困難，先想想-flex" class="headerlink" title="排版遇到困難，先想想 flex"></a>排版遇到困難，先想想 flex</h3><p>人生遇到挫折的時候，想想 flex，這個彈性盒子常常會救你一命。<br>flex 已經支援大部分的主流瀏覽器，而且真的很好用！</p>
@@ -205,7 +205,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://kjj6198.github.io/blog/2017/02/01/responsive-flex/" data-id="cj2stk1fd0011ly5tl0l6xa45" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://kjj6198.github.io/blog/blog/2017/02/01/responsive-flex/" data-id="cj2stn5730010og5ttc4yez20" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -310,7 +310,7 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/2017/02/22/morden-time/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/blog/2017/02/22/morden-time/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">下一篇</strong>
         <p class="article-nav-title">
         
@@ -321,7 +321,7 @@ ga('send', 'pageview');
     </a>
     
     
-        <a href="/2017/01/01/code-review-101/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/blog/2017/01/01/code-review-101/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">上一篇</strong>
         <p class="article-nav-title">code-review-101</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
@@ -341,40 +341,40 @@ ga('send', 'pageview');
                 
                     <li>
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/rails/">rails</a></p>
-                            <p class="item-title"><a href="/2017/03/01/chatops/" class="title">Rails app 自動化部屬 - hubot 與 heaven</a></p>
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/rails/">rails</a></p>
+                            <p class="item-title"><a href="/blog/2017/03/01/chatops/" class="title">Rails app 自動化部屬 - hubot 與 heaven</a></p>
                             <p class="item-date"><time datetime="2017-03-01T15:12:42.000Z" itemprop="datePublished">2017-03-01</time></p>
                         </div>
                     </li>
                 
                     <li>
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
-                            <p class="item-title"><a href="/2017/02/28/webgl-it/" class="title">IT 鐵人幫完賽心得</a></p>
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/blog/2017/02/28/webgl-it/" class="title">IT 鐵人幫完賽心得</a></p>
                             <p class="item-date"><time datetime="2017-02-28T15:44:42.000Z" itemprop="datePublished">2017-02-28</time></p>
                         </div>
                     </li>
                 
                     <li>
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/讀書心得/">讀書心得</a></p>
-                            <p class="item-title"><a href="/2017/02/22/morden-time/" class="title">伊坂幸太郎 - 摩登時代</a></p>
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/讀書心得/">讀書心得</a></p>
+                            <p class="item-title"><a href="/blog/2017/02/22/morden-time/" class="title">伊坂幸太郎 - 摩登時代</a></p>
                             <p class="item-date"><time datetime="2017-02-21T16:00:00.000Z" itemprop="datePublished">2017-02-22</time></p>
                         </div>
                     </li>
                 
                     <li>
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
-                            <p class="item-title"><a href="/2017/02/01/responsive-flex/" class="title">高度相同的排版解決方案</a></p>
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/blog/2017/02/01/responsive-flex/" class="title">高度相同的排版解決方案</a></p>
                             <p class="item-date"><time datetime="2017-02-01T07:33:41.000Z" itemprop="datePublished">2017-02-01</time></p>
                         </div>
                     </li>
                 
                     <li>
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
-                            <p class="item-title"><a href="/2017/01/01/code-review-101/" class="title">code-review-101</a></p>
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/blog/2017/01/01/code-review-101/" class="title">code-review-101</a></p>
                             <p class="item-date"><time datetime="2016-12-31T16:00:00.000Z" itemprop="datePublished">2017-01-01</time></p>
                         </div>
                     </li>
@@ -389,7 +389,7 @@ ga('send', 'pageview');
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">分類</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/rails/">rails</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端週刊/">前端週刊</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/程式筆記/">程式筆記</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/讀書心得/">讀書心得</a><span class="category-list-count">3</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/rails/">rails</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/前端/">前端</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/前端週刊/">前端週刊</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/程式筆記/">程式筆記</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/讀書心得/">讀書心得</a><span class="category-list-count">3</span></li></ul>
         </div>
     </div>
 
@@ -399,7 +399,7 @@ ga('send', 'pageview');
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">歸檔</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">1</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/03/">三月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/02/">二月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/11/">十一月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/10/">十月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/09/">九月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/07/">七月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/06/">六月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/03/">三月 2016</a><span class="archive-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -428,7 +428,7 @@ ga('send', 'pageview');
     var disqus_shortname = 'frontendclothesline';
     
     
-    var disqus_url = 'http://kjj6198.github.io/blog/2017/02/01/responsive-flex/';
+    var disqus_url = 'http://kjj6198.github.io/blog/blog/2017/02/01/responsive-flex/';
     
     (function() {
     var dsq = document.createElement('script');
@@ -443,20 +443,20 @@ ga('send', 'pageview');
 
 
     
-        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
-        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
-        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
-        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
-        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
-        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
-        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
-        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
-        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-video.min.js"></script>
     
 
 
 <!-- Custom Scripts -->
-<script src="/js/main.js"></script>
+<script src="/blog/js/main.js"></script>
 
     </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
