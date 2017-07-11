@@ -13,7 +13,7 @@
 所以這篇文章會著重在如何使用正確的標籤以及語義化；基本的 accessiblity 認識跟 aria 標籤的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="從 legacy code 中尋找出口（中）- HTML 篇">
-<meta property="og:url" content="http://kjj6198.github.io/blog/2016/09/17/legacy-code3/index.html">
+<meta property="og:url" content="http://kjj6198.github.io/2016/09/17/legacy-code3/index.html">
 <meta property="og:site_name" content="前端曬衣場">
 <meta property="og:description" content="講完 CSS 的重構技巧之後，接下來會專注在 HTML 的重構技巧上。本系列的文章將不會談論 js 的重構部分，因為牽扯到較多的程式撰寫技巧，而且網路上類似的文章應該是不勝枚舉。
 前言其實 HTML 能夠重構的點並不多，主要就是標籤的正確使用以及顧慮 accessibility 等小細節。
@@ -30,16 +30,16 @@
 
     
 
-    <link rel="stylesheet" href="/blog/libs/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/blog/libs/titillium-web/styles.css">
-    <link rel="stylesheet" href="/blog/libs/source-code-pro/styles.css">
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
 
-    <link rel="stylesheet" href="/blog/css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
 
-    <script src="/blog/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
     
     
-        <link rel="stylesheet" href="/blog/libs/lightgallery/css/lightgallery.min.css">
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
     
     
         <script type="text/javascript">
@@ -79,7 +79,7 @@ ga('send', 'pageview');
                         <ul id="main-nav">
                             
                                 <li class="main-nav-list-item" >
-                                    <a class="main-nav-list-link" href="/blog/">主頁</a>
+                                    <a class="main-nav-list-link" href="/">主頁</a>
                                 </li>
                             
                                 <li class="main-nav-list-item" >
@@ -116,13 +116,13 @@ ga('send', 'pageview');
             TAGS: '標籤',
             UNTITLED: '(未命名)',
         },
-        ROOT_URL: '/blog/',
-        CONTENT_URL: '/blog/content.json',
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
     };
     window.INSIGHT_CONFIG = INSIGHT_CONFIG;
 })(window);
 </script>
-<script src="/blog/js/insight.js"></script>
+<script src="/js/insight.js"></script>
 
 </div>
                         </nav>
@@ -140,7 +140,7 @@ ga('send', 'pageview');
                         <div class="main-body-header">
     <h1 class="header">
     
-    <a class="page-title-link" href="/blog/categories/前端/">前端</a>
+    <a class="page-title-link" href="/categories/前端/">前端</a>
     </h1>
 </div>
                         <div class="main-body-content">
@@ -159,11 +159,11 @@ ga('send', 'pageview');
         
         
             <div class="article-subtitle">
-                <a href="/blog/2016/09/17/legacy-code3/" class="article-date">
+                <a href="/2016/09/17/legacy-code3/" class="article-date">
     <time datetime="2016-09-17T02:40:16.000Z" itemprop="datePublished">2016-09-17</time>
 </a>
                 
-    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/HTML/">HTML</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/aria/">aria</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/重構/">重構</a></li></ul>
+    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTML/">HTML</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/aria/">aria</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/重構/">重構</a></li></ul>
 
             </div>
         
@@ -241,8 +241,8 @@ ga('send', 'pageview');
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">%=</span> <span class="attr">render</span> '<span class="attr">partial</span>/<span class="attr">modal</span>', <span class="attr">locals:</span> &#123;</span></div><div class="line"> <span class="attr">:name</span> =&gt; 'foo',</div><div class="line"> :title =&gt; 'bar',</div><div class="line"> :image =&gt; image_path('a.png')</div><div class="line">&#125; %&gt;</div></pre></td></tr></table></figure>
 <h2 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h2><p>HTML 的重構比起 CSS 跟 JS，算是簡單許多（只要 css 撰寫的時候不用 tag 做 styling），不過從頭看下來，要顧慮的事情也不少。正確的使用 tag 以及顧慮 accessibility，能夠有效地增加 UX，同時自己在修改的時候也不會看到一大堆 div 看到心癢癢。</p>
 <h4 id="Legacy-Code-專欄"><a href="#Legacy-Code-專欄" class="headerlink" title="Legacy Code 專欄"></a>Legacy Code 專欄</h4><ul>
-<li><a href="/blog/2016/06/11/legacy-code/" title="從 legacy code 中尋找出口（上）">從 legacy code 中尋找出口（上）</a></li>
-<li><a href="/blog/2016/06/14/legacy-code2/" title="如何從 legacy code 中尋找出口（中）- CSS 篇">如何從 legacy code 中尋找出口（中）- CSS 篇</a>
+<li><a href="/2016/06/11/legacy-code/" title="從 legacy code 中尋找出口（上）">從 legacy code 中尋找出口（上）</a></li>
+<li><a href="/2016/06/14/legacy-code2/" title="如何從 legacy code 中尋找出口（中）- CSS 篇">如何從 legacy code 中尋找出口（中）- CSS 篇</a>
 </li>
 </ul>
 
@@ -252,7 +252,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://kjj6198.github.io/blog/blog/2016/09/17/legacy-code3/" data-id="cj2stn56n000log5tu8o2j080" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://kjj6198.github.io/2016/09/17/legacy-code3/" data-id="cj4z1oh3u000jm75teb4ostz9" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -357,7 +357,7 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/blog/2016/10/12/scroll-animation/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/2016/10/12/scroll-animation/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">下一篇</strong>
         <p class="article-nav-title">
         
@@ -368,7 +368,7 @@ ga('send', 'pageview');
     </a>
     
     
-        <a href="/blog/2016/09/16/go-to-postcss-or-not/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2016/09/16/go-to-postcss-or-not/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">上一篇</strong>
         <p class="article-nav-title">令人期待的 PostCSS</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
@@ -388,40 +388,40 @@ ga('send', 'pageview');
                 
                     <li>
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/blog/categories/rails/">rails</a></p>
-                            <p class="item-title"><a href="/blog/2017/03/01/chatops/" class="title">Rails app 自動化部屬 - hubot 與 heaven</a></p>
+                            <p class="item-category"><a class="article-category-link" href="/categories/rails/">rails</a></p>
+                            <p class="item-title"><a href="/2017/03/01/chatops/" class="title">Rails app 自動化部屬 - hubot 與 heaven</a></p>
                             <p class="item-date"><time datetime="2017-03-01T15:12:42.000Z" itemprop="datePublished">2017-03-01</time></p>
                         </div>
                     </li>
                 
                     <li>
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/blog/categories/前端/">前端</a></p>
-                            <p class="item-title"><a href="/blog/2017/02/28/webgl-it/" class="title">IT 鐵人幫完賽心得</a></p>
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/02/28/webgl-it/" class="title">IT 鐵人幫完賽心得</a></p>
                             <p class="item-date"><time datetime="2017-02-28T15:44:42.000Z" itemprop="datePublished">2017-02-28</time></p>
                         </div>
                     </li>
                 
                     <li>
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/blog/categories/讀書心得/">讀書心得</a></p>
-                            <p class="item-title"><a href="/blog/2017/02/22/morden-time/" class="title">伊坂幸太郎 - 摩登時代</a></p>
+                            <p class="item-category"><a class="article-category-link" href="/categories/讀書心得/">讀書心得</a></p>
+                            <p class="item-title"><a href="/2017/02/22/morden-time/" class="title">伊坂幸太郎 - 摩登時代</a></p>
                             <p class="item-date"><time datetime="2017-02-21T16:00:00.000Z" itemprop="datePublished">2017-02-22</time></p>
                         </div>
                     </li>
                 
                     <li>
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/blog/categories/前端/">前端</a></p>
-                            <p class="item-title"><a href="/blog/2017/02/01/responsive-flex/" class="title">高度相同的排版解決方案</a></p>
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/02/01/responsive-flex/" class="title">高度相同的排版解決方案</a></p>
                             <p class="item-date"><time datetime="2017-02-01T07:33:41.000Z" itemprop="datePublished">2017-02-01</time></p>
                         </div>
                     </li>
                 
                     <li>
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/blog/categories/前端/">前端</a></p>
-                            <p class="item-title"><a href="/blog/2017/01/01/code-review-101/" class="title">code-review-101</a></p>
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/01/01/code-review-101/" class="title">code-review-101</a></p>
                             <p class="item-date"><time datetime="2016-12-31T16:00:00.000Z" itemprop="datePublished">2017-01-01</time></p>
                         </div>
                     </li>
@@ -436,7 +436,7 @@ ga('send', 'pageview');
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">分類</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/rails/">rails</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/前端/">前端</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/前端週刊/">前端週刊</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/程式筆記/">程式筆記</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/讀書心得/">讀書心得</a><span class="category-list-count">3</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/rails/">rails</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端週刊/">前端週刊</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/程式筆記/">程式筆記</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/讀書心得/">讀書心得</a><span class="category-list-count">3</span></li></ul>
         </div>
     </div>
 
@@ -446,7 +446,7 @@ ga('send', 'pageview');
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">歸檔</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/03/">三月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/02/">二月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/11/">十一月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/10/">十月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/09/">九月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/07/">七月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/06/">六月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/03/">三月 2016</a><span class="archive-list-count">1</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -475,7 +475,7 @@ ga('send', 'pageview');
     var disqus_shortname = 'frontendclothesline';
     
     
-    var disqus_url = 'http://kjj6198.github.io/blog/blog/2016/09/17/legacy-code3/';
+    var disqus_url = 'http://kjj6198.github.io/2016/09/17/legacy-code3/';
     
     (function() {
     var dsq = document.createElement('script');
@@ -490,20 +490,20 @@ ga('send', 'pageview');
 
 
     
-        <script src="/blog/libs/lightgallery/js/lightgallery.min.js"></script>
-        <script src="/blog/libs/lightgallery/js/lg-thumbnail.min.js"></script>
-        <script src="/blog/libs/lightgallery/js/lg-pager.min.js"></script>
-        <script src="/blog/libs/lightgallery/js/lg-autoplay.min.js"></script>
-        <script src="/blog/libs/lightgallery/js/lg-fullscreen.min.js"></script>
-        <script src="/blog/libs/lightgallery/js/lg-zoom.min.js"></script>
-        <script src="/blog/libs/lightgallery/js/lg-hash.min.js"></script>
-        <script src="/blog/libs/lightgallery/js/lg-share.min.js"></script>
-        <script src="/blog/libs/lightgallery/js/lg-video.min.js"></script>
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
     
 
 
 <!-- Custom Scripts -->
-<script src="/blog/js/main.js"></script>
+<script src="/js/main.js"></script>
 
     </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
