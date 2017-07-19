@@ -2129,3 +2129,8 @@ i.icon:before {
     text-align: center;
   }
 }
+.avatar {
+  border: 3px solid #fff;
+  border-radius: 50%;
+  width: 60px;
+}
