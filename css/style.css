@@ -5,7 +5,7 @@
 .archive-year {
   text-decoration: none;
   text-transform: uppercase;
-  color: #666;
+  color: #444;
   line-height: 1em;
   text-shadow: 0 1px #fff;
 }
@@ -288,8 +288,8 @@ code {
   box-sizing: border-box;
   -webkit-box-shadow: rgba(0,0,0,0.098) 0px 1px 1px 0px;
   box-shadow: rgba(0,0,0,0.098) 0px 1px 1px 0px;
-  padding-left: 340px;
-  background: url("images/s-left.png") repeat-y left 0;
+  padding-right: 340px;
+  background: url("images/s-left.png") repeat-y right 0;
 }
 .main-body-inner:before,
 .main-body-inner:after {
@@ -300,7 +300,7 @@ code {
   clear: both;
 }
 #main {
-  float: right;
+  float: left;
   width: 100%;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -312,7 +312,7 @@ code {
   position: relative;
   padding: 18px 30px 17px;
   border-bottom: 1px solid #eee;
-  color: #666;
+  color: #444;
   font-size: 16px;
   font-weight: 600;
   text-transform: uppercase;
@@ -552,8 +552,8 @@ code {
   display: none;
 }
 #sidebar {
-  float: left;
-  margin-left: -340px;
+  float: right;
+  margin-right: -340px;
   width: 340px;
 }
 #sidebar .sidebar-toggle {
@@ -1063,7 +1063,7 @@ code {
   text-decoration: none;
   font-size: 38px;
   letter-spacing: -1px;
-  color: #555;
+  color: #333;
   line-height: 1.3em;
   -webkit-transition: color 0.2s;
   -moz-transition: color 0.2s;
@@ -1096,14 +1096,14 @@ a.article-title:hover {
   margin-right: 10px;
 }
 .article-tag-list-link {
-  color: #555;
+  color: #333;
   text-decoration: none;
 }
 .article-tag-list-link:before {
   content: '#';
 }
 .article-entry {
-  color: #555;
+  color: #333;
   font-size: 20px;
   font-weight: 400;
   line-height: 1.65;
@@ -1282,7 +1282,7 @@ a.article-title:hover {
   text-decoration: none;
 }
 .article-footer a:hover {
-  color: #555;
+  color: #333;
 }
 .article-comment-link i,
 .article-share-link i {
@@ -1318,7 +1318,7 @@ a.article-title:hover {
   box-sizing: border-box;
   font: 14px "Noto Sans CJK TC", "PingFang TC", "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", sans-serif;
   padding: 0 15px;
-  color: #555;
+  color: #333;
   outline: none;
   border: 1px solid #ddd;
   border-radius: 3px 3px 0 0;
@@ -1481,7 +1481,7 @@ a.article-title:hover {
 .archive-year-wrap {
   padding: 18px 30px 17px;
   font-size: 18px;
-  color: #666;
+  color: #444;
   border-bottom: 1px solid #eee;
 }
 .archive-year i {
@@ -1513,7 +1513,7 @@ a.article-title:hover {
 .archive-article-title {
   text-decoration: none;
   font-weight: bold;
-  color: #555;
+  color: #333;
   -webkit-transition: color 0.2s;
   -moz-transition: color 0.2s;
   -ms-transition: color 0.2s;
@@ -1885,12 +1885,12 @@ i.icon:before {
     margin-top: -50px;
   }
   .main-body-inner {
-    padding-left: 50px;
-    background-position: -290px 0 !important;
+    padding-right: 50px;
+    background-position: -340px 0 !important;
   }
   .main-body-inner #sidebar {
-    left: 0;
-    background: url("images/s-left.png") repeat-y left 0;
+    right: 0;
+    background: url("images/s-left.png") repeat-y right 0;
     margin: 0;
     height: 100%;
     position: absolute;
@@ -1927,7 +1927,7 @@ i.icon:before {
     font-family: fontawesome;
   }
   .main-body-inner #sidebar .sidebar-toggle .toggle:before {
-    content: '\f101';
+    content: '\f100';
   }
   .main-body-inner #sidebar .sidebar-top {
     padding: 10px 30px;

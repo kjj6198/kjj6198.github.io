@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    <title>5/1 勞工大代誌 | 八百屋</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="勞動節,視覺化,d3js,勞工大代誌" />
+    
+    <meta name="description" content="先來看成品吧！ 記錄一下這個專案的始末。 規劃從四月中旬開始規劃、搜集資料到實作，都是一個人慢慢整理而成的，除了想要練習更好的視覺化技巧之外，主要還是想透過這樣的方式來了解台灣的勞動問題，以及曾經經歷過的勞工運動。 因為平時還有課業跟工作要顧，所以實際上花的時間不多，最後兩天甚至是熬夜在趕工。有更多的原因是因為，寫到一半發現又有更多資料想要搜集，不知不覺就變得非常龐大了。 不過這個專題仍然有太多">
+<meta name="keywords" content="勞動節,視覺化,d3js,勞工大代誌">
+<meta property="og:type" content="article">
+<meta property="og:title" content="5&#x2F;1 勞工大代誌">
+<meta property="og:url" content="http://kjj6198.github.io/2017/05/01/labor-project/index.html">
+<meta property="og:site_name" content="八百屋">
+<meta property="og:description" content="先來看成品吧！ 記錄一下這個專案的始末。 規劃從四月中旬開始規劃、搜集資料到實作，都是一個人慢慢整理而成的，除了想要練習更好的視覺化技巧之外，主要還是想透過這樣的方式來了解台灣的勞動問題，以及曾經經歷過的勞工運動。 因為平時還有課業跟工作要顧，所以實際上花的時間不多，最後兩天甚至是熬夜在趕工。有更多的原因是因為，寫到一半發現又有更多資料想要搜集，不知不覺就變得非常龐大了。 不過這個專題仍然有太多">
+<meta property="og:locale" content="zh-TW">
+<meta property="og:image" content="https://kjj6198.github.io/pround-of-labor/app/img/top-image.jpg">
+<meta property="og:updated_time" content="2017-07-19T14:02:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="5&#x2F;1 勞工大代誌">
+<meta name="twitter:description" content="先來看成品吧！ 記錄一下這個專案的始末。 規劃從四月中旬開始規劃、搜集資料到實作，都是一個人慢慢整理而成的，除了想要練習更好的視覺化技巧之外，主要還是想透過這樣的方式來了解台灣的勞動問題，以及曾經經歷過的勞工運動。 因為平時還有課業跟工作要顧，所以實際上花的時間不多，最後兩天甚至是熬夜在趕工。有更多的原因是因為，寫到一半發現又有更多資料想要搜集，不知不覺就變得非常龐大了。 不過這個專題仍然有太多">
+<meta name="twitter:image" content="https://kjj6198.github.io/pround-of-labor/app/img/top-image.jpg">
+    
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-56408806-4', 'auto');
+ga('send', 'pageview');
+
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+    
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                      八百屋
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">Fun Driven Frontend Developer 最近的夢想是能夠光榮地回鄉工作。
+interested in #frontend #react #redux #rxjs #japanese #machine-learning
+</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">主頁</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://kjj6198.github.io/resume/normal/">關於</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://www.shurado.com?ref=blog">日語八百屋</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜尋" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要找..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '頁面',
+            CATEGORIES: '分類',
+            TAGS: '標籤',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/前端/">前端</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-labor-project" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        5/1 勞工大代誌
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-subtitle">
+                <a href="/2017/05/01/labor-project/" class="article-date">
+    <time datetime="2017-04-30T16:00:00.000Z" itemprop="datePublished">2017-05-01</time>
+</a>
+                
+    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/d3js/">d3js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/勞動節/">勞動節</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/勞工大代誌/">勞工大代誌</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/視覺化/">視覺化</a></li></ul>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <p><img src="https://kjj6198.github.io/pround-of-labor/app/img/top-image.jpg" alt="landing image"></p>
+<p>先來看<a href="https://kjj6198.github.io/pround-of-labor/app/">成品</a>吧！</p>
+<p>記錄一下這個專案的始末。</p>
+<h2 id="規劃"><a href="#規劃" class="headerlink" title="規劃"></a>規劃</h2><p>從四月中旬開始規劃、搜集資料到實作，都是一個人慢慢整理而成的，除了想要練習更好的視覺化技巧之外，主要還是想透過這樣的方式來了解台灣的勞動問題，以及曾經經歷過的勞工運動。</p>
+<p>因為平時還有課業跟工作要顧，所以實際上花的時間不多，最後兩天甚至是熬夜在趕工。有更多的原因是因為，寫到一半發現又有更多資料想要搜集，不知不覺就變得非常龐大了。</p>
+<p>不過這個專題仍然有太多議題沒有涵蓋到，像是<strong>年金制度</strong>、<strong>職災統計</strong>等等。因為時間上的關係，無法深入介紹。</p>
+<h2 id="為什麼想要做這份專案"><a href="#為什麼想要做這份專案" class="headerlink" title="為什麼想要做這份專案"></a>為什麼想要做這份專案</h2><p>國中跟高中的時候，或許是職科出身的關係，平時除了從報紙跟電視看看一些新聞外，很少汲取社會的議題和發生的事。</p>
+<p>這樣半懺悔、半好奇的心態，開始搜集了一些台灣過去的勞工運動以及相關數據。像是薪資漲幅、平均工時、出生率等等，這些都是當我看到數據的當下才發現，原來事情那麼大條。</p>
+<p>工時高居全球、薪資漲幅凍漲將近十年、出生率最後一名、即將邁入超高齡社會，這些都是現在台灣正在面臨，且有可能會日漸嚴重的議題。</p>
+<p>如果說現在這個渺小的我能夠做些什麼，大概就是勞動節時上街遊行，聽聽勞工的聲音，畢竟身為一位準勞工，再過不久大概就會遇到同樣的情境。</p>
+<p>更何況是在我還沒出社會之前，就已經是那麼慘的現況了。</p>
+<p>台灣的勞動環境仍然有許多待改進的地方，後人能夠享受到的果實絕不是理所當然。</p>
+<p>這些前輩們用血汗、用人生、甚至賠上性命來爭取更好的勞工環境。</p>
+<p>身為一位工程師能做的事情不多，這個社會上還有更多用科技無法觸及的事。<br>但能夠拋磚引玉地讓人了解到「啊！原來還有這樣子的事啊」，就好了。</p>
+<p>其實在查資料的時候，有很多讓人鼻酸的故事。</p>
+<p>像是關廠工人臥軌時，民眾大喊輾過去；<br>像是看到台電大樓的紀念碑連名字都沒有，藏在樹叢裡頭；<br>像是看見 101 樹立的國殤紀念碑，卻過了那麼久才知道那是為何而來。</p>
+<p>我們所處的社會當中有太多的理所當然，捷運順利地運作、高鐵能夠平安無事地從高雄開到台北、101 能夠安穩座落在臺北城、垃圾桶的垃圾有人收、廁所有人清、24 小時的便利商店，導致我們常常會忘記那背後隱藏的事情是由多少人的汗水（或是鮮血）堆積起來的，更何況是以前沒有任何勞基法保護的勞工們。</p>
+<p>最後，特別感謝小公主陪我度過忙碌的一個月，幫我找資料跟拍照，這一個月陪我一起奮鬥；<br>還有 <a href="https://www.facebook.com/sandokaishy?fref=mentions" target="_blank" rel="external">潘敬昇 （Sheng Pan）</a> 義無反顧地幫我設計了很有質感的 LOGO 跟 Title，還有設計上的建議。</p>
+<p>最後，如果你們也有什麼勞工議題或心得想要分享的話，可以在 facebook 或是 twiiter 加入 <a href="https://www.facebook.com/hashtag/%E5%8B%9E%E5%B7%A5%E5%A4%A7%E4%BB%A3%E8%AA%8C?source=feed_text&amp;story_id=1269510183156649" target="_blank" rel="external">#勞工大代誌</a> 這個 hashtag。如果你喜歡這份專案，也可以順手把他分享出去。</p>
+<p>另外，除了在網站裡頭所提到的議題跟事件，還有太多是我不知道、不清楚的事情存在在這個社會上。</p>
+<p>我整理了一份勞工大代誌總表：<a href="https://goo.gl/nPxeg2" target="_blank" rel="external">https://goo.gl/nPxeg2</a> 任何人都可以編輯。</p>
+<p>敬，所有勞工們。</p>
+<h2 id="後記"><a href="#後記" class="headerlink" title="後記"></a>後記</h2><ul>
+<li>之後這個專題被分享到<a href="https://www.facebook.com/qollie.tw/" target="_blank" rel="external">求職天眼通</a>上，也算是讓更多人知道了。</li>
+<li>暑假選修了一門叫做職場災害與防治</li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://kjj6198.github.io/2017/05/01/labor-project/" data-id="cj5b4njcr000j365tdzvw15zk" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>關注我 :</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="https://twitter.com/kalanyei" target="_blank">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/kjj6198" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="medium" href="https://medium.com/@Shurado" target="_blank">
+                        <i class="icon fa fa-medium"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2017/07/14/what-is-yaoya/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">下一篇</strong>
+        <p class="article-nav-title">
+        
+            做了一份週刊 - 日語八百屋
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2017/03/01/chatops/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">Rails app 自動化部屬 - hubot 與 heaven</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="no-thumbnail">
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/機器學習/">機器學習</a></p>
+                            <p class="item-title"><a href="/2017/07/18/PCA-and-t-SNE/" class="title">淺談降維方法中的 PCA 與 t-SNE</a></p>
+                            <p class="item-date"><time datetime="2017-07-17T16:00:00.000Z" itemprop="datePublished">2017-07-18</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/日語學習/">日語學習</a></p>
+                            <p class="item-title"><a href="/2017/07/14/what-is-yaoya/" class="title">做了一份週刊 - 日語八百屋</a></p>
+                            <p class="item-date"><time datetime="2017-07-13T16:00:00.000Z" itemprop="datePublished">2017-07-14</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/05/01/labor-project/" class="title">5/1 勞工大代誌</a></p>
+                            <p class="item-date"><time datetime="2017-04-30T16:00:00.000Z" itemprop="datePublished">2017-05-01</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/rails/">rails</a></p>
+                            <p class="item-title"><a href="/2017/03/01/chatops/" class="title">Rails app 自動化部屬 - hubot 與 heaven</a></p>
+                            <p class="item-date"><time datetime="2017-03-01T15:12:42.000Z" itemprop="datePublished">2017-03-01</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/02/28/webgl-it/" class="title">IT 鐵人幫完賽心得</a></p>
+                            <p class="item-date"><time datetime="2017-02-28T15:44:42.000Z" itemprop="datePublished">2017-02-28</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">分類</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/rails/">rails</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端週刊/">前端週刊</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日語學習/">日語學習</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/機器學習/">機器學習</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/程式筆記/">程式筆記</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/讀書心得/">讀書心得</a><span class="category-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">歸檔</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit" style="text-align: center;">
+                <p>&copy; 2017 Kalan</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_shortname = 'frontendclothesline';
+    
+    
+    var disqus_url = 'http://kjj6198.github.io/2017/05/01/labor-project/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+</body>
+</html>

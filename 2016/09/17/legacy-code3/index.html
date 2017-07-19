@@ -8,22 +8,18 @@
     
         <meta name="keywords" content="重構,HTML,aria" />
     
-    <meta name="description" content="講完 CSS 的重構技巧之後，接下來會專注在 HTML 的重構技巧上。本系列的文章將不會談論 js 的重構部分，因為牽扯到較多的程式撰寫技巧，而且網路上類似的文章應該是不勝枚舉。
-前言其實 HTML 能夠重構的點並不多，主要就是標籤的正確使用以及顧慮 accessibility 等小細節。
-所以這篇文章會著重在如何使用正確的標籤以及語義化；基本的 accessiblity 認識跟 aria 標籤的">
+    <meta name="description" content="講完 CSS 的重構技巧之後，接下來會專注在 HTML 的重構技巧上。本系列的文章將不會談論 js 的重構部分，因為牽扯到較多的程式撰寫技巧，而且網路上類似的文章應該是不勝枚舉。 前言其實 HTML 能夠重構的點並不多，主要就是標籤的正確使用以及顧慮 accessibility 等小細節。 所以這篇文章會著重在如何使用正確的標籤以及語義化；基本的 accessiblity 認識跟 aria 標籤的">
+<meta name="keywords" content="重構,HTML,aria">
 <meta property="og:type" content="article">
 <meta property="og:title" content="從 legacy code 中尋找出口（中）- HTML 篇">
-<meta property="og:url" content="http://kjj6198.github.io/index.html/2016/09/17/legacy-code3/index.html">
+<meta property="og:url" content="http://kjj6198.github.io/2016/09/17/legacy-code3/index.html">
 <meta property="og:site_name" content="八百屋">
-<meta property="og:description" content="講完 CSS 的重構技巧之後，接下來會專注在 HTML 的重構技巧上。本系列的文章將不會談論 js 的重構部分，因為牽扯到較多的程式撰寫技巧，而且網路上類似的文章應該是不勝枚舉。
-前言其實 HTML 能夠重構的點並不多，主要就是標籤的正確使用以及顧慮 accessibility 等小細節。
-所以這篇文章會著重在如何使用正確的標籤以及語義化；基本的 accessiblity 認識跟 aria 標籤的">
+<meta property="og:description" content="講完 CSS 的重構技巧之後，接下來會專注在 HTML 的重構技巧上。本系列的文章將不會談論 js 的重構部分，因為牽扯到較多的程式撰寫技巧，而且網路上類似的文章應該是不勝枚舉。 前言其實 HTML 能夠重構的點並不多，主要就是標籤的正確使用以及顧慮 accessibility 等小細節。 所以這篇文章會著重在如何使用正確的標籤以及語義化；基本的 accessiblity 認識跟 aria 標籤的">
+<meta property="og:locale" content="zh-TW">
 <meta property="og:updated_time" content="2016-10-18T11:32:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="從 legacy code 中尋找出口（中）- HTML 篇">
-<meta name="twitter:description" content="講完 CSS 的重構技巧之後，接下來會專注在 HTML 的重構技巧上。本系列的文章將不會談論 js 的重構部分，因為牽扯到較多的程式撰寫技巧，而且網路上類似的文章應該是不勝枚舉。
-前言其實 HTML 能夠重構的點並不多，主要就是標籤的正確使用以及顧慮 accessibility 等小細節。
-所以這篇文章會著重在如何使用正確的標籤以及語義化；基本的 accessiblity 認識跟 aria 標籤的">
+<meta name="twitter:description" content="講完 CSS 的重構技巧之後，接下來會專注在 HTML 的重構技巧上。本系列的文章將不會談論 js 的重構部分，因為牽扯到較多的程式撰寫技巧，而且網路上類似的文章應該是不勝枚舉。 前言其實 HTML 能夠重構的點並不多，主要就是標籤的正確使用以及顧慮 accessibility 等小細節。 所以這篇文章會著重在如何使用正確的標籤以及語義化；基本的 accessiblity 認識跟 aria 標籤的">
     
 
     
@@ -65,7 +61,7 @@ ga('send', 'pageview');
             <div class="container-inner">
                 <div id="header-title">
                     <h1 class="logo-wrap">
-                      前端曬衣場
+                      八百屋
                     </h1>
                     
                         <h2 class="subtitle-wrap">
@@ -86,6 +82,10 @@ interested in #frontend #react #redux #rxjs #japanese #machine-learning
                             
                                 <li class="main-nav-list-item" >
                                     <a class="main-nav-list-link" href="https://kjj6198.github.io/resume/normal/">關於</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://www.shurado.com?ref=blog">日語八百屋</a>
                                 </li>
                             
                         </ul>
@@ -254,7 +254,7 @@ interested in #frontend #react #redux #rxjs #japanese #machine-learning
 
 
 
-    <a data-url="http://kjj6198.github.io/index.html/2016/09/17/legacy-code3/" data-id="cj4zpn9t0000mqv5tc65kfb7z" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://kjj6198.github.io/2016/09/17/legacy-code3/" data-id="cj5b4njcx000r365t6xiruwwy" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -353,6 +353,14 @@ interested in #frontend #react #redux #rxjs #japanese #machine-learning
                 </li>
                 
             
+                
+                <li>
+                    <a class="social-tooltip" title="medium" href="https://medium.com/@Shurado" target="_blank">
+                        <i class="icon fa fa-medium"></i>
+                    </a>
+                </li>
+                
+            
         </ul>
     </div>
     
@@ -390,6 +398,30 @@ interested in #frontend #react #redux #rxjs #japanese #machine-learning
                 
                     <li>
                         <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/機器學習/">機器學習</a></p>
+                            <p class="item-title"><a href="/2017/07/18/PCA-and-t-SNE/" class="title">淺談降維方法中的 PCA 與 t-SNE</a></p>
+                            <p class="item-date"><time datetime="2017-07-17T16:00:00.000Z" itemprop="datePublished">2017-07-18</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/日語學習/">日語學習</a></p>
+                            <p class="item-title"><a href="/2017/07/14/what-is-yaoya/" class="title">做了一份週刊 - 日語八百屋</a></p>
+                            <p class="item-date"><time datetime="2017-07-13T16:00:00.000Z" itemprop="datePublished">2017-07-14</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/05/01/labor-project/" class="title">5/1 勞工大代誌</a></p>
+                            <p class="item-date"><time datetime="2017-04-30T16:00:00.000Z" itemprop="datePublished">2017-05-01</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/rails/">rails</a></p>
                             <p class="item-title"><a href="/2017/03/01/chatops/" class="title">Rails app 自動化部屬 - hubot 與 heaven</a></p>
                             <p class="item-date"><time datetime="2017-03-01T15:12:42.000Z" itemprop="datePublished">2017-03-01</time></p>
@@ -404,30 +436,6 @@ interested in #frontend #react #redux #rxjs #japanese #machine-learning
                         </div>
                     </li>
                 
-                    <li>
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/讀書心得/">讀書心得</a></p>
-                            <p class="item-title"><a href="/2017/02/22/morden-time/" class="title">伊坂幸太郎 - 摩登時代</a></p>
-                            <p class="item-date"><time datetime="2017-02-21T16:00:00.000Z" itemprop="datePublished">2017-02-22</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
-                            <p class="item-title"><a href="/2017/02/01/responsive-flex/" class="title">高度相同的排版解決方案</a></p>
-                            <p class="item-date"><time datetime="2017-02-01T07:33:41.000Z" itemprop="datePublished">2017-02-01</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
-                            <p class="item-title"><a href="/2017/01/01/code-review-101/" class="title">code-review-101</a></p>
-                            <p class="item-date"><time datetime="2016-12-31T16:00:00.000Z" itemprop="datePublished">2017-01-01</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -438,7 +446,7 @@ interested in #frontend #react #redux #rxjs #japanese #machine-learning
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">分類</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/rails/">rails</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端週刊/">前端週刊</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/程式筆記/">程式筆記</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/讀書心得/">讀書心得</a><span class="category-list-count">3</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/rails/">rails</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端週刊/">前端週刊</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日語學習/">日語學習</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/機器學習/">機器學習</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/程式筆記/">程式筆記</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/讀書心得/">讀書心得</a><span class="category-list-count">3</span></li></ul>
         </div>
     </div>
 
@@ -448,7 +456,7 @@ interested in #frontend #react #redux #rxjs #japanese #machine-learning
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">歸檔</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">1</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -477,7 +485,7 @@ interested in #frontend #react #redux #rxjs #japanese #machine-learning
     var disqus_shortname = 'frontendclothesline';
     
     
-    var disqus_url = 'http://kjj6198.github.io/index.html/2016/09/17/legacy-code3/';
+    var disqus_url = 'http://kjj6198.github.io/2016/09/17/legacy-code3/';
     
     (function() {
     var dsq = document.createElement('script');
