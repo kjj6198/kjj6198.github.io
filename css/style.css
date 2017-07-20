@@ -1061,10 +1061,11 @@ code {
 }
 .article-title {
   text-decoration: none;
-  font-size: 38px;
+  font-size: 42px;
   letter-spacing: -1px;
   color: #333;
   line-height: 1.3em;
+  font-weight: bold;
   -webkit-transition: color 0.2s;
   -moz-transition: color 0.2s;
   -ms-transition: color 0.2s;
@@ -1104,9 +1105,10 @@ a.article-title:hover {
 }
 .article-entry {
   color: #333;
-  font-size: 20px;
+  font-size: 23px;
   font-weight: 400;
   line-height: 1.65;
+  letter-spacing: -0.003em;
 }
 .article-entry:before,
 .article-entry:after {
