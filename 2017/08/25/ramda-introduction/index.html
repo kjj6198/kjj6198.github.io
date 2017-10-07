@@ -176,6 +176,7 @@ ga('send', 'pageview');
         
         
         <div class="article-entry" itemprop="articleBody">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#直觀-functional-programming"><span class="post-toc-number">2.</span> <span class="post-toc-text">直觀 functional programming</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#propEq"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">propEq</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#zipObj"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">zipObj</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#ifElse"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">ifElse</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#compose"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">compose</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#useWith"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">useWith</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#converge"><span class="post-toc-number">2.6.</span> <span class="post-toc-text">converge</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#identity"><span class="post-toc-number">2.7.</span> <span class="post-toc-text">identity</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#tap"><span class="post-toc-number">2.8.</span> <span class="post-toc-text">tap</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#pluck"><span class="post-toc-number">2.9.</span> <span class="post-toc-text">pluck</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#pick-pickBy-pickAll"><span class="post-toc-number">2.10.</span> <span class="post-toc-text">pick, pickBy, pickAll</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#pathOr"><span class="post-toc-number">2.11.</span> <span class="post-toc-text">pathOr</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#memoize"><span class="post-toc-number">2.12.</span> <span class="post-toc-text">memoize</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#結論"><span class="post-toc-number">3.</span> <span class="post-toc-text">結論</span></a></li></ol>
             <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>ramda 是個相當好用的函式庫，如果聽過 lodash 或是 underscore 的話，可以將 ramda 想成 <strong>functional programming</strong> 的 lodash，他們的 API 有許多相似性，差別在於 ramda 本身有 FP 的功能，任何的 API 只要你沒有傳入參數，ramda 就會自動幫你做 curry，這提供了相當大的彈性。</p>
 <p>比如說在 lodash 當中，API 常見的使用方式為：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">_.map([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>], (n) =&gt; n * <span class="number">2</span>); <span class="comment">// [2, 4, 6]</span></div></pre></td></tr></table></figure>
@@ -233,7 +234,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://kjj6198.github.io/2017/08/25/ramda-introduction/" data-id="cj6qnha19001kgl5t2qnz7nxt" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://kjj6198.github.io/2017/08/25/ramda-introduction/" data-id="cj8hdo00y001rp55tlr9rryre" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -308,6 +309,7 @@ ga('send', 'pageview');
     </section>
 
 
+
                         </div>
                     </section>
                     <aside id="sidebar">
@@ -362,6 +364,16 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
+        <a href="/2017/10/02/react-16-features/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">下一篇</strong>
+        <p class="article-nav-title">
+        
+            React16 重點整理
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
     
         <a href="/2017/08/18/Sass/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">上一篇</strong>
@@ -380,6 +392,22 @@ ga('send', 'pageview');
         <h3 class="widget-title">最新文章</h3>
         <div class="widget">
             <ul id="recent-post" class="no-thumbnail">
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/日語學習/">日語學習</a></p>
+                            <p class="item-title"><a href="/2017/10/07/jlpt-learning/" class="title">自學四年通過日檢 N2 心得</a></p>
+                            <p class="item-date"><time datetime="2017-10-07T13:47:12.000Z" itemprop="datePublished">2017-10-07</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/10/02/react-16-features/" class="title">React16 重點整理</a></p>
+                            <p class="item-date"><time datetime="2017-10-01T16:00:00.000Z" itemprop="datePublished">2017-10-02</time></p>
+                        </div>
+                    </li>
                 
                     <li>
                         <div class="item-inner">
@@ -405,22 +433,6 @@ ga('send', 'pageview');
                         </div>
                     </li>
                 
-                    <li>
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/機器學習/">機器學習</a></p>
-                            <p class="item-title"><a href="/2017/07/18/PCA-and-t-SNE/" class="title">淺談降維方法中的 PCA 與 t-SNE</a></p>
-                            <p class="item-date"><time datetime="2017-07-17T16:00:00.000Z" itemprop="datePublished">2017-07-18</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/日語學習/">日語學習</a></p>
-                            <p class="item-title"><a href="/2017/07/14/what-is-yaoya/" class="title">做了一份週刊 - 日語八百屋</a></p>
-                            <p class="item-date"><time datetime="2017-07-13T16:00:00.000Z" itemprop="datePublished">2017-07-14</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -431,7 +443,7 @@ ga('send', 'pageview');
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">分類</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/rails/">rails</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端週刊/">前端週刊</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日語學習/">日語學習</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/機器學習/">機器學習</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/程式筆記/">程式筆記</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/讀書心得/">讀書心得</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/雜談/">雜談</a><span class="category-list-count">1</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/rails/">rails</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端週刊/">前端週刊</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日語學習/">日語學習</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/機器學習/">機器學習</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/程式筆記/">程式筆記</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/讀書心得/">讀書心得</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/雜談/">雜談</a><span class="category-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -441,7 +453,7 @@ ga('send', 'pageview');
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">歸檔</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">1</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">1</span></li></ul>
         </div>
     </div>
 

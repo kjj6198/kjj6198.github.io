@@ -174,6 +174,7 @@ ga('send', 'pageview');
         
         
         <div class="article-entry" itemprop="articleBody">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#引入-style-linter-及-editorconfig"><span class="post-toc-number">2.</span> <span class="post-toc-text">引入 style linter 及 editorconfig</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-加入-stylelint"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">1. 加入 stylelint</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-加入-editorconfig"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">2. 加入 .editorconfig</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#常見的-code-smell-以及-refactor-方式"><span class="post-toc-number">3.</span> <span class="post-toc-text">常見的 code smell 以及 refactor 方式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Order"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">Order</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#善用-sass-map-管理變數"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">善用 sass map 管理變數</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#大量的巢狀-class"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">大量的巢狀 class</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#善用-Mixin-簡化程式"><span class="post-toc-number">4.</span> <span class="post-toc-text">善用 Mixin 簡化程式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#BEM-mixin"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">BEM mixin</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#util-mixin"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">util mixin</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#child-selector-mixin"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">child selector mixin</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#善用-Comment"><span class="post-toc-number">5.</span> <span class="post-toc-text">善用 Comment</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#目錄"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">目錄</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#魔術數字、HACK、使用方式"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">魔術數字、HACK、使用方式</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#CSS-結構"><span class="post-toc-number">6.</span> <span class="post-toc-text">CSS 結構</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#module"><span class="post-toc-number">6.1.</span> <span class="post-toc-text">module</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#base"><span class="post-toc-number">6.2.</span> <span class="post-toc-text">base</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#config"><span class="post-toc-number">6.3.</span> <span class="post-toc-text">config</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#helper"><span class="post-toc-number">6.4.</span> <span class="post-toc-text">helper</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#寫在最後"><span class="post-toc-number">7.</span> <span class="post-toc-text">寫在最後</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#持續關注前端趨勢"><span class="post-toc-number">8.</span> <span class="post-toc-text">持續關注前端趨勢</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#reference"><span class="post-toc-number">8.1.</span> <span class="post-toc-text">reference</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Legacy-Code-專欄"><span class="post-toc-number">8.1.1.</span> <span class="post-toc-text">Legacy Code 專欄</span></a></li></ol></li></ol></li></ol>
             <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>我們的第一步是先從 CSS 下手，因為 css 是相對於其他前端部分來說比較容易重構的部分。很容易髒亂的 code 也是 CSS。</p>
 <p>上一篇描述了在大型專案中引入新框架及技術的困難點，這一篇主要會專注在如何透過現有的工具及框架來重構現有的代碼。</p>
 <p>本次的重構技巧會以 SCSS 為主，所以在閱讀本文之前，我先假設你已經有基本的 SCSS 以及 CSS 的基礎。其他預處理器的概念應該是相通的。</p>
@@ -279,7 +280,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://kjj6198.github.io/2016/06/14/legacy-code2/" data-id="cj6qnha0j0017gl5tncblsrvo" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://kjj6198.github.io/2016/06/14/legacy-code2/" data-id="cj8hdo00i001ap55tvms99l48" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -352,6 +353,7 @@ ga('send', 'pageview');
 
     
     </section>
+
 
 
                         </div>
@@ -439,6 +441,22 @@ ga('send', 'pageview');
                 
                     <li>
                         <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/日語學習/">日語學習</a></p>
+                            <p class="item-title"><a href="/2017/10/07/jlpt-learning/" class="title">自學四年通過日檢 N2 心得</a></p>
+                            <p class="item-date"><time datetime="2017-10-07T13:47:12.000Z" itemprop="datePublished">2017-10-07</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/10/02/react-16-features/" class="title">React16 重點整理</a></p>
+                            <p class="item-date"><time datetime="2017-10-01T16:00:00.000Z" itemprop="datePublished">2017-10-02</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
                             <p class="item-title"><a href="/2017/08/25/ramda-introduction/" class="title">淺談 ramda 中的幾個 API</a></p>
                             <p class="item-date"><time datetime="2017-08-24T16:14:45.000Z" itemprop="datePublished">2017-08-25</time></p>
@@ -461,22 +479,6 @@ ga('send', 'pageview');
                         </div>
                     </li>
                 
-                    <li>
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/機器學習/">機器學習</a></p>
-                            <p class="item-title"><a href="/2017/07/18/PCA-and-t-SNE/" class="title">淺談降維方法中的 PCA 與 t-SNE</a></p>
-                            <p class="item-date"><time datetime="2017-07-17T16:00:00.000Z" itemprop="datePublished">2017-07-18</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/日語學習/">日語學習</a></p>
-                            <p class="item-title"><a href="/2017/07/14/what-is-yaoya/" class="title">做了一份週刊 - 日語八百屋</a></p>
-                            <p class="item-date"><time datetime="2017-07-13T16:00:00.000Z" itemprop="datePublished">2017-07-14</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -487,7 +489,7 @@ ga('send', 'pageview');
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">分類</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/rails/">rails</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端週刊/">前端週刊</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日語學習/">日語學習</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/機器學習/">機器學習</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/程式筆記/">程式筆記</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/讀書心得/">讀書心得</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/雜談/">雜談</a><span class="category-list-count">1</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/rails/">rails</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端週刊/">前端週刊</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日語學習/">日語學習</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/機器學習/">機器學習</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/程式筆記/">程式筆記</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/讀書心得/">讀書心得</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/雜談/">雜談</a><span class="category-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -497,7 +499,7 @@ ga('send', 'pageview');
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">歸檔</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">1</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">1</span></li></ul>
         </div>
     </div>
 

@@ -1118,6 +1118,23 @@ a.article-title:hover {
 .article-entry:after {
   clear: both;
 }
+.article-entry .post-toc {
+  width: 50%;
+  margin: 20px 0;
+  padding: 20px;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 0.8em;
+  list-style-type: none;
+  color: #4682b4;
+}
+.article-entry .post-toc ol {
+  list-style-type: none;
+}
+.article-entry .post-toc a {
+  color: inherit;
+}
 .article-entry p,
 .article-entry table {
   margin: 1.6em 0;
