@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    <title>前端面試心得 | 欠・擬合 | UNder-fitting</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="面試" />
+    
+    <meta name="description" content="前言終於有時間整理最近的面試歷程了。先總結一些看到的事情：  通常公司面試只考 Javascript 的熟悉度，多數關於演算法或是解釋原型鍊等等，很少考 DOM 或是 Event 的操作。 幾乎不考 CSS，就算有也只是簡單判斷 class、ID 優先度這種基本題目而已。 沒有面試考 HTML，例如 semantic tag、accessilbility、input type 使用等等。 Reac">
+<meta name="keywords" content="面試">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端面試心得">
+<meta property="og:url" content="http://kjj6198.github.io/2017/09/02/frontend-interview/index.html">
+<meta property="og:site_name" content="欠・擬合 | UNder-fitting">
+<meta property="og:description" content="前言終於有時間整理最近的面試歷程了。先總結一些看到的事情：  通常公司面試只考 Javascript 的熟悉度，多數關於演算法或是解釋原型鍊等等，很少考 DOM 或是 Event 的操作。 幾乎不考 CSS，就算有也只是簡單判斷 class、ID 優先度這種基本題目而已。 沒有面試考 HTML，例如 semantic tag、accessilbility、input type 使用等等。 Reac">
+<meta property="og:locale" content="zh-TW">
+<meta property="og:updated_time" content="2017-10-08T09:41:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端面試心得">
+<meta name="twitter:description" content="前言終於有時間整理最近的面試歷程了。先總結一些看到的事情：  通常公司面試只考 Javascript 的熟悉度，多數關於演算法或是解釋原型鍊等等，很少考 DOM 或是 Event 的操作。 幾乎不考 CSS，就算有也只是簡單判斷 class、ID 優先度這種基本題目而已。 沒有面試考 HTML，例如 semantic tag、accessilbility、input type 使用等等。 Reac">
+    
+
+    
+
+    
+        <link rel="icon" href="/imgs/favicon.ico" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-56408806-4', 'auto');
+ga('send', 'pageview');
+
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+    
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                      欠・擬合 | UNder-fitting
+                    </h1>
+                    <img src="https://pbs.twimg.com/profile_images/915528631065047040/5-Do3QWr_400x400.jpg" alt="" class="avatar">
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">Fun Driven Frontend Developer 最近的夢想是能夠光榮地回鄉工作。
+如果你也對日劇、機器學習、日文、前後端開發、React、程式、咖啡有興趣，或許我們可以聊聊
+</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">主頁</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://kjj6198.github.io/resume">關於</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://www.shurado.com?ref=blog">日語八百屋</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜尋" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要找..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '頁面',
+            CATEGORIES: '分類',
+            TAGS: '標籤',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/前端/">前端</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-frontend-interview" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        前端面試心得
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-subtitle">
+                <a href="/2017/09/02/frontend-interview/" class="article-date">
+    <time datetime="2017-09-01T16:00:00.000Z" itemprop="datePublished">2017-09-02</time>
+</a>
+                
+    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/面試/">面試</a></li></ul>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#背景"><span class="post-toc-number">2.</span> <span class="post-toc-text">背景</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#期待的工作環境"><span class="post-toc-number">3.</span> <span class="post-toc-text">期待的工作環境</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#找工作的管道"><span class="post-toc-number">4.</span> <span class="post-toc-text">找工作的管道</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-Accupass-活動通"><span class="post-toc-number">5.</span> <span class="post-toc-text">1. Accupass 活動通</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#面試前"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">面試前</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#面試中"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">面試中</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#面試結果"><span class="post-toc-number">5.3.</span> <span class="post-toc-text">面試結果</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-Linker-Network-Inc-美商寶蘊凌科網路科技有限公司"><span class="post-toc-number">6.</span> <span class="post-toc-text">2. Linker Network Inc. 美商寶蘊凌科網路科技有限公司</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#面試前-1"><span class="post-toc-number">6.1.</span> <span class="post-toc-text">面試前</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#面試中-1"><span class="post-toc-number">6.2.</span> <span class="post-toc-text">面試中</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#面試結果-1"><span class="post-toc-number">6.3.</span> <span class="post-toc-text">面試結果</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-台灣樂天市場"><span class="post-toc-number">7.</span> <span class="post-toc-text">3. 台灣樂天市場</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#面試前-2"><span class="post-toc-number">7.1.</span> <span class="post-toc-text">面試前</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#面試中-2"><span class="post-toc-number">7.2.</span> <span class="post-toc-text">面試中</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#面試結果-2"><span class="post-toc-number">7.3.</span> <span class="post-toc-text">面試結果</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-Codementor"><span class="post-toc-number">8.</span> <span class="post-toc-text">4. Codementor</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#面試前-3"><span class="post-toc-number">8.1.</span> <span class="post-toc-text">面試前</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#面試中-3"><span class="post-toc-number">8.2.</span> <span class="post-toc-text">面試中</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#面試後"><span class="post-toc-number">8.3.</span> <span class="post-toc-text">面試後</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-17-media"><span class="post-toc-number">9.</span> <span class="post-toc-text">5. 17 media</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#面試中-4"><span class="post-toc-number">9.1.</span> <span class="post-toc-text">面試中</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#面試結果-3"><span class="post-toc-number">9.2.</span> <span class="post-toc-text">面試結果</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#面試心得"><span class="post-toc-number">10.</span> <span class="post-toc-text">面試心得</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-履歷準備"><span class="post-toc-number">10.1.</span> <span class="post-toc-text">1. 履歷準備</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-工作經驗"><span class="post-toc-number">10.2.</span> <span class="post-toc-text">2. 工作經驗</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-Side-Project"><span class="post-toc-number">10.3.</span> <span class="post-toc-text">3. Side Project</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-多問問題"><span class="post-toc-number">10.4.</span> <span class="post-toc-text">4. 多問問題</span></a></li></ol></li></ol>
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>終於有時間整理最近的面試歷程了。先總結一些看到的事情：</p>
+<ol>
+<li>通常公司面試只考 Javascript 的熟悉度，多數關於演算法或是解釋原型鍊等等，很少考 DOM 或是 Event 的操作。</li>
+<li>幾乎不考 CSS，就算有也只是簡單判斷 class、ID 優先度這種基本題目而已。</li>
+<li>沒有面試考 HTML，例如 semantic tag、accessilbility、input type 使用等等。</li>
+<li>React、Redux、ES6 語法幾乎成為前端必備技能，Angular 比較少公司採用。</li>
+<li>普遍的獵頭都不夠專業，也有可能是太菜了還沒被專業的獵頭找上</li>
+</ol>
+<p>以下是這次面試的公司：</p>
+<ol>
+<li>Accupass</li>
+<li>Codementor</li>
+<li>Linker Network Inc.</li>
+<li>樂天市場</li>
+<li>17 media</li>
+</ol>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>國立科大資管系，目前已經有兩年工作經驗。平時專注在前端開發，接觸 React、Redux 開發約兩年的時間。除了一般的前端「工程」之外，自己也很喜歡畫面的實作與互動，同時也有在自己的小專案當中練習後端的知識，像是 AWS、Lambda、nodejs、資料庫、機器學習等等，不過最熟悉的還是前端相關。</p>
+<h3 id="期待的工作環境"><a href="#期待的工作環境" class="headerlink" title="期待的工作環境"></a>期待的工作環境</h3><ol>
+<li>能夠和前端團隊一起合作。之前的工作經驗因為前端開發都只有自己一人，所以比較難討論特定的前端技術</li>
+<li>不會有太多突發狀況。像是突然就改需求、砍掉開發中的產品、因為人情而被迫開發的案子等等</li>
+<li>有主產品以及明確的服務</li>
+<li>技術含量高，可以和優秀的團隊一起共事</li>
+</ol>
+<h3 id="找工作的管道"><a href="#找工作的管道" class="headerlink" title="找工作的管道"></a>找工作的管道</h3><ul>
+<li>inside jobboard</li>
+<li>yourator</li>
+<li>104 人力銀行</li>
+<li>f2e jobs</li>
+<li>PTT Soft_Job 版</li>
+</ul>
+<h3 id="1-Accupass-活動通"><a href="#1-Accupass-活動通" class="headerlink" title="1. Accupass 活動通"></a>1. Accupass 活動通</h3><p><strong>應徵職位：Frontend Developer</strong></p>
+<p>一個活動票券的網站，最近正在將架構從 Angular 改寫為 React，原因是原本的 Angular 較難維護，而且很容易產生牽一髮動全身的情形。</p>
+<h4 id="面試前"><a href="#面試前" class="headerlink" title="面試前"></a>面試前</h4><p>在 104 上被邀約面試，是由 PM 邀約面試的。</p>
+<h4 id="面試中"><a href="#面試中" class="headerlink" title="面試中"></a>面試中</h4><p>團隊正在擴編。面試主要聊一些自己的工作經驗以及一些小項目。當天面試我的前端工程師是一位日本人XD，但是中文講得很好（全程都是中文面試）。</p>
+<p>聊了關於 Accupass 的開發狀況、如何開發功能、管理時程等等，也和前端工程師聊技術，從 CSSModules、RxJS 聊到 CycleJS，感覺是個對前端技術很有熱忱的工程師。</p>
+<h4 id="面試結果"><a href="#面試結果" class="headerlink" title="面試結果"></a>面試結果</h4><p>婉拒 offer。</p>
+<p>PM 相當希望我能夠加入 Accupass 團隊，婉拒後也撥了通電話詢問原因，並提及如果以後有機會希望能夠一起合作。不過由於其他職位更吸引我，所以拒絕了 Accupass 的 offer。</p>
+<h3 id="2-Linker-Network-Inc-美商寶蘊凌科網路科技有限公司"><a href="#2-Linker-Network-Inc-美商寶蘊凌科網路科技有限公司" class="headerlink" title="2. Linker Network Inc. 美商寶蘊凌科網路科技有限公司"></a>2. Linker Network Inc. 美商寶蘊凌科網路科技有限公司</h3><p><strong>應徵職位：Frontend Developer</strong></p>
+<p>專門做 IOT、AI、機器學習的雲端運算平台，因為這些 platform 需要 UI 的支持，所以需要前端開發協助。官網還蠻簡陋的，看不出個所以然，不過做的事情技術含量很高。</p>
+<h4 id="面試前-1"><a href="#面試前-1" class="headerlink" title="面試前"></a>面試前</h4><p>在 104 上主動投遞履歷，被電話邀請面試。這間公司做的技術含量很深，也有在線下辦一些社群。</p>
+<h4 id="面試中-1"><a href="#面試中-1" class="headerlink" title="面試中"></a>面試中</h4><p>感覺得出來是個蠻技術含量很紮實的公司。自我介紹談了一下過去的工作經驗，以及用 React, Redux。</p>
+<p>我之後才知道原來當初面試我的是 c9s ，想說怎麼那麼眼熟。感覺得出來是位大大，技術的掌握度很深。（不過本人看起來比較憔悴）</p>
+<p>面試時考了些偏優化的題目，像是：</p>
+<ol>
+<li>js 如何做 minify？<br>這題是要你大概解釋一下 js minify 的過程，最後簡化到如何消除程式碼中不必要的空白。這題的想法很簡單，不過實作起來有一些細節要注意，當時沒有想很多，被提示很多次才寫出來</li>
+<li>前端效能優化可以怎麼做？<br>提了一些常見的方式，不過感覺沒有很合面試官的胃口。像是 base64 編碼減少請求數、快取、ServiceWorker 等等。</li>
+<li>如果要你做一個 SPA 的 framework，你會怎麼做？<br>如果要我做，首先要考慮的是 router 的處理方式，畢竟 SPA 需要依靠前端做 router。後來被提醒了還要考慮 lifecycle 的問題</li>
+<li>一些 Javascript 的問題</li>
+<li>原形鍊的原理</li>
+<li><code>new</code> 背後發生了什麼事？</li>
+<li>如何實作繼承</li>
+<li><code>this</code> 指向誰</li>
+</ol>
+<p>最後由一位看起來是主管的人跟我談一些公司現況、未來發展等等。</p>
+<h4 id="面試結果-1"><a href="#面試結果-1" class="headerlink" title="面試結果"></a>面試結果</h4><p>無聲卡（到現在已經三週），大概是太菜了吧QQ</p>
+<h3 id="3-台灣樂天市場"><a href="#3-台灣樂天市場" class="headerlink" title="3. 台灣樂天市場"></a>3. 台灣樂天市場</h3><p><strong>應徵職位：Frontend Developer</strong></p>
+<p>之前有參加過一次面試，不過因為沒辦法提供全職的上班時間（也不確定是不是）。所以重新又投了一次。辦公室的氣氛跟一般大公司差不多，要有員工證才能進辦公室。</p>
+<h4 id="面試前-2"><a href="#面試前-2" class="headerlink" title="面試前"></a>面試前</h4><p>HR 聯絡，寄給我一張身家調查表以及程式考題。上頭的格式大概跟 104 履歷差不多。這邊我想特別講一下他們的面試邀約信。</p>
+<p>一般的公司通常在信上附上地址，不過樂天市場會把一些重要的地標標示出來，例如 XX 號出口、在 XX 銀行上面、出電梯右轉等等，雖然這是一個微不足道的提醒，但對面試者來說很有用，畢竟誰都不想在大太陽底下看 google map 還不小心走反方向。</p>
+<h4 id="面試中-2"><a href="#面試中-2" class="headerlink" title="面試中"></a>面試中</h4><p>這次的面試比起以前好像又更制式一些，還要寫智力測驗跟人格測驗的考卷，考一些類似加減乘除之類的題目，我好像還錯了幾題XD。整個面試流程又因為這樣拉長了一些時間。</p>
+<p>跟工程師面試的過程蠻愉快的，主要也是聊一些工作經驗以及對技術的了解，兩位工程師感覺也是技術很強的大大。有一位工程師之前已經面試過我，跟我說「我對你的技術能力沒有太大問題」，但是因為卡兵役的關係還是被 reject 掉，整個很感動QQ。</p>
+<p>後來我還發現原來有一位就是 <a href="https://github.com/AllenFang/react-bootstrap-table/" target="_blank" rel="external">react-bootstrap-table</a> 的 creator。</p>
+<p>面試主要考了一些 Javascript 的東西，像是：</p>
+<ol>
+<li>遞迴以及實際應用<br>例如有一題反轉字串，主考官叫我用遞迴實現，並問我好處是什麼。我想破頭也想不出來，網路也找不到答案。</li>
+<li>閉包與實際開發應用</li>
+<li>IIFE（立即執行函式） 的好處<br>我舉了幾個例子，不過後來一位工程師跟我分享 jQuery 的原始碼，說用 IIFE 的方式也可以有效幫助 minify（因為把 window 參數化了），這招倒是我以前從來沒想過的。</li>
+<li>React、Redux 的開發場景應用<br>考一些 Redux 常見開發情景、管理 store 的方式、react lifecycle 的應用</li>
+<li>（更新）如何不用 <code>+</code> 實作加法功能<br>這題考對 bit operator 了解。透過 <code>XOR</code> 可以做到，高中的加法器有教XD，不過還是要畫一下真值表。</li>
+<li>（更新）台灣樂天市場有一句令我印象深刻的標語：<strong>複雜的東西簡單化、簡單的東西流程化、流程的東西標準化、標準化的東西自動化。</strong>（不確定原文是不是這樣）</li>
+</ol>
+<p>之後問了一些比較工程化的問題，像是 CI/CD、如何跑開發流程等等，樂天市場的技術線蠻多的，Angular、React、RoR、GraphQL 都有。</p>
+<h4 id="面試結果-2"><a href="#面試結果-2" class="headerlink" title="面試結果"></a>面試結果</h4><p>因為還是資格不符，所以基本上應該是被淘汰。不過前端 team 感覺得出來相當紮實，兩位工程師除了前端外都有其他領域的開發經驗，而且相當友善，面試結束時還請我喝了一杯飲料（雖然是公司的販賣機啦XD），也給了我很多關於職涯上的建議。</p>
+<h3 id="4-Codementor"><a href="#4-Codementor" class="headerlink" title="4. Codementor"></a>4. Codementor</h3><p><strong>應徵職位：Frontend Developer</strong></p>
+<p>做一對一的線上 mentor 的服務。衍伸出來許多服務，像是線上 code review、debug、pair programming 等等。</p>
+<h4 id="面試前-3"><a href="#面試前-3" class="headerlink" title="面試前"></a>面試前</h4><p>因為技術含量高，而且面對的對象又是工程師，想說是個很好練功的地方，在 104 上投遞履歷，隔天收到 HR 線上面試邀請。我還蠻喜歡線上面試的，不用額外跑到公司一趟對工程師來說實在是一大福音啊！</p>
+<h4 id="面試中-3"><a href="#面試中-3" class="headerlink" title="面試中"></a>面試中</h4><p><strong>第一階段 — 工程師面試</strong></p>
+<p>跟 team lead 面試，聊一些過去的工作經驗，問了一些開發上的問題。口頭考了一些 javascript 跟 react 的理解</p>
+<ol>
+<li>閉包</li>
+<li>flux v.s MVC 解決了什麼問題：老實說我沒有實際用過 flux，只有看過架構圖跟 code，所以只能靠自己的理解來回答</li>
+<li>javascript 是如何做到非同步的？談對 call stack 跟 event loop 的理解</li>
+</ol>
+<p><strong>第二階段 — 與 co-founder 面試</strong></p>
+<p>一樣在線上跟 co-founder 聊天。這個階段比較少提技術的部分，自我介紹完了之後，他對我的一個 side project 好像很有興趣XD，問我當初成立的動機以及為什麼沒有把它變成完整的服務。有好一段時間都在談這個小專案，也有談到 code mentor 也有在做類似內容平台的服務。</p>
+<p>後來問了一些 code mentor 的歷史以及一些團隊文化。總共約 30–40 分鐘左右</p>
+<p><strong>第三階段 — 與 CEO 面試</strong></p>
+<p>CEO 人在 California，一樣在線上面試。主要也是聊一些自己的工作內容跟開發經驗以及一些關於人格特質的問題。應該是希望從對談當中聊聊彼此之間的契合程度吧！總共約 30–40 分鐘左右。</p>
+<p>因為 code mentor 的 co-founder 以及 CEO 都是工程師出身，聊起來相當愉快，不會有種從上往下看你的感覺。</p>
+<p>他後來問了一題「你覺得你自己是個聰明人嗎？」。我回答不是，看過越多的程式碼與演算法後更是如此覺得。</p>
+<p>自己可能一輩子都沒辦法設計出像 React 那麼龐大的架構，或是各種排序演算法等等，怎麼想都不覺得自己很聰明。</p>
+<h4 id="面試後"><a href="#面試後" class="headerlink" title="面試後"></a>面試後</h4><p>約五天後被婉拒，好像是找到更 senior 的前端。code mentor 給我的感覺相當愉快，不管是 CEO 或是 team lead 都給我一種對自己產品相當有熱忱的感覺。希望未來還可以跟他們一起合作。</p>
+<h3 id="5-17-media"><a href="#5-17-media" class="headerlink" title="5. 17 media"></a>5. 17 media</h3><p><strong>應徵職位：Frontend Developer</strong></p>
+<p>這應該是我目前面試過最愉快的一間公司。從 f2e jobs 上看到徵才資訊，一直猶豫要不要投履歷，後來是朋友推薦後獲得面試邀約。</p>
+<h4 id="面試中-4"><a href="#面試中-4" class="headerlink" title="面試中"></a>面試中</h4><p>因為 team lead 是用下班時間面試 18:30。我很準時到達辦公室，team lead 也很準時出現在辦公室。這點讓我很欣賞。</p>
+<p>有些公司因為不確定面試者什麼時候來，所以多數都是工程師還在工作的狀態下突然被通知要面試才匆匆忙忙準備相關資料，或者臨時看一下履歷表。問了一下目前到現在面試幾個人了，他還特地秀出 slack 的訊息，還順便註記了幾個人遲到。是個相當重視時間的人。</p>
+<p>剛開始先由 HR 帶領晃過公司一圈。辦公室挺大的，零食櫃跟冰箱很猛，還有咖啡機、咖啡豆、微波爐等器具，聽說 RD team 還有另外一間辦公室，不過當天去的情況看來還是有點擠。</p>
+<p>再來是 team lead 面試，首先先自我介紹跟講一些工作經驗。</p>
+<p>一邊聊一邊帶到目前公司、團隊的狀況。感覺起來是個蠻保護團隊的人。之後就是 live coding 了，為了模擬真實的情況，所以不會斷網路，主要考一些 javascript 常見開發應用跟 built-in function 的實作。</p>
+<p>寫出來之後，team lead 就會從你寫的 code 當中開始討論技術。像是這邊為什麼要這樣寫，有沒有更好的寫法等等，他花了很多時間在討論、問問題以及提出自己對這段 code 的意見，感覺就像實際在 code review 一樣。這邊也花了最久時間，大概也有 1.5hr 左右吧。</p>
+<p>最後會給你一段髒髒的程式碼要你做 code review 跟解 bug，一起討論完之後，面試就結束了。</p>
+<p>出辦公室的時候大概已經 21:50 幾分了吧，他很有耐心都一直在旁邊做事。比較讓我印象深刻的是我們一起討論 <code>\B</code> 的用法，這是很少人會去理解的正規表達式，所以討論完原本的答案後，我就請教他 <code>\``B</code>的用法。</p>
+<p>他很有耐心地從 \b、\w 到 \B 一個一個解釋，直接解開了我長久以來的疑問。（網路上很少把 <code>\b</code> 解釋的很清楚）</p>
+<p>他給我幾個感覺：</p>
+<ol>
+<li>真實：不會隱瞞公司的狀況，讓你進來後覺得被騙，而且過程中不經意會講一些工作上遇到的無奈與感嘆，感覺已經看過不少風雨。</li>
+<li>真誠：不會用很奇怪的考題來電人，還會跟你一起討論 code quality、這段 code 要如何改進。這在面試當中是一件相當難得的事情。再來我跟他提到因為辦公室太大讓我不知道一進門要找誰時，他說會再反映給 HR。原本我以為他只是說說而已（畢竟大部分的公司也都是聽聽而已），沒想到他真的有跟 HR 反應，讓我非常感動。</li>
+</ol>
+<h4 id="面試結果-3"><a href="#面試結果-3" class="headerlink" title="面試結果"></a>面試結果</h4><p>offer get。HR 打電話來說明 on board 相關流程。</p>
+<h3 id="面試心得"><a href="#面試心得" class="headerlink" title="面試心得"></a>面試心得</h3><p>面試真的好累QQ，如果可以的話實在不想到處奔波，全部採用線上面試，非常符合 lazy engineer 啊！</p>
+<p>這次面試除了「找工作」之外，也見識到許多開發者，他們或許不常出現在各大社群當中，但是論實力跟涵養，都遠比某些在社群上膨風的開發者來得深厚。並不是說參與社群是一件不好的事，還是有很多人為社群貢獻許多，不過線下也有許多人在默默奉獻，不應該用活躍與否來判斷一個人的實力。</p>
+<p>這一次的面試除了「找工作」這件事之外，我學到的是 — 謙遜。在軟體開發的領域中有太多聰明人了，不斷在提醒著自己有多麽無知。</p>
+<h4 id="1-履歷準備"><a href="#1-履歷準備" class="headerlink" title="1. 履歷準備"></a>1. 履歷準備</h4><p>因為我平常就有寫 medium 跟部落格的習慣，履歷表就能順便放進去。而且因為履歷表是放在 github 上，所以很容易更新。</p>
+<h4 id="2-工作經驗"><a href="#2-工作經驗" class="headerlink" title="2. 工作經驗"></a>2. 工作經驗</h4><p>工作經驗並不是把公司名稱、職稱、年資寫進去而已，你負責哪些工作內容、在公司做了什麼事情，盡量寫得具體一些，例如：</p>
+<ul>
+<li>用 React、Redux 管理複雜頁面開發</li>
+<li>優化首頁 Loading 效能</li>
+</ul>
+<p>就比擔任前端開發來得好許多。</p>
+<h4 id="3-Side-Project"><a href="#3-Side-Project" class="headerlink" title="3. Side Project"></a>3. Side Project</h4><p>除了工作以外，如果有自己的 side project 就更好了，身為工程師一定會有自己想要動手解決的問題。</p>
+<p>可以讓面試官知道你喜歡的領域以及技術線，每個專案當中一定會有一些特定的問題是困擾你很久或是花了許多時間解決的。</p>
+<h4 id="4-多問問題"><a href="#4-多問問題" class="headerlink" title="4. 多問問題"></a>4. 多問問題</h4><p>面試應該是個你來我往的雙向溝通，而不是一場你問我答的標準流程而已，知道如何反問對方，也能夠增加對公司的了解程度。</p>
+<p>通常我都會問一些公司內部的問題，主要會針對這幾個方面問：</p>
+<ol>
+<li><strong>有沒有自動化？</strong><br>很多公司都還是土炮手動 SSH 登入部署。這種開發方式很可能間接一步反映到公司文化上，例如：申請預算流程繁瑣、對能夠自動化的東西視若無睹。</li>
+<li><strong>如何解決 bug？</strong><br>解決 bug 的方式可以看出公司如何排程。例如 bug 怎麼被回報的、誰來決定 bug 的優先度等等，通常從對方的回答就能判斷他們是否有一套規範來決定如何排程的</li>
+<li><strong>需求是否常常變動？</strong><br>從需求變動這個問題來看可以從很多角度切入，什麼是常常變動？在什麼時候變動？怎樣才叫做變動？這時候就能看出這間公司是否會出現明明開發時說 A，結果交差卻說 B 的情形了。</li>
+</ol>
+<p>接下來就是從這上面延伸出來的回答繼續追問了，通常看面試官的回答程度大概就知道這間公司的內部情形了。</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://kjj6198.github.io/2017/09/02/frontend-interview/" data-id="cj8ik6nsy000o4c5tvy5cjg2f" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>關注我 :</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="https://twitter.com/kalanyei" target="_blank">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://www.facebook.com/justkeiyi" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/kjj6198" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="linkedin" href="https://www.linkedin.com/in/%E6%84%B7%E5%A5%95-%E9%99%B3-8595b1128/" target="_blank">
+                        <i class="icon fa fa-linkedin"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="medium" href="https://medium.com/@Shurado" target="_blank">
+                        <i class="icon fa fa-medium"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2017/10/02/react-16-features/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">下一篇</strong>
+        <p class="article-nav-title">
+        
+            React16 重點整理
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2017/08/25/ramda-introduction/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">淺談 ramda 中的幾個 API</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="no-thumbnail">
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/日語學習/">日語學習</a></p>
+                            <p class="item-title"><a href="/2017/10/07/jlpt-learning/" class="title">自學四年通過日檢 N2 心得</a></p>
+                            <p class="item-date"><time datetime="2017-10-07T13:47:12.000Z" itemprop="datePublished">2017-10-07</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/10/02/react-16-features/" class="title">React16 重點整理</a></p>
+                            <p class="item-date"><time datetime="2017-10-01T16:00:00.000Z" itemprop="datePublished">2017-10-02</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/09/02/frontend-interview/" class="title">前端面試心得</a></p>
+                            <p class="item-date"><time datetime="2017-09-01T16:00:00.000Z" itemprop="datePublished">2017-09-02</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/08/25/ramda-introduction/" class="title">淺談 ramda 中的幾個 API</a></p>
+                            <p class="item-date"><time datetime="2017-08-24T16:14:45.000Z" itemprop="datePublished">2017-08-25</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/08/18/Sass/" class="title">你可能不知道的 Sass 技巧</a></p>
+                            <p class="item-date"><time datetime="2017-08-18T09:11:38.000Z" itemprop="datePublished">2017-08-18</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">分類</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/rails/">rails</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端週刊/">前端週刊</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日語學習/">日語學習</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/機器學習/">機器學習</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/程式筆記/">程式筆記</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/讀書心得/">讀書心得</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/雜談/">雜談</a><span class="category-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">歸檔</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit" style="text-align: center;">
+                <p>&copy; 2017 Kalan</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_shortname = 'frontendclothesline';
+    
+    
+    var disqus_url = 'http://kjj6198.github.io/2017/09/02/frontend-interview/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+</body>
+</html>
