@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    <title>透過 AWS lambda 上傳 Medium 文章 | 欠・擬合 | UNder-fitting</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="lambda,medium" />
+    
+    <meta name="description" content="Medium 本身不支援 code block 編輯，雖然不知道背後的原因為何（或許工程師並非主要客群），所以如果要高亮程式碼，一個作法是直接貼圖片，一個是貼在 gist 上後再 embed 到文章當中。 程式碼用圖片貼出雖然可以達到高亮效果，但對工程師來說是一件相當不友善的事，因為無法透過複製貼上的方式來實際測試你的程式碼，或者編輯文章時還要手動修圖，是一件很麻煩的事。 不過貼上 gist 也有">
+<meta name="keywords" content="lambda,medium">
+<meta property="og:type" content="article">
+<meta property="og:title" content="透過 AWS lambda 上傳 Medium 文章">
+<meta property="og:url" content="http://kjj6198.github.io/2017/11/10/AWS-lambda-medium/index.html">
+<meta property="og:site_name" content="欠・擬合 | UNder-fitting">
+<meta property="og:description" content="Medium 本身不支援 code block 編輯，雖然不知道背後的原因為何（或許工程師並非主要客群），所以如果要高亮程式碼，一個作法是直接貼圖片，一個是貼在 gist 上後再 embed 到文章當中。 程式碼用圖片貼出雖然可以達到高亮效果，但對工程師來說是一件相當不友善的事，因為無法透過複製貼上的方式來實際測試你的程式碼，或者編輯文章時還要手動修圖，是一件很麻煩的事。 不過貼上 gist 也有">
+<meta property="og:locale" content="zh-TW">
+<meta property="og:updated_time" content="2017-11-09T16:50:15.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="透過 AWS lambda 上傳 Medium 文章">
+<meta name="twitter:description" content="Medium 本身不支援 code block 編輯，雖然不知道背後的原因為何（或許工程師並非主要客群），所以如果要高亮程式碼，一個作法是直接貼圖片，一個是貼在 gist 上後再 embed 到文章當中。 程式碼用圖片貼出雖然可以達到高亮效果，但對工程師來說是一件相當不友善的事，因為無法透過複製貼上的方式來實際測試你的程式碼，或者編輯文章時還要手動修圖，是一件很麻煩的事。 不過貼上 gist 也有">
+    
+
+    
+
+    
+        <link rel="icon" href="/imgs/favicon.ico" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-56408806-4', 'auto');
+ga('send', 'pageview');
+
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+    
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                      欠・擬合 | UNder-fitting
+                    </h1>
+                    <img src="https://pbs.twimg.com/profile_images/915528631065047040/5-Do3QWr_400x400.jpg" alt="" class="avatar">
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">Fun Driven Frontend Developer 最近的夢想是能夠光榮地回鄉工作。
+如果你也對日劇、機器學習、日文、前後端開發、React、程式、咖啡有興趣，或許我們可以聊聊
+</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">主頁</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://kjj6198.github.io/resume">關於</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://www.shurado.com?ref=blog">日語八百屋</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜尋" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要找..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '頁面',
+            CATEGORIES: '分類',
+            TAGS: '標籤',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/AWS/">AWS</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-AWS-lambda-medium" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        透過 AWS lambda 上傳 Medium 文章
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-subtitle">
+                <a href="/2017/11/10/AWS-lambda-medium/" class="article-date">
+    <time datetime="2017-11-09T16:46:28.000Z" itemprop="datePublished">2017-11-10</time>
+</a>
+                
+    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/lambda/">lambda</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/medium/">medium</a></li></ul>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#AWS-Lambda"><span class="post-toc-number">1.</span> <span class="post-toc-text">AWS Lambda</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Github-Issue"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Github Issue</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Medium-API"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Medium API</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Gist-API"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">Gist API</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#串接-Lambda"><span class="post-toc-number">2.</span> <span class="post-toc-text">串接 Lambda</span></a></li></ol>
+            <p>Medium 本身不支援 code block 編輯，雖然不知道背後的原因為何（或許工程師並非主要客群），所以如果要高亮程式碼，一個作法是直接貼圖片，一個是貼在 gist 上後再 embed 到文章當中。</p>
+<p>程式碼用圖片貼出雖然可以達到高亮效果，但對工程師來說是一件相當不友善的事，因為無法透過複製貼上的方式來實際測試你的程式碼，或者編輯文章時還要手動修圖，是一件很麻煩的事。</p>
+<p>不過貼上 gist 也有幾個問題</p>
+<ul>
+<li>手機版無法觀看，會直接噴出連結給你而非嵌入的內容</li>
+<li>自己貼 code 到 gist 太麻煩。（不過搭配 vscode sublime 等套件上傳到 gist 也是個不錯的方式）</li>
+</ul>
+<p>為了盡量在 Medium 看到高亮的 code block，最後決定使用 AWS Lambda 解決這件事。</p>
+<h2 id="AWS-Lambda"><a href="#AWS-Lambda" class="headerlink" title="AWS Lambda"></a><a href="https://aws.amazon.com/tw/lambda/" target="_blank" rel="external">AWS Lambda</a></h2><p>對於 Lambda 還不了解的讀者，目前網路上已經有很多資源可以觀看，這邊不再贅述。Lambda 是讓 AWS 幫你執行想要的 function，而不用實際去建立一個 server（當然背後還是有 server 啦）。透過這種方式，我們不用寫個 function 就要部署到一台機器，甚至去維護它，我們只需要執行就好。</p>
+<h3 id="Github-Issue"><a href="#Github-Issue" class="headerlink" title="Github Issue"></a>Github Issue</h3><p>為了串接到 lambda 的 endpoint，決定透過 github webhook 觸發。因為在 github 可以使用 issue 寫 markdown，還可以上傳圖片（github 幫你 host）、預覽、code block 等，其實相當方便。想要發布文章時，再透過 close issue 觸發 webhook，再透過 lambda 將 code block 上傳至 gist，最後呼叫 Medium API 建立文章。</p>
+<h3 id="Medium-API"><a href="#Medium-API" class="headerlink" title="Medium API"></a>Medium API</h3><ul>
+<li><a href="https://github.com/Medium/medium-api-docs" target="_blank" rel="external">https://github.com/Medium/medium-api-docs</a></li>
+</ul>
+<p>Medium 的 API 短小輕薄，不過方便好用。首先先到個人頁面的 <strong>setting</strong> &gt; <strong>Integration tokens</strong> 生成 token，再透過 token 呼叫建立文章的 API 即可。</p>
+<h3 id="Gist-API"><a href="#Gist-API" class="headerlink" title="Gist API"></a>Gist API</h3><p>gist API 也是一樣，為了不讓自己的 gist 一片混亂，建議可以另外再開一個帳號專門存放文章使用的 code。到 <strong>settings &gt; developer settings &gt; personal access token &gt; generate token</strong> 建立 token，記得勾選 gist 權限。</p>
+<h2 id="串接-Lambda"><a href="#串接-Lambda" class="headerlink" title="串接 Lambda"></a>串接 Lambda</h2><p>前置工作做好後就可以開始串接 lambda 了。</p>
+<p>首先把建立好的 lambda endpoint 放到 github webhook 中，然後隨便找一個可以編譯 markdown 為 HTML 的 package（我是用 <code>marked</code>），結合起來就可以囉！</p>
+<p>一個簡單的實作在<a href="https://github.com/DnD-mag/DnD-lamda" target="_blank" rel="external">這裡</a>。雖然稍嫌麻煩，不過其實還挺方便的。不知道 Medium 何時才要支援 code block QQ。</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://kjj6198.github.io/2017/11/10/AWS-lambda-medium/" data-id="cj9spr7qo0006wf5t88cgq6l4" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>關注我 :</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="https://twitter.com/kalanyei" target="_blank">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://www.facebook.com/justkeiyi" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/kjj6198" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="linkedin" href="https://www.linkedin.com/in/%E6%84%B7%E5%A5%95-%E9%99%B3-8595b1128/" target="_blank">
+                        <i class="icon fa fa-linkedin"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="medium" href="https://medium.com/@Shurado" target="_blank">
+                        <i class="icon fa fa-medium"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2017/11/10/better-express-error/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">下一篇</strong>
+        <p class="article-nav-title">
+        
+            Better Express error
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2017/10/07/jlpt-learning/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">自學四年通過日檢 N2 心得</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="no-thumbnail">
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/nodejs/">nodejs</a></p>
+                            <p class="item-title"><a href="/2017/11/10/better-express-error/" class="title">Better Express error</a></p>
+                            <p class="item-date"><time datetime="2017-11-09T16:48:23.000Z" itemprop="datePublished">2017-11-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/AWS/">AWS</a></p>
+                            <p class="item-title"><a href="/2017/11/10/AWS-lambda-medium/" class="title">透過 AWS lambda 上傳 Medium 文章</a></p>
+                            <p class="item-date"><time datetime="2017-11-09T16:46:28.000Z" itemprop="datePublished">2017-11-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/日語學習/">日語學習</a></p>
+                            <p class="item-title"><a href="/2017/10/07/jlpt-learning/" class="title">自學四年通過日檢 N2 心得</a></p>
+                            <p class="item-date"><time datetime="2017-10-07T13:47:12.000Z" itemprop="datePublished">2017-10-07</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/10/02/react-16-features/" class="title">React16 重點整理</a></p>
+                            <p class="item-date"><time datetime="2017-10-01T16:00:00.000Z" itemprop="datePublished">2017-10-02</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/09/02/frontend-interview/" class="title">前端面試心得</a></p>
+                            <p class="item-date"><time datetime="2017-09-01T16:00:00.000Z" itemprop="datePublished">2017-09-02</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">分類</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AWS/">AWS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/rails/">rails</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端週刊/">前端週刊</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日語學習/">日語學習</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/機器學習/">機器學習</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/程式筆記/">程式筆記</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/讀書心得/">讀書心得</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/雜談/">雜談</a><span class="category-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">歸檔</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit" style="text-align: center;">
+                <p>&copy; 2017 Kalan</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_shortname = 'frontendclothesline';
+    
+    
+    var disqus_url = 'http://kjj6198.github.io/2017/11/10/AWS-lambda-medium/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+</body>
+</html>
