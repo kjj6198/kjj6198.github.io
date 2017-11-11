@@ -196,7 +196,7 @@ ga('send', 'pageview');
 <p>目前覺得最合適的解決方案是搭配 <code>hubot-deploy</code> 以及 <code>heaven</code> 來幫助部署。</p>
 <p>但 heaven 的文件實在寫的有夠爛。</p>
 <p>看了老半天，甚至看了一下 source code 才知道到底該怎麼設定。於是決定將整個設定流程分享給大家，希望能夠減少其他 devops 們走歪路的時間。</p>
-<h2 id="主要流程"><a href="#主要流程" class="headerlink" title="主要流程"></a>主要流程</h2><img src="/2017/03/01/chatops/process.png" alt="Github deployment process" title="Github deployment process">
+<h2 id="主要流程"><a href="#主要流程" class="headerlink" title="主要流程"></a>主要流程</h2><img src="/2017/03/01/chatops/process.png" title="Github deployment process">
 <p>hubot 接收到部署指令後，會發送 <a href="https://developer.github.com/v3/repos/deployments" target="_blank" rel="external">github deployment</a>，同時會觸發 <code>deployment</code> 這個事件，這時 github 就會發送 POST 給在 webhook 設置的 url（這邊接收者為 <code>heaven</code>），heaven 接收到請求之後，就會開始部署，再一一回傳我們想要知道的部數狀況。</p>
 <h3 id="hubot-deploy"><a href="#hubot-deploy" class="headerlink" title="hubot-deploy"></a>hubot-deploy</h3><p>hubot-deploy 能夠用 slack 對 slack-bot 下指令的方式建立 github 的 <a href="https://developer.github.com/v3/repos/deployments" target="_blank" rel="external">deployment</a> event。</p>
 <h3 id="heaven"><a href="#heaven" class="headerlink" title="heaven"></a>heaven</h3><p>是一個 Rails 的 application。主要有一個 <code>/events</code> 負責接收從 github deployment 傳來的 deployment 與 payload。</p>
@@ -242,7 +242,7 @@ ga('send', 'pageview');
 <p>全域變數可以到 heroku 的 dashboard 或是直接用 command line 設定：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">heroku config:set HUBOT_GITHUB_TOKEN=abcccc</div><div class="line">heroku config:set HUBOT_SLACK_TOKEN=abcccc</div></pre></td></tr></table></figure>
 <p>測試一下是否成功。在你設定的頻道中輸入 <code>hubot deploy:version</code></p>
-<img src="/2017/03/01/chatops/success.png" alt="success" title="success">
+<img src="/2017/03/01/chatops/success.png" title="success">
 <p>其中的 <code>hubot</code> 要跟你的機器人名稱相同，例如機器人的名稱為 tripmomo，那麼我就要輸入 <code>tripmomo deploy:version</code>。</p>
 <p>成功的話 hubot 會回應你目前的版本訊息。</p>
 <ol>
@@ -339,7 +339,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://kjj6198.github.io/2017/03/01/chatops/" data-id="cj9vhte26000mml5tzd01gmw1" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://kjj6198.github.io/2017/03/01/chatops/" data-id="cj9vhxo17000wgg5tt0jcc4r4" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -500,8 +500,8 @@ ga('send', 'pageview');
                 
                     <li>
                         <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2017/11/11/1111-happy-birthday/" class="title"></a></p>
+                            <p class="item-category"><a class="article-category-link" href="/categories/雜談/">雜談</a></p>
+                            <p class="item-title"><a href="/2017/11/11/1111-happy-birthday/" class="title">狂歡雙 11  —  祝我生日快樂</a></p>
                             <p class="item-date"><time datetime="2017-11-11T15:34:10.000Z" itemprop="datePublished">2017-11-11</time></p>
                         </div>
                     </li>
@@ -548,7 +548,7 @@ ga('send', 'pageview');
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">分類</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AWS/">AWS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/rails/">rails</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端週刊/">前端週刊</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日語學習/">日語學習</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/機器學習/">機器學習</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/程式筆記/">程式筆記</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/讀書心得/">讀書心得</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/雜談/">雜談</a><span class="category-list-count">1</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AWS/">AWS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/rails/">rails</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端週刊/">前端週刊</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日語學習/">日語學習</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/機器學習/">機器學習</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/程式筆記/">程式筆記</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/讀書心得/">讀書心得</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/雜談/">雜談</a><span class="category-list-count">2</span></li></ul>
         </div>
     </div>
 
