@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    <title>如何設計 user friendly 的 table | 欠・擬合 | UNder-fitting</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="table,CSS" />
+    
+    <meta name="description" content="認清一件事實，table 是拿來看，不是被當作絢麗的視覺使用的  最近在後台頻繁有使用表格的需求，如何設計對使用者良好的 table 是一項挑戰，尤其在資料筆數多、欄位多的情況下，使用者很容易就會被額外的元素吸引。 而在現代 div 排版盛行的影響下，使用 table 很容易就被當成二流的前端工程師。 其實對於呈現資料上，table 仍然是個相當有效的排版方式，且他們具有的特色可以幫助我們排版更">
+<meta name="keywords" content="table,CSS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何設計 user friendly 的 table">
+<meta property="og:url" content="http://kjj6198.github.io/2017/11/24/user-friendly-table/index.html">
+<meta property="og:site_name" content="欠・擬合 | UNder-fitting">
+<meta property="og:description" content="認清一件事實，table 是拿來看，不是被當作絢麗的視覺使用的  最近在後台頻繁有使用表格的需求，如何設計對使用者良好的 table 是一項挑戰，尤其在資料筆數多、欄位多的情況下，使用者很容易就會被額外的元素吸引。 而在現代 div 排版盛行的影響下，使用 table 很容易就被當成二流的前端工程師。 其實對於呈現資料上，table 仍然是個相當有效的排版方式，且他們具有的特色可以幫助我們排版更">
+<meta property="og:locale" content="zh-TW">
+<meta property="og:image" content="http://kjj6198.github.io/Users/kalan/Desktop/螢幕快照">
+<meta property="og:updated_time" content="2017-11-23T16:36:07.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="如何設計 user friendly 的 table">
+<meta name="twitter:description" content="認清一件事實，table 是拿來看，不是被當作絢麗的視覺使用的  最近在後台頻繁有使用表格的需求，如何設計對使用者良好的 table 是一項挑戰，尤其在資料筆數多、欄位多的情況下，使用者很容易就會被額外的元素吸引。 而在現代 div 排版盛行的影響下，使用 table 很容易就被當成二流的前端工程師。 其實對於呈現資料上，table 仍然是個相當有效的排版方式，且他們具有的特色可以幫助我們排版更">
+<meta name="twitter:image" content="http://kjj6198.github.io/Users/kalan/Desktop/螢幕快照">
+    
+
+    
+
+    
+        <link rel="icon" href="/imgs/favicon.ico" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-56408806-4', 'auto');
+ga('send', 'pageview');
+
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+    
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                      欠・擬合 | UNder-fitting
+                    </h1>
+                    <img src="https://pbs.twimg.com/profile_images/915528631065047040/5-Do3QWr_400x400.jpg" alt="" class="avatar">
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">Fun Driven Frontend Developer 最近的夢想是能夠光榮地回鄉工作。
+如果你也對日劇、機器學習、日文、前後端開發、React、程式、咖啡有興趣，或許我們可以聊聊
+</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">主頁</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://kjj6198.github.io/resume">關於</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://www.shurado.com?ref=blog">日語八百屋</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜尋" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要找..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '頁面',
+            CATEGORIES: '分類',
+            TAGS: '標籤',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/前端/">前端</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-user-friendly-table" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        如何設計 user friendly 的 table
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-subtitle">
+                <a href="/2017/11/24/user-friendly-table/" class="article-date">
+    <time datetime="2017-11-23T16:35:38.000Z" itemprop="datePublished">2017-11-24</time>
+</a>
+                
+    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/table/">table</a></li></ul>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#HTML-中的-lt-table-gt"><span class="post-toc-number">1.</span> <span class="post-toc-text">HTML 中的 <table></span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#盡量不要拉滿整個-table-寬度"><span class="post-toc-number">2.</span> <span class="post-toc-text">盡量不要拉滿整個 table 寬度</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#選擇顯示欄位"><span class="post-toc-number">3.</span> <span class="post-toc-text">選擇顯示欄位</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#加入-lt-caption-gt"><span class="post-toc-number">4.</span> <span class="post-toc-text">加入 <caption></span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#移除不必要的顏色與-border"><span class="post-toc-number">5.</span> <span class="post-toc-text">移除不必要的顏色與 border</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#表頭跟內容對齊"><span class="post-toc-number">6.</span> <span class="post-toc-text">表頭跟內容對齊</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#提供簡單的排序與搜尋"><span class="post-toc-number">7.</span> <span class="post-toc-text">提供簡單的排序與搜尋</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#考慮簡單的-print"><span class="post-toc-number">8.</span> <span class="post-toc-text">考慮簡單的 @print</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#reponsive"><span class="post-toc-number">9.</span> <span class="post-toc-text">reponsive</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#結論"><span class="post-toc-number">10.</span> <span class="post-toc-text">結論</span></a></li></ol>
+            <blockquote>
+<p>認清一件事實，table 是拿來看，不是被當作絢麗的視覺使用的</p>
+</blockquote>
+<p>最近在後台頻繁有使用表格的需求，如何設計對使用者良好的 table 是一項挑戰，尤其在資料筆數多、欄位多的情況下，使用者很容易就會被額外的元素吸引。</p>
+<p>而在現代 <code>div</code> 排版盛行的影響下，使用 table 很容易就被當成二流的前端工程師。</p>
+<p>其實對於呈現資料上，table 仍然是個相當有效的排版方式，且他們具有的特色可以幫助我們排版更加輕鬆。</p>
+<h2 id="HTML-中的-lt-table-gt"><a href="#HTML-中的-lt-table-gt" class="headerlink" title="HTML 中的 &lt;table&gt;"></a>HTML 中的 <code>&lt;table&gt;</code></h2><p>在 HTML 當中 <code>&lt;table&gt;</code> 由幾個標籤組成：</p>
+<ul>
+<li><code>&lt;thead&gt;</code>：定義表頭標題<ul>
+<li><code>&lt;tr&gt;</code>：定義表頭的 row</li>
+<li><code>&lt;th&gt;</code>：定義標題</li>
+</ul>
+</li>
+<li><code>&lt;tbody&gt;</code>：定義表格內容</li>
+<li><code>&lt;tfoot&gt;</code>：定義表格的結尾部份</li>
+</ul>
+<h2 id="盡量不要拉滿整個-table-寬度"><a href="#盡量不要拉滿整個-table-寬度" class="headerlink" title="盡量不要拉滿整個 table 寬度"></a>盡量不要拉滿整個 table 寬度</h2><p>讓 table 當中內容自行決定寬度。如果拉滿寬度的話，使用者很容易因為兩個 column 之間的距離間隔太長而不容易閱讀。</p>
+<h2 id="選擇顯示欄位"><a href="#選擇顯示欄位" class="headerlink" title="選擇顯示欄位"></a>選擇顯示欄位</h2><p>如果資料的欄位太多（例如超過 10 個以上），可以透過 checkbox 等方式讓使用者選擇希望顯示的欄位。</p>
+<h2 id="加入-lt-caption-gt"><a href="#加入-lt-caption-gt" class="headerlink" title="加入 &lt;caption&gt;"></a>加入 <code>&lt;caption&gt;</code></h2><p>在表格當中可以加入 <code>&lt;caption&gt;</code>，方便標注表格的 title。例如：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">table</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">caption</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">h4</span>&gt;</span>出帳列表<span class="tag">&lt;/<span class="name">h4</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">caption</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">thead</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">th</span>&gt;</span>日期<span class="tag">&lt;/<span class="name">th</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">th</span>&gt;</span>姓名<span class="tag">&lt;/<span class="name">th</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">th</span>&gt;</span>人口<span class="tag">&lt;/<span class="name">th</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">th</span>&gt;</span>年紀<span class="tag">&lt;/<span class="name">th</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">thead</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">tbody</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">td</span>&gt;</span>2017-11-11<span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">td</span>&gt;</span>kalan.chen<span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">td</span>&gt;</span>12375<span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">td</span>&gt;</span>22<span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">tbody</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>透過 <code>caption-side: top | bottom</code> 可以做定位。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">caption</span> &#123;</div><div class="line">  <span class="attribute">caption-side</span>: top;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><img src="/Users/kalan/Desktop/螢幕快照 2017-11-23 下午11.51.47.png" alt="螢幕快照 2017-11-23 下午11.51.47"></p>
+<h2 id="移除不必要的顏色與-border"><a href="#移除不必要的顏色與-border" class="headerlink" title="移除不必要的顏色與 border"></a>移除不必要的顏色與 border</h2><p><img src="/Users/kalan/Desktop/螢幕快照 2017-11-23 下午11.57.06.png" alt="螢幕快照 2017-11-23 下午11.57.06"></p>
+<p>雖然乍看之下色彩繽紛，但對於使用者來說，border 和背景顏色都可能造成視覺雜訊，雖然是看似貼心的設計，但可能難以找到想要的資料。</p>
+<p>使用簡單的灰階做辨識，並消除（或者調淡）邊界的顏色，去除不必要的視覺雜訊，讓使用者更容易找到資料。</p>
+<h2 id="表頭跟內容對齊"><a href="#表頭跟內容對齊" class="headerlink" title="表頭跟內容對齊"></a>表頭跟內容對齊</h2><p>一般來說文字會靠左對齊，而數字則是靠右對齊。</p>
+<h2 id="提供簡單的排序與搜尋"><a href="#提供簡單的排序與搜尋" class="headerlink" title="提供簡單的排序與搜尋"></a>提供簡單的排序與搜尋</h2><p>對於後台來說，使用者可能會頻繁搜尋表格內的資料，一個方式是每次都用 ajax 請求更新資料，或者在前端實作。我們可以提供簡單的排序功能，方便使用者快速地找到資料，或是提供簡易的搜尋功能。</p>
+<p>題外話：排序其實可以直接使用 <code>element.appendChild</code> 來做，如果 appendChild 的節點已經出現在 parent 當中，會直接替換位置而不會加入一個新的 node。</p>
+<p><a href="https://codepen.io/kjj6198/pen/qXgQdL" target="_blank" rel="external">https://codepen.io/kjj6198/pen/qXgQdL</a></p>
+<h2 id="考慮簡單的-print"><a href="#考慮簡單的-print" class="headerlink" title="考慮簡單的 @print"></a>考慮簡單的 @print</h2><p>對於像是出帳系統、記錄等等，營運人員除了在網頁上觀看外，也有可能需要將表格內容列印下來，這時可以使用 <code>@media print</code> 的方式處理列印的細節，例如 font-size 的設定可能要用 <code>pt</code> 表示、將顏色改為黑白、縮短間距等等，都是需要考慮的細節。</p>
+<h2 id="reponsive"><a href="#reponsive" class="headerlink" title="reponsive"></a>reponsive</h2><p>傳統的 table 在做手機版支援時，通常是使用水平滾動的方式來顯示。不過在手機上頻繁滾動對使用者來說仍然不是個理想的操作。</p>
+<p>可以利用 data attribute 搭配 CSS 的 pseudo 完成。在手機上，我們將每一個 row 的顯示改為垂直。像這樣：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">table</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">caption</span>&gt;</span>付款紀錄<span class="tag">&lt;/<span class="name">caption</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">thead</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">th</span>&gt;</span>方案內容<span class="tag">&lt;/<span class="name">th</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">th</span>&gt;</span>金額<span class="tag">&lt;/<span class="name">th</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">th</span>&gt;</span>數量<span class="tag">&lt;/<span class="name">th</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">th</span>&gt;</span>贊助日期<span class="tag">&lt;/<span class="name">th</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">th</span>&gt;</span>贊助狀態<span class="tag">&lt;/<span class="name">th</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">thead</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">tbody</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">td</span> <span class="attr">data-label</span>=<span class="string">"方案"</span>&gt;</span>一枝草一點露，一人一百支持 TingChi<span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">td</span> <span class="attr">data-label</span>=<span class="string">"金額"</span>&gt;</span>$100<span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">td</span> <span class="attr">data-label</span>=<span class="string">"數量"</span>&gt;</span>1<span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">td</span> <span class="attr">data-label</span>=<span class="string">"贊助日期"</span>&gt;</span>2016-12-26<span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">td</span> <span class="attr">data-label</span>=<span class="string">"贊助狀態"</span>&gt;</span>付款成功<span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">td</span> <span class="attr">data-label</span>=<span class="string">"方案"</span>&gt;</span>一枝草一點露，一人一百支持 TingChi<span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">td</span> <span class="attr">data-label</span>=<span class="string">"金額"</span>&gt;</span>$100<span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">td</span> <span class="attr">data-label</span>=<span class="string">"數量"</span>&gt;</span>1<span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">td</span> <span class="attr">data-label</span>=<span class="string">"贊助日期"</span>&gt;</span>2016-12-26<span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">td</span> <span class="attr">data-label</span>=<span class="string">"贊助狀態"</span> <span class="attr">data-status</span>=<span class="string">"success"</span>&gt;</span>付款成功<span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">td</span> <span class="attr">data-label</span>=<span class="string">"方案"</span>&gt;</span>一枝草一點露，一人一百支持 TingChi<span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">td</span> <span class="attr">data-label</span>=<span class="string">"金額"</span>&gt;</span>$100<span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">td</span> <span class="attr">data-label</span>=<span class="string">"數量"</span>&gt;</span>1<span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">td</span> <span class="attr">data-label</span>=<span class="string">"贊助日期"</span>&gt;</span>2016-12-26<span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">td</span> <span class="attr">data-label</span>=<span class="string">"贊助狀態"</span> <span class="attr">data-status</span>=<span class="string">"fail"</span>&gt;</span>付款失敗</div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"repay-information"</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">button</span>&gt;</span>重新付款<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">button</span>&gt;</span>刪除紀錄<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">tbody</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><img src="/Users/kalan/Desktop/螢幕快照 2017-11-24 上午12.17.51.png" alt="螢幕快照 2017-11-24 上午12.17.51"></p>
+<p>轉為</p>
+<p><img src="/Users/kalan/Desktop/螢幕快照 2017-11-24 上午12.18.28.png" alt="螢幕快照 2017-11-24 上午12.18.28"></p>
+<p>這樣即使在手機上也不需要滾動了。</p>
+<p><a href="https://codepen.io/kjj6198/pen/oBZweY" target="_blank" rel="external">https://codepen.io/kjj6198/pen/oBZweY</a></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">table &#123;</div><div class="line">  width: 100%;</div><div class="line">  font-family: "PingFang TC";</div><div class="line">  td &#123; text-align: cetner; &#125;</div><div class="line">   </div><div class="line">&#125;</div><div class="line"></div><div class="line">@media screen and (max-width: 500px) &#123;</div><div class="line">  table &gt; thead &#123;</div><div class="line">    border: 0;</div><div class="line">    display: none;</div><div class="line">    position: absolute;</div><div class="line">  &#125;</div><div class="line">  tbody tr &#123;</div><div class="line">    border: 1px solid #aaa;</div><div class="line">    margin-bottom: 1em;</div><div class="line">    display: block;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  td:first-child &#123;</div><div class="line">    display: block;</div><div class="line">    font-weight: bold;</div><div class="line">    text-align: center;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  td:not(:first-child) &#123; </div><div class="line">    margin-top: 1em;</div><div class="line">    margin-bottom: 1em;</div><div class="line">    display: block;</div><div class="line">    text-align: right;</div><div class="line">    &amp;:before &#123;</div><div class="line">      float: left;</div><div class="line">      content: attr(data-label);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h2><p>table 在資料呈現上相當方便，寬度的計算、等高都已經幫我們實作完成，在製作後台時，table 也幾乎是觀看資料時不可或缺的排版之一。</p>
+<p>table 的設計上也有一些眉角可以注意，本篇文章提供了幾個製作 table 時需要注意的地方以及簡單的實作，未來如果有其他事項也會逐一加入。</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://kjj6198.github.io/2017/11/24/user-friendly-table/" data-id="cjacp9r3i002cyg5tt6uosr36" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>關注我 :</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="https://twitter.com/kalanyei" target="_blank">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://www.facebook.com/justkeiyi" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/kjj6198" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="linkedin" href="https://www.linkedin.com/in/%E6%84%B7%E5%A5%95-%E9%99%B3-8595b1128/" target="_blank">
+                        <i class="icon fa fa-linkedin"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="medium" href="https://medium.com/@Shurado" target="_blank">
+                        <i class="icon fa fa-medium"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2017/11/11/1111-happy-birthday/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">狂歡雙 11  —  祝我生日快樂</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="no-thumbnail">
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/11/24/user-friendly-table/" class="title">如何設計 user friendly 的 table</a></p>
+                            <p class="item-date"><time datetime="2017-11-23T16:35:38.000Z" itemprop="datePublished">2017-11-24</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/雜談/">雜談</a></p>
+                            <p class="item-title"><a href="/2017/11/11/1111-happy-birthday/" class="title">狂歡雙 11  —  祝我生日快樂</a></p>
+                            <p class="item-date"><time datetime="2017-11-11T15:34:10.000Z" itemprop="datePublished">2017-11-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/nodejs/">nodejs</a></p>
+                            <p class="item-title"><a href="/2017/11/10/better-express-error/" class="title">Better Express error</a></p>
+                            <p class="item-date"><time datetime="2017-11-09T16:48:23.000Z" itemprop="datePublished">2017-11-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/AWS/">AWS</a></p>
+                            <p class="item-title"><a href="/2017/11/10/AWS-lambda-medium/" class="title">透過 AWS lambda 上傳 Medium 文章</a></p>
+                            <p class="item-date"><time datetime="2017-11-09T16:46:28.000Z" itemprop="datePublished">2017-11-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/日語學習/">日語學習</a></p>
+                            <p class="item-title"><a href="/2017/10/07/jlpt-learning/" class="title">自學四年通過日檢 N2 心得</a></p>
+                            <p class="item-date"><time datetime="2017-10-07T13:47:12.000Z" itemprop="datePublished">2017-10-07</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">分類</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AWS/">AWS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/rails/">rails</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端週刊/">前端週刊</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日語學習/">日語學習</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/機器學習/">機器學習</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/程式筆記/">程式筆記</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/讀書心得/">讀書心得</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/雜談/">雜談</a><span class="category-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">歸檔</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit" style="text-align: center;">
+                <p>&copy; 2017 Kalan</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_shortname = 'frontendclothesline';
+    
+    
+    var disqus_url = 'http://kjj6198.github.io/2017/11/24/user-friendly-table/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+</body>
+</html>
