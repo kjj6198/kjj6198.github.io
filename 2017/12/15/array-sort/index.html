@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    <title>Array.sort 淺析 | 欠・擬合 | UNder-fitting</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="algorithm,sorting" />
+    
+    <meta name="description" content="Array.sort 淺析這篇文章不是談論在 Javascript 原生的 sort 要注意的事項。例如： 12[1, 2, 3, 8, 20, 30, 11].sort()// [1, 11, 2, 20, 3, 30, 8] 因為預設的 sort 方法會把值轉為 String，並按照 char code 做排序，所以才會出現上面的結果。 今天要來探討 Javascript 的 sort 背後的">
+<meta name="keywords" content="algorithm,sorting">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Array.sort 淺析">
+<meta property="og:url" content="http://kjj6198.github.io/2017/12/15/array-sort/index.html">
+<meta property="og:site_name" content="欠・擬合 | UNder-fitting">
+<meta property="og:description" content="Array.sort 淺析這篇文章不是談論在 Javascript 原生的 sort 要注意的事項。例如： 12[1, 2, 3, 8, 20, 30, 11].sort()// [1, 11, 2, 20, 3, 30, 8] 因為預設的 sort 方法會把值轉為 String，並按照 char code 做排序，所以才會出現上面的結果。 今天要來探討 Javascript 的 sort 背後的">
+<meta property="og:locale" content="zh-TW">
+<meta property="og:updated_time" content="2017-12-17T06:22:45.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Array.sort 淺析">
+<meta name="twitter:description" content="Array.sort 淺析這篇文章不是談論在 Javascript 原生的 sort 要注意的事項。例如： 12[1, 2, 3, 8, 20, 30, 11].sort()// [1, 11, 2, 20, 3, 30, 8] 因為預設的 sort 方法會把值轉為 String，並按照 char code 做排序，所以才會出現上面的結果。 今天要來探討 Javascript 的 sort 背後的">
+    
+
+    
+
+    
+        <link rel="icon" href="/imgs/favicon.ico" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-56408806-4', 'auto');
+ga('send', 'pageview');
+
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+    
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                      欠・擬合 | UNder-fitting
+                    </h1>
+                    <img src="https://pbs.twimg.com/profile_images/915528631065047040/5-Do3QWr_400x400.jpg" alt="" class="avatar">
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">Fun Driven Frontend Developer 最近的夢想是能夠光榮地回鄉工作。
+如果你也對日劇、機器學習、日文、前後端開發、React、程式、咖啡有興趣，或許我們可以聊聊
+</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">主頁</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://kjj6198.github.io/resume">關於</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://www.shurado.com?ref=blog">日語八百屋</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜尋" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要找..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '頁面',
+            CATEGORIES: '分類',
+            TAGS: '標籤',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/演算法/">演算法</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-array-sort" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Array.sort 淺析
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-subtitle">
+                <a href="/2017/12/15/array-sort/" class="article-date">
+    <time datetime="2017-12-14T16:00:00.000Z" itemprop="datePublished">2017-12-15</time>
+</a>
+                
+    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sorting/">sorting</a></li></ul>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Array-sort-淺析"><span class="post-toc-number">1.</span> <span class="post-toc-text">Array.sort 淺析</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#深入探討：為什麼是快速排序？"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">深入探討：為什麼是快速排序？</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#為什麼不用合併排序？"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">為什麼不用合併排序？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#In-place"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">In-place</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Stable"><span class="post-toc-number">1.1.3.</span> <span class="post-toc-text">Stable</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#插入排序"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">插入排序</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#結論"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">結論</span></a></li></ol></li></ol>
+            <h1 id="Array-sort-淺析"><a href="#Array-sort-淺析" class="headerlink" title="Array.sort 淺析"></a>Array.sort 淺析</h1><p>這篇文章不是談論在 Javascript 原生的 sort 要注意的事項。例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">8</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">11</span>].sort()</div><div class="line"><span class="comment">// [1, 11, 2, 20, 3, 30, 8]</span></div></pre></td></tr></table></figure>
+<p>因為預設的 sort 方法會把值轉為 String，並按照 char code 做排序，所以才會出現上面的結果。</p>
+<p>今天要來探討 Javascript 的 sort 背後的實作方式。</p>
+<p>從 <a href="https://github.com/v8/v8/blob/master/src/js/array.js#L757" target="_blank" rel="external">V8 的實作</a>當中，我們可以看到幾個事實：</p>
+<ul>
+<li>Array 的 sort 是用 quick sort 排序</li>
+<li>在陣列數量小於等於 10 的時候，使用插入排序。</li>
+</ul>
+<p>為了簡化 V8 中的代碼，這邊撰寫一個簡單的快速排序代碼：（僅供參考）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">quickSort</span>(<span class="params">arr, p, r</span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> (p &lt; r) &#123;</div><div class="line">    <span class="keyword">var</span> q = partition(arr, p, r)</div><div class="line">    quickSort(arr, q - <span class="number">1</span>, p)</div><div class="line">    quickSort(arr, q + <span class="number">1</span>, r)</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">partition</span>(<span class="params">arr, p, r</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> x = arr[r];</div><div class="line">  <span class="keyword">var</span> i = p - <span class="number">1</span>;</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> j = p; j &lt; r - <span class="number">1</span>; j++) &#123;</div><div class="line">    <span class="keyword">if</span> (arr[j] &lt;= x) &#123;</div><div class="line">      i += <span class="number">1</span>;</div><div class="line">      <span class="keyword">var</span> tmp = a[j];</div><div class="line">      arr[j] = a[i];</div><div class="line">      arr[i] = tmp;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">var</span> tmp = arr[r];</div><div class="line">  arr[r] = a[i + <span class="number">1</span>]</div><div class="line">  arr[i + <span class="number">1</span>] = tmp;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="深入探討：為什麼是快速排序？"><a href="#深入探討：為什麼是快速排序？" class="headerlink" title="深入探討：為什麼是快速排序？"></a>深入探討：為什麼是快速排序？</h2><p>快速排序法的實現重點在於如何選擇一個相對好的 pivot，來避免最壞情況的發生。在實際的情況當中，輸入的資料並不一定是隨機的，所以在實務上都會使用 random 的方式來選擇 pivot。</p>
+<p>第一個問題是，<strong>為什麼 V8 使用快速排序？</strong>雖然快速排序的平均時間複雜度可以達到 $O(nlogn)$，但是最壞情況也有可能達到$O(n^2)$。同時，快速排序並不是一個穩定的演算法，也就是兩個同樣值的資料，在排序之後位置可能會不同。</p>
+<h3 id="為什麼不用合併排序？"><a href="#為什麼不用合併排序？" class="headerlink" title="為什麼不用合併排序？"></a>為什麼不用合併排序？</h3><p>合併排序簡單可以分為兩大步驟，先把 array 分解後再調用 merge 不斷合併。不僅平均、最壞、最好時間複雜度都可以達到$O(nlogn)$，演算法本身也是穩定的，為什麼不採用呢？</p>
+<h3 id="In-place"><a href="#In-place" class="headerlink" title="In-place"></a>In-place</h3><p>我們在 quick sort 當中，並不需要對 array 做合併的動作，也就是整個演算法可以不另外耗費空間完成，而 merge sort 需要 $O(n)$ 的空間。因此儘管快速排序有上述的情況發生，但在實務上他仍然是一個相當好的選擇。</p>
+<p>我們可以透過 randomize 的方式（關於如何隨機選取 pivot，實際上還能夠寫一大篇文章來解釋），來避免 $O(n^2)$ 的情形發生。</p>
+<h3 id="Stable"><a href="#Stable" class="headerlink" title="Stable"></a>Stable</h3><p>不過儘管如此，我們還是沒辦法解決 stable 的問題，雖然在大部分的場景當中可能並不重要（畢竟資料排序通常都是由後端實作），不過如果真的碰到時，這就是非常重要的考量了。</p>
+<p><strong>並不是每個瀏覽器的實作都是用 Quicksort</strong></p>
+<h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h2><p>如果仔細看一下 <a href="https://github.com/v8/v8/blob/master/src/js/array.js#L723" target="_blank" rel="external">V8 的原始碼</a>，會發現這一段：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">while</span> (<span class="literal">true</span>) &#123;</div><div class="line"> <span class="comment">// Insertion sort is faster for short arrays.</span></div><div class="line"> <span class="keyword">if</span> (to - <span class="keyword">from</span> &lt;= <span class="number">10</span>) &#123;</div><div class="line">   InsertionSort(a, <span class="keyword">from</span>, to);</div><div class="line">   <span class="keyword">return</span>;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<p>咦，為什麼在陣列數量小於等於 10 的時候要用插入排序法呢？</p>
+<p>要理解原因，我們先回想一下插入排序的原理。插入排序跟撲克牌整理牌的方式很像，每次拿起一張牌，找到一個最適當位置放入，每次的要插入的牌組都是已經整理好的，可以達到原址排序。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">insertionSort</span>(<span class="params">arr</span>) </span>&#123;</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">1</span>; j &lt; arr.length; j++) &#123;</div><div class="line">  	<span class="keyword">var</span> key = arr[j];</div><div class="line">    <span class="keyword">var</span> i = j - <span class="number">1</span>;</div><div class="line">    <span class="keyword">while</span>(i &gt;= <span class="number">0</span> &amp;&amp; arr[i] &gt; key) &#123;</div><div class="line">      arr[i + <span class="number">1</span>] = arr[i]</div><div class="line">      i = i - <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">    arr[i + <span class="number">1</span>] = key;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> arr;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>插入排序雖然跟氣泡排序擁有相同的時間複雜度，不過在交換次數上有很大的不同，氣泡排序有$O(n^2)$的交換次數，而插入排序最多只需要$O(n)$。</p>
+<p>回到最剛開始的問題，<strong>為什麼在陣列數量小於等於 10 的時候要用插入排序法呢？</strong></p>
+<p>對於小數量的陣列而言，如果已經排序好，或是相當接近有序的陣列，插入排序法是唯一可以達到時間複雜度$O(n)$的演算法。這是相當有效率的一件事。</p>
+<h2 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h2><p>因為在工作上需要排序，因此開始深入理解了原生的 sort 在背後做了哪些事情。除了要注意 js 會預設轉為字串比較之外，在處理資料量大的陣列時，理解背後的實作方式就顯得相當重要。</p>
+<p>同時我們也了解到，不同的排序演算法都有其適合的場景，在使用 sort 的時候要記得：</p>
+<ul>
+<li>Quick sort 在實務上通常有最好的結果，但要注意 quick sort 並不是穩定的演算法</li>
+<li>Merge sort 雖然能夠達到 $O(nlogn)$ 的時間複雜度，但是需要額外 $O(n)$ 的空間做 merge</li>
+<li>Insertion sort 在小數量的陣列排序上有不錯的效果，最好情形可以在$O(n)$ 比較完成。</li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://kjj6198.github.io/2017/12/15/array-sort/" data-id="cjbadywe9000fw25t16nxd8fq" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>關注我 :</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="https://twitter.com/kalanyei" target="_blank">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://www.facebook.com/justkeiyi" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/kjj6198" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="linkedin" href="https://www.linkedin.com/in/%E6%84%B7%E5%A5%95-%E9%99%B3-8595b1128/" target="_blank">
+                        <i class="icon fa fa-linkedin"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="medium" href="https://medium.com/@Shurado" target="_blank">
+                        <i class="icon fa fa-medium"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2017/11/24/user-friendly-table/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">如何設計 user friendly 的 table</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="no-thumbnail">
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/演算法/">演算法</a></p>
+                            <p class="item-title"><a href="/2017/12/15/array-sort/" class="title">Array.sort 淺析</a></p>
+                            <p class="item-date"><time datetime="2017-12-14T16:00:00.000Z" itemprop="datePublished">2017-12-15</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/11/24/user-friendly-table/" class="title">如何設計 user friendly 的 table</a></p>
+                            <p class="item-date"><time datetime="2017-11-23T16:35:38.000Z" itemprop="datePublished">2017-11-24</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/雜談/">雜談</a></p>
+                            <p class="item-title"><a href="/2017/11/11/1111-happy-birthday/" class="title">狂歡雙 11  —  祝我生日快樂</a></p>
+                            <p class="item-date"><time datetime="2017-11-11T15:34:10.000Z" itemprop="datePublished">2017-11-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/nodejs/">nodejs</a></p>
+                            <p class="item-title"><a href="/2017/11/10/better-express-error/" class="title">Better Express error</a></p>
+                            <p class="item-date"><time datetime="2017-11-09T16:48:23.000Z" itemprop="datePublished">2017-11-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/AWS/">AWS</a></p>
+                            <p class="item-title"><a href="/2017/11/10/AWS-lambda-medium/" class="title">透過 AWS lambda 上傳 Medium 文章</a></p>
+                            <p class="item-date"><time datetime="2017-11-09T16:46:28.000Z" itemprop="datePublished">2017-11-10</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">分類</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AWS/">AWS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/rails/">rails</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端週刊/">前端週刊</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日語學習/">日語學習</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/機器學習/">機器學習</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/演算法/">演算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/程式筆記/">程式筆記</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/讀書心得/">讀書心得</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/雜談/">雜談</a><span class="category-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">歸檔</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit" style="text-align: center;">
+                <p>&copy; 2017 Kalan</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_shortname = 'frontendclothesline';
+    
+    
+    var disqus_url = 'http://kjj6198.github.io/2017/12/15/array-sort/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+</body>
+</html>
