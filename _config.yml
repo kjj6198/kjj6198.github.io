@@ -3,10 +3,14 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 前端曬衣場
-subtitle: 一位在台北求生存的大學生。喜歡看日劇、喝☕️、吃🍖。
-description: 一位在台北求生存的大學生。喜歡看日劇、喝☕️、吃🍖。
-keywords: 前端 工程師 實習 學生
+title: 欠・擬合 | UNder-fitting 
+subtitle: |
+  Fun Driven Frontend Developer 最近的夢想是能夠光榮地回鄉工作。
+  如果你也對日劇、機器學習、日文、前後端開發、React、程式、咖啡有興趣，或許我們可以聊聊
+description: |
+  Fun Driven Frontend Developer 最近的夢想是能夠光榮地回鄉工作。
+  interested in #frontend #react #redux #rxjs #japanese #machine-learning
+keywords: 前端 工程師 程式 機器學習 frontend frontend redux rxjs
 author: Kalan
 language: zh-TW
 timezone:

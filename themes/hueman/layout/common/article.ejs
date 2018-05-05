@@ -13,6 +13,9 @@
         <% } %>
         <%- partial('post/gallery') %>
         <div class="article-entry" itemprop="articleBody">
+            <%- toc(post.content, {
+                    class: 'post-toc'
+                }) %>
             <%- post.content %>
         </div>
         <footer class="article-footer">

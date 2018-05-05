@@ -6,6 +6,7 @@ index:
     category: '分類：'
     uncategorized: '未分類'
     tag: '標籤：'
+    fanpage: '日語八百屋'
 nav:
     current_page:
         other: '第 %d 頁，'
