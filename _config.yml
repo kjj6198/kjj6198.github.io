@@ -73,6 +73,9 @@ theme: hueman
 pulgins:
   - hexo-math
 
+math:
+  engine: katex
+
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
