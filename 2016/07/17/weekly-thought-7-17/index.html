@@ -172,8 +172,8 @@ ga('send', 'pageview');
         
         <div class="article-entry" itemprop="articleBody">
             <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#發現的新東西"><span class="post-toc-number">1.</span> <span class="post-toc-text">發現的新東西</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#別跟我說你懂-margin"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">別跟我說你懂 margin</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#MutationObserver"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">MutationObserver</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#astrum"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">astrum</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#新的問題"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">新的問題</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#SudoDashboard"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">SudoDashboard</span></a></li></ol></li></ol>
-            <h2 id="發現的新東西"><a href="#發現的新東西" class="headerlink" title="發現的新東西"></a>發現的新東西</h2><h3 id="別跟我說你懂-margin"><a href="#別跟我說你懂-margin" class="headerlink" title="別跟我說你懂 margin"></a><a href="http://www.hicss.net/do-not-tell-me-you-understand-margin/" target="_blank" rel="external">別跟我說你懂 margin</a></h3><p>拿捏 margin 跟 padding 可以很容易地看出前端工程師對 CSS 的掌握程度。說真的超多眉眉角角的，不過看完文章發現原來 margin 的妙用這麼多。以後的實踐或許有比較容易的方法也說不定！</p>
-<h3 id="MutationObserver"><a href="#MutationObserver" class="headerlink" title="MutationObserver"></a><a href="http://javascript.ruanyifeng.com/dom/mutationobserver.html" target="_blank" rel="external">MutationObserver</a></h3><p>這個鮮為人知的 API，被喜歡翻 MSDN 的我挖掘到了，基本上已經支持目前主流的瀏覽器（IE11+)。</p>
+            <h2 id="發現的新東西"><a href="#發現的新東西" class="headerlink" title="發現的新東西"></a>發現的新東西</h2><h3 id="別跟我說你懂-margin"><a href="#別跟我說你懂-margin" class="headerlink" title="別跟我說你懂 margin"></a><a href="http://www.hicss.net/do-not-tell-me-you-understand-margin/" target="_blank" rel="noopener">別跟我說你懂 margin</a></h3><p>拿捏 margin 跟 padding 可以很容易地看出前端工程師對 CSS 的掌握程度。說真的超多眉眉角角的，不過看完文章發現原來 margin 的妙用這麼多。以後的實踐或許有比較容易的方法也說不定！</p>
+<h3 id="MutationObserver"><a href="#MutationObserver" class="headerlink" title="MutationObserver"></a><a href="http://javascript.ruanyifeng.com/dom/mutationobserver.html" target="_blank" rel="noopener">MutationObserver</a></h3><p>這個鮮為人知的 API，被喜歡翻 MSDN 的我挖掘到了，基本上已經支持目前主流的瀏覽器（IE11+)。</p>
 <p>看完介紹會發現他很像事件，專門給 DOM 的變化使用的，不過不同的是，一般的事件是同步的，而 MutationObserver 是<strong>非同步</strong>的。</p>
 <p>這可以幫助我們在 DOM 有變化的時候，做出相對應的反應。</p>
 <p>利用這個特性，我們可以達到以下幾個應用：</p>
@@ -182,15 +182,15 @@ ga('send', 'pageview');
 <li>initialize</li>
 </ol>
 <p>因為在 HTML 實際被 render 之前，DOM 就已經先下載下來了，所以我們可以在 rendering 之前就改變 DOM 的內容。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> observer =  <span class="keyword">new</span>  MutationObserver ( <span class="function"><span class="keyword">function</span> (<span class="params"> mutations </span>)</span>&#123; </div><div class="line">  <span class="keyword">for</span>  ( <span class="keyword">var</span> i = <span class="number">0</span> ; i &lt; mutations . length ; i ++)&#123; </div><div class="line">    <span class="keyword">for</span>  ( <span class="keyword">var</span> j = <span class="number">0</span> ; j &lt; mutations [ i ]. addedNodes . length ; j ++ )&#123; </div><div class="line">      lazyLoad ( mutations [ i ]. addedNodes [ j ]); </div><div class="line">    &#125; </div><div class="line">  &#125; </div><div class="line">&#125;);</div><div class="line"></div><div class="line">observer . observe ( <span class="built_in">document</span> . documentElement ,  &#123; </div><div class="line">  <span class="attr">childList</span> :  <span class="literal">true</span> , </div><div class="line">  <span class="attr">subtree</span> :  <span class="literal">true</span> </div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<h3 id="astrum"><a href="#astrum" class="headerlink" title="astrum"></a><a href="http://astrum.nodividestudio.com/" target="_blank" rel="external">astrum</a></h3><p>這是一個很炫砲的 style guide library。做得非常精緻。<br>最近像這些 styleguide 的 library 一直推陳出新，其實就像潘大所說的。寫文件是好的，但是一定要評估成本、其他人的熟悉成本、要建構的時間等等，不能只是因為又潮又炫就自己跳下去自幹。而是要讓寫文件這件事情逐漸被引入。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> observer =  <span class="keyword">new</span>  MutationObserver ( <span class="function"><span class="keyword">function</span> (<span class="params"> mutations </span>)</span>&#123; </span><br><span class="line">  <span class="keyword">for</span>  ( <span class="keyword">var</span> i = <span class="number">0</span> ; i &lt; mutations . length ; i ++)&#123; </span><br><span class="line">    <span class="keyword">for</span>  ( <span class="keyword">var</span> j = <span class="number">0</span> ; j &lt; mutations [ i ]. addedNodes . length ; j ++ )&#123; </span><br><span class="line">      lazyLoad ( mutations [ i ]. addedNodes [ j ]); </span><br><span class="line">    &#125; </span><br><span class="line">  &#125; </span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">observer . observe ( <span class="built_in">document</span> . documentElement ,  &#123; </span><br><span class="line">  childList :  <span class="literal">true</span> , </span><br><span class="line">  subtree :  <span class="literal">true</span> </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="astrum"><a href="#astrum" class="headerlink" title="astrum"></a><a href="http://astrum.nodividestudio.com/" target="_blank" rel="noopener">astrum</a></h3><p>這是一個很炫砲的 style guide library。做得非常精緻。<br>最近像這些 styleguide 的 library 一直推陳出新，其實就像潘大所說的。寫文件是好的，但是一定要評估成本、其他人的熟悉成本、要建構的時間等等，不能只是因為又潮又炫就自己跳下去自幹。而是要讓寫文件這件事情逐漸被引入。</p>
 <p>不過當作 side project 或是自己想玩玩看就另當別論了。</p>
 <h3 id="新的問題"><a href="#新的問題" class="headerlink" title="新的問題"></a>新的問題</h3><p>每個框架都是為了解決某個問題而出現的。但使用了某個框架之後，好像逐漸又會萌生新的問題。我把一些自己在開發上常會碰到的問題整理了一下：</p>
 <ol>
 <li>文件切換</li>
 </ol>
 <p>我覺得很麻煩的一點就是要一直在 component 之間跳來跳去，有時候還要切過去看看 action, reducer 之類的，久了很容易阻礙思考。</p>
-<ol>
+<ol start="2">
 <li>Webpack 打包過慢</li>
 </ol>
 <p>要 bundle 的檔案越來越多，webpack 逐漸變得沒有那麼快了。每次寫完 code 還要等他 bundle，而且每次更新都會 reload 一次，說真的還挺麻煩的。</p>
@@ -202,7 +202,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://kjj6198.github.io/2016/07/17/weekly-thought-7-17/" data-id="cjgtnxi5u0037g75tlf348htn" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://kjj6198.github.io/2016/07/17/weekly-thought-7-17/" data-id="cjgxtnpea003bsg5tvlq7wsy9" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -363,6 +363,14 @@ ga('send', 'pageview');
                 
                     <li>
                         <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/數學/">數學</a></p>
+                            <p class="item-title"><a href="/2018/05/08/birthday-paradox/" class="title">再談生日悖論（Birthday Paradox）</a></p>
+                            <p class="item-date"><time datetime="2018-05-08T15:15:33.000Z" itemprop="datePublished">2018-05-08</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/雜談/">雜談</a></p>
                             <p class="item-title"><a href="/2018/01/01/2017-yearly-review/" class="title">2017 年度總結</a></p>
                             <p class="item-date"><time datetime="2017-12-31T16:00:00.000Z" itemprop="datePublished">2018-01-01</time></p>
@@ -393,14 +401,6 @@ ga('send', 'pageview');
                         </div>
                     </li>
                 
-                    <li>
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/nodejs/">nodejs</a></p>
-                            <p class="item-title"><a href="/2017/11/10/better-express-error/" class="title">Better Express error</a></p>
-                            <p class="item-date"><time datetime="2017-11-09T16:48:23.000Z" itemprop="datePublished">2017-11-10</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -411,7 +411,7 @@ ga('send', 'pageview');
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">分類</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AWS/">AWS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/rails/">rails</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端週刊/">前端週刊</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日語學習/">日語學習</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/機器學習/">機器學習</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/演算法/">演算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/程式筆記/">程式筆記</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/讀書心得/">讀書心得</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/雜談/">雜談</a><span class="category-list-count">3</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AWS/">AWS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/rails/">rails</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端週刊/">前端週刊</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/數學/">數學</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日語學習/">日語學習</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/機器學習/">機器學習</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/演算法/">演算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/程式筆記/">程式筆記</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/讀書心得/">讀書心得</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/雜談/">雜談</a><span class="category-list-count">3</span></li></ul>
         </div>
     </div>
 
@@ -421,7 +421,7 @@ ga('send', 'pageview');
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">歸檔</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">1</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -484,7 +484,7 @@ ga('send', 'pageview');
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->

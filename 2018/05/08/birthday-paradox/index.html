@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    <title>再談生日悖論（Birthday Paradox） | 欠・擬合 | UNder-fitting</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="" />
+    
+    <meta name="description" content="前言生日悖論是個剛開始上統計學時，老師很喜歡拿來唬弄學生的招式。通常老師會徐徐從錢包拿出 100 元，並且問學生，在教室中有沒有兩個人同一天生日？ 直覺上，我們可能會以為機率很低。不過事實上只要超過 23 人，2 人同一天生日的機率就有 50% 以上。 一部分的原因是我們將問題「其中兩人同一天生日」與「其中有人跟你同一天生日」聯想在一起，但兩者的機率是完全不一樣的。 「其中有人跟自己同一天生日」的">
+<meta name="keywords" content="前端 工程師 程式 機器學習 frontend frontend redux rxjs">
+<meta property="og:type" content="article">
+<meta property="og:title" content="再談生日悖論（Birthday Paradox）">
+<meta property="og:url" content="http://kjj6198.github.io/2018/05/08/birthday-paradox/index.html">
+<meta property="og:site_name" content="欠・擬合 | UNder-fitting">
+<meta property="og:description" content="前言生日悖論是個剛開始上統計學時，老師很喜歡拿來唬弄學生的招式。通常老師會徐徐從錢包拿出 100 元，並且問學生，在教室中有沒有兩個人同一天生日？ 直覺上，我們可能會以為機率很低。不過事實上只要超過 23 人，2 人同一天生日的機率就有 50% 以上。 一部分的原因是我們將問題「其中兩人同一天生日」與「其中有人跟你同一天生日」聯想在一起，但兩者的機率是完全不一樣的。 「其中有人跟自己同一天生日」的">
+<meta property="og:locale" content="zh-TW">
+<meta property="og:image" content="https://d2rkn6fj2nuekp.cloudfront.net/blog/WCM0004.png">
+<meta property="og:updated_time" content="2018-05-08T15:20:28.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="再談生日悖論（Birthday Paradox）">
+<meta name="twitter:description" content="前言生日悖論是個剛開始上統計學時，老師很喜歡拿來唬弄學生的招式。通常老師會徐徐從錢包拿出 100 元，並且問學生，在教室中有沒有兩個人同一天生日？ 直覺上，我們可能會以為機率很低。不過事實上只要超過 23 人，2 人同一天生日的機率就有 50% 以上。 一部分的原因是我們將問題「其中兩人同一天生日」與「其中有人跟你同一天生日」聯想在一起，但兩者的機率是完全不一樣的。 「其中有人跟自己同一天生日」的">
+<meta name="twitter:image" content="https://d2rkn6fj2nuekp.cloudfront.net/blog/WCM0004.png">
+    
+
+    
+
+    
+        <link rel="icon" href="/imgs/favicon.ico" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-56408806-4', 'auto');
+ga('send', 'pageview');
+
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+    
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                      欠・擬合 | UNder-fitting
+                    </h1>
+                    <img src="https://pbs.twimg.com/profile_images/915528631065047040/5-Do3QWr_400x400.jpg" alt="" class="avatar">
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">Fun Driven Frontend Developer 最近的夢想是能夠光榮地回鄉工作。
+如果你也對日劇、機器學習、日文、前後端開發、React、程式、咖啡有興趣，或許我們可以聊聊
+</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">主頁</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://kjj6198.github.io/resume">關於</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://www.shurado.com?ref=blog">日語八百屋</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜尋" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要找..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '頁面',
+            CATEGORIES: '分類',
+            TAGS: '標籤',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/數學/">數學</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-birthday-paradox" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        再談生日悖論（Birthday Paradox）
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-subtitle">
+                <a href="/2018/05/08/birthday-paradox/" class="article-date">
+    <time datetime="2018-05-08T15:15:33.000Z" itemprop="datePublished">2018-05-08</time>
+</a>
+                
+            </div>
+        
+        <div class="article-entry" itemprop="articleBody">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#解法"><span class="post-toc-number">2.</span> <span class="post-toc-text">解法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#補集"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">補集</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#結論"><span class="post-toc-number">3.</span> <span class="post-toc-text">結論</span></a></li></ol>
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>生日悖論是個剛開始上統計學時，老師很喜歡拿來唬弄學生的招式。通常老師會徐徐從錢包拿出 100 元，並且問學生，在教室中有沒有兩個人同一天生日？</p>
+<p>直覺上，我們可能會以為機率很低。不過事實上只要超過 23 人，2 人同一天生日的機率就有 50% 以上。</p>
+<p>一部分的原因是我們將問題「其中兩人同一天生日」與「其中有人跟你同一天生日」聯想在一起，但兩者的機率是完全不一樣的。</p>
+<p>「其中有人跟自己同一天生日」的機率為 $\frac{1}{365}$，不過「其中兩人同一天生日」的話因為範圍變廣了，機率自然也會增加。不過仍然有些違反直覺，照理來說，應該是呈現線性成長的才對吧？但事實上只要超過某個值，這個機率就會快速上升，我們下面會談到。</p>
+<h2 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h2><h3 id="補集"><a href="#補集" class="headerlink" title="補集"></a>補集</h3><p>我們可以透過補集的方式來計算至少有兩人同一天生日的機率，也就是用 1 減去所有人生日都不相同的機率。那麼要怎麼計算呢？我們先來想想兩個人生日不同的機率：$\frac{365}{365}\times\frac{364}{365}$（第一個人有 365 天可以選，第二個人則是 364 天）；接下來在想想三個人生日不同的機率 $\frac{365}{365}\times\frac{364}{365}\times\frac{363}{365}$。看出來了嗎？如果有 n 個人，則機率為$\frac{365}{365}\times\frac{364}{365}\times\frac{363}{365}\times…\frac{n-1}{365}$</p>
+<p>所以我們要求算的機率為：<br>$$<br>P(其中兩人同一天生日)=1-(\frac{364}{365}\times\frac{363}{365}\times…\frac{n-1}{365}) \geq 0.5<br>$$<br>化簡一下：</p>
+<p><img src="https://d2rkn6fj2nuekp.cloudfront.net/blog/WCM0004.png" alt="WCM0004"></p>
+<p>我們可以利用$1+x\lt e^{x}$的特性，進一步修改不等式：</p>
+<p><img src="https://d2rkn6fj2nuekp.cloudfront.net/blog/WCM0003.png" alt="WCM0003"></p>
+<p>從這邊可以觀察到，因為可以用自然指數來逼近，所以機率的成長也會隨著人數的增長而呈現指數變化。</p>
+<h2 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h2><p>很多時候我們學習數學常常會被公式跟奇形怪狀的題目耍得團團轉，卻一直沒有思考公式背後真正的含義、如何證明出來的，或者更重要的，學這些數學到底是為了解決什麼問題？</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://kjj6198.github.io/2018/05/08/birthday-paradox/" data-id="cjgxtnpcu000hsg5t1wpsrm52" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>關注我 :</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="https://twitter.com/kalanyei" target="_blank">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://www.facebook.com/justkeiyi" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/kjj6198" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="linkedin" href="https://www.linkedin.com/in/%E6%84%B7%E5%A5%95-%E9%99%B3-8595b1128/" target="_blank">
+                        <i class="icon fa fa-linkedin"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="medium" href="https://medium.com/@Shurado" target="_blank">
+                        <i class="icon fa fa-medium"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2018/01/01/2017-yearly-review/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">2017 年度總結</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="no-thumbnail">
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/數學/">數學</a></p>
+                            <p class="item-title"><a href="/2018/05/08/birthday-paradox/" class="title">再談生日悖論（Birthday Paradox）</a></p>
+                            <p class="item-date"><time datetime="2018-05-08T15:15:33.000Z" itemprop="datePublished">2018-05-08</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/雜談/">雜談</a></p>
+                            <p class="item-title"><a href="/2018/01/01/2017-yearly-review/" class="title">2017 年度總結</a></p>
+                            <p class="item-date"><time datetime="2017-12-31T16:00:00.000Z" itemprop="datePublished">2018-01-01</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/演算法/">演算法</a></p>
+                            <p class="item-title"><a href="/2017/12/15/array-sort/" class="title">Array.sort 淺析</a></p>
+                            <p class="item-date"><time datetime="2017-12-14T16:00:00.000Z" itemprop="datePublished">2017-12-15</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/11/24/user-friendly-table/" class="title">如何設計 user friendly 的 table</a></p>
+                            <p class="item-date"><time datetime="2017-11-23T16:35:38.000Z" itemprop="datePublished">2017-11-24</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/雜談/">雜談</a></p>
+                            <p class="item-title"><a href="/2017/11/11/1111-happy-birthday/" class="title">狂歡雙 11  —  祝我生日快樂</a></p>
+                            <p class="item-date"><time datetime="2017-11-11T15:34:10.000Z" itemprop="datePublished">2017-11-11</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">分類</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AWS/">AWS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/rails/">rails</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端週刊/">前端週刊</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/數學/">數學</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日語學習/">日語學習</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/機器學習/">機器學習</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/演算法/">演算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/程式筆記/">程式筆記</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/讀書心得/">讀書心得</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/雜談/">雜談</a><span class="category-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">歸檔</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit" style="text-align: center;">
+                <p>&copy; 2018 Kalan</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_shortname = 'frontendclothesline';
+    
+    
+    var disqus_url = 'http://kjj6198.github.io/2018/05/08/birthday-paradox/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+</body>
+</html>

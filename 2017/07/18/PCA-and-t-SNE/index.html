@@ -213,7 +213,7 @@ ga('send', 'pageview');
 <h4 id="PCA-的應用"><a href="#PCA-的應用" class="headerlink" title="PCA 的應用"></a>PCA 的應用</h4><p><strong>在降維的時候，我們希望留下最重要的特徵</strong>，剩下的比較不重要的特徵我們直接捨棄掉。</p>
 <p>像是判斷一個人時，最重要的判別方式可能就是眼睛、鼻子、嘴巴等等，所以膚色、頭髮等等的特徵我們就可以捨棄，事實上在人臉辨識當中也常利用 PCA 做降維。</p>
 <p><img src="https://cdn-images-1.medium.com/max/1250/1*yAtJRzT9un7JP9yllYs3mg.jpeg" alt="img"></p>
-<p><em>這是對奇異值分解相當直觀的了解，篇幅關係無法深入細談，若對奇異值分解有興趣可自行到</em><a href="https://www.wikiwand.com/zh-tw/%E5%A5%87%E5%BC%82%E5%80%BC%E5%88%86%E8%A7%A3" target="_blank" rel="external"><em>維基百科</em></a></p>
+<p><em>這是對奇異值分解相當直觀的了解，篇幅關係無法深入細談，若對奇異值分解有興趣可自行到</em><a href="https://www.wikiwand.com/zh-tw/%E5%A5%87%E5%BC%82%E5%80%BC%E5%88%86%E8%A7%A3" target="_blank" rel="noopener"><em>維基百科</em></a></p>
 <h3 id="t-SNE"><a href="#t-SNE" class="headerlink" title="t-SNE"></a>t-SNE</h3><p>PCA 是個相當直觀且有效的降維方式，不過在三維轉換為二維時我們可以看到，有些數據的集群完全被搗成一團。</p>
 <p>PCA 是一種線性降維的方式，但如果特徵與特徵間的關聯是非線性關係的話，用 PCA 可能會導致<strong>欠擬合（underfitting）</strong></p>
 <p><strong>t-SNE 也是一種降維方式</strong>，不過他用了更複雜的公式來表達高維與低維之間的關係。t-SNE 主要是將高維的數據用高斯分佈的機率密度函數近似，而低維數據的部分使用 t 分佈的方式來近似，在使用 KL 距離計算相似度，最後再以梯度下降（或隨機梯度下降）求最佳解 。</p>
@@ -237,7 +237,7 @@ ga('send', 'pageview');
 <p>求梯度可以寫成</p>
 <p><img src="https://cdn-images-1.medium.com/max/1000/1*MzouyFbnSKdeBA7nLJVCPw.png" alt="img"></p>
 <p>最後再利用梯度下降法（或隨機梯度下降法）就可以找到最小值了。</p>
-<h4 id="實測：使用-MNIST-測試"><a href="#實測：使用-MNIST-測試" class="headerlink" title="實測：使用 MNIST 測試"></a>實測：使用 MNIST 測試</h4><p>測試集可以到<a href="http://yann.lecun.com/exdb/mnist/" target="_blank" rel="external">這裡</a>下載，首先我們先用 PCA 降到二維看看。</p>
+<h4 id="實測：使用-MNIST-測試"><a href="#實測：使用-MNIST-測試" class="headerlink" title="實測：使用 MNIST 測試"></a>實測：使用 MNIST 測試</h4><p>測試集可以到<a href="http://yann.lecun.com/exdb/mnist/" target="_blank" rel="noopener">這裡</a>下載，首先我們先用 PCA 降到二維看看。</p>
 <p><strong>PCA</strong></p>
 <p><img src="https://cdn-images-1.medium.com/max/1250/1*Be6oSLuXgG0cDi2gJEL-wA.jpeg" alt="img">PCA 降維</p>
 <p>可以發現降到二維之後，資料幾乎被搗成一團，完全看不出集群，這是因為 PCA 的線性降維在過程中損失太多訊息。</p>
@@ -245,7 +245,7 @@ ga('send', 'pageview');
 <p>接下來使用 t-SNE 測試</p>
 <p><img src="https://cdn-images-1.medium.com/max/1250/1*5i8McPBKmFOMOcCDjl8w4Q.jpeg" alt="img">使用 t-SNE 降維</p>
 <p>這是使用 t-SNE 後的降維結果，可以發現降維過後，資料仍然分群地相當明確。從這兩張圖可以非常明顯看出這兩者（PCA, t-SNE）的差別。</p>
-<h3 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h3><p>後來又有人提出一連串改善 t-SNE 效能的演算法，詳情可以參考<a href="https://lvdmaaten.github.io/publications/papers/JMLR_2014.pdf" target="_blank" rel="external"><strong>Accelerating t-sne using tree-based algorithms</strong></a>，大部分熱門的資料分析程式語言也都有實作，像是 sklearn, R, matlab 等等。</p>
+<h3 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h3><p>後來又有人提出一連串改善 t-SNE 效能的演算法，詳情可以參考<a href="https://lvdmaaten.github.io/publications/papers/JMLR_2014.pdf" target="_blank" rel="noopener"><strong>Accelerating t-sne using tree-based algorithms</strong></a>，大部分熱門的資料分析程式語言也都有實作，像是 sklearn, R, matlab 等等。</p>
 <p>不過畢竟<strong> t-SNE 不是線性降維，在執行時間上會比 PCA 來得久許多。</strong></p>
 <ul>
 <li>當特徵數量過多時，使用 PCA 可能會造成降維後的特徵欠擬合（underfitting），這時可以考慮使用 t-SNE 來降維</li>
@@ -253,11 +253,11 @@ ga('send', 'pageview');
 <li>論文當中還有一些優化技巧（如何選擇困惑度等等），因為還沒有閱讀完畢，之後會再逐漸補上</li>
 </ul>
 <h4 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h4><ul>
-<li><a href="http://siplab.tudelft.nl/sites/default/files/vandermaaten08a.pdf" target="_blank" rel="external">Van der Maaten L, Hinton G. <strong>Visualizing data using t-SNE</strong></a></li>
-<li><a href="https://lvdmaaten.github.io/publications/papers/JMLR_2014.pdf" target="_blank" rel="external"><strong>Accelerating t-sne using tree-based algorithms</strong></a> 利用各種樹的演算法來加速 t-SNE 的運算</li>
-<li><a href="https://ccjou.wordpress.com/2009/09/01/%E5%A5%87%E7%95%B0%E5%80%BC%E5%88%86%E8%A7%A3-svd/" target="_blank" rel="external">線代啟示錄 - 奇異值分解</a></li>
+<li><a href="http://siplab.tudelft.nl/sites/default/files/vandermaaten08a.pdf" target="_blank" rel="noopener">Van der Maaten L, Hinton G. <strong>Visualizing data using t-SNE</strong></a></li>
+<li><a href="https://lvdmaaten.github.io/publications/papers/JMLR_2014.pdf" target="_blank" rel="noopener"><strong>Accelerating t-sne using tree-based algorithms</strong></a> 利用各種樹的演算法來加速 t-SNE 的運算</li>
+<li><a href="https://ccjou.wordpress.com/2009/09/01/%E5%A5%87%E7%95%B0%E5%80%BC%E5%88%86%E8%A7%A3-svd/" target="_blank" rel="noopener">線代啟示錄 - 奇異值分解</a></li>
 </ul>
-<p><em>文章同步發表於 <a href="https://medium.com/@Shurado/%E6%B7%BA%E8%AB%87%E5%85%A9%E7%A8%AE%E9%99%8D%E7%B6%AD%E6%96%B9%E6%B3%95-pca-%E8%88%87-t-sne-d4254916925b" target="_blank" rel="external">medium</a></em></p>
+<p><em>文章同步發表於 <a href="https://medium.com/@Shurado/%E6%B7%BA%E8%AB%87%E5%85%A9%E7%A8%AE%E9%99%8D%E7%B6%AD%E6%96%B9%E6%B3%95-pca-%E8%88%87-t-sne-d4254916925b" target="_blank" rel="noopener">medium</a></em></p>
 
         </div>
         <footer class="article-footer">
@@ -265,7 +265,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://kjj6198.github.io/2017/07/18/PCA-and-t-SNE/" data-id="cjgtnxi3t000bg75t92jksvj2" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://kjj6198.github.io/2017/07/18/PCA-and-t-SNE/" data-id="cjgxtnpcp000asg5tiu3k7j12" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -426,6 +426,14 @@ ga('send', 'pageview');
                 
                     <li>
                         <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/數學/">數學</a></p>
+                            <p class="item-title"><a href="/2018/05/08/birthday-paradox/" class="title">再談生日悖論（Birthday Paradox）</a></p>
+                            <p class="item-date"><time datetime="2018-05-08T15:15:33.000Z" itemprop="datePublished">2018-05-08</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/雜談/">雜談</a></p>
                             <p class="item-title"><a href="/2018/01/01/2017-yearly-review/" class="title">2017 年度總結</a></p>
                             <p class="item-date"><time datetime="2017-12-31T16:00:00.000Z" itemprop="datePublished">2018-01-01</time></p>
@@ -456,14 +464,6 @@ ga('send', 'pageview');
                         </div>
                     </li>
                 
-                    <li>
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/nodejs/">nodejs</a></p>
-                            <p class="item-title"><a href="/2017/11/10/better-express-error/" class="title">Better Express error</a></p>
-                            <p class="item-date"><time datetime="2017-11-09T16:48:23.000Z" itemprop="datePublished">2017-11-10</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -474,7 +474,7 @@ ga('send', 'pageview');
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">分類</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AWS/">AWS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/rails/">rails</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端週刊/">前端週刊</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日語學習/">日語學習</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/機器學習/">機器學習</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/演算法/">演算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/程式筆記/">程式筆記</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/讀書心得/">讀書心得</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/雜談/">雜談</a><span class="category-list-count">3</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AWS/">AWS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/rails/">rails</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端週刊/">前端週刊</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/數學/">數學</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日語學習/">日語學習</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/機器學習/">機器學習</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/演算法/">演算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/程式筆記/">程式筆記</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/讀書心得/">讀書心得</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/雜談/">雜談</a><span class="category-list-count">3</span></li></ul>
         </div>
     </div>
 
@@ -484,7 +484,7 @@ ga('send', 'pageview');
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">歸檔</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">1</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -547,7 +547,7 @@ ga('send', 'pageview');
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->

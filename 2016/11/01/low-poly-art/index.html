@@ -173,7 +173,7 @@ ga('send', 'pageview');
         <div class="article-entry" itemprop="articleBody">
             <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#圖片轉灰階"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">圖片轉灰階</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Sobel-取邊緣"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Sobel 取邊緣</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#取點"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">取點</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#結論"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">結論</span></a></li></ol></li></ol>
             <p>文章待補，圖片。</p>
-<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>說到 low poly，最讓我驚豔的是 <a href="http://species-in-pieces.com/" target="_blank" rel="external">species in pieces</a> 這個網站，他使用 low-poly 的方式畫出 30 種現在地球上瀕臨絕種的動物，是用 CSS 的 clip-path 做出來的，為了兼容瀏覽器，甚至還有做 fallback 的圖片，非常的用心。</p>
+<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>說到 low poly，最讓我驚豔的是 <a href="http://species-in-pieces.com/" target="_blank" rel="noopener">species in pieces</a> 這個網站，他使用 low-poly 的方式畫出 30 種現在地球上瀕臨絕種的動物，是用 CSS 的 clip-path 做出來的，為了兼容瀏覽器，甚至還有做 fallback 的圖片，非常的用心。</p>
 <p>之前有在知乎上有看見 low poly 的實作方式，但看了一下原始碼，回答是用 THREE.js 做的。一來我對 three 的掌握程度還太低，再來是 2D 的圖形用 WebGL 加速實在有點奢侈啊。這邊記錄一下思路跟實現過程。</p>
 <p>其實要做到 low poly 的效果並不難，最直覺的方式就是在畫面上取點，然後把點連接成三角形。再把三角形著色就完成了。不過隨機取點的方式會造成圖片很大的失真。</p>
 <p>有以下四大步驟：</p>
@@ -186,14 +186,14 @@ ga('send', 'pageview');
 </ul>
 <h4 id="圖片轉灰階"><a href="#圖片轉灰階" class="headerlink" title="圖片轉灰階"></a>圖片轉灰階</h4><p>有了 canvas 之後，我們可以使用 <code>getImageData</code> 這個 API 對圖片中的任何 pixel 做操作，這給 canvas 更大的彈性跟靈活度，代表圖片的操作有更多的可能性了。</p>
 <p>而灰階的實現並不難，將圖片中的 r g b 相加取平均即可。示意的程式碼大概像這樣：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> resultArr = [];</div><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> row = <span class="number">0</span>; row &lt; height; y++) &#123;</div><div class="line">  <span class="keyword">var</span> i = row * width * <span class="number">4</span> + <span class="number">4</span>;</div><div class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> col = <span class="number">1</span>; col &lt; width; col++, i+=<span class="number">4</span>) &#123;</div><div class="line">    </div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> resultArr = [];</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> row = <span class="number">0</span>; row &lt; height; y++) &#123;</span><br><span class="line">  <span class="keyword">var</span> i = row * width * <span class="number">4</span> + <span class="number">4</span>;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> col = <span class="number">1</span>; col &lt; width; col++, i+=<span class="number">4</span>) &#123;</span><br><span class="line">    </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>其實在實際應用中，要取得邊緣的方式並不是那麼簡單，有可能會影響的因素有：</p>
 <ul>
 <li>陰影</li>
 <li>聚焦模糊</li>
 </ul>
 <h4 id="Sobel-取邊緣"><a href="#Sobel-取邊緣" class="headerlink" title="Sobel 取邊緣"></a>Sobel 取邊緣</h4><p>通常檢測邊界的算法原理在於，將此像素的資料與其他像素比較，如果比較起來發現差距很大（顏色），那麼即可判斷這一點是邊緣。取邊界的算法有很多種，一般最暴力也最直接的方法就是 Sobel。</p>
-<p>這邊就不解釋 Sobel 的原理了，<a href="https://www.wikiwand.com/zh-tw/%E7%B4%A2%E8%B2%9D%E7%88%BE%E7%AE%97%E5%AD%90" target="_blank" rel="external">維基百科</a>上面寫得蠻清楚的。<br><span>$$Gx = \begin{vmatrix} 
+<p>這邊就不解釋 Sobel 的原理了，<a href="https://www.wikiwand.com/zh-tw/%E7%B4%A2%E8%B2%9D%E7%88%BE%E7%AE%97%E5%AD%90" target="_blank" rel="noopener">維基百科</a>上面寫得蠻清楚的。<br><span>$$Gx = \begin{vmatrix} 
 \mathbf{-1} &amp; \mathbf{0} &amp; \mathbf{1} \\
 \mathbf{-2} &amp; \mathbf{0} &amp; \mathbf{2} \\
 \mathbf{-1} &amp; \mathbf{0} &amp; \mathbf{1}
@@ -223,7 +223,7 @@ Gy = \begin{vmatrix}
 
 
 
-    <a data-url="http://kjj6198.github.io/2016/11/01/low-poly-art/" data-id="cjgtnxi510020g75t4nwktgte" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://kjj6198.github.io/2016/11/01/low-poly-art/" data-id="cjgxtnpdo0024sg5tz33ilpt2" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -384,6 +384,14 @@ Gy = \begin{vmatrix}
                 
                     <li>
                         <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/數學/">數學</a></p>
+                            <p class="item-title"><a href="/2018/05/08/birthday-paradox/" class="title">再談生日悖論（Birthday Paradox）</a></p>
+                            <p class="item-date"><time datetime="2018-05-08T15:15:33.000Z" itemprop="datePublished">2018-05-08</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/雜談/">雜談</a></p>
                             <p class="item-title"><a href="/2018/01/01/2017-yearly-review/" class="title">2017 年度總結</a></p>
                             <p class="item-date"><time datetime="2017-12-31T16:00:00.000Z" itemprop="datePublished">2018-01-01</time></p>
@@ -414,14 +422,6 @@ Gy = \begin{vmatrix}
                         </div>
                     </li>
                 
-                    <li>
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/nodejs/">nodejs</a></p>
-                            <p class="item-title"><a href="/2017/11/10/better-express-error/" class="title">Better Express error</a></p>
-                            <p class="item-date"><time datetime="2017-11-09T16:48:23.000Z" itemprop="datePublished">2017-11-10</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -432,7 +432,7 @@ Gy = \begin{vmatrix}
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">分類</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AWS/">AWS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/rails/">rails</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端週刊/">前端週刊</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日語學習/">日語學習</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/機器學習/">機器學習</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/演算法/">演算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/程式筆記/">程式筆記</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/讀書心得/">讀書心得</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/雜談/">雜談</a><span class="category-list-count">3</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AWS/">AWS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/rails/">rails</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端週刊/">前端週刊</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/數學/">數學</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日語學習/">日語學習</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/機器學習/">機器學習</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/演算法/">演算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/程式筆記/">程式筆記</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/讀書心得/">讀書心得</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/雜談/">雜談</a><span class="category-list-count">3</span></li></ul>
         </div>
     </div>
 
@@ -442,7 +442,7 @@ Gy = \begin{vmatrix}
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">歸檔</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">1</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -505,7 +505,7 @@ Gy = \begin{vmatrix}
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
