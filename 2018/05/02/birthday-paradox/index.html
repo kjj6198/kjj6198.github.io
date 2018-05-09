@@ -3,24 +3,24 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     
-    <title>欠・擬合 | UNder-fitting</title>
+    <title>再談生日悖論（Birthday Paradox） | 欠・擬合 | UNder-fitting</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
         <meta name="keywords" content="" />
     
-    <meta name="description" content="再談生日悖論（Birthday Paradox）前言生日悖論是個剛開始上統計學時，老師很喜歡拿來唬弄學生的招式。通常老師會徐徐從錢包拿出 100 元，並且問學生，在教室中有沒有兩個人同一天生日？ 直覺上，我們可能會以為機率很低。不過事實上只要超過 23 人，2 人同一天生日的機率就有 50% 以上。 一部分的原因是我們將問題「其中兩人同一天生日」與「其中有人跟你同一天生日」聯想在一起，但兩者的機率">
+    <meta name="description" content="前言生日悖論是個剛開始上統計學時，老師很喜歡拿來唬弄學生的招式。通常老師會徐徐從錢包拿出 100 元，並且問學生，在教室中有沒有兩個人同一天生日？ 直覺上，我們可能會以為機率很低。不過事實上只要超過 23 人，2 人同一天生日的機率就有 50% 以上。 一部分的原因是我們將問題「其中兩人同一天生日」與「其中有人跟你同一天生日」聯想在一起，但兩者的機率是完全不一樣的。 「其中有人跟自己同一天生日」的">
 <meta name="keywords" content="前端 工程師 程式 機器學習 frontend frontend redux rxjs">
 <meta property="og:type" content="article">
-<meta property="og:title" content="欠・擬合 | UNder-fitting">
-<meta property="og:url" content="http://kjj6198.github.io/2018/05/08/birthday-paradox/index.html">
+<meta property="og:title" content="再談生日悖論（Birthday Paradox）">
+<meta property="og:url" content="http://kjj6198.github.io/2018/05/02/birthday-paradox/index.html">
 <meta property="og:site_name" content="欠・擬合 | UNder-fitting">
-<meta property="og:description" content="再談生日悖論（Birthday Paradox）前言生日悖論是個剛開始上統計學時，老師很喜歡拿來唬弄學生的招式。通常老師會徐徐從錢包拿出 100 元，並且問學生，在教室中有沒有兩個人同一天生日？ 直覺上，我們可能會以為機率很低。不過事實上只要超過 23 人，2 人同一天生日的機率就有 50% 以上。 一部分的原因是我們將問題「其中兩人同一天生日」與「其中有人跟你同一天生日」聯想在一起，但兩者的機率">
+<meta property="og:description" content="前言生日悖論是個剛開始上統計學時，老師很喜歡拿來唬弄學生的招式。通常老師會徐徐從錢包拿出 100 元，並且問學生，在教室中有沒有兩個人同一天生日？ 直覺上，我們可能會以為機率很低。不過事實上只要超過 23 人，2 人同一天生日的機率就有 50% 以上。 一部分的原因是我們將問題「其中兩人同一天生日」與「其中有人跟你同一天生日」聯想在一起，但兩者的機率是完全不一樣的。 「其中有人跟自己同一天生日」的">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https://d2rkn6fj2nuekp.cloudfront.net/blog/WCM0004.png">
-<meta property="og:updated_time" content="2018-05-08T15:37:48.000Z">
+<meta property="og:updated_time" content="2018-05-09T15:54:09.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="欠・擬合 | UNder-fitting">
-<meta name="twitter:description" content="再談生日悖論（Birthday Paradox）前言生日悖論是個剛開始上統計學時，老師很喜歡拿來唬弄學生的招式。通常老師會徐徐從錢包拿出 100 元，並且問學生，在教室中有沒有兩個人同一天生日？ 直覺上，我們可能會以為機率很低。不過事實上只要超過 23 人，2 人同一天生日的機率就有 50% 以上。 一部分的原因是我們將問題「其中兩人同一天生日」與「其中有人跟你同一天生日」聯想在一起，但兩者的機率">
+<meta name="twitter:title" content="再談生日悖論（Birthday Paradox）">
+<meta name="twitter:description" content="前言生日悖論是個剛開始上統計學時，老師很喜歡拿來唬弄學生的招式。通常老師會徐徐從錢包拿出 100 元，並且問學生，在教室中有沒有兩個人同一天生日？ 直覺上，我們可能會以為機率很低。不過事實上只要超過 23 人，2 人同一天生日的機率就有 50% 以上。 一部分的原因是我們將問題「其中兩人同一天生日」與「其中有人跟你同一天生日」聯想在一起，但兩者的機率是完全不一樣的。 「其中有人跟自己同一天生日」的">
 <meta name="twitter:image" content="https://d2rkn6fj2nuekp.cloudfront.net/blog/WCM0004.png">
     
 
@@ -145,24 +145,34 @@ ga('send', 'pageview');
                         <div class="main-body-header">
     <h1 class="header">
     
-    未分類
+    <a class="page-title-link" href="/categories/雜談/">雜談</a>
     </h1>
 </div>
                         <div class="main-body-content">
                             <article id="post-birthday-paradox" class="article article-single article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        再談生日悖論（Birthday Paradox）
+        </h1>
+    
+
+            </header>
+        
         
             <div class="article-subtitle">
-                <a href="/2018/05/08/birthday-paradox/" class="article-date">
-    <time datetime="2018-05-08T15:15:33.000Z" itemprop="datePublished">2018-05-08</time>
+                <a href="/2018/05/02/birthday-paradox/" class="article-date">
+    <time datetime="2018-05-01T16:00:00.000Z" itemprop="datePublished">2018-05-02</time>
 </a>
                 
             </div>
         
         <div class="article-entry" itemprop="articleBody">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#再談生日悖論（Birthday-Paradox）"><span class="post-toc-number">1.</span> <span class="post-toc-text">再談生日悖論（Birthday Paradox）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#解法"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">解法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#補集"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">補集</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#結論"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">結論</span></a></li></ol></li></ol>
-            <h1 id="再談生日悖論（Birthday-Paradox）"><a href="#再談生日悖論（Birthday-Paradox）" class="headerlink" title="再談生日悖論（Birthday Paradox）"></a>再談生日悖論（Birthday Paradox）</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>生日悖論是個剛開始上統計學時，老師很喜歡拿來唬弄學生的招式。通常老師會徐徐從錢包拿出 100 元，並且問學生，在教室中有沒有兩個人同一天生日？</p>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#解法"><span class="post-toc-number">2.</span> <span class="post-toc-text">解法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#補集"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">補集</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#結論"><span class="post-toc-number">3.</span> <span class="post-toc-text">結論</span></a></li></ol>
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>生日悖論是個剛開始上統計學時，老師很喜歡拿來唬弄學生的招式。通常老師會徐徐從錢包拿出 100 元，並且問學生，在教室中有沒有兩個人同一天生日？</p>
 <p>直覺上，我們可能會以為機率很低。不過事實上只要超過 23 人，2 人同一天生日的機率就有 50% 以上。</p>
 <p>一部分的原因是我們將問題「其中兩人同一天生日」與「其中有人跟你同一天生日」聯想在一起，但兩者的機率是完全不一樣的。</p>
 <p>「其中有人跟自己同一天生日」的機率為 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mfrac><mrow><mn>1</mn></mrow><mrow><mn>3</mn><mn>6</mn><mn>5</mn></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{1}{365}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.845108em;"></span><span class="strut bottom" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="base textstyle uncramped"><span class="mord reset-textstyle textstyle uncramped"><span class="sizing reset-size5 size5 reset-textstyle textstyle uncramped nulldelimiter"></span><span class="mfrac"><span class="vlist"><span style="top:0.345em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord scriptstyle cramped"><span class="mord mathrm">3</span><span class="mord mathrm">6</span><span class="mord mathrm">5</span></span></span></span><span style="top:-0.22999999999999998em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle textstyle uncramped frac-line"></span></span><span style="top:-0.394em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle uncramped"><span class="mord scriptstyle uncramped"><span class="mord mathrm">1</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="sizing reset-size5 size5 reset-textstyle textstyle uncramped nulldelimiter"></span></span></span></span></span>，不過「其中兩人同一天生日」的話因為範圍變廣了，機率自然也會增加。不過仍然有些違反直覺，照理來說，應該是呈現線性成長的才對吧？但事實上只要超過某個值，這個機率就會快速上升，我們下面會談到。</p>
@@ -180,7 +190,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://kjj6198.github.io/2018/05/08/birthday-paradox/" data-id="cjgxuaj20000ht55t4fyjhxqu" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://kjj6198.github.io/2018/05/02/birthday-paradox/" data-id="cjgzab071000rbc5tldvxfpz1" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -331,9 +341,9 @@ ga('send', 'pageview');
                 
                     <li>
                         <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/05/08/birthday-paradox/" class="title"></a></p>
-                            <p class="item-date"><time datetime="2018-05-08T15:15:33.000Z" itemprop="datePublished">2018-05-08</time></p>
+                            <p class="item-category"><a class="article-category-link" href="/categories/雜談/">雜談</a></p>
+                            <p class="item-title"><a href="/2018/05/02/birthday-paradox/" class="title">再談生日悖論（Birthday Paradox）</a></p>
+                            <p class="item-date"><time datetime="2018-05-01T16:00:00.000Z" itemprop="datePublished">2018-05-02</time></p>
                         </div>
                     </li>
                 
@@ -379,7 +389,7 @@ ga('send', 'pageview');
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">分類</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AWS/">AWS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/rails/">rails</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端週刊/">前端週刊</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日語學習/">日語學習</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/機器學習/">機器學習</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/演算法/">演算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/程式筆記/">程式筆記</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/讀書心得/">讀書心得</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/雜談/">雜談</a><span class="category-list-count">3</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AWS/">AWS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/rails/">rails</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端週刊/">前端週刊</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日語學習/">日語學習</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/機器學習/">機器學習</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/演算法/">演算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/程式筆記/">程式筆記</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/讀書心得/">讀書心得</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/雜談/">雜談</a><span class="category-list-count">4</span></li></ul>
         </div>
     </div>
 
@@ -418,7 +428,7 @@ ga('send', 'pageview');
     var disqus_shortname = 'frontendclothesline';
     
     
-    var disqus_url = 'http://kjj6198.github.io/2018/05/08/birthday-paradox/';
+    var disqus_url = 'http://kjj6198.github.io/2018/05/02/birthday-paradox/';
     
     (function() {
     var dsq = document.createElement('script');
