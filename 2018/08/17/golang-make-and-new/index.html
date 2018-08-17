@@ -3,20 +3,23 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     
-    <title>標籤：: webGL | 欠・擬合 | UNder-fitting</title>
+    <title>欠・擬合 | UNder-fitting</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-    <meta name="description" content="Fun Driven Frontend Developer 最近的夢想是能夠光榮地回鄉工作。 interested in #frontend #react #redux #rxjs #japanese #machine-learning">
+        <meta name="keywords" content="" />
+    
+    <meta name="description" content="golang 筆記：make 與 new 的差別在 golang 有兩個保留字 make 與 new，也是剛開始學習 golang 的時候容易搞混的地方，這邊做個簡單的筆記。 newnew 可以用來初始化泛型，並且返回儲存位址。所以通常我們會用指標變數來接 new 過後的型別。特別要注意的是，new 會自動用 zeroed value 來初始化型別，也就是字串會是&amp;quot;&amp;quot;，numb">
 <meta name="keywords" content="前端 工程師 程式 機器學習 frontend frontend redux rxjs">
-<meta property="og:type" content="website">
+<meta property="og:type" content="article">
 <meta property="og:title" content="欠・擬合 | UNder-fitting">
-<meta property="og:url" content="http://kjj6198.github.io/tags/webGL/index.html">
+<meta property="og:url" content="http://kjj6198.github.io/2018/08/17/golang-make-and-new/index.html">
 <meta property="og:site_name" content="欠・擬合 | UNder-fitting">
-<meta property="og:description" content="Fun Driven Frontend Developer 最近的夢想是能夠光榮地回鄉工作。 interested in #frontend #react #redux #rxjs #japanese #machine-learning">
+<meta property="og:description" content="golang 筆記：make 與 new 的差別在 golang 有兩個保留字 make 與 new，也是剛開始學習 golang 的時候容易搞混的地方，這邊做個簡單的筆記。 newnew 可以用來初始化泛型，並且返回儲存位址。所以通常我們會用指標變數來接 new 過後的型別。特別要注意的是，new 會自動用 zeroed value 來初始化型別，也就是字串會是&amp;quot;&amp;quot;，numb">
 <meta property="og:locale" content="zh-TW">
+<meta property="og:updated_time" content="2018-08-17T15:04:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="欠・擬合 | UNder-fitting">
-<meta name="twitter:description" content="Fun Driven Frontend Developer 最近的夢想是能夠光榮地回鄉工作。 interested in #frontend #react #redux #rxjs #japanese #machine-learning">
+<meta name="twitter:description" content="golang 筆記：make 與 new 的差別在 golang 有兩個保留字 make 與 new，也是剛開始學習 golang 的時候容易搞混的地方，這邊做個簡單的筆記。 newnew 可以用來初始化泛型，並且返回儲存位址。所以通常我們會用指標變數來接 new 過後的型別。特別要注意的是，new 會自動用 zeroed value 來初始化型別，也就是字串會是&amp;quot;&amp;quot;，numb">
     
 
     
@@ -140,56 +143,120 @@ ga('send', 'pageview');
                         <div class="main-body-header">
     <h1 class="header">
     
-    <i class="icon fa fa-tag"></i>標籤：: <em>webGL</em>
+    未分類
     </h1>
 </div>
                         <div class="main-body-content">
-                            
-
-    
-    
+                            <article id="post-golang-make-and-new" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
         
         
-        <section class="archives-wrap">
-            <div class="archive-year-wrap">
-                <a href="/archives/2017" class="archive-year"><i class="icon fa fa-calendar-o"></i>2017</a>
+            <div class="article-subtitle">
+                <a href="/2018/08/17/golang-make-and-new/" class="article-date">
+    <time datetime="2018-08-17T15:03:53.000Z" itemprop="datePublished">2018-08-17</time>
+</a>
+                
             </div>
-            <div class="archives">
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        <div class="article-meta">
-            <p class="category">
-            <a class="article-category-link" href="/categories/前端/">前端</a>
-            </p>
-            <p class="date"><time datetime="2017-02-28T15:44:42.000Z" itemprop="datePublished">2017-02-28</time></p>
-        </div>
         
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2017/02/28/webgl-it/">IT 鐵人幫完賽心得</a>
-        </h1>
-    
+        <div class="article-entry" itemprop="articleBody">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#golang-筆記：make-與-new-的差別"><span class="post-toc-number">1.</span> <span class="post-toc-text">golang 筆記：make 與 new 的差別</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#new"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">new</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#make"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">make</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#結論"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">結論</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#更多閱讀"><span class="post-toc-number">1.3.0.1.</span> <span class="post-toc-text">更多閱讀</span></a></li></ol></li></ol></li></ol></li></ol>
+            <h1 id="golang-筆記：make-與-new-的差別"><a href="#golang-筆記：make-與-new-的差別" class="headerlink" title="golang 筆記：make 與 new 的差別"></a>golang 筆記：make 與 new 的差別</h1><p>在 golang 有兩個保留字 <code>make</code> 與 <code>new</code>，也是剛開始學習 golang 的時候容易搞混的地方，這邊做個簡單的筆記。</p>
+<h2 id="new"><a href="#new" class="headerlink" title="new"></a>new</h2><p>new 可以用來初始化泛型，<strong>並且返回儲存位址</strong>。所以通常我們會用指標變數來接 <code>new</code> 過後的型別。特別要注意的是，new 會自動用 zeroed value 來初始化型別，也就是字串會是<code>&quot;&quot;</code>，number 會是 <code>0</code>，channel, func, map, slice 等等則會是 <code>nil</code>。</p>
+<p>因為這個特性，如果我們對 map 做以下的操作的話，會出現 <code>panic: assignment to entry in nil map</code></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	people := <span class="built_in">new</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">string</span>)</span><br><span class="line">	p := *people</span><br><span class="line">	p[<span class="string">"name"</span>] = <span class="string">"Kalan"</span> <span class="comment">// panic: assignment to entry in nil map</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>因為初始化的 map 會是 nil map，不像其他的 primitive type 一樣有預設值。</p>
+<p>如果用 <code>struct</code> 做初始化，也可以直接用 <code>&amp;</code> 代表指向的位址，下面兩個寫法效果是一樣的：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Person <span class="keyword">struct</span> &#123;</span><br><span class="line">  Name <span class="keyword">string</span></span><br><span class="line">  Age  <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    p := &amp;Person&#123;&#125;</span><br><span class="line">    p := <span class="built_in">new</span>(Person)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>好處是上面的 <code>Person</code> 也可以根據自己想要傳入的值額外再做設定，但 new 則是全部的 field 都會直接塞 zeroed value。</p>
+<h2 id="make"><a href="#make" class="headerlink" title="make"></a>make</h2><p><code>make</code> 與 <code>new</code> 不同，是用來初始化一些特別的型別，像是 channel, map, slice 等等。另外特別要注意的是 <strong>make 並不會回傳指標</strong>，如果要拿到指標，就要考慮用像是 new 的方式來初始化型別。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    receiver := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">string</span>) <span class="comment">// 初始化 channel，但不回傳指標</span></span><br><span class="line">    person := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">string</span>)</span><br><span class="line">    people := <span class="built_in">make</span>([]<span class="keyword">string</span>, <span class="number">100</span>) <span class="comment">// 初始化長度為 100 的字串陣列</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>還是要再度強調一次，<strong>make 不會回傳指標！</strong>下面這段程式碼會噴錯：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	person := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">string</span>)</span><br><span class="line">	fmt.Println(*person) <span class="comment">// invalid indirect of person</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h2><p><code>make</code> 與 <code>new</code> 在剛開始學習 golang 時容易搞混，有時參數要傳入指標時也會一不小心就用 make 來傳，這時候知道這兩者的區別就相當重要。</p>
+<h4 id="更多閱讀"><a href="#更多閱讀" class="headerlink" title="更多閱讀"></a>更多閱讀</h4><ul>
+<li><a href="https://golang.org/doc/effective_go.html#allocation_make" target="_blank" rel="noopener">https://golang.org/doc/effective_go.html#allocation_make</a></li>
+<li><a href="https://golang.org/doc/effective_go.html#allocation_new" target="_blank" rel="noopener">https://golang.org/doc/effective_go.html#allocation_new</a></li>
+</ul>
 
-        <p class="article-excerpt">
-            連結
-今天是鐵人賽的最後一天，感覺自己最後結尾的部分收得不是很好，也有很多部分都因為時間上的關係沒有很完整地介紹完。
-挑戰 30 天連續發文的確是一件非常不容易的事情，自己也更了解到如果還有類似的機會，一定要事先做好準備才行，才不會突發狀況發生時，急就章地寫完文章結尾。
-同時，這次挑戰的主題是以前從來沒有碰過的 webGL 及 3D 圖學。原本以為前 10 天的學習能夠掌握基本的知識，不過實際上要...
-        </p>
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://kjj6198.github.io/2018/08/17/golang-make-and-new/" data-id="cjky4k155001c9m5tldd6mc5f" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
     </div>
 </article>
 
+    <section id="comments">
     
-        </div>
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
     
-
-
-    </div></section>
+    </section>
 
 
 
@@ -243,6 +310,19 @@ ga('send', 'pageview');
             
         </ul>
     </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2018/05/02/birthday-paradox/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">再談生日悖論（Birthday Paradox）</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
     
     <div class="widgets-container">
         
@@ -342,11 +422,13 @@ ga('send', 'pageview');
     var disqus_shortname = 'frontendclothesline';
     
     
+    var disqus_url = 'http://kjj6198.github.io/2018/08/17/golang-make-and-new/';
+    
     (function() {
     var dsq = document.createElement('script');
     dsq.type = 'text/javascript';
     dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
     </script>
