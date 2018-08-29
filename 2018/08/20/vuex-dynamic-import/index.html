@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    <title>透過 vuex 與 webpack dynamic import 動態載入 module | 欠・擬合 | UNder-fitting</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="webpack,vuex,vue" />
+    
+    <meta name="description" content="在最近的專案中用到 vue 來開發，而如果要管理比較複雜的資料流貨狀態，通常都是用 vuex 來當作 Single Truth of Source 的 store。在 vue 裡頭建立 store 時，都是把所有的 module 寫完後，再統一放到 vue 的 root 當中。 123456789101112export default new Vuex.Store(&amp;#123;  modules">
+<meta name="keywords" content="webpack,vuex,vue">
+<meta property="og:type" content="article">
+<meta property="og:title" content="透過 vuex 與 webpack dynamic import 動態載入 module">
+<meta property="og:url" content="http://kjj6198.github.io/2018/08/20/vuex-dynamic-import/index.html">
+<meta property="og:site_name" content="欠・擬合 | UNder-fitting">
+<meta property="og:description" content="在最近的專案中用到 vue 來開發，而如果要管理比較複雜的資料流貨狀態，通常都是用 vuex 來當作 Single Truth of Source 的 store。在 vue 裡頭建立 store 時，都是把所有的 module 寫完後，再統一放到 vue 的 root 當中。 123456789101112export default new Vuex.Store(&amp;#123;  modules">
+<meta property="og:locale" content="zh-TW">
+<meta property="og:updated_time" content="2018-08-29T12:34:27.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="透過 vuex 與 webpack dynamic import 動態載入 module">
+<meta name="twitter:description" content="在最近的專案中用到 vue 來開發，而如果要管理比較複雜的資料流貨狀態，通常都是用 vuex 來當作 Single Truth of Source 的 store。在 vue 裡頭建立 store 時，都是把所有的 module 寫完後，再統一放到 vue 的 root 當中。 123456789101112export default new Vuex.Store(&amp;#123;  modules">
+    
+
+    
+
+    
+        <link rel="icon" href="/imgs/favicon.ico" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-56408806-4', 'auto');
+ga('send', 'pageview');
+
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+    
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                      欠・擬合 | UNder-fitting
+                    </h1>
+                    <img src="https://pbs.twimg.com/profile_images/915528631065047040/5-Do3QWr_400x400.jpg" alt="" class="avatar">
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">Fun Driven Frontend Developer 最近的夢想是能夠光榮地回鄉工作。
+如果你也對日劇、機器學習、日文、前後端開發、React、程式、咖啡有興趣，或許我們可以聊聊
+</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">主頁</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://kjj6198.github.io/resume">關於</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://www.shurado.com?ref=blog">日語八百屋</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜尋" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要找..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '頁面',
+            CATEGORIES: '分類',
+            TAGS: '標籤',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/前端/">前端</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/前端/vue/">vue</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-vuex-dynamic-import" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        透過 vuex 與 webpack dynamic import 動態載入 module
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-subtitle">
+                <a href="/2018/08/20/vuex-dynamic-import/" class="article-date">
+    <time datetime="2018-08-19T16:00:00.000Z" itemprop="datePublished">2018-08-20</time>
+</a>
+                
+    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/">vue</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vuex/">vuex</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webpack/">webpack</a></li></ul>
+
+            </div>
+        
+        <div class="article-entry" itemprop="articleBody">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Webpack-Dynamic-Import"><span class="post-toc-number">1.</span> <span class="post-toc-text">Webpack Dynamic Import</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#引入時機"><span class="post-toc-number">2.</span> <span class="post-toc-text">引入時機</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#什麼時候引入-module？"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">什麼時候引入 module？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#有需要時再載入"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">有需要時再載入</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#錯誤處理"><span class="post-toc-number">3.</span> <span class="post-toc-text">錯誤處理</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#什麼時候要-unregister"><span class="post-toc-number">4.</span> <span class="post-toc-text">什麼時候要 unregister</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#其他"><span class="post-toc-number">5.</span> <span class="post-toc-text">其他</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#結論"><span class="post-toc-number">6.</span> <span class="post-toc-text">結論</span></a></li></ol>
+            <p>在最近的專案中用到 vue 來開發，而如果要管理比較複雜的資料流貨狀態，通常都是用 vuex 來當作 Single Truth of Source 的 store。在 vue 裡頭建立 store 時，都是把所有的 module 寫完後，再統一放到 vue 的 root 當中。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">  modules: &#123;</span><br><span class="line">    profile,</span><br><span class="line">    users,</span><br><span class="line">    menus,</span><br><span class="line">    list,</span><br><span class="line">    food,</span><br><span class="line">    product,</span><br><span class="line">    todo,</span><br><span class="line">    ...</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>這在一般的中小型專案中沒有什麼問題，不過一旦專案的架構變得越來越大，很容易讓 store 的資料結構變得越來越大且越來越複雜。而且 module 裡頭的 action, mutations 一多，難免會增加不少不必要的 bundle size，也不是所有的 module 都是在 app 初始化之後就要馬上使用到。關於這點 vue 透過了 webpack 的 dynamic import 機制<a href="https://vuejs.org/v2/guide/components-dynamic-async.html#Async-Components" target="_blank" rel="noopener">動態載入 component</a>。</p>
+<p>在 vuex 當中則可以透過 <code>store.registerModule</code> 的方式在有需要的時候才將 module 放進 store，有了這個 API，我們也可以搭配 webpack dynamic import 的機制來減少 bundle size，並且盡可能地讓所有的操作變得簡單，在 app 初始化的時候，我們也只需要放入必要的 module 即可。</p>
+<p>今天就來跟大家介紹如何透過 webpack dynamic import 的機制做到動態載入 module。</p>
+<h2 id="Webpack-Dynamic-Import"><a href="#Webpack-Dynamic-Import" class="headerlink" title="Webpack Dynamic Import"></a><a href="https://webpack.js.org/guides/code-splitting/#dynamic-imports" target="_blank" rel="noopener">Webpack Dynamic Import</a></h2><p>在開始之前，我們先來講講 webpack dynamic import 的機制。一般而言在 webpack 要做到 code splitting 的方法有</p>
+<ul>
+<li>設定多個 entry </li>
+<li>透過 SplitChunks 這個 plugin 來拆分出不同的 chunk</li>
+<li><strong>透過 dynamic import 的機制引入程式碼</strong></li>
+</ul>
+<p>如果我們要在 component 當中動態引入對應的 module 的話，最方便的方法應該是透過 dynamic import 的機制。它能夠讓 <code>import()</code> 變成一個 return Promise 的函數，在 webpack build 的時候，會自動把這些檔案拆分出來變成其他 chunks，例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span>(<span class="comment">/* webpackChunkName: "CreateMenu" */</span> <span class="string">'./pages/NewMenu.js'</span>),</span><br></pre></td></tr></table></figure>
+<p>在 webpack build 的時候會把 <code>CreateMenu.js</code> 拆出來變成一個 chunk。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Version: webpack 4.16.3</span><br><span class="line">Time: 112ms</span><br><span class="line">Built at: 2018-08-20 14:49:40</span><br><span class="line">                                   Asset       Size                        Chunks             Chunk Names</span><br><span class="line">                     Profile.c943bf21.js   32.7 KiB                       Profile  [emitted]  Profile</span><br></pre></td></tr></table></figure>
+<p>官方提供了撰寫 comment 的方式來決定 chunk name，在 debug 的時候比較清楚目前引入的是哪個 chunk。</p>
+<p><em>要搭配這個機制需要額外設定 babel 的 plugin <a href="https://babeljs.io/docs/plugins/syntax-dynamic-import/#installation" target="_blank" rel="noopener">Syntax Dynamic Import Babel Plugin</a>。</em></p>
+<p>知道了 webpack dynamic import 的使用方式後，我們來整合一下 vuex。</p>
+<h2 id="引入時機"><a href="#引入時機" class="headerlink" title="引入時機"></a>引入時機</h2><p>要透過動態引入 module 的方式，勢必要考慮幾個問題：</p>
+<ul>
+<li>在什麼時候引入 module？</li>
+<li>如果發生錯誤導致無法載入該如何處理？</li>
+</ul>
+<h3 id="什麼時候引入-module？"><a href="#什麼時候引入-module？" class="headerlink" title="什麼時候引入 module？"></a>什麼時候引入 module？</h3><p>當 component 可能需要 store 的狀態時載入（廢話）。所以我們可以這樣寫：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// component.vue</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    mounted() &#123;</span><br><span class="line">        <span class="keyword">import</span>(<span class="string">'./modules/menus'</span>).then(<span class="function"><span class="params">menus</span> =&gt;</span> <span class="keyword">this</span>.$store.registerModule(<span class="string">'menus'</span>, menus.default));</span><br><span class="line">    &#125;,</span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="comment">// your template</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>看起來很單純，不過很快就會遇到幾個問題：</p>
+<ul>
+<li>如果在 render 的時候還沒有載入完成，那麽當 template 當中取用 <code>menus</code> 的資料時，會因為 undefined 而整個爆炸</li>
+<li>如果在其他 component 已經載入過了，也會有錯誤 <code>duplicate getter key: menus</code></li>
+</ul>
+<p>為了修正以上的問題，我們稍微修改一下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// component.vue</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    data: <span class="function"><span class="params">()</span> =&gt;</span> (&#123;</span><br><span class="line">       loaded: <span class="literal">false</span> </span><br><span class="line">    &#125;),</span><br><span class="line">    mounted() &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.$store.state.menus) &#123;</span><br><span class="line">            <span class="keyword">import</span>(<span class="string">'./modules/menus'</span>).then(<span class="function"><span class="params">menus</span> =&gt;</span> &#123;</span><br><span class="line">                </span><br><span class="line">            	<span class="keyword">this</span>.$store.registerModule(<span class="string">'menus'</span>, menus.default);</span><br><span class="line">                <span class="keyword">this</span>.loaded = <span class="literal">true</span>;</span><br><span class="line">            &#125;);            </span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">this</span>.loaded = <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">return</span> loaded ? h() : <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>看其來確實好多了，不過在每個需要 store 資料的 component 當中都做重複的事難免有些麻煩，我們把它拆出來變成一個通用的 HOC component。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">export default function createMenuModule(Component, moduleName, dynamicModule) &#123;</span><br><span class="line">  return Vue.component(`dynamicModule-$&#123;Component.name || &apos;Component&apos;&#125;`, &#123;</span><br><span class="line">    data: () =&gt; (&#123;</span><br><span class="line">      isLoaded: false,</span><br><span class="line">    &#125;),</span><br><span class="line">    mounted() &#123;</span><br><span class="line">      if (this.$store.state[moduleName]) &#123;</span><br><span class="line">      	dynamicModule</span><br><span class="line">      	.then(module =&gt; this.$store.registerModule(moduleName, module.default)) // register module into store      </span><br><span class="line">	  &#125;</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    render(h) &#123;</span><br><span class="line">      return this.isLoaded ? (</span><br><span class="line">		&lt;Component &#123;...this.$props&#125; /&gt;</span><br><span class="line">      ) : null;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// MenuList.js</span><br><span class="line">export default createModule(MenuList, import(/* webpackChunkName: Menus */ &apos;./modules/menus&apos;)); // return a higher order vue component</span><br></pre></td></tr></table></figure>
+<p>這樣子一來，就可以安心地在有需要的時候引入對應的 module，而在 component 當中不需要每次都處理惱人的載入邏輯與處理。當然你也可以修改一下參數，讓這個 function 可以接收多個 module。當然要考慮的事情又變多了（怎麼做 module name mapping、多個 promise 處理等），但概念是類似的。</p>
+<h3 id="有需要時再載入"><a href="#有需要時再載入" class="headerlink" title="有需要時再載入"></a>有需要時再載入</h3><p>剛剛的範例中解決了我們前面提到的問題，不過仔細一看可以發現，如果我們直接將 <code>import()</code> 寫在參數裡頭，好像不管怎樣都一定會發送請求耶！如果<strong>可以先查看 store 裡頭有沒有對應的資料再決定要不要載入呢？</strong>。</p>
+<p>所以我們接下來要再修改一下函數，讓 store 可以當作參數傳遞。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">createMenuModule</span>(<span class="params">Component, moduleName, loader = (</span>) =&gt; <span class="title">Promise</span>.<span class="title">resolve</span>(<span class="params"></span>)) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> Vue.component(<span class="string">`dynamicModule-<span class="subst">$&#123;Component.name || <span class="string">'Component'</span>&#125;</span>`</span>, &#123;</span><br><span class="line">    data: <span class="function"><span class="params">()</span> =&gt;</span> (&#123;</span><br><span class="line">      isLoaded: <span class="literal">false</span>,</span><br><span class="line">    &#125;),</span><br><span class="line">    mounted() &#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">this</span>.$store.state[moduleName]) &#123;</span><br><span class="line">		loader()</span><br><span class="line">      	.then(<span class="function"><span class="params">module</span> =&gt;</span> <span class="keyword">this</span>.$store.registerModule(moduleName, <span class="built_in">module</span>.default)) <span class="comment">// register module into store      </span></span><br><span class="line">	  &#125;</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    render(h) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.isLoaded ? (</span><br><span class="line">		&lt;Component &#123;...this.$props&#125; /&gt;</span><br><span class="line">      ) : <span class="literal">null</span>;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// MenuList.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> createModule(MenuList, <span class="string">'menus'</span>, &#123;</span><br><span class="line">  loader: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'./modules/menus'</span>),</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>把最後一個參數當作 function 傳入就好了，當然也可以在 loader 上做更多處理（error handling, error logging, GA…），讓整個 component 更加穩固。如果要做得更仔細一點，第三個參數也可以傳入像是 timeout, LoadingComponent 的機制，讓這個 higher order function 更加實用。（不過大部分的情況下都是希望 module 越快載入越好）</p>
+<h2 id="錯誤處理"><a href="#錯誤處理" class="headerlink" title="錯誤處理"></a>錯誤處理</h2><p>雖然我們希望 promise 順利載入，天下太平。但實際上有太多因素會影響 module 的載入。大部分是網路不穩或中途離線等等，因此我們需要一個錯誤處理機制。</p>
+<p>在 mounted 的時候我們可以利用 catch 來處理錯誤，並且設定一個新的 data 來記錄 error 的資訊。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">createMenuModule</span>(<span class="params">Component, moduleName, loader = (</span>) =&gt; <span class="title">Promise</span>.<span class="title">resolve</span>(<span class="params"></span>)) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> Vue.component(<span class="string">`DynamicModule-<span class="subst">$&#123;Component.name || <span class="string">'Component'</span>&#125;</span>`</span>, &#123;</span><br><span class="line">    data: <span class="function"><span class="params">()</span> =&gt;</span> (&#123;</span><br><span class="line">      isLoaded: <span class="literal">false</span>,</span><br><span class="line">      error: <span class="literal">null</span>,</span><br><span class="line">    &#125;),</span><br><span class="line">    mounted() &#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">this</span>.$store.state[moduleName]) &#123;</span><br><span class="line">		loader()</span><br><span class="line">      	.then(<span class="function"><span class="params">module</span> =&gt;</span> <span class="keyword">this</span>.$store.registerModule(moduleName, <span class="built_in">module</span>.default)) <span class="comment">// register module into store</span></span><br><span class="line">        .catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">this</span>.error = err</span><br><span class="line">            sendToLoggingService(err);</span><br><span class="line">        &#125;)</span><br><span class="line">	  &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    render(h) &#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">this</span>.error) &#123;</span><br><span class="line">        <span class="keyword">return</span> h(<span class="string">'pre'</span>, <span class="keyword">this</span>.error);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.isLoaded ? (</span><br><span class="line">		&lt;Component &#123;...this.$props&#125; /&gt;</span><br><span class="line">      ) : <span class="literal">null</span>;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// MenuList.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> createModule(MenuList, <span class="string">'menus'</span>, &#123;</span><br><span class="line">  loader: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'./modules/menus'</span>),</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>當然也可以善用 vue 的 errorCaptured，或是實作一個 <code>ErrorBoundary</code> 元件來記錄這些資訊。</p>
+<h2 id="什麼時候要-unregister"><a href="#什麼時候要-unregister" class="headerlink" title="什麼時候要 unregister"></a>什麼時候要 unregister</h2><p>什麼時候要  unregister 呢？在前半段當中我們處理了載入的部分，但卸載的話並無法直接在 component unmount 實作，因為我們並不知道是否有其他元件有存取 store 的資料，所以除非是相當確信只會有單一元件使用，不然不要隨意 unregisterModule。</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>在 react 當中沒有那麼方便，不過有 <a href="https://github.com/jamiebuilds/react-loadable" target="_blank" rel="noopener">react-loadable</a> 可以用。但 redux 沒有類似 registerReducer 的 API，必須自己實作。如果有使用像是 redux-observable 或是 redux-saga（動態載入 epic 或是 saga） 的話，也可以透過類似的方式實作。</p>
+<h2 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h2><p>比起 react 與 redux，vue 的生態系當中對非同步載入的支援更好（更容易實作）。當然引入這樣的機制難免會提高 debug 的複雜度，雖然有效減少了 bundle size。但也要搭配各種機制才能讓整個 app 運行的更加穩固。</p>
+<p>本文試著提出在動態載入時可能遇到的問題以及解決方式，希望可以幫助到正為 bundle size 所苦的開發者們。</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://kjj6198.github.io/2018/08/20/vuex-dynamic-import/" data-id="cjlf4huvv0037rw5tskltzfu7" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>關注我 :</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="https://twitter.com/kalanyei" target="_blank">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://www.facebook.com/justkeiyi" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/kjj6198" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="linkedin" href="https://www.linkedin.com/in/%E6%84%B7%E5%A5%95-%E9%99%B3-8595b1128/" target="_blank">
+                        <i class="icon fa fa-linkedin"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="medium" href="https://medium.com/@Shurado" target="_blank">
+                        <i class="icon fa fa-medium"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2018/08/29/isaka-killer/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">下一篇</strong>
+        <p class="article-nav-title">
+        
+            瓢蟲 - 伊坂殺手系列第二作
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2018/08/15/golang-make-and-new/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">make 與 new 的差別</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="no-thumbnail">
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/讀書心得/">讀書心得</a></p>
+                            <p class="item-title"><a href="/2018/08/29/isaka-killer/" class="title">瓢蟲 - 伊坂殺手系列第二作</a></p>
+                            <p class="item-date"><time datetime="2018-08-28T16:24:39.000Z" itemprop="datePublished">2018-08-29</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/前端/vue/">vue</a></p>
+                            <p class="item-title"><a href="/2018/08/20/vuex-dynamic-import/" class="title">透過 vuex 與 webpack dynamic import 動態載入 module</a></p>
+                            <p class="item-date"><time datetime="2018-08-19T16:00:00.000Z" itemprop="datePublished">2018-08-20</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/golang/">golang</a></p>
+                            <p class="item-title"><a href="/2018/08/15/golang-make-and-new/" class="title">make 與 new 的差別</a></p>
+                            <p class="item-date"><time datetime="2018-08-15T10:00:00.000Z" itemprop="datePublished">2018-08-15</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/雜談/">雜談</a></p>
+                            <p class="item-title"><a href="/2018/05/02/birthday-paradox/" class="title">再談生日悖論（Birthday Paradox）</a></p>
+                            <p class="item-date"><time datetime="2018-05-01T16:00:00.000Z" itemprop="datePublished">2018-05-02</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/雜談/">雜談</a></p>
+                            <p class="item-title"><a href="/2018/01/01/2017-yearly-review/" class="title">2017 年度總結</a></p>
+                            <p class="item-date"><time datetime="2017-12-31T16:00:00.000Z" itemprop="datePublished">2018-01-01</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">分類</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AWS/">AWS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/golang/">golang</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/rails/">rails</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">19</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/前端/vue/">vue</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端週刊/">前端週刊</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日語學習/">日語學習</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/機器學習/">機器學習</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/演算法/">演算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/程式筆記/">程式筆記</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/讀書心得/">讀書心得</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/雜談/">雜談</a><span class="category-list-count">6</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">歸檔</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">六月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">二月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">一月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">十月 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">九月 2014</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit" style="text-align: center;">
+                <p>&copy; 2018 Kalan</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_shortname = 'frontendclothesline';
+    
+    
+    var disqus_url = 'http://kjj6198.github.io/2018/08/20/vuex-dynamic-import/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</body>
+</html>
