@@ -3,23 +3,23 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     
-    <title>weekly-6/6 | 欠・擬合 | UNder-fitting</title>
+    <title>web development 筆記 | 欠・擬合 | UNder-fitting</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-        <meta name="keywords" content="" />
+        <meta name="keywords" content="react,css,webpack" />
     
-    <meta name="description" content="這次介紹一下我建置 style guide 的過程以及心得。 工作內容 styleguide 建置 新的 ws_job_index search bar  Styleguide 真的很重要在建置的過程中，我們常常會忽略，「如果是別人，該如何快速懂得文件的內容」。所以在上以前的 view 當中，我其實都不太清楚。「啊！原來這個已經寫成 helper 了」「啊！這個已經寫成 class」的情況屢見不鮮">
-<meta name="keywords" content="前端 工程師 程式 機器學習 frontend frontend redux rxjs">
+    <meta name="description" content="這個禮拜在思考關於重構的東西，在前端還可以怎麼實踐。css 的部分已經有大致的雛形出來了，把相關的註解跟文件寫完之後再和大家分享心得。 Get your ../../ outreference css 部分重構完之後，再來就是要對 js 下手了。目前比較困擾的幾個點有：  component 初期的部分比較亂 有些 flux、有些 redux  再來是我認為最麻煩的，就是路徑管理的問題了，因為檔案">
+<meta name="keywords" content="react,css,webpack">
 <meta property="og:type" content="article">
-<meta property="og:title" content="weekly-6&#x2F;6">
-<meta property="og:url" content="http://kjj6198.github.io/2016/06/06/weekly-6-6/index.html">
+<meta property="og:title" content="web development 筆記">
+<meta property="og:url" content="http://kjj6198.github.io/2016/11/14/webdevelopment-note3/index.html">
 <meta property="og:site_name" content="欠・擬合 | UNder-fitting">
-<meta property="og:description" content="這次介紹一下我建置 style guide 的過程以及心得。 工作內容 styleguide 建置 新的 ws_job_index search bar  Styleguide 真的很重要在建置的過程中，我們常常會忽略，「如果是別人，該如何快速懂得文件的內容」。所以在上以前的 view 當中，我其實都不太清楚。「啊！原來這個已經寫成 helper 了」「啊！這個已經寫成 class」的情況屢見不鮮">
+<meta property="og:description" content="這個禮拜在思考關於重構的東西，在前端還可以怎麼實踐。css 的部分已經有大致的雛形出來了，把相關的註解跟文件寫完之後再和大家分享心得。 Get your ../../ outreference css 部分重構完之後，再來就是要對 js 下手了。目前比較困擾的幾個點有：  component 初期的部分比較亂 有些 flux、有些 redux  再來是我認為最麻煩的，就是路徑管理的問題了，因為檔案">
 <meta property="og:locale" content="zh-TW">
-<meta property="og:updated_time" content="2016-11-14T11:45:10.000Z">
+<meta property="og:updated_time" content="2018-08-29T14:37:46.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="weekly-6&#x2F;6">
-<meta name="twitter:description" content="這次介紹一下我建置 style guide 的過程以及心得。 工作內容 styleguide 建置 新的 ws_job_index search bar  Styleguide 真的很重要在建置的過程中，我們常常會忽略，「如果是別人，該如何快速懂得文件的內容」。所以在上以前的 view 當中，我其實都不太清楚。「啊！原來這個已經寫成 helper 了」「啊！這個已經寫成 class」的情況屢見不鮮">
+<meta name="twitter:title" content="web development 筆記">
+<meta name="twitter:description" content="這個禮拜在思考關於重構的東西，在前端還可以怎麼實踐。css 的部分已經有大致的雛形出來了，把相關的註解跟文件寫完之後再和大家分享心得。 Get your ../../ outreference css 部分重構完之後，再來就是要對 js 下手了。目前比較困擾的幾個點有：  component 初期的部分比較亂 有些 flux、有些 redux  再來是我認為最麻煩的，就是路徑管理的問題了，因為檔案">
     
 
     
@@ -147,14 +147,14 @@ ga('send', 'pageview');
     </h1>
 </div>
                         <div class="main-body-content">
-                            <article id="post-weekly-6-6" class="article article-single article-type-post" itemscope itemprop="blogPost">
+                            <article id="post-webdevelopment-note3" class="article article-single article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
             <header class="article-header">
                 
     
         <h1 class="article-title" itemprop="name">
-        weekly-6/6
+        web development 筆記
         </h1>
     
 
@@ -162,35 +162,49 @@ ga('send', 'pageview');
         
         
             <div class="article-subtitle">
-                <a href="/2016/06/06/weekly-6-6/" class="article-date">
-    <time datetime="2016-06-06T13:52:39.000Z" itemprop="datePublished">2016-06-06</time>
+                <a href="/2016/11/14/webdevelopment-note3/" class="article-date">
+    <time datetime="2016-11-13T16:00:00.000Z" itemprop="datePublished">2016-11-14</time>
 </a>
                 
+    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webpack/">webpack</a></li></ul>
+
             </div>
         
         <div class="article-entry" itemprop="articleBody">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#工作內容"><span class="post-toc-number">1.</span> <span class="post-toc-text">工作內容</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Styleguide-真的很重要"><span class="post-toc-number">2.</span> <span class="post-toc-text">Styleguide 真的很重要</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Helper-真的很好用"><span class="post-toc-number">3.</span> <span class="post-toc-text">Helper 真的很好用</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#關於-layout-的新想法："><span class="post-toc-number">4.</span> <span class="post-toc-text">關於 layout 的新想法：</span></a></li></ol>
-            <p>這次介紹一下我建置 style guide 的過程以及心得。</p>
-<h2 id="工作內容"><a href="#工作內容" class="headerlink" title="工作內容"></a>工作內容</h2><ol>
-<li>styleguide 建置</li>
-<li>新的 <code>ws_job_index</code> search bar</li>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Get-your-out"><span class="post-toc-number">1.</span> <span class="post-toc-text">Get your ../../ out</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#idiomatic-css"><span class="post-toc-number">2.</span> <span class="post-toc-text">idiomatic-css</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#code-smell-in-css"><span class="post-toc-number">3.</span> <span class="post-toc-text">code smell in css</span></a></li></ol>
+            <p>這個禮拜在思考關於重構的東西，在前端還可以怎麼實踐。css 的部分已經有大致的雛形出來了，把相關的註解跟文件寫完之後再和大家分享心得。</p>
+<h3 id="Get-your-out"><a href="#Get-your-out" class="headerlink" title="Get your ../../ out"></a>Get your <code>../../</code> out</h3><p><a href="http://davidboyne.co.uk/2016/04/29/react-webpack-gem.html" target="_blank" rel="noopener">reference</a></p>
+<p>css 部分重構完之後，再來就是要對 js 下手了。目前比較困擾的幾個點有：</p>
+<ol>
+<li>component 初期的部分比較亂</li>
+<li>有些 flux、有些 redux</li>
 </ol>
-<h2 id="Styleguide-真的很重要"><a href="#Styleguide-真的很重要" class="headerlink" title="Styleguide 真的很重要"></a>Styleguide 真的很重要</h2><p>在建置的過程中，我們常常會忽略，「如果是別人，該如何快速懂得文件的內容」。<br>所以在上以前的 view 當中，我其實都不太清楚。「啊！原來這個已經寫成 helper 了」「啊！這個已經寫成 class」的情況屢見不鮮，所以我在上新的版面過程中，都會盡量地以「之後的自己或別人也能看得懂」為原則。同時也會順手把以前的 code 跟文件統一整理。</p>
-<p>最陽春的 styleguide 只花了兩天就有了雛形了，這證明文件的建置並不是那麼困難。但是更重要的是 consistency，也就是持續更新這件事。</p>
-<p>而且透過寫文件的方式，其實 code 的概念很容易就讓別人懂，雖然無可避免地要花一些時間，但我認為這是蠻值得的投資。所以讓我們一起來 document driven 吧！</p>
-<p>接下來會介紹我在建置時發現的一些不錯的概念。</p>
-<h2 id="Helper-真的很好用"><a href="#Helper-真的很好用" class="headerlink" title="Helper 真的很好用"></a>Helper 真的很好用</h2><p>使用 helper 的方式，我們不僅可以快速套用 <code>rails</code> <code>ruby</code> 內建的方法，還可以讓 view 裡面的 HTML 碼大量減少，增加易讀性跟擴展性。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">%=</span> <span class="attr">ui_component</span>("<span class="attr">sudo_tags</span>", &#123;</span></span><br><span class="line"><span class="tag">	<span class="attr">:tags</span> =&gt;</span> "blabla"</span><br><span class="line">&#125;) %&gt;</span><br></pre></td></tr></table></figure>
-<p>這個 <code>ui_component</code> 的方法，其實是對 render 的進一步包裝：</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">ui_component</span> <span class="title">url</span>, <span class="title">options</span> = <span class="title">nil</span></span></span><br><span class="line">	render <span class="string">"components/<span class="subst">#&#123;url&#125;</span>"</span>, <span class="symbol">:locals</span> =&gt; options</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<p>雖然是簡單的方法包裝，但其實大量提升了可讀性，我們也可以拆分元件，統一放入 <code>component</code> 裡面管理。如果元件的構成很簡單，甚至還可利用 <code>content_tag</code> 來包裝。</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span>	<span class="title">button_generator</span> <span class="title">content</span>, <span class="title">options</span> = <span class="title">nil</span></span></span><br><span class="line">	btn_class = <span class="string">"btn "</span></span><br><span class="line">	options.merge(<span class="symbol">:class</span> =&gt; btn_class)</span><br><span class="line">  content_tag <span class="symbol">:button</span>, content, options</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<p>希望以後真的可以達到高度組件化，這樣就算是科科，也能簡單引用某個元件。</p>
-<h2 id="關於-layout-的新想法："><a href="#關於-layout-的新想法：" class="headerlink" title="關於 layout 的新想法："></a>關於 layout 的新想法：</h2><p>我實在非常不喜歡 grid，但實務上無可避免地還是會使用到。<br>那麼，有沒有比較折衷的辦法來維持可讀性，也就是所謂的 <code>layout</code> 與語意分離。</p>
-<p>還真的有，而且這個方法實作起來並不難。答案是善用 css 的 attribute selector</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">layout</span>=<span class="string">"col-3"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-attr">[layout^="col-*"]</span> &#123;</span><br><span class="line">  // your gird style</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>雖然看起來只是將 layout 拆至一個 attribute 裡面，但這樣至少不會看見 <code>col-3</code> 等 grid 的 rule 出現在 class 裡面。對我來說可讀性提高很多，但最理想的方式還是盡可能寫進 class    裡面吧！</p>
+<p>再來是我認為最麻煩的，就是路徑管理的問題了，因為檔案裡面有太多類似的 <code>../..</code> 出現，導致之後要對檔案做搬遷的時候還要全部重改一次，感覺非常的費工費時，也是讓人不敢輕易重構一大原因。</p>
+<p>那時候第一個想法是，「不然我把全部的檔案存成一張路由表好了。」，不是 import 檔案本身，而是每次要 import 時，都到這個路由表去拿路徑，不但方便，而且每次對檔案做搬遷時，我只要維護好這張路由表就了。不過這個想法還沒有實作過，所以可能不是好方法也說不定…。</p>
+<p>再來發現的第二個工具是<code>modulesDirectories</code>，主要是幫你把 root 定義好，每次呼叫 component 時都是以 root 當作起點而非檔案本身。</p>
+<p>以 sudo 的檔案為例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">require(&apos;../ui/comment_reply.js&apos;);</span><br><span class="line">import h from &apos;../utils/sudo_helper/dom.js&apos;;</span><br><span class="line">const actionList = &#123;</span><br><span class="line">	reply: &apos;reply&apos;,</span><br><span class="line">	edit: &apos;edit&apos;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">import jobsIndex from &apos;../reducers/pages/JobsIndex.js&apos;;</span><br><span class="line">import App from &apos;../containers/jobs_index.js&apos;;</span><br><span class="line">import configureStore from &apos;../stores/JobSearchStore.js&apos;;</span><br><span class="line"></span><br><span class="line">var Checkbox = require(&apos;../components/checkbox&apos;);</span><br><span class="line">var Slider = require(&apos;../components/slider.js&apos;);</span><br><span class="line">var TextInput = require(&apos;../components/text_input.js&apos;);</span><br></pre></td></tr></table></figure>
+<p>加入 <code>modulesDirectories</code> 之後，我們可以這樣寫：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">require(&apos;ui/comment_reply.js&apos;);</span><br><span class="line">import h from &apos;utils/sudo_helper/dom.js&apos;</span><br><span class="line"></span><br><span class="line">import jobIndex from &apos;reducers/pages/JobIndex&apos;;</span><br><span class="line">import App from &apos;containers/jobs_index&apos;;</span><br><span class="line">import configureStore from &apos;stores/JobSearchStore&apos;;</span><br></pre></td></tr></table></figure>
+<p>這樣 component 搬遷的時候，不會因為相對路徑改變的關係，而還要全部重寫一次，重構的意願也相對提高了。</p>
+<h3 id="idiomatic-css"><a href="#idiomatic-css" class="headerlink" title="idiomatic-css"></a><a href="https://github.com/necolas/idiomatic-css/tree/master/translations/zh-TW" target="_blank" rel="noopener">idiomatic-css</a></h3><p>最近一直在研究如何讓 css 的易讀性更高，並且更好做維護，目前如果搭配 webpack 的話，常見的方法有：</p>
+<ol>
+<li>css-module</li>
+<li>postCss</li>
+<li>radium</li>
+</ol>
+<p>這些工具搭配 react 一起使用，其實可以很有效地解決 namespace 的問題。</p>
+<p>不過主站目前想要先解決的是變數的統一命名，及 css 的規範。這部分規範好了之後，css 的管理相對也會變得簡單許多。</p>
+<h3 id="code-smell-in-css"><a href="#code-smell-in-css" class="headerlink" title="code smell in css"></a><a href="http://csswizardry.com/2012/11/code-smells-in-css/" target="_blank" rel="noopener">code smell in css</a></h3><p>這篇文章介紹了很多關於 css 的 <code>smell code</code>。幾個比較重要的大概念：</p>
+<ol>
+<li>避免 magic number</li>
+<li>盡量讓 class 是 immutable</li>
+<li>利用權重的技巧，而不是過度使用 important</li>
+<li>selector 盡量簡單</li>
+</ol>
+<p>順便來複習一下 <a href="http://www.w3schools.com/cssref/css_selectors.asp" target="_blank" rel="noopener">selector</a> 的語法吧！除了用 class 來當做 selector 之外還有很多其他實用的 selector 可以使用！<br>像是 input 就是一個非常好使用 attribute selector 的例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">.sudo-input &#123;</span><br><span class="line">  input[type=&quot;text&quot;] &#123;</span><br><span class="line">    // text style</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  input[type=&quot;submit&quot;] &#123;</span><br><span class="line">    // submit style</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  input[type=&quot;number&quot;] &#123;</span><br><span class="line">   // ...</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>這樣不僅語意清楚，也可以省下不必要的 class。</p>
 
         </div>
         <footer class="article-footer">
@@ -198,7 +212,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://kjj6198.github.io/2016/06/06/weekly-6-6/" data-id="cjlf4huvz003erw5tsmnixuqb" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://kjj6198.github.io/2016/11/14/webdevelopment-note3/" data-id="cjlf8zqkp003itj5tk0y9b0lq" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -328,20 +342,20 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/2016/06/11/2016-g0v-summit/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/2016/11/14/css-variable/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">下一篇</strong>
         <p class="article-nav-title">
         
-            2016 g0v summit 心得
+            css variable + sass variable = 😍
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
     </a>
     
     
-        <a href="/2016/05/29/weekly-thought-5-29/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2016/11/01/low-poly-art/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">上一篇</strong>
-        <p class="article-nav-title">weekly-thought-5/29</p>
+        <p class="article-nav-title">用 Canvas 實作 low-poly art 心得</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -407,7 +421,7 @@ ga('send', 'pageview');
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">分類</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AWS/">AWS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/golang/">golang</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/rails/">rails</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">19</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/前端/vue/">vue</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端週刊/">前端週刊</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日語學習/">日語學習</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/機器學習/">機器學習</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/演算法/">演算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/程式筆記/">程式筆記</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/讀書心得/">讀書心得</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/雜談/">雜談</a><span class="category-list-count">6</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AWS/">AWS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/golang/">golang</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/rails/">rails</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">21</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/前端/vue/">vue</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端週刊/">前端週刊</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日語學習/">日語學習</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/機器學習/">機器學習</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/演算法/">演算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/程式筆記/">程式筆記</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/讀書心得/">讀書心得</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/雜談/">雜談</a><span class="category-list-count">6</span></li></ul>
         </div>
     </div>
 
@@ -446,7 +460,7 @@ ga('send', 'pageview');
     var disqus_shortname = 'frontendclothesline';
     
     
-    var disqus_url = 'http://kjj6198.github.io/2016/06/06/weekly-6-6/';
+    var disqus_url = 'http://kjj6198.github.io/2016/11/14/webdevelopment-note3/';
     
     (function() {
     var dsq = document.createElement('script');

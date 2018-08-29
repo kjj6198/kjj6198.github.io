@@ -3,23 +3,23 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     
-    <title>frontend collection - 5/23 | 欠・擬合 | UNder-fitting</title>
+    <title>javascript 筆記 | 欠・擬合 | UNder-fitting</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-        <meta name="keywords" content="react,webpack" />
+        <meta name="keywords" content="sudo週刊" />
     
-    <meta name="description" content="這禮拜發現的新東西這個禮拜在思考關於重構的東西，在前端還可以怎麼實踐。css 的部分已經有大致的雛形出來了，把相關的註解跟文件寫完之後再和大家分享心得。 Get your ../../ outreference css 部分重構完之後，再來就是要對 js 下手了。目前比較困擾的幾個點有：  component 初期的部分比較亂 有些 flux、有些 redux  再來是我認為最麻煩的，就是路徑管理">
-<meta name="keywords" content="react,webpack">
+    <meta name="description" content="別跟我說你懂 margin拿捏 margin 跟 padding 可以很容易地看出前端工程師對 CSS 的掌握程度。說真的超多眉眉角角的，不過看完文章發現原來 margin 的妙用這麼多。以後的實踐或許有比較容易的方法也說不定！ MutationObserver這個鮮為人知的 API，被喜歡翻 MSDN 的我挖掘到了，基本上已經支持目前主流的瀏覽器（IE11+)。 看完介紹會發現他很像事件，專門給">
+<meta name="keywords" content="sudo週刊">
 <meta property="og:type" content="article">
-<meta property="og:title" content="frontend collection - 5&#x2F;23">
-<meta property="og:url" content="http://kjj6198.github.io/2016/11/14/frontend-weekly/index.html">
+<meta property="og:title" content="javascript 筆記">
+<meta property="og:url" content="http://kjj6198.github.io/2016/07/17/javascript-note2/index.html">
 <meta property="og:site_name" content="欠・擬合 | UNder-fitting">
-<meta property="og:description" content="這禮拜發現的新東西這個禮拜在思考關於重構的東西，在前端還可以怎麼實踐。css 的部分已經有大致的雛形出來了，把相關的註解跟文件寫完之後再和大家分享心得。 Get your ../../ outreference css 部分重構完之後，再來就是要對 js 下手了。目前比較困擾的幾個點有：  component 初期的部分比較亂 有些 flux、有些 redux  再來是我認為最麻煩的，就是路徑管理">
+<meta property="og:description" content="別跟我說你懂 margin拿捏 margin 跟 padding 可以很容易地看出前端工程師對 CSS 的掌握程度。說真的超多眉眉角角的，不過看完文章發現原來 margin 的妙用這麼多。以後的實踐或許有比較容易的方法也說不定！ MutationObserver這個鮮為人知的 API，被喜歡翻 MSDN 的我挖掘到了，基本上已經支持目前主流的瀏覽器（IE11+)。 看完介紹會發現他很像事件，專門給">
 <meta property="og:locale" content="zh-TW">
-<meta property="og:updated_time" content="2017-02-19T11:16:55.000Z">
+<meta property="og:updated_time" content="2018-08-29T14:33:53.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="frontend collection - 5&#x2F;23">
-<meta name="twitter:description" content="這禮拜發現的新東西這個禮拜在思考關於重構的東西，在前端還可以怎麼實踐。css 的部分已經有大致的雛形出來了，把相關的註解跟文件寫完之後再和大家分享心得。 Get your ../../ outreference css 部分重構完之後，再來就是要對 js 下手了。目前比較困擾的幾個點有：  component 初期的部分比較亂 有些 flux、有些 redux  再來是我認為最麻煩的，就是路徑管理">
+<meta name="twitter:title" content="javascript 筆記">
+<meta name="twitter:description" content="別跟我說你懂 margin拿捏 margin 跟 padding 可以很容易地看出前端工程師對 CSS 的掌握程度。說真的超多眉眉角角的，不過看完文章發現原來 margin 的妙用這麼多。以後的實踐或許有比較容易的方法也說不定！ MutationObserver這個鮮為人知的 API，被喜歡翻 MSDN 的我挖掘到了，基本上已經支持目前主流的瀏覽器（IE11+)。 看完介紹會發現他很像事件，專門給">
     
 
     
@@ -147,14 +147,14 @@ ga('send', 'pageview');
     </h1>
 </div>
                         <div class="main-body-content">
-                            <article id="post-frontend-weekly" class="article article-single article-type-post" itemscope itemprop="blogPost">
+                            <article id="post-javascript-note2" class="article article-single article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
             <header class="article-header">
                 
     
         <h1 class="article-title" itemprop="name">
-        frontend collection - 5/23
+        javascript 筆記
         </h1>
     
 
@@ -162,49 +162,39 @@ ga('send', 'pageview');
         
         
             <div class="article-subtitle">
-                <a href="/2016/11/14/frontend-weekly/" class="article-date">
-    <time datetime="2016-11-14T11:45:21.000Z" itemprop="datePublished">2016-11-14</time>
+                <a href="/2016/07/17/javascript-note2/" class="article-date">
+    <time datetime="2016-07-17T01:48:34.000Z" itemprop="datePublished">2016-07-17</time>
 </a>
                 
-    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webpack/">webpack</a></li></ul>
+    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sudo週刊/">sudo週刊</a></li></ul>
 
             </div>
         
         <div class="article-entry" itemprop="articleBody">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#這禮拜發現的新東西"><span class="post-toc-number">1.</span> <span class="post-toc-text">這禮拜發現的新東西</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Get-your-out"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Get your ../../ out</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#idiomatic-css"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">idiomatic-css</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#code-smell-in-css"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">code smell in css</span></a></li></ol></li></ol>
-            <h2 id="這禮拜發現的新東西"><a href="#這禮拜發現的新東西" class="headerlink" title="這禮拜發現的新東西"></a>這禮拜發現的新東西</h2><p>這個禮拜在思考關於重構的東西，在前端還可以怎麼實踐。css 的部分已經有大致的雛形出來了，把相關的註解跟文件寫完之後再和大家分享心得。</p>
-<h3 id="Get-your-out"><a href="#Get-your-out" class="headerlink" title="Get your ../../ out"></a>Get your <code>../../</code> out</h3><p><a href="http://davidboyne.co.uk/2016/04/29/react-webpack-gem.html" target="_blank" rel="noopener">reference</a></p>
-<p>css 部分重構完之後，再來就是要對 js 下手了。目前比較困擾的幾個點有：</p>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#別跟我說你懂-margin"><span class="post-toc-number">1.</span> <span class="post-toc-text">別跟我說你懂 margin</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#MutationObserver"><span class="post-toc-number">2.</span> <span class="post-toc-text">MutationObserver</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#astrum"><span class="post-toc-number">3.</span> <span class="post-toc-text">astrum</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#新的問題"><span class="post-toc-number">4.</span> <span class="post-toc-text">新的問題</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#SudoDashboard"><span class="post-toc-number">5.</span> <span class="post-toc-text">SudoDashboard</span></a></li></ol>
+            <h3 id="別跟我說你懂-margin"><a href="#別跟我說你懂-margin" class="headerlink" title="別跟我說你懂 margin"></a><a href="http://www.hicss.net/do-not-tell-me-you-understand-margin/" target="_blank" rel="noopener">別跟我說你懂 margin</a></h3><p>拿捏 margin 跟 padding 可以很容易地看出前端工程師對 CSS 的掌握程度。說真的超多眉眉角角的，不過看完文章發現原來 margin 的妙用這麼多。以後的實踐或許有比較容易的方法也說不定！</p>
+<h3 id="MutationObserver"><a href="#MutationObserver" class="headerlink" title="MutationObserver"></a><a href="http://javascript.ruanyifeng.com/dom/mutationobserver.html" target="_blank" rel="noopener">MutationObserver</a></h3><p>這個鮮為人知的 API，被喜歡翻 MSDN 的我挖掘到了，基本上已經支持目前主流的瀏覽器（IE11+)。</p>
+<p>看完介紹會發現他很像事件，專門給 DOM 的變化使用的，不過不同的是，一般的事件是同步的，而 MutationObserver 是<strong>非同步</strong>的。</p>
+<p>這可以幫助我們在 DOM 有變化的時候，做出相對應的反應。</p>
+<p>利用這個特性，我們可以達到以下幾個應用：</p>
 <ol>
-<li>component 初期的部分比較亂</li>
-<li>有些 flux、有些 redux</li>
+<li>lazy loading</li>
+<li>initialize</li>
 </ol>
-<p>再來是我認為最麻煩的，就是路徑管理的問題了，因為檔案裡面有太多類似的 <code>../..</code> 出現，導致之後要對檔案做搬遷的時候還要全部重改一次，感覺非常的費工費時，也是讓人不敢輕易重構一大原因。</p>
-<p>那時候第一個想法是，「不然我把全部的檔案存成一張路由表好了。」，不是 import 檔案本身，而是每次要 import 時，都到這個路由表去拿路徑，不但方便，而且每次對檔案做搬遷時，我只要維護好這張路由表就了。不過這個想法還沒有實作過，所以可能不是好方法也說不定…。</p>
-<p>再來發現的第二個工具是<code>modulesDirectories</code>，主要是幫你把 root 定義好，每次呼叫 component 時都是以 root 當作起點而非檔案本身。</p>
-<p>以 sudo 的檔案為例</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">'../ui/comment_reply.js'</span>);</span><br><span class="line"><span class="keyword">import</span> h <span class="keyword">from</span> <span class="string">'../utils/sudo_helper/dom.js'</span>;</span><br><span class="line"><span class="keyword">const</span> actionList = &#123;</span><br><span class="line">	reply: <span class="string">'reply'</span>,</span><br><span class="line">	edit: <span class="string">'edit'</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> jobsIndex <span class="keyword">from</span> <span class="string">'../reducers/pages/JobsIndex.js'</span>;</span><br><span class="line"><span class="keyword">import</span> App <span class="keyword">from</span> <span class="string">'../containers/jobs_index.js'</span>;</span><br><span class="line"><span class="keyword">import</span> configureStore <span class="keyword">from</span> <span class="string">'../stores/JobSearchStore.js'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> Checkbox = <span class="built_in">require</span>(<span class="string">'../components/checkbox'</span>);</span><br><span class="line"><span class="keyword">var</span> Slider = <span class="built_in">require</span>(<span class="string">'../components/slider.js'</span>);</span><br><span class="line"><span class="keyword">var</span> TextInput = <span class="built_in">require</span>(<span class="string">'../components/text_input.js'</span>);</span><br></pre></td></tr></table></figure>
-<p> 加入 <code>modulesDirectories</code> 之後，我們可以這樣寫：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">'ui/comment_reply.js'</span>);</span><br><span class="line"><span class="keyword">import</span> h <span class="keyword">from</span> <span class="string">'utils/sudo_helper/dom.js'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> jobIndex <span class="keyword">from</span> <span class="string">'reducers/pages/JobIndex'</span>;</span><br><span class="line"><span class="keyword">import</span> App <span class="keyword">from</span> <span class="string">'containers/jobs_index'</span>;</span><br><span class="line"><span class="keyword">import</span> configureStore <span class="keyword">from</span> <span class="string">'stores/JobSearchStore'</span>;</span><br></pre></td></tr></table></figure>
-<p>這樣 component 搬遷的時候，不會因為相對路徑改變的關係，而還要全部重寫一次，重構的意願也相對提高了。</p>
-<h3 id="idiomatic-css"><a href="#idiomatic-css" class="headerlink" title="idiomatic-css"></a><a href="https://github.com/necolas/idiomatic-css/tree/master/translations/zh-TW" target="_blank" rel="noopener">idiomatic-css</a></h3><p>最近一直在研究如何讓 css 的易讀性更高，並且更好做維護，目前如果搭配 webpack 的話，常見的方法有：</p>
+<p>因為在 HTML 實際被 render 之前，DOM 就已經先下載下來了，所以我們可以在 rendering 之前就改變 DOM 的內容。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> observer =  <span class="keyword">new</span>  MutationObserver ( <span class="function"><span class="keyword">function</span> (<span class="params"> mutations </span>)</span>&#123; </span><br><span class="line">  <span class="keyword">for</span>  ( <span class="keyword">var</span> i = <span class="number">0</span> ; i &lt; mutations . length ; i ++)&#123; </span><br><span class="line">    <span class="keyword">for</span>  ( <span class="keyword">var</span> j = <span class="number">0</span> ; j &lt; mutations [ i ]. addedNodes . length ; j ++ )&#123; </span><br><span class="line">      lazyLoad ( mutations [ i ]. addedNodes [ j ]); </span><br><span class="line">    &#125; </span><br><span class="line">  &#125; </span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">observer . observe ( <span class="built_in">document</span> . documentElement ,  &#123; </span><br><span class="line">  childList :  <span class="literal">true</span> , </span><br><span class="line">  subtree :  <span class="literal">true</span> </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="astrum"><a href="#astrum" class="headerlink" title="astrum"></a><a href="http://astrum.nodividestudio.com/" target="_blank" rel="noopener">astrum</a></h3><p>這是一個很炫砲的 style guide library。做得非常精緻。<br>最近像這些 styleguide 的 library 一直推陳出新，其實就像潘大所說的。寫文件是好的，但是一定要評估成本、其他人的熟悉成本、要建構的時間等等，不能只是因為又潮又炫就自己跳下去自幹。而是要讓寫文件這件事情逐漸被引入。</p>
+<p>不過當作 side project 或是自己想玩玩看就另當別論了。</p>
+<h3 id="新的問題"><a href="#新的問題" class="headerlink" title="新的問題"></a>新的問題</h3><p>每個框架都是為了解決某個問題而出現的。但使用了某個框架之後，好像逐漸又會萌生新的問題。我把一些自己在開發上常會碰到的問題整理了一下：</p>
 <ol>
-<li>css-module</li>
-<li>postCss</li>
-<li>radium</li>
+<li>文件切換</li>
 </ol>
-<p>這些工具搭配 react 一起使用，其實可以很有效地解決 namespace 的問題。</p>
-<p>不過主站目前想要先解決的是變數的統一命名，及 css 的規範。這部分規範好了之後，css 的管理相對也會變得簡單許多。</p>
-<h3 id="code-smell-in-css"><a href="#code-smell-in-css" class="headerlink" title="code smell in css"></a><a href="http://csswizardry.com/2012/11/code-smells-in-css/" target="_blank" rel="noopener">code smell in css</a></h3><p>這篇文章介紹了很多關於 css 的 <code>smell code</code>。幾個比較重要的大概念：</p>
-<ol>
-<li>避免 magic number</li>
-<li>盡量讓 class 是 immutable</li>
-<li>利用權重的技巧，而不是過度使用 important</li>
-<li>selector 盡量簡單</li>
+<p>我覺得很麻煩的一點就是要一直在 component 之間跳來跳去，有時候還要切過去看看 action, reducer 之類的，久了很容易阻礙思考。</p>
+<ol start="2">
+<li>Webpack 打包過慢</li>
 </ol>
-<p>順便來複習一下 <a href="http://www.w3schools.com/cssref/css_selectors.asp" target="_blank" rel="noopener">selector</a> 的語法吧！除了用 class 來當做 selector 之外還有很多其他實用的 selector 可以使用！<br>像是 input 就是一個非常好使用 attribute selector 的例子：</p>
-<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.sudo-input</span> &#123;</span><br><span class="line">  <span class="selector-tag">input</span><span class="selector-attr">[type="text"]</span> &#123;</span><br><span class="line">    <span class="comment">// text style</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="selector-tag">input</span><span class="selector-attr">[type="submit"]</span> &#123;</span><br><span class="line">    <span class="comment">// submit style</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="selector-tag">input</span><span class="selector-attr">[type="number"]</span> &#123;</span><br><span class="line">   <span class="comment">// ...</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>這樣不僅語意清楚，也可以省下不必要的 class。</p>
+<p>要 bundle 的檔案越來越多，webpack 逐漸變得沒有那麼快了。每次寫完 code 還要等他 bundle，而且每次更新都會 reload 一次，說真的還挺麻煩的。</p>
+<h3 id="SudoDashboard"><a href="#SudoDashboard" class="headerlink" title="SudoDashboard"></a>SudoDashboard</h3><p>其實只是想練習 dashboard 的 UI 跟 Websocket 的實作。不過感覺做起來還蠻實用的，最近空閒的時候應該會開始組織一下。還請潘大多多擔任設計指導。</p>
 
         </div>
         <footer class="article-footer">
@@ -212,7 +202,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://kjj6198.github.io/2016/11/14/frontend-weekly/" data-id="cjlf4huuj001brw5tzumhcjbq" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://kjj6198.github.io/2016/07/17/javascript-note2/" data-id="cjlf8zqju0022tj5ttee2wt4w" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -342,20 +332,20 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/2016/11/14/weekly-thought-5-30/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/2016/07/31/javascript-note3/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">下一篇</strong>
         <p class="article-nav-title">
         
-            weekly-thought-5/30
+            webdevelopment 筆記
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
     </a>
     
     
-        <a href="/2016/11/14/css-variable/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2016/06/14/legacy-code2/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">上一篇</strong>
-        <p class="article-nav-title">css variable + sass variable = 😍</p>
+        <p class="article-nav-title">如何從 legacy code 中尋找出口（中）- CSS 篇</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -421,7 +411,7 @@ ga('send', 'pageview');
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">分類</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AWS/">AWS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/golang/">golang</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/rails/">rails</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">19</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/前端/vue/">vue</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端週刊/">前端週刊</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日語學習/">日語學習</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/機器學習/">機器學習</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/演算法/">演算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/程式筆記/">程式筆記</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/讀書心得/">讀書心得</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/雜談/">雜談</a><span class="category-list-count">6</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AWS/">AWS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/golang/">golang</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/rails/">rails</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">21</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/前端/vue/">vue</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端週刊/">前端週刊</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日語學習/">日語學習</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/機器學習/">機器學習</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/演算法/">演算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/程式筆記/">程式筆記</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/讀書心得/">讀書心得</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/雜談/">雜談</a><span class="category-list-count">6</span></li></ul>
         </div>
     </div>
 
@@ -460,7 +450,7 @@ ga('send', 'pageview');
     var disqus_shortname = 'frontendclothesline';
     
     
-    var disqus_url = 'http://kjj6198.github.io/2016/11/14/frontend-weekly/';
+    var disqus_url = 'http://kjj6198.github.io/2016/07/17/javascript-note2/';
     
     (function() {
     var dsq = document.createElement('script');

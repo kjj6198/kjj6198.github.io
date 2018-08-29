@@ -3,7 +3,7 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     
-    <title>weekly-thought-5/30 | 欠・擬合 | UNder-fitting</title>
+    <title>javascript 筆記 | 欠・擬合 | UNder-fitting</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
         <meta name="keywords" content="css,javascript,html" />
@@ -11,14 +11,14 @@
     <meta name="description" content="這個禮拜不談「新」東西，多數會是關於網頁開發的重新思考。算是回過頭來漸漸補齊自己的技術債吧！比起前幾個禮拜所談的新東西，這一篇文章可能相對枯燥一點，當然篇幅也會比較長，但我認為這是必要的。 這些東西在前端變化快速的時代下或許顯得不那麼重要，不過思考總是件好事。 語義化標籤重新思考語義化這件事會有這個想法，是看到 instant article 的 html 架構，他們規範 instant arti">
 <meta name="keywords" content="css,javascript,html">
 <meta property="og:type" content="article">
-<meta property="og:title" content="weekly-thought-5&#x2F;30">
-<meta property="og:url" content="http://kjj6198.github.io/2016/11/14/weekly-thought-5-30/index.html">
+<meta property="og:title" content="javascript 筆記">
+<meta property="og:url" content="http://kjj6198.github.io/2016/11/14/javascript-note/index.html">
 <meta property="og:site_name" content="欠・擬合 | UNder-fitting">
 <meta property="og:description" content="這個禮拜不談「新」東西，多數會是關於網頁開發的重新思考。算是回過頭來漸漸補齊自己的技術債吧！比起前幾個禮拜所談的新東西，這一篇文章可能相對枯燥一點，當然篇幅也會比較長，但我認為這是必要的。 這些東西在前端變化快速的時代下或許顯得不那麼重要，不過思考總是件好事。 語義化標籤重新思考語義化這件事會有這個想法，是看到 instant article 的 html 架構，他們規範 instant arti">
 <meta property="og:locale" content="zh-TW">
-<meta property="og:updated_time" content="2016-11-14T11:51:39.000Z">
+<meta property="og:updated_time" content="2018-08-29T14:33:08.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="weekly-thought-5&#x2F;30">
+<meta name="twitter:title" content="javascript 筆記">
 <meta name="twitter:description" content="這個禮拜不談「新」東西，多數會是關於網頁開發的重新思考。算是回過頭來漸漸補齊自己的技術債吧！比起前幾個禮拜所談的新東西，這一篇文章可能相對枯燥一點，當然篇幅也會比較長，但我認為這是必要的。 這些東西在前端變化快速的時代下或許顯得不那麼重要，不過思考總是件好事。 語義化標籤重新思考語義化這件事會有這個想法，是看到 instant article 的 html 架構，他們規範 instant arti">
     
 
@@ -147,14 +147,14 @@ ga('send', 'pageview');
     </h1>
 </div>
                         <div class="main-body-content">
-                            <article id="post-weekly-thought-5-30" class="article article-single article-type-post" itemscope itemprop="blogPost">
+                            <article id="post-javascript-note" class="article article-single article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
             <header class="article-header">
                 
     
         <h1 class="article-title" itemprop="name">
-        weekly-thought-5/30
+        javascript 筆記
         </h1>
     
 
@@ -162,7 +162,7 @@ ga('send', 'pageview');
         
         
             <div class="article-subtitle">
-                <a href="/2016/11/14/weekly-thought-5-30/" class="article-date">
+                <a href="/2016/11/14/javascript-note/" class="article-date">
     <time datetime="2016-11-14T11:51:39.000Z" itemprop="datePublished">2016-11-14</time>
 </a>
                 
@@ -171,7 +171,7 @@ ga('send', 'pageview');
             </div>
         
         <div class="article-entry" itemprop="articleBody">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#語義化標籤"><span class="post-toc-number">1.</span> <span class="post-toc-text">語義化標籤</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#重新思考語義化這件事"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">重新思考語義化這件事</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#對於-class-的思考"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">對於 class 的思考</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#grid-system-是個很棒的東西耶！"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">grid system 是個很棒的東西耶！</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Page-Visibility-API"><span class="post-toc-number">2.</span> <span class="post-toc-text">Page Visibility API</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#回頭看看-js-的事件傳播"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">回頭看看 js 的事件傳播</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#js-事件傳播"><span class="post-toc-number">2.1.1.</span> <span class="post-toc-text">js 事件傳播</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#事件取消"><span class="post-toc-number">2.1.2.</span> <span class="post-toc-text">事件取消</span></a></li></ol></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#語義化標籤"><span class="post-toc-number">1.</span> <span class="post-toc-text">語義化標籤</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#重新思考語義化這件事"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">重新思考語義化這件事</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#對於-class-的思考"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">對於 class 的思考</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#grid-system-是個很棒的東西"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">grid system 是個很棒的東西</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Page-Visibility-API"><span class="post-toc-number">2.</span> <span class="post-toc-text">Page Visibility API</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#回頭看看-js-的事件傳播"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">回頭看看 js 的事件傳播</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#js-事件傳播"><span class="post-toc-number">2.1.1.</span> <span class="post-toc-text">js 事件傳播</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#事件取消"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">事件取消</span></a></li></ol></li></ol>
             <p>這個禮拜不談「新」東西，多數會是關於網頁開發的重新思考。算是回過頭來漸漸補齊自己的技術債吧！比起前幾個禮拜所談的新東西，這一篇文章可能相對枯燥一點，當然篇幅也會比較長，但我認為這是必要的。</p>
 <p>這些東西在前端變化快速的時代下或許顯得不那麼重要，不過思考總是件好事。</p>
 <h2 id="語義化標籤"><a href="#語義化標籤" class="headerlink" title="語義化標籤"></a>語義化標籤</h2><h3 id="重新思考語義化這件事"><a href="#重新思考語義化這件事" class="headerlink" title="重新思考語義化這件事"></a>重新思考語義化這件事</h3><p>會有這個想法，是看到 <code>instant article</code> 的 html 架構，他們規範 instant article 的架構必須符合他們的規範，而且結構的表達也很清楚。我在裡頭看到了好多我以前沒有注意過的 html tag。像是 <code>address</code> <code>figure</code> <code>caption</code> <code>summary</code> 。好奇之下查了一下<a href="http://www.w3schools.com/tags/tag_html.asp" target="_blank" rel="noopener">文件</a>等等。發現其實有很多語義化的標籤都已經支持目前主流的瀏覽器，spec 也寫得很清楚，但是目前主站多還是以 <code>div + class</code> 的方式做表達，雖然有些地方會套用 <code>header</code>，但我認為有更多適合的語義化標籤可以加入使用。除了減少不必要的 class 命名，也能夠提高 html 的易讀性跟 SEO，重點是，我們寫的是符合標準的 html。</p>
@@ -204,11 +204,7 @@ ga('send', 'pageview');
 </ol>
 <p>我覺得這並不會增加維護成本，反而會在長期內減少冗餘樣式、不可預知的樣式覆蓋等維護問題。唯一的成本可能就是你在開始一個頁面之前，需要去抽像一下可複用的單元，然後用sass表達出來。不過我感覺如果你採用的是正確的工作流(面向語義)，這些事情都是比較順理成章的。</p>
 <p>對於團隊開發如何確保面向語義，這確實是一個比較難解決的問題。除了需要提供一個清晰的團隊sass庫說明之外，貌似只能通過一些工程化手段解決了(加強code review流程、制定規範等等)。</p>
-<h3 id="grid-system-是個很棒的東西耶！"><a href="#grid-system-是個很棒的東西耶！" class="headerlink" title="grid system 是個很棒的東西耶！"></a>grid system 是個很棒的東西耶！</h3><p>我承認 grid system 的確是個非常好用的模式，在實際場景也會遇到 layout 無法用語義化來表示的問題，但根據語義化的定義，為了寫出更好看的 HTML 跟易讀性，我們或許總有一天還是要把 grid system 拔掉。這會是個大工程，但在目前主站說大不大，說小不小的架構上，還是越早開始越好吧！</p>
-<ul>
-<li>使用 susy</li>
-<li>@include @extend</li>
-</ul>
+<h3 id="grid-system-是個很棒的東西"><a href="#grid-system-是個很棒的東西" class="headerlink" title="grid system 是個很棒的東西"></a>grid system 是個很棒的東西</h3><p>我承認 grid system 的確是個非常好用的模式，在實際場景也會遇到 layout 無法用語義化來表示的問題，但根據語義化的定義，為了寫出更好看的 HTML 跟易讀性，我們或許總有一天還是要把 grid system 拔掉。這會是個大工程，但在目前主站說大不大，說小不小的架構上，還是越早開始越好吧！</p>
 <h2 id="Page-Visibility-API"><a href="#Page-Visibility-API" class="headerlink" title="Page Visibility API"></a>Page Visibility API</h2><p>能夠知道目前 user 是否 focus 在這個 page 上。<br>在很多情境下，我們希望當使用者沒有聚焦在這個網頁上（可能跳去別的應用程式、切換分頁時），可以盡量減少不必的請求或操作。facebook 好像也是當你回到網頁時才會有訊息的提示聲音。<br>比較常見的情景是播放影片時，如果使用者跳出頁面，我們可以先自動讓影片停止，等使用者回來之後，影片在繼續播放。</p>
 <h3 id="回頭看看-js-的事件傳播"><a href="#回頭看看-js-的事件傳播" class="headerlink" title="回頭看看 js 的事件傳播"></a>回頭看看 js 的事件傳播</h3><p>最近把犀牛書拿回來翻了翻，主要是為了釐清以前不是那麼明白的觀念。太多 js library 充斥在網路，我們是否已經忘記原生的 js 了？雖然高度的抽象化是科技趨於發達後一定會有的現象，但是了解一下內部的運作也是好的，對於之後寫 code 也會比較有概念！</p>
 <h4 id="js-事件傳播"><a href="#js-事件傳播" class="headerlink" title="js 事件傳播"></a>js 事件傳播</h4><p>js 的事件傳播主要分為兩大類型，<code>bubble</code> 跟 <code>capture</code>，大部分的傳播方式是用 <code>bubble</code>。什麼是 <code>bubble</code> 呢？在註冊對象元素的事件處理器被調用之後，事件就會開始往上漂浮（不包含某些元素的特定事件），然後再調用註冊於祖父元素上的處理器。這種現象會上升到 <code>document</code> 最後到達 <code>window</code>。</p>
@@ -220,7 +216,7 @@ ga('send', 'pageview');
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">var</span> actionList = &#123;</span><br><span class="line"> 	foo: <span class="function"><span class="keyword">function</span>(<span class="params"></span>),</span></span><br><span class="line"><span class="function"> 	<span class="title">bar</span>: <span class="title">function</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">&#125;</span></span><br><span class="line"><span class="function"><span class="title">$</span>(<span class="params"><span class="string">'document'</span></span>).<span class="title">on</span>(<span class="params"><span class="string">'click'</span>,<span class="string">'.js_action'</span>, e =&gt; &#123;</span></span></span><br><span class="line"><span class="function"><span class="params">	if(typeof e.target.dataset.action === <span class="string">'function'</span></span>)</span>&#123;</span><br><span class="line">		actionList[e.target.dataset.action]</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 <p>像這樣，以後如果要增加新的 event handlder 只要在 acionList 新增就好，甚至搭配 extend 的方式，可以不用寫在 actionList 也沒關係。充分提高了擴充性</p>
 <p>那麼，為什麼那麼少人使用 capture 呢？最大的原因在於因為可愛的 IE 無法使用。再來事件捕捉只適用於 addEventListener 的方式。<br>事件捕捉有點像是反過來，會先從祖父開始，依序向下船，直到<strong>事件父元素的事件處理被被調用為止</strong>，註冊於事件元素的事件處理器永遠不會被調用。</p>
-<h4 id="事件取消"><a href="#事件取消" class="headerlink" title="事件取消"></a>事件取消</h4><p>我們也常常看到類似 <code>e.preventDefault()</code> 的方法。其實像是舊版的瀏覽器並不支援，我們可以用一些比較 tricky 的方式來做取消。</p>
+<h3 id="事件取消"><a href="#事件取消" class="headerlink" title="事件取消"></a>事件取消</h3><p>我們也常常看到類似 <code>e.preventDefault()</code> 的方法。其實像是舊版的瀏覽器並不支援，我們可以用一些比較 tricky 的方式來做取消。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">cancelDefault</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> event = event || <span class="built_in">window</span>.event;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(event.preventDefault) event.preventDefault()</span><br><span class="line">	<span class="keyword">if</span>(event.returnValue) event.returnValue = <span class="literal">false</span></span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
         </div>
@@ -229,7 +225,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://kjj6198.github.io/2016/11/14/weekly-thought-5-30/" data-id="cjlf4huw4003krw5thklupmwr" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://kjj6198.github.io/2016/11/14/javascript-note/" data-id="cjlf8zqjq001xtj5t1nt98ibj" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -370,9 +366,9 @@ ga('send', 'pageview');
     </a>
     
     
-        <a href="/2016/11/14/frontend-weekly/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2016/11/14/css-variable/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">上一篇</strong>
-        <p class="article-nav-title">frontend collection - 5/23</p>
+        <p class="article-nav-title">css variable + sass variable = 😍</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -438,7 +434,7 @@ ga('send', 'pageview');
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">分類</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AWS/">AWS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/golang/">golang</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/rails/">rails</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">19</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/前端/vue/">vue</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端週刊/">前端週刊</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日語學習/">日語學習</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/機器學習/">機器學習</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/演算法/">演算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/程式筆記/">程式筆記</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/讀書心得/">讀書心得</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/雜談/">雜談</a><span class="category-list-count">6</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AWS/">AWS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/golang/">golang</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/rails/">rails</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">21</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/前端/vue/">vue</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端週刊/">前端週刊</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日語學習/">日語學習</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/機器學習/">機器學習</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/演算法/">演算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/程式筆記/">程式筆記</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/讀書心得/">讀書心得</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/雜談/">雜談</a><span class="category-list-count">6</span></li></ul>
         </div>
     </div>
 
@@ -477,7 +473,7 @@ ga('send', 'pageview');
     var disqus_shortname = 'frontendclothesline';
     
     
-    var disqus_url = 'http://kjj6198.github.io/2016/11/14/weekly-thought-5-30/';
+    var disqus_url = 'http://kjj6198.github.io/2016/11/14/javascript-note/';
     
     (function() {
     var dsq = document.createElement('script');
