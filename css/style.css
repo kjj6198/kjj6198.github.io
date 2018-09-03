@@ -5,7 +5,7 @@
 .archive-year {
   text-decoration: none;
   text-transform: uppercase;
-  color: #444;
+  color: #222;
   line-height: 1em;
   text-shadow: 0 1px #fff;
 }
@@ -224,17 +224,19 @@ body {
   -webkit-font-smoothing: antialiased;
   font-weight: 400;
   background: #eaeaea;
-  font: 16px "Noto Sans CJK TC", "PingFang TC", "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", sans-serif;
+  font: 16px "PingFang TC", "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", sans-serif;
   -webkit-text-size-adjust: 100%;
 }
 code {
   margin: 0 2px;
-  color: #e96900;
-  padding: 3px 5px;
+  color: #d14;
+  padding: 2px 4px;
   font-size: 0.8em;
   border-radius: 2px;
   font-family: Monaco, "Consolas", "Source Code Pro", Menlo, Consolas, monospace;
-  background-color: #f8f8f8;
+  background-color: #f7f7f9;
+  border: 1px solid #e1e1e8;
+  white-space: nowrap;
 }
 .container {
   position: relative;
@@ -312,7 +314,7 @@ code {
   position: relative;
   padding: 18px 30px 17px;
   border-bottom: 1px solid #eee;
-  color: #444;
+  color: #222;
   font-size: 16px;
   font-weight: 600;
   text-transform: uppercase;
@@ -529,7 +531,7 @@ code {
   -moz-transition: 0.2s ease-in;
   -ms-transition: 0.2s ease-in;
   transition: 0.2s ease-in;
-  font: 16px "Noto Sans CJK TC", "PingFang TC", "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", sans-serif;
+  font: 16px "PingFang TC", "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", sans-serif;
   color: rgba(255,255,255,0.99);
 }
 .search-form-input:focus,
@@ -1063,7 +1065,7 @@ code {
   text-decoration: none;
   font-size: 42px;
   letter-spacing: -1px;
-  color: #333;
+  color: #111;
   line-height: 1.3em;
   font-weight: bold;
   -webkit-transition: color 0.2s;
@@ -1097,15 +1099,15 @@ a.article-title:hover {
   margin-right: 10px;
 }
 .article-tag-list-link {
-  color: #333;
+  color: #111;
   text-decoration: none;
 }
 .article-tag-list-link:before {
   content: '#';
 }
 .article-entry {
-  color: #333;
-  font-size: 23px;
+  color: #111;
+  font-size: 20px;
   font-weight: 400;
   line-height: 1.65;
   letter-spacing: -0.003em;
@@ -1202,7 +1204,7 @@ a.article-title:hover {
   background-color: #faebd7;
 }
 .article-entry a {
-  color: inherit;
+  color: #4682b4;
   text-decoration: none;
   background-image: -webkit-linear-gradient(left, #444 0, #444 100%);
   background-image: -moz-linear-gradient(left, #444 0, #444 100%);
@@ -1282,7 +1284,7 @@ a.article-title:hover {
 .article-entry blockquote footer {
   font-size: 16px;
   margin: 1.6em 0;
-  font-family: "Noto Sans CJK TC", "PingFang TC", "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", sans-serif;
+  font-family: "PingFang TC", "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", sans-serif;
 }
 .article-entry blockquote footer cite:before {
   content: "—";
@@ -1361,7 +1363,7 @@ a.article-title:hover {
   text-decoration: none;
 }
 .article-footer a:hover {
-  color: #333;
+  color: #111;
 }
 .article-comment-link i,
 .article-share-link i {
@@ -1395,9 +1397,9 @@ a.article-title:hover {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  font: 14px "Noto Sans CJK TC", "PingFang TC", "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", sans-serif;
+  font: 14px "PingFang TC", "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", sans-serif;
   padding: 0 15px;
-  color: #333;
+  color: #111;
   outline: none;
   border: 1px solid #ddd;
   border-radius: 3px 3px 0 0;
@@ -1566,7 +1568,7 @@ a.article-title:hover {
 .archive-year-wrap {
   padding: 18px 30px 17px;
   font-size: 18px;
-  color: #444;
+  color: #222;
   border-bottom: 1px solid #eee;
 }
 .archive-year i {
@@ -1598,7 +1600,7 @@ a.article-title:hover {
 .archive-article-title {
   text-decoration: none;
   font-weight: bold;
-  color: #333;
+  color: #111;
   -webkit-transition: color 0.2s;
   -moz-transition: color 0.2s;
   -ms-transition: color 0.2s;
@@ -1900,52 +1902,82 @@ i.icon:before {
   height: 1.6em;
 }
 .highlight {
-  color: #a9b7c6;
-  background: #282b2e;
-}
-.highlight .code .number,
-.highlight .code .literal,
-.highlight .code .symbol,
-.highlight .code .bullet {
-  color: #6897bb;
-}
-.highlight .code .keyword,
-.highlight .code .selector-tag,
-.highlight .code .deletion {
-  color: #cc7832;
-}
-.highlight .code .variable,
-.highlight .code .template-variable,
-.highlight .code .link {
-  color: #629755;
+  color: #e6e1dc;
+  background: #232323;
 }
 .highlight .code .comment,
 .highlight .code .quote {
-  color: #808080;
+  color: #bc9458;
+  font-style: italic;
 }
-.highlight .code .meta {
-  color: #bbb529;
+.highlight .code .keyword,
+.highlight .code .selector-tag {
+  color: #c26230;
 }
 .highlight .code .string,
-.highlight .code .attribute,
-.highlight .code .addition {
-  color: #6a8759;
+.highlight .code .number,
+.highlight .code .regexp,
+.highlight .code .variable,
+.highlight .code .template-variable {
+  color: #a5c261;
 }
-.highlight .code .section,
-.highlight .code .title,
+.highlight .code .subst {
+  color: #519f50;
+}
+.highlight .code .tag,
+.highlight .code .name {
+  color: #e8bf6a;
+}
 .highlight .code .type {
+  color: #da4939;
+}
+.highlight .code .symbol,
+.highlight .code .bullet,
+.highlight .code .built_in,
+.highlight .code .builtin-name,
+.highlight .code .attr,
+.highlight .code .link {
+  color: #6d9cbe;
+}
+.highlight .code .params {
+  color: #d0d0ff;
+}
+.highlight .code .attribute {
+  color: #cda869;
+}
+.highlight .code .meta {
+  color: #9b859d;
+}
+.highlight .code .title,
+.highlight .code .section {
   color: #ffc66d;
 }
-.highlight .code .name,
-.highlight .code .selector-id,
+.highlight .code .addition {
+  background-color: #144212;
+  color: #e6e1dc;
+  display: inline-block;
+  width: 100%;
+}
+.highlight .code .deletion {
+  background-color: #600;
+  color: #e6e1dc;
+  display: inline-block;
+  width: 100%;
+}
 .highlight .code .selector-class {
-  color: #e8bf6a;
+  color: #9b703f;
+}
+.highlight .code .selector-id {
+  color: #8b98ab;
 }
 .highlight .code .emphasis {
   font-style: italic;
 }
 .highlight .code .strong {
   font-weight: bold;
+}
+.highlight .code .link {
+  text-decoration: underline;
 }
 @media only screen and (min-width: 960px) {
   .nav-container-inner {
