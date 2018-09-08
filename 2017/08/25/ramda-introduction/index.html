@@ -151,32 +151,32 @@ ga('send', 'pageview');
     </h1>
 </div>
                         <div class="main-body-content">
-                            <article id="post-ramda-introduction" class="article article-single article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
+                            <article id="post-ramda-introduction" class="article article-single article-type-post" itemscope
+  itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
         
-            <header class="article-header">
-                
     
         <h1 class="article-title" itemprop="name">
         淺談 ramda 中的幾個 API
         </h1>
     
 
-            </header>
+      </header>
+      
         
-        
-            <div class="article-subtitle">
-                <a href="/2017/08/25/ramda-introduction/" class="article-date">
+          <div class="article-subtitle">
+            <a href="/2017/08/25/ramda-introduction/" class="article-date">
     <time datetime="2017-08-24T16:14:45.000Z" itemprop="datePublished">2017-08-25</time>
 </a>
-                
+              
     <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/function-programming/">function programming</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ramda/">ramda</a></li></ul>
 
-            </div>
-        
-        <div class="article-entry" itemprop="articleBody">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#直觀-functional-programming"><span class="post-toc-number">2.</span> <span class="post-toc-text">直觀 functional programming</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#propEq"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">propEq</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#zipObj"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">zipObj</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#ifElse"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">ifElse</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#compose"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">compose</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#useWith"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">useWith</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#converge"><span class="post-toc-number">2.6.</span> <span class="post-toc-text">converge</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#identity"><span class="post-toc-number">2.7.</span> <span class="post-toc-text">identity</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#tap"><span class="post-toc-number">2.8.</span> <span class="post-toc-text">tap</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#pluck"><span class="post-toc-number">2.9.</span> <span class="post-toc-text">pluck</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#pick-pickBy-pickAll"><span class="post-toc-number">2.10.</span> <span class="post-toc-text">pick, pickBy, pickAll</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#pathOr"><span class="post-toc-number">2.11.</span> <span class="post-toc-text">pathOr</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#memoize"><span class="post-toc-number">2.12.</span> <span class="post-toc-text">memoize</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#結論"><span class="post-toc-number">3.</span> <span class="post-toc-text">結論</span></a></li></ol>
-            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>ramda 是個相當好用的函式庫，如果聽過 lodash 或是 underscore 的話，可以將 ramda 想成 <strong>functional programming</strong> 的 lodash，他們的 API 有許多相似性，差別在於 ramda 本身有 FP 的功能，任何的 API 只要你沒有傳入參數，ramda 就會自動幫你做 curry，這提供了相當大的彈性。</p>
+          </div>
+          
+            <div class="article-entry" itemprop="articleBody">
+              <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>ramda 是個相當好用的函式庫，如果聽過 lodash 或是 underscore 的話，可以將 ramda 想成 <strong>functional programming</strong> 的 lodash，他們的 API 有許多相似性，差別在於 ramda 本身有 FP 的功能，任何的 API 只要你沒有傳入參數，ramda 就會自動幫你做 curry，這提供了相當大的彈性。</p>
 <p>比如說在 lodash 當中，API 常見的使用方式為：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">_.map([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>], (n) =&gt; n * <span class="number">2</span>); <span class="comment">// [2, 4, 6]</span></span><br></pre></td></tr></table></figure>
 <p>而在 ramda 當中則是：</p>
@@ -227,13 +227,13 @@ ga('send', 'pageview');
 <h3 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h3><p>ramda 是個相當好用函式庫，這篇文章提出一些在一般操作比較少見的 API，不過 ramda 本身的 <a href="http://ramdajs.com/docs/" target="_blank" rel="noopener">API</a> 相當豐富，搭配 <code>compose</code> 你可以自由組裝自己的 function，並且利用以上提到方法來簡化你的函數。</p>
 <p>如果你也喜歡這種程式碼風格，歡迎踏入 functional programming 的世界。</p>
 
-        </div>
-        <footer class="article-footer">
-            
+            </div>
+            <footer class="article-footer">
+              
 
 
 
-    <a data-url="http://kjj6198.github.io/2017/08/25/ramda-introduction/" data-id="cjltl7dw000324n5tq3c2f5ke" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://kjj6198.github.io/2017/08/25/ramda-introduction/" data-id="cjltlbdml002ypb5tkcz4o19m" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -293,8 +293,8 @@ ga('send', 'pageview');
     })(jQuery);
 </script>
 
-        </footer>
-    </div>
+            </footer>
+  </div>
 </article>
 
     <section id="comments">

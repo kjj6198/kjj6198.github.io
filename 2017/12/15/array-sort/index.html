@@ -149,32 +149,32 @@ ga('send', 'pageview');
     </h1>
 </div>
                         <div class="main-body-content">
-                            <article id="post-array-sort" class="article article-single article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
+                            <article id="post-array-sort" class="article article-single article-type-post" itemscope
+  itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
         
-            <header class="article-header">
-                
     
         <h1 class="article-title" itemprop="name">
         Array.sort 淺析
         </h1>
     
 
-            </header>
+      </header>
+      
         
-        
-            <div class="article-subtitle">
-                <a href="/2017/12/15/array-sort/" class="article-date">
+          <div class="article-subtitle">
+            <a href="/2017/12/15/array-sort/" class="article-date">
     <time datetime="2017-12-14T16:00:00.000Z" itemprop="datePublished">2017-12-15</time>
 </a>
-                
+              
     <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sorting/">sorting</a></li></ul>
 
-            </div>
-        
-        <div class="article-entry" itemprop="articleBody">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Array-sort-淺析"><span class="post-toc-number">1.</span> <span class="post-toc-text">Array.sort 淺析</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#深入探討：為什麼是快速排序？"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">深入探討：為什麼是快速排序？</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#為什麼不用合併排序？"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">為什麼不用合併排序？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#In-place"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">In-place</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Stable"><span class="post-toc-number">1.1.3.</span> <span class="post-toc-text">Stable</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#插入排序"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">插入排序</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#結論"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">結論</span></a></li></ol></li></ol>
-            <h1 id="Array-sort-淺析"><a href="#Array-sort-淺析" class="headerlink" title="Array.sort 淺析"></a>Array.sort 淺析</h1><p>這篇文章不是談論在 Javascript 原生的 sort 要注意的事項。例如：</p>
+          </div>
+          
+            <div class="article-entry" itemprop="articleBody">
+              <h1 id="Array-sort-淺析"><a href="#Array-sort-淺析" class="headerlink" title="Array.sort 淺析"></a>Array.sort 淺析</h1><p>這篇文章不是談論在 Javascript 原生的 sort 要注意的事項。例如：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">8</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">11</span>].sort()</span><br><span class="line"><span class="comment">// [1, 11, 2, 20, 3, 30, 8]</span></span><br></pre></td></tr></table></figure>
 <p>因為預設的 sort 方法會把值轉為 String，並按照 char code 做排序，所以才會出現上面的結果。</p>
 <p>今天要來探討 Javascript 的 sort 背後的實作方式。</p>
@@ -208,13 +208,13 @@ ga('send', 'pageview');
 <li>Insertion sort 在小數量的陣列排序上有不錯的效果，最好情形可以在$O(n)$ 比較完成。</li>
 </ul>
 
-        </div>
-        <footer class="article-footer">
-            
+            </div>
+            <footer class="article-footer">
+              
 
 
 
-    <a data-url="http://kjj6198.github.io/2017/12/15/array-sort/" data-id="cjltl7du3000k4n5tcstyed27" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://kjj6198.github.io/2017/12/15/array-sort/" data-id="cjltlbdl7000mpb5tstht1ltj" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -274,8 +274,8 @@ ga('send', 'pageview');
     })(jQuery);
 </script>
 
-        </footer>
-    </div>
+            </footer>
+  </div>
 </article>
 
     <section id="comments">

@@ -149,32 +149,32 @@ ga('send', 'pageview');
     </h1>
 </div>
                         <div class="main-body-content">
-                            <article id="post-Sass" class="article article-single article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
+                            <article id="post-Sass" class="article article-single article-type-post" itemscope
+  itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
         
-            <header class="article-header">
-                
     
         <h1 class="article-title" itemprop="name">
         你可能不知道的 Sass 技巧
         </h1>
     
 
-            </header>
+      </header>
+      
         
-        
-            <div class="article-subtitle">
-                <a href="/2017/08/18/Sass/" class="article-date">
+          <div class="article-subtitle">
+            <a href="/2017/08/18/Sass/" class="article-date">
     <time datetime="2017-08-18T09:11:38.000Z" itemprop="datePublished">2017-08-18</time>
 </a>
-                
+              
     <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sass/">sass</a></li></ul>
 
-            </div>
-        
-        <div class="article-entry" itemprop="articleBody">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#變數宣告"><span class="post-toc-number">1.</span> <span class="post-toc-text">變數宣告</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#資料型別-List-Map"><span class="post-toc-number">2.</span> <span class="post-toc-text">資料型別 List, Map</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Map"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">Map</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#其他-API"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">其他 API</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#List"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">List</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#管理-z-index"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">管理 z-index</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#其他-list-函數"><span class="post-toc-number">2.4.1.</span> <span class="post-toc-text">其他 list 函數</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#內建函數"><span class="post-toc-number">3.</span> <span class="post-toc-text">內建函數</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#darken-lighten"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">darken lighten</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#rgba-rgb"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">rgba rgb</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#invert"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">invert</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#at-root"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">@at-root</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#mixin"><span class="post-toc-number">4.</span> <span class="post-toc-text">mixin</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#管理字體大小"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">管理字體大小</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#管理-media"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">管理 @media</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Function"><span class="post-toc-number">5.</span> <span class="post-toc-text">Function</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Logging"><span class="post-toc-number">6.</span> <span class="post-toc-text">Logging</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#BEM-utils"><span class="post-toc-number">7.</span> <span class="post-toc-text">BEM utils</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#z-index-管理"><span class="post-toc-number">8.</span> <span class="post-toc-text">z-index 管理</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#引入-css-variable"><span class="post-toc-number">9.</span> <span class="post-toc-text">引入 css variable</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#結論"><span class="post-toc-number"></span> <span class="post-toc-text">結論</span></a>
-            <p>我發現有許多前端工程師只把 sass 當作有變數、nested class 跟 <code>&amp;</code> 的 CSS 來撰寫。</p>
+          </div>
+          
+            <div class="article-entry" itemprop="articleBody">
+              <p>我發現有許多前端工程師只把 sass 當作有變數、nested class 跟 <code>&amp;</code> 的 CSS 來撰寫。</p>
 <p>在 Sass 當中有許多好用的函式跟功能，如果不知道如何使用的話，對一個強大的預處理器來說，這是件相當可惜的事情。<code>Sass3.5</code> 的更新加強了對 css variable 的支持。</p>
 <p>在考慮使用 CSS in Javascript 或是引入 PostCSS 的 plugin 之前，先看看是否能夠用 Sass 達到同樣的目的吧！</p>
 <h4 id="變數宣告"><a href="#變數宣告" class="headerlink" title="變數宣告"></a>變數宣告</h4><p>我們可以透過變數宣告 !defualt, !global</p>
@@ -258,13 +258,13 @@ ga('send', 'pageview');
 <h3 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h3><p>PostCSS, CSS in Javascript, styled-component，都是為了解決問題而發展出來的工具，不過 Sass 也有許多功能值得大家參考，這篇文章提出一些常見的開發問題，並使用 Sass 來解決。Sass 的函數並沒有想像中那麼複雜，而且功能強大，你甚至可以利用 Sass 的內建函數來建置 sin, cos 等三角函數幫助運算，撰寫排序演算法、使用遞迴（如果你想的話…）。</p>
 <p>使用 Sass 並不代表你需要拋棄 PostCSS 或其他工具帶來的便利性，像是 autoprefixer 以及 cssnano 等等，都是相當好用的插件。你甚至可以搭配使用帶來更快速及穩固的開發體驗。</p>
 
-        </div>
-        <footer class="article-footer">
-            
+            </div>
+            <footer class="article-footer">
+              
 
 
 
-    <a data-url="http://kjj6198.github.io/2017/08/18/Sass/" data-id="cjltl7du1000g4n5tio6vsbk6" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://kjj6198.github.io/2017/08/18/Sass/" data-id="cjltlbdl2000gpb5t8wfylvs3" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -324,8 +324,8 @@ ga('send', 'pageview');
     })(jQuery);
 </script>
 
-        </footer>
-    </div>
+            </footer>
+  </div>
 </article>
 
     <section id="comments">

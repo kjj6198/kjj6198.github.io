@@ -149,32 +149,32 @@ ga('send', 'pageview');
     </h1>
 </div>
                         <div class="main-body-content">
-                            <article id="post-vuex-dynamic-import" class="article article-single article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
+                            <article id="post-vuex-dynamic-import" class="article article-single article-type-post" itemscope
+  itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
         
-            <header class="article-header">
-                
     
         <h1 class="article-title" itemprop="name">
         透過 vuex 與 webpack dynamic import 動態載入 module
         </h1>
     
 
-            </header>
+      </header>
+      
         
-        
-            <div class="article-subtitle">
-                <a href="/2018/08/20/vuex-dynamic-import/" class="article-date">
+          <div class="article-subtitle">
+            <a href="/2018/08/20/vuex-dynamic-import/" class="article-date">
     <time datetime="2018-08-19T16:00:00.000Z" itemprop="datePublished">2018-08-20</time>
 </a>
-                
+              
     <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/">vue</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vuex/">vuex</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webpack/">webpack</a></li></ul>
 
-            </div>
-        
-        <div class="article-entry" itemprop="articleBody">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Webpack-Dynamic-Import"><span class="post-toc-number">1.</span> <span class="post-toc-text">Webpack Dynamic Import</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#引入時機"><span class="post-toc-number">2.</span> <span class="post-toc-text">引入時機</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#什麼時候引入-module？"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">什麼時候引入 module？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#有需要時再載入"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">有需要時再載入</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#錯誤處理"><span class="post-toc-number">3.</span> <span class="post-toc-text">錯誤處理</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#什麼時候要-unregister"><span class="post-toc-number">4.</span> <span class="post-toc-text">什麼時候要 unregister</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#其他"><span class="post-toc-number">5.</span> <span class="post-toc-text">其他</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#結論"><span class="post-toc-number">6.</span> <span class="post-toc-text">結論</span></a></li></ol>
-            <p>在最近的專案中用到 vue 來開發，而如果要管理比較複雜的資料流貨狀態，通常都是用 vuex 來當作 Single Truth of Source 的 store。在 vue 裡頭建立 store 時，都是把所有的 module 寫完後，再統一放到 vue 的 root 當中。</p>
+          </div>
+          
+            <div class="article-entry" itemprop="articleBody">
+              <p>在最近的專案中用到 vue 來開發，而如果要管理比較複雜的資料流貨狀態，通常都是用 vuex 來當作 Single Truth of Source 的 store。在 vue 裡頭建立 store 時，都是把所有的 module 寫完後，再統一放到 vue 的 root 當中。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">  modules: &#123;</span><br><span class="line">    profile,</span><br><span class="line">    users,</span><br><span class="line">    menus,</span><br><span class="line">    list,</span><br><span class="line">    food,</span><br><span class="line">    product,</span><br><span class="line">    todo,</span><br><span class="line">    ...</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>這在一般的中小型專案中沒有什麼問題，不過一旦專案的架構變得越來越大，很容易讓 store 的資料結構變得越來越大且越來越複雜。而且 module 裡頭的 action, mutations 一多，難免會增加不少不必要的 bundle size，也不是所有的 module 都是在 app 初始化之後就要馬上使用到。關於這點 vue 透過了 webpack 的 dynamic import 機制<a href="https://vuejs.org/v2/guide/components-dynamic-async.html#Async-Components" target="_blank" rel="noopener">動態載入 component</a>。</p>
 <p>在 vuex 當中則可以透過 <code>store.registerModule</code> 的方式在有需要的時候才將 module 放進 store，有了這個 API，我們也可以搭配 webpack dynamic import 的機制來減少 bundle size，並且盡可能地讓所有的操作變得簡單，在 app 初始化的時候，我們也只需要放入必要的 module 即可。</p>
@@ -222,13 +222,13 @@ ga('send', 'pageview');
 <h2 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h2><p>比起 react 與 redux，vue 的生態系當中對非同步載入的支援更好（更容易實作）。當然引入這樣的機制難免會提高 debug 的複雜度，雖然有效減少了 bundle size。但也要搭配各種機制才能讓整個 app 運行的更加穩固。</p>
 <p>本文試著提出在動態載入時可能遇到的問題以及解決方式，希望可以幫助到正為 bundle size 所苦的開發者們。</p>
 
-        </div>
-        <footer class="article-footer">
-            
+            </div>
+            <footer class="article-footer">
+              
 
 
 
-    <a data-url="http://kjj6198.github.io/2018/08/20/vuex-dynamic-import/" data-id="cjltl7dwg003p4n5ttbg3jl8u" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://kjj6198.github.io/2018/08/20/vuex-dynamic-import/" data-id="cjltlbdmz003mpb5tji5izfkt" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -288,8 +288,8 @@ ga('send', 'pageview');
     })(jQuery);
 </script>
 
-        </footer>
-    </div>
+            </footer>
+  </div>
 </article>
 
     <section id="comments">

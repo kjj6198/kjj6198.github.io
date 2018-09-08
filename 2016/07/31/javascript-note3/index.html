@@ -149,32 +149,32 @@ ga('send', 'pageview');
     </h1>
 </div>
                         <div class="main-body-content">
-                            <article id="post-javascript-note3" class="article article-single article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
+                            <article id="post-javascript-note3" class="article article-single article-type-post" itemscope
+  itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
         
-            <header class="article-header">
-                
     
         <h1 class="article-title" itemprop="name">
         webdevelopment 筆記
         </h1>
     
 
-            </header>
+      </header>
+      
         
-        
-            <div class="article-subtitle">
-                <a href="/2016/07/31/javascript-note3/" class="article-date">
+          <div class="article-subtitle">
+            <a href="/2016/07/31/javascript-note3/" class="article-date">
     <time datetime="2016-07-31T06:45:18.000Z" itemprop="datePublished">2016-07-31</time>
 </a>
-                
+              
     <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
 
-            </div>
-        
-        <div class="article-entry" itemprop="articleBody">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#瀏覽器的字體渲染"><span class="post-toc-number">1.</span> <span class="post-toc-text">瀏覽器的字體渲染</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#基本解法-grayscale"><span class="post-toc-number">2.</span> <span class="post-toc-text">基本解法 grayscale</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#進階解法-subpixel"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">進階解法 subpixel</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#問題點：百家爭鳴的瀏覽器"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">問題點：百家爭鳴的瀏覽器</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#結論"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">結論</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#事件控制"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">事件控制</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#microdata"><span class="post-toc-number">3.</span> <span class="post-toc-text">microdata</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Rails-view"><span class="post-toc-number">4.</span> <span class="post-toc-text">Rails view</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#partial-設計的幾個要點："><span class="post-toc-number">4.1.</span> <span class="post-toc-text">partial 設計的幾個要點：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#component-化"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">component 化</span></a></li></ol></li></ol>
-            <h2 id="瀏覽器的字體渲染"><a href="#瀏覽器的字體渲染" class="headerlink" title="瀏覽器的字體渲染"></a>瀏覽器的字體渲染</h2><p>前陣子發現了 <code>font-smoothing</code> 的屬性，雖然 w3c 已經把他從標準刪除，但在 chrome 上面還是可以使用這個屬性。</p>
+          </div>
+          
+            <div class="article-entry" itemprop="articleBody">
+              <h2 id="瀏覽器的字體渲染"><a href="#瀏覽器的字體渲染" class="headerlink" title="瀏覽器的字體渲染"></a>瀏覽器的字體渲染</h2><p>前陣子發現了 <code>font-smoothing</code> 的屬性，雖然 w3c 已經把他從標準刪除，但在 chrome 上面還是可以使用這個屬性。</p>
 <p>但令人好奇的是，其他瀏覽器的字體渲染方式呢？</p>
 <p>其實字型渲染是一個一直以來容易被忽略，卻又是極為重要的議題。因為網站的易讀性除了 layout 之外，再來就是字體了。</p>
 <p>為了確認網站在瀏覽器的一致性，稍微研究了一下字體渲染的方式。<br>分享在這邊給大家做參考。</p>
@@ -229,13 +229,13 @@ ga('send', 'pageview');
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"page_id"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">header</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">%=</span> <span class="attr">load_component</span>("<span class="attr">company_header</span>") %&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">header</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">main</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">aside</span>&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">%=</span> <span class="attr">load_component</span>("<span class="attr">company_sidebar__header</span>") %&gt;</span></span><br><span class="line">	    <span class="tag">&lt;<span class="name">%=</span> <span class="attr">load_component</span>("<span class="attr">company_sidebar__content</span>") %&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">aside</span>&gt;</span></span><br><span class="line">	  <span class="tag">&lt;<span class="name">%=</span> <span class="attr">load_component</span>("<span class="attr">company_summary</span>") %&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">%=</span> <span class="attr">load_component</span>("<span class="attr">company_introduction</span>") %&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">%=</span> <span class="attr">load_component</span>("<span class="attr">company_section</span>") %&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">main</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">footer</span>&gt;</span></span><br><span class="line">  	<span class="tag">&lt;<span class="name">%=</span> <span class="attr">load_component</span>("<span class="attr">company_footer</span>") %&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">footer</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>但其實目前主站的頁面都仍時常變動，所以過早的抽象化反而會浪費更多成本吧！不過未來如果能用這樣的方式來撰寫程式碼，相信應該是非常好維護的！</p>
 
-        </div>
-        <footer class="article-footer">
-            
+            </div>
+            <footer class="article-footer">
+              
 
 
 
-    <a data-url="http://kjj6198.github.io/2016/07/31/javascript-note3/" data-id="cjltl7dv400284n5tvctrfyld" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://kjj6198.github.io/2016/07/31/javascript-note3/" data-id="cjltlbdm60028pb5t9ev35jr1" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -295,8 +295,8 @@ ga('send', 'pageview');
     })(jQuery);
 </script>
 
-        </footer>
-    </div>
+            </footer>
+  </div>
 </article>
 
     <section id="comments">

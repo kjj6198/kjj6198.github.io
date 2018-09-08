@@ -151,32 +151,32 @@ ga('send', 'pageview');
     </h1>
 </div>
                         <div class="main-body-content">
-                            <article id="post-chatops" class="article article-single article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
+                            <article id="post-chatops" class="article article-single article-type-post" itemscope
+  itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
         
-            <header class="article-header">
-                
     
         <h1 class="article-title" itemprop="name">
         Rails app 自動化部屬 - hubot 與 heaven
         </h1>
     
 
-            </header>
+      </header>
+      
         
-        
-            <div class="article-subtitle">
-                <a href="/2017/03/01/chatops/" class="article-date">
+          <div class="article-subtitle">
+            <a href="/2017/03/01/chatops/" class="article-date">
     <time datetime="2017-03-01T15:12:42.000Z" itemprop="datePublished">2017-03-01</time>
 </a>
-                
+              
     <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/capistrano/">capistrano</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/chatops/">chatops</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/devops/">devops</a></li></ul>
 
-            </div>
-        
-        <div class="article-entry" itemprop="articleBody">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#主要流程"><span class="post-toc-number"></span> <span class="post-toc-text">主要流程</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#hubot-deploy"><span class="post-toc-number">1.</span> <span class="post-toc-text">hubot-deploy</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#heaven"><span class="post-toc-number">2.</span> <span class="post-toc-text">heaven</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#設定步驟"><span class="post-toc-number"></span> <span class="post-toc-text">設定步驟</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#設定-hubot-deploy"><span class="post-toc-number">1.</span> <span class="post-toc-text">設定 hubot-deploy</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#設定-heaven"><span class="post-toc-number">2.</span> <span class="post-toc-text">設定 heaven</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#設定-Gemfile"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">設定 Gemfile</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#串接-github-deployment"><span class="post-toc-number">3.</span> <span class="post-toc-text">串接 github deployment</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#部署"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">部署</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#hubot-deploy-常用指令"><span class="post-toc-number"></span> <span class="post-toc-text">hubot-deploy 常用指令</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#筆記"><span class="post-toc-number"></span> <span class="post-toc-text">筆記</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#後記"><span class="post-toc-number"></span> <span class="post-toc-text">後記</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#參考資源："><span class="post-toc-number">1.</span> <span class="post-toc-text">參考資源：</span></a></li></ol>
-            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>目前所在的公司裡頭是直接在本地端的 terminal 跑 <code>cap staging deploy</code> 指令。 <a href="https://github.com/capistrano/capistrano" target="_blank" rel="noopener">capistrano</a> 作為自動部署化的工具非常方便，但難免會遇到幾個問題：</p>
+          </div>
+          
+            <div class="article-entry" itemprop="articleBody">
+              <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>目前所在的公司裡頭是直接在本地端的 terminal 跑 <code>cap staging deploy</code> 指令。 <a href="https://github.com/capistrano/capistrano" target="_blank" rel="noopener">capistrano</a> 作為自動部署化的工具非常方便，但難免會遇到幾個問題：</p>
 <ul>
 <li>不是團隊中的每個人都有相同的環境</li>
 <li>大家都在部署，結果 staging 上現在到底是哪個 branch，完全一頭霧水。</li>
@@ -332,13 +332,13 @@ ga('send', 'pageview');
 <li><a href="http://lazier.cwchang.me/2015/01/24/ChatOps-Hubot-Capistrano-Heaven/" target="_blank" rel="noopener">chatops</a></li>
 </ul>
 
-        </div>
-        <footer class="article-footer">
-            
+            </div>
+            <footer class="article-footer">
+              
 
 
 
-    <a data-url="http://kjj6198.github.io/2017/03/01/chatops/" data-id="cjltl7dud000y4n5tx4kjpu1c" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://kjj6198.github.io/2017/03/01/chatops/" data-id="cjltlbdld000ypb5tknakbp4i" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -398,8 +398,8 @@ ga('send', 'pageview');
     })(jQuery);
 </script>
 
-        </footer>
-    </div>
+            </footer>
+  </div>
 </article>
 
     <section id="comments">

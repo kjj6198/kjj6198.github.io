@@ -149,32 +149,32 @@ ga('send', 'pageview');
     </h1>
 </div>
                         <div class="main-body-content">
-                            <article id="post-AWS-lambda-medium" class="article article-single article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
+                            <article id="post-AWS-lambda-medium" class="article article-single article-type-post" itemscope
+  itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
         
-            <header class="article-header">
-                
     
         <h1 class="article-title" itemprop="name">
         透過 AWS lambda 上傳 Medium 文章
         </h1>
     
 
-            </header>
+      </header>
+      
         
-        
-            <div class="article-subtitle">
-                <a href="/2017/11/10/AWS-lambda-medium/" class="article-date">
+          <div class="article-subtitle">
+            <a href="/2017/11/10/AWS-lambda-medium/" class="article-date">
     <time datetime="2017-11-09T16:46:28.000Z" itemprop="datePublished">2017-11-10</time>
 </a>
-                
+              
     <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/lambda/">lambda</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/medium/">medium</a></li></ul>
 
-            </div>
-        
-        <div class="article-entry" itemprop="articleBody">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#AWS-Lambda"><span class="post-toc-number">1.</span> <span class="post-toc-text">AWS Lambda</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Github-Issue"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Github Issue</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Medium-API"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Medium API</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Gist-API"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">Gist API</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#串接-Lambda"><span class="post-toc-number">2.</span> <span class="post-toc-text">串接 Lambda</span></a></li></ol>
-            <p>Medium 本身不支援 code block 編輯，雖然不知道背後的原因為何（或許工程師並非主要客群），所以如果要高亮程式碼，一個作法是直接貼圖片，一個是貼在 gist 上後再 embed 到文章當中。</p>
+          </div>
+          
+            <div class="article-entry" itemprop="articleBody">
+              <p>Medium 本身不支援 code block 編輯，雖然不知道背後的原因為何（或許工程師並非主要客群），所以如果要高亮程式碼，一個作法是直接貼圖片，一個是貼在 gist 上後再 embed 到文章當中。</p>
 <p>程式碼用圖片貼出雖然可以達到高亮效果，但對工程師來說是一件相當不友善的事，因為無法透過複製貼上的方式來實際測試你的程式碼，或者編輯文章時還要手動修圖，是一件很麻煩的事。</p>
 <p>不過貼上 gist 也有幾個問題</p>
 <ul>
@@ -193,13 +193,13 @@ ga('send', 'pageview');
 <p>首先把建立好的 lambda endpoint 放到 github webhook 中，然後隨便找一個可以編譯 markdown 為 HTML 的 package（我是用 <code>marked</code>），結合起來就可以囉！</p>
 <p>一個簡單的實作在<a href="https://github.com/DnD-mag/DnD-lamda" target="_blank" rel="noopener">這裡</a>。雖然稍嫌麻煩，不過其實還挺方便的。不知道 Medium 何時才要支援 code block QQ。</p>
 
-        </div>
-        <footer class="article-footer">
-            
+            </div>
+            <footer class="article-footer">
+              
 
 
 
-    <a data-url="http://kjj6198.github.io/2017/11/10/AWS-lambda-medium/" data-id="cjltl7dtv000b4n5ttrlzoh4y" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://kjj6198.github.io/2017/11/10/AWS-lambda-medium/" data-id="cjltlbdkv000apb5tb36m7uru" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -259,8 +259,8 @@ ga('send', 'pageview');
     })(jQuery);
 </script>
 
-        </footer>
-    </div>
+            </footer>
+  </div>
 </article>
 
     <section id="comments">

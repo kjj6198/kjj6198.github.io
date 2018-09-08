@@ -149,32 +149,32 @@ ga('send', 'pageview');
     </h1>
 </div>
                         <div class="main-body-content">
-                            <article id="post-redux-saga-and-redux-observable" class="article article-single article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
+                            <article id="post-redux-saga-and-redux-observable" class="article article-single article-type-post" itemscope
+  itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
         
-            <header class="article-header">
-                
     
         <h1 class="article-title" itemprop="name">
         redux-saga 與 redux-observable(待整理)
         </h1>
     
 
-            </header>
+      </header>
+      
         
-        
-            <div class="article-subtitle">
-                <a href="/2017/05/05/redux-saga-and-redux-observable/" class="article-date">
+          <div class="article-subtitle">
+            <a href="/2017/05/05/redux-saga-and-redux-observable/" class="article-date">
     <time datetime="2017-05-04T16:00:00.000Z" itemprop="datePublished">2017-05-05</time>
 </a>
-                
+              
     <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RxJS/">RxJS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/observable/">observable</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redux/">redux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/saga-pattern/">saga pattern</a></li></ul>
 
-            </div>
-        
-        <div class="article-entry" itemprop="articleBody">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#要解決什麼問題？"><span class="post-toc-number">1.</span> <span class="post-toc-text">要解決什麼問題？</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#callback"><span class="post-toc-number">1.0.1.</span> <span class="post-toc-text">callback</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Event"><span class="post-toc-number">1.0.2.</span> <span class="post-toc-text">Event</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Promise"><span class="post-toc-number">1.0.3.</span> <span class="post-toc-text">Promise</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ReactiveX"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">ReactiveX</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#redux-observable"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">redux-observable</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#結論"><span class="post-toc-number">2.</span> <span class="post-toc-text">結論</span></a></li></ol>
-            <p>前陣子有幾個很突出的函式庫，專門處理 redux 當中非同步的 action。最簡單暴力有效的方法是 <code>redux-thunk</code>，的確，一般的 ajax call 或是簡單的發送非同步請求時，thunk 能夠很直覺也很方便地完成我們要的需求。</p>
+          </div>
+          
+            <div class="article-entry" itemprop="articleBody">
+              <p>前陣子有幾個很突出的函式庫，專門處理 redux 當中非同步的 action。最簡單暴力有效的方法是 <code>redux-thunk</code>，的確，一般的 ajax call 或是簡單的發送非同步請求時，thunk 能夠很直覺也很方便地完成我們要的需求。</p>
 <p>但，如果是更複雜的應用呢？比如說：</p>
 <ul>
 <li>為了減少伺服器的負擔，我們只想要對使用者最後的操作做處理</li>
@@ -206,13 +206,13 @@ ga('send', 'pageview');
 <p>如果你先前就已經具備了足夠的 RxJS 的知識，比較習慣 functional reactive programming 的話，那麼 <code>redux-observable</code> 很適合勝任這個工作。</p>
 <p>又或許，在團隊裡頭技術的迭代較快，可能今年 react，明年變成 Angular(哪家公司會這樣做XD)，那麼選擇 <code>redux-observable</code> 會在之後技術線改變時較容易修改，因為 Angular2 本身配備了 RxJS，搬移的成本較低。</p>
 
-        </div>
-        <footer class="article-footer">
-            
+            </div>
+            <footer class="article-footer">
+              
 
 
 
-    <a data-url="http://kjj6198.github.io/2017/05/05/redux-saga-and-redux-observable/" data-id="cjltl7dw300394n5tnxsfp9th" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://kjj6198.github.io/2017/05/05/redux-saga-and-redux-observable/" data-id="cjltlbdmq0036pb5tqgxqn0qp" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -272,8 +272,8 @@ ga('send', 'pageview');
     })(jQuery);
 </script>
 
-        </footer>
-    </div>
+            </footer>
+  </div>
 </article>
 
     <section id="comments">

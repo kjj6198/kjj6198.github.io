@@ -149,32 +149,32 @@ ga('send', 'pageview');
     </h1>
 </div>
                         <div class="main-body-content">
-                            <article id="post-css-variable" class="article article-single article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
+                            <article id="post-css-variable" class="article article-single article-type-post" itemscope
+  itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
         
-            <header class="article-header">
-                
     
         <h1 class="article-title" itemprop="name">
         css variable + sass variable = 😍
         </h1>
     
 
-            </header>
+      </header>
+      
         
-        
-            <div class="article-subtitle">
-                <a href="/2016/11/14/css-variable/" class="article-date">
+          <div class="article-subtitle">
+            <a href="/2016/11/14/css-variable/" class="article-date">
     <time datetime="2016-11-14T11:44:20.000Z" itemprop="datePublished">2016-11-14</time>
 </a>
-                
+              
     <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li></ul>
 
-            </div>
-        
-        <div class="article-entry" itemprop="articleBody">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#支援度"><span class="post-toc-number">1.</span> <span class="post-toc-text">支援度</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#custom-property"><span class="post-toc-number">2.</span> <span class="post-toc-text">custom property</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#為什麼你要用-CSS-Variable"><span class="post-toc-number">3.</span> <span class="post-toc-text">為什麼你要用 CSS Variable</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#property-特性"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">property 特性</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#inline-style"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">inline-style</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#react-inline-style"><span class="post-toc-number">3.2.1.</span> <span class="post-toc-text">react inline style</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#grid"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">grid</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#js-的控制"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">js 的控制</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#取值"><span class="post-toc-number">3.4.1.</span> <span class="post-toc-text">取值</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#設值"><span class="post-toc-number">3.4.2.</span> <span class="post-toc-text">設值</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#支援度-1"><span class="post-toc-number">3.4.3.</span> <span class="post-toc-text">支援度</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#之後的挑戰"><span class="post-toc-number">4.</span> <span class="post-toc-text">之後的挑戰</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#結論"><span class="post-toc-number"></span> <span class="post-toc-text">結論</span></a>
-            <p>之前寫過了一篇關於自己對 css variable 的想法，原本對這個屬性沒有抱持著太大的期待，自己用習慣了 SASS 變數也覺得這個 css variable 反而像個彆腳的 system，不過如果你也是這樣想的人，可以參考這篇文章 <a href="https://developers.google.com/web/updates/2016/02/css-variables-why-should-you-care" target="_blank" rel="noopener">Why should you care Css variables</a></p>
+          </div>
+          
+            <div class="article-entry" itemprop="articleBody">
+              <p>之前寫過了一篇關於自己對 css variable 的想法，原本對這個屬性沒有抱持著太大的期待，自己用習慣了 SASS 變數也覺得這個 css variable 反而像個彆腳的 system，不過如果你也是這樣想的人，可以參考這篇文章 <a href="https://developers.google.com/web/updates/2016/02/css-variables-why-should-you-care" target="_blank" rel="noopener">Why should you care Css variables</a></p>
 <p>css 的變數已經出來有一段期間了，瀏覽器的支援程度還不算太糟。或許各位都曾經想過，這些變數的功能在 SASS 上幾乎都做得到，而且搭配 SASS 的 function 以及 SASS 的型別（list map）變數的使用彈性更為強大。</p>
 <p>不過這邊想要跟大家分享的是，css variable 真正亮眼的地方在哪裡。</p>
 <p>這篇文章會假設大家已經有一些 css variable 的基礎。</p>
@@ -251,13 +251,13 @@ ga('send', 'pageview');
 <h2 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h2><p>這篇文章介紹了 CSS variable 使用方式與場景，之前我也覺得 css variable 很彆扭，不但寫起來醜不拉機，而且也沒有相對應的函數操作。</p>
 <p>不過一旦理解 CSS variable 就是 custom property 的概念的時候，就會發現一些 CSS 以往無法突破的可能性。我們沒有必要一定要對 SASS 或是 CSS variable 做取捨，我們甚至可以將兩者搭配使用，做出一些以往無法達到的強大效果。</p>
 
-        </div>
-        <footer class="article-footer">
-            
+            </div>
+            <footer class="article-footer">
+              
 
 
 
-    <a data-url="http://kjj6198.github.io/2016/11/14/css-variable/" data-id="cjltl7duk001a4n5t0l3sk2kn" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://kjj6198.github.io/2016/11/14/css-variable/" data-id="cjltlbdlj0018pb5tzijkb29d" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -317,8 +317,8 @@ ga('send', 'pageview');
     })(jQuery);
 </script>
 
-        </footer>
-    </div>
+            </footer>
+  </div>
 </article>
 
     <section id="comments">

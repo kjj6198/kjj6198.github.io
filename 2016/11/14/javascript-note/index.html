@@ -149,32 +149,32 @@ ga('send', 'pageview');
     </h1>
 </div>
                         <div class="main-body-content">
-                            <article id="post-javascript-note" class="article article-single article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
+                            <article id="post-javascript-note" class="article article-single article-type-post" itemscope
+  itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
         
-            <header class="article-header">
-                
     
         <h1 class="article-title" itemprop="name">
         javascript 筆記
         </h1>
     
 
-            </header>
+      </header>
+      
         
-        
-            <div class="article-subtitle">
-                <a href="/2016/11/14/javascript-note/" class="article-date">
+          <div class="article-subtitle">
+            <a href="/2016/11/14/javascript-note/" class="article-date">
     <time datetime="2016-11-14T11:51:39.000Z" itemprop="datePublished">2016-11-14</time>
 </a>
-                
+              
     <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/html/">html</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
 
-            </div>
-        
-        <div class="article-entry" itemprop="articleBody">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#語義化標籤"><span class="post-toc-number">1.</span> <span class="post-toc-text">語義化標籤</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#重新思考語義化這件事"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">重新思考語義化這件事</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#對於-class-的思考"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">對於 class 的思考</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#grid-system-是個很棒的東西"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">grid system 是個很棒的東西</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Page-Visibility-API"><span class="post-toc-number">2.</span> <span class="post-toc-text">Page Visibility API</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#回頭看看-js-的事件傳播"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">回頭看看 js 的事件傳播</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#js-事件傳播"><span class="post-toc-number">2.1.1.</span> <span class="post-toc-text">js 事件傳播</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#事件取消"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">事件取消</span></a></li></ol></li></ol>
-            <p>這個禮拜不談「新」東西，多數會是關於網頁開發的重新思考。算是回過頭來漸漸補齊自己的技術債吧！比起前幾個禮拜所談的新東西，這一篇文章可能相對枯燥一點，當然篇幅也會比較長，但我認為這是必要的。</p>
+          </div>
+          
+            <div class="article-entry" itemprop="articleBody">
+              <p>這個禮拜不談「新」東西，多數會是關於網頁開發的重新思考。算是回過頭來漸漸補齊自己的技術債吧！比起前幾個禮拜所談的新東西，這一篇文章可能相對枯燥一點，當然篇幅也會比較長，但我認為這是必要的。</p>
 <p>這些東西在前端變化快速的時代下或許顯得不那麼重要，不過思考總是件好事。</p>
 <h2 id="語義化標籤"><a href="#語義化標籤" class="headerlink" title="語義化標籤"></a>語義化標籤</h2><h3 id="重新思考語義化這件事"><a href="#重新思考語義化這件事" class="headerlink" title="重新思考語義化這件事"></a>重新思考語義化這件事</h3><p>會有這個想法，是看到 <code>instant article</code> 的 html 架構，他們規範 instant article 的架構必須符合他們的規範，而且結構的表達也很清楚。我在裡頭看到了好多我以前沒有注意過的 html tag。像是 <code>address</code> <code>figure</code> <code>caption</code> <code>summary</code> 。好奇之下查了一下<a href="http://www.w3schools.com/tags/tag_html.asp" target="_blank" rel="noopener">文件</a>等等。發現其實有很多語義化的標籤都已經支持目前主流的瀏覽器，spec 也寫得很清楚，但是目前主站多還是以 <code>div + class</code> 的方式做表達，雖然有些地方會套用 <code>header</code>，但我認為有更多適合的語義化標籤可以加入使用。除了減少不必要的 class 命名，也能夠提高 html 的易讀性跟 SEO，重點是，我們寫的是符合標準的 html。</p>
 <p>而且 w3c 在 html5 致力推廣語義化的標籤，諸如 <code>nav</code> <code>header</code> <code>dd</code> <code>dt</code> 等等，並且將一些沒有意義的 tag 刪除或是不推薦使用如 <code>b</code> <code>font</code> <code>center</code> 等等。</p>
@@ -221,13 +221,13 @@ ga('send', 'pageview');
 <h3 id="事件取消"><a href="#事件取消" class="headerlink" title="事件取消"></a>事件取消</h3><p>我們也常常看到類似 <code>e.preventDefault()</code> 的方法。其實像是舊版的瀏覽器並不支援，我們可以用一些比較 tricky 的方式來做取消。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">cancelDefault</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> event = event || <span class="built_in">window</span>.event;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(event.preventDefault) event.preventDefault()</span><br><span class="line">	<span class="keyword">if</span>(event.returnValue) event.returnValue = <span class="literal">false</span></span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-        </div>
-        <footer class="article-footer">
-            
+            </div>
+            <footer class="article-footer">
+              
 
 
 
-    <a data-url="http://kjj6198.github.io/2016/11/14/javascript-note/" data-id="cjltl7dv000214n5td42hy2og" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://kjj6198.github.io/2016/11/14/javascript-note/" data-id="cjltlbdm20022pb5t1fvqu6pm" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -287,8 +287,8 @@ ga('send', 'pageview');
     })(jQuery);
 </script>
 
-        </footer>
-    </div>
+            </footer>
+  </div>
 </article>
 
     <section id="comments">

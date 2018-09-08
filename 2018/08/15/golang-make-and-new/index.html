@@ -149,30 +149,30 @@ ga('send', 'pageview');
     </h1>
 </div>
                         <div class="main-body-content">
-                            <article id="post-golang-make-and-new" class="article article-single article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
+                            <article id="post-golang-make-and-new" class="article article-single article-type-post" itemscope
+  itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
         
-            <header class="article-header">
-                
     
         <h1 class="article-title" itemprop="name">
         make 與 new 的差別
         </h1>
     
 
-            </header>
+      </header>
+      
         
-        
-            <div class="article-subtitle">
-                <a href="/2018/08/15/golang-make-and-new/" class="article-date">
+          <div class="article-subtitle">
+            <a href="/2018/08/15/golang-make-and-new/" class="article-date">
     <time datetime="2018-08-15T10:00:00.000Z" itemprop="datePublished">2018-08-15</time>
 </a>
-                
-            </div>
-        
-        <div class="article-entry" itemprop="articleBody">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#new"><span class="post-toc-number">1.</span> <span class="post-toc-text">new</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#make"><span class="post-toc-number">2.</span> <span class="post-toc-text">make</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#結論"><span class="post-toc-number">3.</span> <span class="post-toc-text">結論</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#更多閱讀"><span class="post-toc-number">3.0.1.</span> <span class="post-toc-text">更多閱讀</span></a></li></ol></li></ol></li></ol>
-            <p>在 golang 有兩個保留字 <code>make</code> 與 <code>new</code>，也是剛開始學習 golang 的時候容易搞混的地方，這邊做個簡單的筆記。</p>
+              
+          </div>
+          
+            <div class="article-entry" itemprop="articleBody">
+              <p>在 golang 有兩個保留字 <code>make</code> 與 <code>new</code>，也是剛開始學習 golang 的時候容易搞混的地方，這邊做個簡單的筆記。</p>
 <h2 id="new"><a href="#new" class="headerlink" title="new"></a>new</h2><p>new 可以用來初始化泛型，<strong>並且返回儲存位址</strong>。所以通常我們會用指標變數來接 <code>new</code> 過後的型別。特別要注意的是，new 會自動用 zeroed value 來初始化型別，也就是字串會是<code>&quot;&quot;</code>，number 會是 <code>0</code>，channel, func, map, slice 等等則會是 <code>nil</code>。</p>
 <p>因為這個特性，如果我們對 map 做以下的操作的話，會出現 <code>panic: assignment to entry in nil map</code></p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	people := <span class="built_in">new</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">string</span>)</span><br><span class="line">	p := *people</span><br><span class="line">	p[<span class="string">"name"</span>] = <span class="string">"Kalan"</span> <span class="comment">// panic: assignment to entry in nil map</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -190,13 +190,13 @@ ga('send', 'pageview');
 <li><a href="https://golang.org/doc/effective_go.html#allocation_new" target="_blank" rel="noopener">https://golang.org/doc/effective_go.html#allocation_new</a></li>
 </ul>
 
-        </div>
-        <footer class="article-footer">
-            
+            </div>
+            <footer class="article-footer">
+              
 
 
 
-    <a data-url="http://kjj6198.github.io/2018/08/15/golang-make-and-new/" data-id="cjltl7dut001q4n5tdfolygol" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://kjj6198.github.io/2018/08/15/golang-make-and-new/" data-id="cjltlbdlu001rpb5tym7t61ft" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -256,8 +256,8 @@ ga('send', 'pageview');
     })(jQuery);
 </script>
 
-        </footer>
-    </div>
+            </footer>
+  </div>
 </article>
 
     <section id="comments">

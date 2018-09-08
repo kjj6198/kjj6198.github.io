@@ -149,32 +149,32 @@ ga('send', 'pageview');
     </h1>
 </div>
                         <div class="main-body-content">
-                            <article id="post-go-to-postcss-or-not" class="article article-single article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
+                            <article id="post-go-to-postcss-or-not" class="article article-single article-type-post" itemscope
+  itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
         
-            <header class="article-header">
-                
     
         <h1 class="article-title" itemprop="name">
         令人期待的 PostCSS
         </h1>
     
 
-            </header>
+      </header>
+      
         
-        
-            <div class="article-subtitle">
-                <a href="/2016/09/16/go-to-postcss-or-not/" class="article-date">
+          <div class="article-subtitle">
+            <a href="/2016/09/16/go-to-postcss-or-not/" class="article-date">
     <time datetime="2016-09-16T15:58:02.000Z" itemprop="datePublished">2016-09-16</time>
 </a>
-                
+              
     <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/postcss/">postcss</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sass/">sass</a></li></ul>
 
-            </div>
-        
-        <div class="article-entry" itemprop="articleBody">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#從-SASS-到-PostCSS"><span class="post-toc-number">1.</span> <span class="post-toc-text">從 SASS 到 PostCSS</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#變數"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">變數</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#mixins-跟-function"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">mixins 跟 function</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#相較於-SASS-還不成熟"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">相較於 SASS 還不成熟</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#PostCSS-的優勢"><span class="post-toc-number">2.</span> <span class="post-toc-text">PostCSS 的優勢</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#為什麼我不敢離開-SASS"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">為什麼我不敢離開 SASS</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#結論"><span class="post-toc-number">3.</span> <span class="post-toc-text">結論</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#reference"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">reference</span></a></li></ol></li></ol>
-            <h2 id="從-SASS-到-PostCSS"><a href="#從-SASS-到-PostCSS" class="headerlink" title="從 SASS 到 PostCSS"></a>從 SASS 到 PostCSS</h2><p>大約在一年前，PostCSS 開始竄紅在前端生態圈裡，不外乎就是所謂的 preprocessor 的特性、高度客製化自己的 plugin、搶先使用 cssnext 的功能，還能夠搭配各種建構工具（gulp, webpack），用起來非常輕鬆寫意。</p>
+          </div>
+          
+            <div class="article-entry" itemprop="articleBody">
+              <h2 id="從-SASS-到-PostCSS"><a href="#從-SASS-到-PostCSS" class="headerlink" title="從 SASS 到 PostCSS"></a>從 SASS 到 PostCSS</h2><p>大約在一年前，PostCSS 開始竄紅在前端生態圈裡，不外乎就是所謂的 preprocessor 的特性、高度客製化自己的 plugin、搶先使用 cssnext 的功能，還能夠搭配各種建構工具（gulp, webpack），用起來非常輕鬆寫意。</p>
 <h3 id="變數"><a href="#變數" class="headerlink" title="變數"></a>變數</h3><p>雖然剛開始看到 PostCSS 的時候還挺興奮的，但隨即思考了一下：「真的有必要馬上把 SASS 取代掉嗎？」。</p>
 <p>PostCSS 的優點在於你能夠選擇你想要的 plugin，需要時再使用就好。舉變數的功能為例好了，<a href="https://github.com/postcss/postcss-simple-vars" target="_blank" rel="noopener">postcss-simple-vars</a> 能夠模擬 SASS 的變數宣告及使用行為。對我來說怎麼看都彆扭，因為 SASS 除了變數本身宣告之外，還有 map, list 的型別，而且具備了相當完整的 API 操作。例如：取值、判斷式、迴圈功能等。</p>
 <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="variable">$colors</span>: (</span><br><span class="line">  main: <span class="number">#abc</span>,</span><br><span class="line">  sub: <span class="number">#bac</span>,</span><br><span class="line">  word: <span class="number">#333</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: map-get(<span class="variable">$colors</span>, <span class="variable">$main</span>);</span><br><span class="line">  <span class="attribute">color</span>: map-get(<span class="variable">$colors</span>, word);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -211,13 +211,13 @@ ga('send', 'pageview');
 <li><a href="http://cssnext.io/" target="_blank" rel="noopener">cssnext</a></li>
 </ul>
 
-        </div>
-        <footer class="article-footer">
-            
+            </div>
+            <footer class="article-footer">
+              
 
 
 
-    <a data-url="http://kjj6198.github.io/2016/09/16/go-to-postcss-or-not/" data-id="cjltl7duq001l4n5td10d8oav" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://kjj6198.github.io/2016/09/16/go-to-postcss-or-not/" data-id="cjltlbdls001npb5tb6gtnk2d" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -277,8 +277,8 @@ ga('send', 'pageview');
     })(jQuery);
 </script>
 
-        </footer>
-    </div>
+            </footer>
+  </div>
 </article>
 
     <section id="comments">

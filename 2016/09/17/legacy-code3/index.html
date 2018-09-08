@@ -149,32 +149,32 @@ ga('send', 'pageview');
     </h1>
 </div>
                         <div class="main-body-content">
-                            <article id="post-legacy-code3" class="article article-single article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
+                            <article id="post-legacy-code3" class="article article-single article-type-post" itemscope
+  itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
         
-            <header class="article-header">
-                
     
         <h1 class="article-title" itemprop="name">
         從 legacy code 中尋找出口（中）- HTML 篇
         </h1>
     
 
-            </header>
+      </header>
+      
         
-        
-            <div class="article-subtitle">
-                <a href="/2016/09/17/legacy-code3/" class="article-date">
+          <div class="article-subtitle">
+            <a href="/2016/09/17/legacy-code3/" class="article-date">
     <time datetime="2016-09-17T02:40:16.000Z" itemprop="datePublished">2016-09-17</time>
 </a>
-                
+              
     <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTML/">HTML</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/aria/">aria</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/重構/">重構</a></li></ul>
 
-            </div>
-        
-        <div class="article-entry" itemprop="articleBody">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#語義化"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">語義化</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#section"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">section</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#article"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">article</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#datalist"><span class="post-toc-number">1.1.3.</span> <span class="post-toc-text">datalist</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#dl-dt-dd"><span class="post-toc-number">1.1.4.</span> <span class="post-toc-text">dl dt dd</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#figure-figcaption"><span class="post-toc-number">1.1.5.</span> <span class="post-toc-text">figure figcaption</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#legend"><span class="post-toc-number">1.1.6.</span> <span class="post-toc-text">legend</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#如果都沒辦法滿足怎麼辦？"><span class="post-toc-number">1.1.7.</span> <span class="post-toc-text">如果都沒辦法滿足怎麼辦？</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Accessibility"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Accessibility</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#模板語言（已-rails-views-為例）"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">模板語言（已 rails views 為例）</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#結論"><span class="post-toc-number">2.</span> <span class="post-toc-text">結論</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Legacy-Code-專欄"><span class="post-toc-number">2.0.1.</span> <span class="post-toc-text">Legacy Code 專欄</span></a></li></ol></li></ol></li></ol>
-            <p>講完 CSS 的重構技巧之後，接下來會專注在 HTML 的重構技巧上。本系列的文章將不會談論 js 的重構部分，因為牽扯到較多的程式撰寫技巧，而且網路上類似的文章應該是不勝枚舉。</p>
+          </div>
+          
+            <div class="article-entry" itemprop="articleBody">
+              <p>講完 CSS 的重構技巧之後，接下來會專注在 HTML 的重構技巧上。本系列的文章將不會談論 js 的重構部分，因為牽扯到較多的程式撰寫技巧，而且網路上類似的文章應該是不勝枚舉。</p>
 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>其實 HTML 能夠重構的點並不多，主要就是標籤的正確使用以及顧慮 accessibility 等小細節。</p>
 <p>所以這篇文章會著重在如何使用正確的標籤以及語義化；基本的 accessiblity 認識跟 aria 標籤的使用，不僅對 screen reader 較友善，語義化的標籤使用也能夠在之後修改 HTML 時更有效率；最後是模板語言的技巧應用，這邊會用 rails 的 views 為例，不過概念的部分應該是相通的。 </p>
 <hr>
@@ -251,13 +251,13 @@ ga('send', 'pageview');
 </li>
 </ul>
 
-        </div>
-        <footer class="article-footer">
-            
+            </div>
+            <footer class="article-footer">
+              
 
 
 
-    <a data-url="http://kjj6198.github.io/2016/09/17/legacy-code3/" data-id="cjltl7dvf002q4n5trjn8mxe8" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://kjj6198.github.io/2016/09/17/legacy-code3/" data-id="cjltlbdmg002ppb5tjxqh5tjs" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -317,8 +317,8 @@ ga('send', 'pageview');
     })(jQuery);
 </script>
 
-        </footer>
-    </div>
+            </footer>
+  </div>
 </article>
 
     <section id="comments">

@@ -149,30 +149,30 @@ ga('send', 'pageview');
     </h1>
 </div>
                         <div class="main-body-content">
-                            <article id="post-golang-env-variable" class="article article-single article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
+                            <article id="post-golang-env-variable" class="article article-single article-type-post" itemscope
+  itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
         
-            <header class="article-header">
-                
     
         <h1 class="article-title" itemprop="name">
         【golang 筆記】 如何為你的專案設定環境變數
         </h1>
     
 
-            </header>
+      </header>
+      
         
-        
-            <div class="article-subtitle">
-                <a href="/2018/09/03/golang-env-variable/" class="article-date">
+          <div class="article-subtitle">
+            <a href="/2018/09/03/golang-env-variable/" class="article-date">
     <time datetime="2018-09-03T15:02:53.000Z" itemprop="datePublished">2018-09-03</time>
 </a>
-                
-            </div>
-        
-        <div class="article-entry" itemprop="articleBody">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#flag"><span class="post-toc-number">2.</span> <span class="post-toc-text">flag</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#透過-YAML-載入"><span class="post-toc-number">3.</span> <span class="post-toc-text">透過 YAML 載入</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#後記"><span class="post-toc-number">4.</span> <span class="post-toc-text">後記</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">5.</span> <span class="post-toc-text">kjj6198/configo</span></a></li></ol>
-            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在開發專案的時候常常需要切換不同的環境，也因此我們通常會設定不同的環境變數。不過如果直接寫死在程式當中每次修改起來實在太麻煩了，如果可以透過動態的方式傳入環境變數的話可以減少很多不必要的修改，程式也相對比較乾淨。</p>
+              
+          </div>
+          
+            <div class="article-entry" itemprop="articleBody">
+              <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在開發專案的時候常常需要切換不同的環境，也因此我們通常會設定不同的環境變數。不過如果直接寫死在程式當中每次修改起來實在太麻煩了，如果可以透過動態的方式傳入環境變數的話可以減少很多不必要的修改，程式也相對比較乾淨。</p>
 <h2 id="flag"><a href="#flag" class="headerlink" title="flag"></a>flag</h2><p>一般在 golang 可以利用 <a href="https://golang.org/pkg/flag/" target="_blank" rel="noopener">flag</a> 這個 package 做到類似的效果，例如：</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> env <span class="keyword">string</span></span><br><span class="line"><span class="keyword">var</span> accessToken <span class="keyword">string</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;    </span><br><span class="line">    flag.StringVar(&amp;env, <span class="string">'ENV'</span>, <span class="string">'development'</span>, <span class="string">'your current env'</span>)</span><br><span class="line">    flag.StringVar(&amp;accessToken, <span class="string">'ACCESS_TOKEN'</span>, <span class="string">'xxx-oo-ooo'</span>, <span class="string">'your API access token'</span>)</span><br><span class="line">    flag.Parse()</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// start your application</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>或者也可以參考<a href="http://www.evanlin.com/go-build-config-ldflags" target="_blank" rel="noopener">這篇文章</a>中提到的方式，用 <code>go build -ldflag</code> 在 compile time 設定變數。</p>
@@ -190,13 +190,13 @@ ga('send', 'pageview');
       <div class="img" style="background-image: url(https://avatars0.githubusercontent.com/u/6581081?s=400&v=4)">
       </div></a>
 
-        </div>
-        <footer class="article-footer">
-            
+            </div>
+            <footer class="article-footer">
+              
 
 
 
-    <a data-url="http://kjj6198.github.io/2018/09/03/golang-env-variable/" data-id="cjltl7dus001o4n5tg2nrigxr" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://kjj6198.github.io/2018/09/03/golang-env-variable/" data-id="cjltlbdlr001kpb5t87xnhczi" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -256,8 +256,8 @@ ga('send', 'pageview');
     })(jQuery);
 </script>
 
-        </footer>
-    </div>
+            </footer>
+  </div>
 </article>
 
     <section id="comments">

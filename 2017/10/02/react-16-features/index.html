@@ -149,32 +149,32 @@ ga('send', 'pageview');
     </h1>
 </div>
                         <div class="main-body-content">
-                            <article id="post-react-16-features" class="article article-single article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
+                            <article id="post-react-16-features" class="article article-single article-type-post" itemscope
+  itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
         
-            <header class="article-header">
-                
     
         <h1 class="article-title" itemprop="name">
         React16 重點整理
         </h1>
     
 
-            </header>
+      </header>
+      
         
-        
-            <div class="article-subtitle">
-                <a href="/2017/10/02/react-16-features/" class="article-date">
+          <div class="article-subtitle">
+            <a href="/2017/10/02/react-16-features/" class="article-date">
     <time datetime="2017-10-01T16:00:00.000Z" itemprop="datePublished">2017-10-02</time>
 </a>
-                
+              
     <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
 
-            </div>
-        
-        <div class="article-entry" itemprop="articleBody">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-componentDidPatch-error-info"><span class="post-toc-number">1.</span> <span class="post-toc-text">1. componentDidPatch(error, info)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-Text-Only-component"><span class="post-toc-number">2.</span> <span class="post-toc-text">2. Text-Only component</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-ReactDOM-createPortal-component-dom"><span class="post-toc-number">3.</span> <span class="post-toc-text">*3. ReactDOM.createPortal(component, dom)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-Custom-Attributes"><span class="post-toc-number">4.</span> <span class="post-toc-text">4. Custom Attributes</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-prevent-update"><span class="post-toc-number">5.</span> <span class="post-toc-text">5. prevent update</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#6-SSR-的支援"><span class="post-toc-number">6.</span> <span class="post-toc-text">6. SSR 的支援</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#結論"><span class="post-toc-number"></span> <span class="post-toc-text">結論</span></a>
-            <p>react 終於正式發佈 v16 了，其實<a href="https://reactjs.org/blog/2017/09/26/react-v16.0.html" target="_blank" rel="noopener">官方部落格</a>的介紹已經相當完整（而且賞心悅目）。本篇文章作為筆記與統整，精簡了部分的細節。</p>
+          </div>
+          
+            <div class="article-entry" itemprop="articleBody">
+              <p>react 終於正式發佈 v16 了，其實<a href="https://reactjs.org/blog/2017/09/26/react-v16.0.html" target="_blank" rel="noopener">官方部落格</a>的介紹已經相當完整（而且賞心悅目）。本篇文章作為筆記與統整，精簡了部分的細節。</p>
 <h3 id="1-componentDidPatch-error-info"><a href="#1-componentDidPatch-error-info" class="headerlink" title="1. componentDidPatch(error, info)"></a>1. componentDidPatch(error, info)</h3><p>react16 最亮眼的部分，加入 ErrorBoundary 的功能，確保在 lifecycle 時的錯誤不會影響到整個 component。之前如果在 render 時發生錯誤，會導致整個 component 不見。</p>
 <p><strong>只有在 Error 在 lifecycle method 被呼叫時才會傳入 componentDidPatch</strong>，所以在 constructor 之類的地方 throw Error 是不會被 componentDidCatch 給 catch 的。</p>
 <p><code>componentDidCatch</code> 傳入兩個參數 error, info。可以在 componentDidCatch 內處理錯誤，fallback UI 或是呼叫第三方服務紀錄錯誤等等。</p>
@@ -195,13 +195,13 @@ ga('send', 'pageview');
 </blockquote>
 <h2 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h2><p>以上就是 React 16 的主要更動。官方部落格有更詳盡的介紹。</p>
 
-        </div>
-        <footer class="article-footer">
-            
+            </div>
+            <footer class="article-footer">
+              
 
 
 
-    <a data-url="http://kjj6198.github.io/2017/10/02/react-16-features/" data-id="cjltl7dvq002x4n5tnmq50iod" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://kjj6198.github.io/2017/10/02/react-16-features/" data-id="cjltlbdmn0031pb5tjgfgcy05" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -261,8 +261,8 @@ ga('send', 'pageview');
     })(jQuery);
 </script>
 
-        </footer>
-    </div>
+            </footer>
+  </div>
 </article>
 
     <section id="comments">

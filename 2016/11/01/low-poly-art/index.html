@@ -149,32 +149,32 @@ ga('send', 'pageview');
     </h1>
 </div>
                         <div class="main-body-content">
-                            <article id="post-low-poly-art" class="article article-single article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
+                            <article id="post-low-poly-art" class="article article-single article-type-post" itemscope
+  itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
         
-            <header class="article-header">
-                
     
         <h1 class="article-title" itemprop="name">
         用 Canvas 實作 low-poly art 心得
         </h1>
     
 
-            </header>
+      </header>
+      
         
-        
-            <div class="article-subtitle">
-                <a href="/2016/11/01/low-poly-art/" class="article-date">
+          <div class="article-subtitle">
+            <a href="/2016/11/01/low-poly-art/" class="article-date">
     <time datetime="2016-11-01T03:40:41.000Z" itemprop="datePublished">2016-11-01</time>
 </a>
-                
+              
     <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/low-poly/">low poly</a></li></ul>
 
-            </div>
-        
-        <div class="article-entry" itemprop="articleBody">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#圖片轉灰階"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">圖片轉灰階</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Sobel-取邊緣"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Sobel 取邊緣</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#取點"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">取點</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#結論"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">結論</span></a></li></ol></li></ol>
-            <p>文章待補，圖片。</p>
+          </div>
+          
+            <div class="article-entry" itemprop="articleBody">
+              <p>文章待補，圖片。</p>
 <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>說到 low poly，最讓我驚豔的是 <a href="http://species-in-pieces.com/" target="_blank" rel="noopener">species in pieces</a> 這個網站，他使用 low-poly 的方式畫出 30 種現在地球上瀕臨絕種的動物，是用 CSS 的 clip-path 做出來的，為了兼容瀏覽器，甚至還有做 fallback 的圖片，非常的用心。</p>
 <p>之前有在知乎上有看見 low poly 的實作方式，但看了一下原始碼，回答是用 THREE.js 做的。一來我對 three 的掌握程度還太低，再來是 2D 的圖形用 WebGL 加速實在有點奢侈啊。這邊記錄一下思路跟實現過程。</p>
 <p>其實要做到 low poly 的效果並不難，最直覺的方式就是在畫面上取點，然後把點連接成三角形。再把三角形著色就完成了。不過隨機取點的方式會造成圖片很大的失真。</p>
@@ -219,13 +219,13 @@ Gy = \begin{vmatrix}
 <p>光是圖形的轉換跟變化，就足以寫一本厚厚的教科書了，更何況是用程式語言實作。不過第一次接觸這個領域，挺好玩的。</p>
 <p>這個演算法最重要的部分在於選取點的方式，如果更有技巧地取點，那麼三角化後的圖形失真會越少。許多論文跟網路上的實現都比我胡亂湊出來的算法屌多了。</p>
 
-        </div>
-        <footer class="article-footer">
-            
+            </div>
+            <footer class="article-footer">
+              
 
 
 
-    <a data-url="http://kjj6198.github.io/2016/11/01/low-poly-art/" data-id="cjltl7dvh002t4n5tax7pcowk" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://kjj6198.github.io/2016/11/01/low-poly-art/" data-id="cjltlbdmh002spb5t7fm0z4a0" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -285,8 +285,8 @@ Gy = \begin{vmatrix}
     })(jQuery);
 </script>
 
-        </footer>
-    </div>
+            </footer>
+  </div>
 </article>
 
     <section id="comments">

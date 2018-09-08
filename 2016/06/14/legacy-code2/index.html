@@ -149,32 +149,32 @@ ga('send', 'pageview');
     </h1>
 </div>
                         <div class="main-body-content">
-                            <article id="post-legacy-code2" class="article article-single article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
+                            <article id="post-legacy-code2" class="article article-single article-type-post" itemscope
+  itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
         
-            <header class="article-header">
-                
     
         <h1 class="article-title" itemprop="name">
         如何從 legacy code 中尋找出口（中）- CSS 篇
         </h1>
     
 
-            </header>
+      </header>
+      
         
-        
-            <div class="article-subtitle">
-                <a href="/2016/06/14/legacy-code2/" class="article-date">
+          <div class="article-subtitle">
+            <a href="/2016/06/14/legacy-code2/" class="article-date">
     <time datetime="2016-06-14T04:01:52.000Z" itemprop="datePublished">2016-06-14</time>
 </a>
-                
+              
     <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/重構/">重構</a></li></ul>
 
-            </div>
-        
-        <div class="article-entry" itemprop="articleBody">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#引入-style-linter-及-editorconfig"><span class="post-toc-number">2.</span> <span class="post-toc-text">引入 style linter 及 editorconfig</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-加入-stylelint"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">1. 加入 stylelint</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-加入-editorconfig"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">2. 加入 .editorconfig</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#常見的-code-smell-以及-refactor-方式"><span class="post-toc-number">3.</span> <span class="post-toc-text">常見的 code smell 以及 refactor 方式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Order"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">Order</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#善用-sass-map-管理變數"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">善用 sass map 管理變數</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#大量的巢狀-class"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">大量的巢狀 class</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#善用-Mixin-簡化程式"><span class="post-toc-number">4.</span> <span class="post-toc-text">善用 Mixin 簡化程式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#BEM-mixin"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">BEM mixin</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#util-mixin"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">util mixin</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#child-selector-mixin"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">child selector mixin</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#善用-Comment"><span class="post-toc-number">5.</span> <span class="post-toc-text">善用 Comment</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#目錄"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">目錄</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#魔術數字、HACK、使用方式"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">魔術數字、HACK、使用方式</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#CSS-結構"><span class="post-toc-number">6.</span> <span class="post-toc-text">CSS 結構</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#module"><span class="post-toc-number">6.1.</span> <span class="post-toc-text">module</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#base"><span class="post-toc-number">6.2.</span> <span class="post-toc-text">base</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#config"><span class="post-toc-number">6.3.</span> <span class="post-toc-text">config</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#helper"><span class="post-toc-number">6.4.</span> <span class="post-toc-text">helper</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#寫在最後"><span class="post-toc-number">7.</span> <span class="post-toc-text">寫在最後</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#持續關注前端趨勢"><span class="post-toc-number">8.</span> <span class="post-toc-text">持續關注前端趨勢</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#reference"><span class="post-toc-number">8.1.</span> <span class="post-toc-text">reference</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Legacy-Code-專欄"><span class="post-toc-number">8.1.1.</span> <span class="post-toc-text">Legacy Code 專欄</span></a></li></ol></li></ol></li></ol>
-            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>我們的第一步是先從 CSS 下手，因為 css 是相對於其他前端部分來說比較容易重構的部分。很容易髒亂的 code 也是 CSS。</p>
+          </div>
+          
+            <div class="article-entry" itemprop="articleBody">
+              <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>我們的第一步是先從 CSS 下手，因為 css 是相對於其他前端部分來說比較容易重構的部分。很容易髒亂的 code 也是 CSS。</p>
 <p>上一篇描述了在大型專案中引入新框架及技術的困難點，這一篇主要會專注在如何透過現有的工具及框架來重構現有的代碼。</p>
 <p>本次的重構技巧會以 SCSS 為主，所以在閱讀本文之前，我先假設你已經有基本的 SCSS 以及 CSS 的基礎。其他預處理器的概念應該是相通的。</p>
 <h2 id="引入-style-linter-及-editorconfig"><a href="#引入-style-linter-及-editorconfig" class="headerlink" title="引入 style linter 及 editorconfig"></a>引入 style linter 及 editorconfig</h2><p>我們採取的第一步是先引入審查代碼工具。目前比較流行的 css linter 是 stylelinter，他能夠針對 scss sass 語法做 lint。也可以搭配其他 IDE、文字編輯器 plugin。這邊的範例是使用 sublime，其他的 IDE 應該也有類似的功能。</p>
@@ -273,13 +273,13 @@ ga('send', 'pageview');
 </li>
 </ul>
 
-        </div>
-        <footer class="article-footer">
-            
+            </div>
+            <footer class="article-footer">
+              
 
 
 
-    <a data-url="http://kjj6198.github.io/2016/06/14/legacy-code2/" data-id="cjltl7dvc002l4n5tst2iubzt" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://kjj6198.github.io/2016/06/14/legacy-code2/" data-id="cjltlbdmd002kpb5tk6kllhas" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -339,8 +339,8 @@ ga('send', 'pageview');
     })(jQuery);
 </script>
 
-        </footer>
-    </div>
+            </footer>
+  </div>
 </article>
 
     <section id="comments">
