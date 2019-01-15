@@ -8,7 +8,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://kjj6198.github.io/"/>
-  <updated>2018-09-03T15:24:36.000Z</updated>
+  <updated>2019-01-15T09:58:36.579Z</updated>
   <id>http://kjj6198.github.io/</id>
   
   <author>
@@ -17,6 +17,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>日本軟體業常見名詞轉換</title>
+    <link href="http://kjj6198.github.io/2019/01/15/japan-software-noun/"/>
+    <id>http://kjj6198.github.io/2019/01/15/japan-software-noun/</id>
+    <published>2019-01-15T09:52:38.627Z</published>
+    <updated>2019-01-15T09:58:36.579Z</updated>
+    
+    <content type="html"><![CDATA[<p>由於實在太多特定的詞彙了，每次看到每次都要查一遍實在太累人了，而且還要一直 context switch。統一整理成一篇記錄起來。</p><p>大部分的名詞都是由英文直接轉換成片假名，但當中還是有些直接用日文表達，或是平假名與既有單字結合。嗯說真的要直接對應起來還真有點吃力，不過想了一下中文好像也是這樣，沒什麼資格好說別人的。</p><table><thead><tr><th>日文</th><th>中文</th><th>來源</th><th>備註</th></tr></thead><tbody><tr><td>フレームワーク</td><td>框架</td><td>framework</td><td></td></tr><tr><td>コンポーネント</td><td>元件、組件</td><td>component</td><td></td></tr><tr><td>関数</td><td>函數</td><td></td><td></td></tr><tr><td>引数</td><td>參數</td><td></td><td></td></tr><tr><td>アロー関数</td><td>箭頭函數</td><td>arrow function</td><td>是 javascript ES6 新增的語法</td></tr><tr><td>メソード</td><td>方法</td><td>method</td><td></td></tr><tr><td>非同期処理</td><td>非同步處理</td><td></td><td></td></tr><tr><td>入力値</td><td>輸入值</td><td></td><td></td></tr><tr><td>ソースコード</td><td>原始碼</td><td>source code</td><td></td></tr><tr><td>リテラル</td><td>字面值</td><td>riteral</td><td></td></tr><tr><td>オブジェクト</td><td>物件</td><td>object</td><td></td></tr><tr><td>匿名関数、無名関数</td><td>匿名函數</td><td></td><td></td></tr><tr><td>分割代入</td><td>解構賦值</td><td></td><td>javascript 當中 <code>const {a, b} = c</code> 的語法</td></tr><tr><td>残余引数</td><td>rest</td><td></td><td>javascript 當中 <code>const { a, b, …rest } = c</code> 的語法</td></tr><tr><td>デフォルト引数</td><td></td><td>default</td><td></td></tr><tr><td>戻り値、返す値</td><td>回傳值</td><td></td><td></td></tr><tr><td>コールバック</td><td>回呼（中文通常仍然用 callback)</td><td>callback</td><td></td></tr><tr><td>真理値</td><td>布林值</td><td></td><td>true/false</td></tr><tr><td>配列</td><td>陣列</td><td></td><td></td></tr><tr><td>第 1 級関数</td><td>第一級函數</td><td></td><td></td></tr><tr><td>正規表現</td><td>正規表達式</td><td></td><td></td></tr><tr><td>シンボル</td><td></td><td>symbol</td><td></td></tr><tr><td>コンパイラ</td><td>編譯器</td><td>compiler</td><td></td></tr><tr><td>疎行列、スパース行列</td><td>稀疏矩陣</td><td></td><td></td></tr><tr><td>特異値分解</td><td>奇異值分解</td><td></td><td></td></tr><tr><td>接続コード</td><td>轉接頭</td><td></td></tr></tbody></table>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;由於實在太多特定的詞彙了，每次看到每次都要查一遍實在太累人了，而且還要一直 context switch。統一整理成一篇記錄起來。&lt;/p&gt;
+&lt;p&gt;大部分的名詞都是由英文直接轉換成片假名，但當中還是有些直接用日文表達，或是平假名與既有單字結合。嗯說真的要直接對應起來還真有點吃
+      
+    
+    </summary>
+    
+      <category term="Software" scheme="http://kjj6198.github.io/categories/Software/"/>
+    
+    
+      <category term="日本" scheme="http://kjj6198.github.io/tags/%E6%97%A5%E6%9C%AC/"/>
+    
+  </entry>
   
   <entry>
     <title>【golang 筆記】 如何為你的專案設定環境變數</title>
@@ -542,38 +568,6 @@
       <category term="日語學習" scheme="http://kjj6198.github.io/tags/%E6%97%A5%E8%AA%9E%E5%AD%B8%E7%BF%92/"/>
     
       <category term="日語八百屋" scheme="http://kjj6198.github.io/tags/%E6%97%A5%E8%AA%9E%E5%85%AB%E7%99%BE%E5%B1%8B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>redux-saga 與 redux-observable(待整理)</title>
-    <link href="http://kjj6198.github.io/2017/05/05/redux-saga-and-redux-observable/"/>
-    <id>http://kjj6198.github.io/2017/05/05/redux-saga-and-redux-observable/</id>
-    <published>2017-05-04T16:00:00.000Z</published>
-    <updated>2018-08-28T16:18:55.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>前陣子有幾個很突出的函式庫，專門處理 redux 當中非同步的 action。最簡單暴力有效的方法是 <code>redux-thunk</code>，的確，一般的 ajax call 或是簡單的發送非同步請求時，thunk 能夠很直覺也很方便地完成我們要的需求。</p><p>但，如果是更複雜的應用呢？比如說：</p><ul><li>為了減少伺服器的負擔，我們只想要對使用者最後的操作做處理</li><li>如果發送請求之後，在還沒取得回應之前，我們想要取消請求</li></ul><p>如果我們要在 action 裡頭對這些請求做判斷，很快這些 action 就會變得肥大臃腫，逐漸難以維護。而且，thunk 並沒有辦法取消請求。</p><p>這篇文章會透過範例，介紹 <code>redux-saga</code> 跟 <code>redux-observable</code>，並且分析兩者的不同之處，最後再來做比較。</p><h2 id="要解決什麼問題？"><a href="#要解決什麼問題？" class="headerlink" title="要解決什麼問題？"></a>要解決什麼問題？</h2><p>這兩個函式庫雖然風格非常不同，但是要解決的問題是相同的，<strong>有效管理 side effect</strong>。而最大的不同點在於，<code>redux-observable</code> 使用 RxJS 實作，而 <code>redux-thunk</code> 使用 es6 的 generator。</p><p>所有解決非同步的方式都有一種目的，<strong>讓非同步的操作看起來像是同步的</strong>。</p><h4 id="callback"><a href="#callback" class="headerlink" title="callback"></a>callback</h4><p>最剛開始的解決方案是 callback，但缺點顯然易見，很快就會因為多層牽套的關係導致越深層的程式碼越來越難維護。</p><h4 id="Event"><a href="#Event" class="headerlink" title="Event"></a>Event</h4><p>後來，採用監聽 event 的方式，我們可以很快地對事件變化做特定的行為，這在簡單的非同步狀況下可以有效解決問題，但如果是事件同時併發，或是監聽多個事件的話，一樣會出現 callback 的問題。</p><h4 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h4><p>promise 把之前的 callback 做扁平化，任何的操作可以用 <code>then(resolve, reject)</code> 的方式達成，同時 Promise 也有提供<code>all</code> 之類的操作對多事件統一處理。</p><h3 id="ReactiveX"><a href="#ReactiveX" class="headerlink" title="ReactiveX"></a>ReactiveX</h3><p>什麼是 functional reactive programming</p><p>簡稱為 RxJS 在去年七月份左右逐漸竄紅，主要的概念在於提供一連串的 functional API 操作 Observable Stream。</p><p><a href="http://queue.acm.org/detail.cfm?id=2169076" target="_blank" rel="noopener">Your mouse is database</a></p><p>這篇文章的將 UI 上的事件操作都當作無止盡的 stream</p><p><a href="https://www.wikiwand.com/en/Observer_pattern" target="_blank" rel="noopener">wiki observer pattern</a></p><p>和一般的 observer 的不同點在於，如果一個 Observable 物件沒有接收到 <code>subscribe</code> 方法時，並不會開始流動。</p><p>reactive，對資料的變動做出反應。</p><p>將所有的資料都視為 observable stream，統一用 Observable 處理。</p><p><a href="https://egghead.io/lessons/rxjs-reactive-programming-what-is-rxjs?course=introduction-to-reactive-programming" target="_blank" rel="noopener">reactive programming</a></p><h3 id="redux-observable"><a href="#redux-observable" class="headerlink" title="redux-observable"></a>redux-observable</h3><p>observable 是什麼？其實這個名詞並不是新玩意，在 UI 上我們也常常使用 observer 的概念。例如 <code>addEventListener(eventType, handler)</code>。</p><blockquote><p>監聽畫面上的某個事件，並且對此事件做相對應的處理，這就是 observer。</p></blockquote><p>當然，這樣的概念很廣泛，事實上我們也不需要過度的解釋名詞。</p><p>在 Rx 當中，我們將所有事件的組合當作一個資料流</p><h2 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h2><p>這邊我沒辦法很明確地說這兩個函式庫適合的場景，因為這兩個函式庫要解決的問題其實非常類似，只是手法不同而已。</p><p>如果你先前就已經具備了足夠的 RxJS 的知識，比較習慣 functional reactive programming 的話，那麼 <code>redux-observable</code> 很適合勝任這個工作。</p><p>又或許，在團隊裡頭技術的迭代較快，可能今年 react，明年變成 Angular(哪家公司會這樣做XD)，那麼選擇 <code>redux-observable</code> 會在之後技術線改變時較容易修改，因為 Angular2 本身配備了 RxJS，搬移的成本較低。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;前陣子有幾個很突出的函式庫，專門處理 redux 當中非同步的 action。最簡單暴力有效的方法是 &lt;code&gt;redux-thunk&lt;/code&gt;，的確，一般的 ajax call 或是簡單的發送非同步請求時，thunk 能夠很直覺也很方便地完成我們要的需求。&lt;/p&gt;
-
-      
-    
-    </summary>
-    
-      <category term="前端" scheme="http://kjj6198.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
-    
-    
-      <category term="redux" scheme="http://kjj6198.github.io/tags/redux/"/>
-    
-      <category term="saga pattern" scheme="http://kjj6198.github.io/tags/saga-pattern/"/>
-    
-      <category term="observable" scheme="http://kjj6198.github.io/tags/observable/"/>
-    
-      <category term="RxJS" scheme="http://kjj6198.github.io/tags/RxJS/"/>
     
   </entry>
   
