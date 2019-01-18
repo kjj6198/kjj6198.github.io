@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    <title>和 CORS 與 cookie 打交道 | 欠擬合 | UNder-fitting</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="CORS,cookie" />
+    
+    <meta name="description" content="前言CORS 與 cookie 在前端是個蠻重要的問題，不過大多數在開發的時候，因為前後端的 domain 時常是相同的，所以很少去 care 這些問題。或者只要要求後端將 Access-Control-Allow-Origin: * 開好開滿就對了，很少去理解背後運作的機制。 針對這個問題，MDN 上其實有個非常詳盡的解說，所以這篇文章主要在於整理重點以及在實際操作上時常發生的問題。 同源政策（">
+<meta name="keywords" content="CORS,cookie">
+<meta property="og:type" content="article">
+<meta property="og:title" content="和 CORS 與 cookie 打交道">
+<meta property="og:url" content="http://kjj6198.github.io/2019/01/18/cors-and-cookie/index.html">
+<meta property="og:site_name" content="欠擬合 | UNder-fitting">
+<meta property="og:description" content="前言CORS 與 cookie 在前端是個蠻重要的問題，不過大多數在開發的時候，因為前後端的 domain 時常是相同的，所以很少去 care 這些問題。或者只要要求後端將 Access-Control-Allow-Origin: * 開好開滿就對了，很少去理解背後運作的機制。 針對這個問題，MDN 上其實有個非常詳盡的解說，所以這篇文章主要在於整理重點以及在實際操作上時常發生的問題。 同源政策（">
+<meta property="og:locale" content="zh-TW">
+<meta property="og:image" content="https://user-images.githubusercontent.com/6581081/51367359-24674b80-1b25-11e9-9121-ab64e36e0e9e.png">
+<meta property="og:updated_time" content="2019-01-18T06:16:02.669Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="和 CORS 與 cookie 打交道">
+<meta name="twitter:description" content="前言CORS 與 cookie 在前端是個蠻重要的問題，不過大多數在開發的時候，因為前後端的 domain 時常是相同的，所以很少去 care 這些問題。或者只要要求後端將 Access-Control-Allow-Origin: * 開好開滿就對了，很少去理解背後運作的機制。 針對這個問題，MDN 上其實有個非常詳盡的解說，所以這篇文章主要在於整理重點以及在實際操作上時常發生的問題。 同源政策（">
+<meta name="twitter:image" content="https://user-images.githubusercontent.com/6581081/51367359-24674b80-1b25-11e9-9121-ab64e36e0e9e.png">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="欠擬合 | UNder-fitting" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/imgs/favicon.ico" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-56408806-4', 'auto');
+ga('send', 'pageview');
+
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+    
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                      欠擬合 | UNder-fitting
+                    </h1>
+                    <img src="https://pbs.twimg.com/profile_images/915528631065047040/5-Do3QWr_400x400.jpg" alt="" class="avatar">
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">Fun Driven Frontend Developer 最近的夢想是能夠光榮地回鄉工作。
+如果你也對日劇、機器學習、日文、前後端開發、React、程式、咖啡有興趣，或許我們可以聊聊
+</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">主頁</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://kjj6198.github.io/resume">關於</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://www.shurado.com?ref=blog">日語八百屋</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜尋" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要找..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '頁面',
+            CATEGORIES: '分類',
+            TAGS: '標籤',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/前端/">前端</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-cors-and-cookie" class="article article-single article-type-post" itemscope
+  itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+    
+        <h1 class="article-title" itemprop="name">
+        和 CORS 與 cookie 打交道
+        </h1>
+    
+
+      </header>
+      
+        
+          <div class="article-subtitle">
+            <a href="/2019/01/18/cors-and-cookie/" class="article-date">
+    <time datetime="2019-01-18T06:13:25.660Z" itemprop="datePublished">2019-01-18</time>
+</a>
+              
+    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CORS/">CORS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cookie/">cookie</a></li></ul>
+
+          </div>
+          
+            <div class="article-entry" itemprop="articleBody">
+              <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>CORS 與 cookie 在前端是個蠻重要的問題，不過大多數在開發的時候，因為前後端的 domain 時常是相同的，所以很少去 care 這些問題。或者只要要求後端將 <code>Access-Control-Allow-Origin: *</code> 開好開滿就對了，很少去理解背後運作的機制。</p>
+<p>針對這個問題，<a href="https://developer.mozilla.org/zh-TW/docs/Web/HTTP/CORS" target="_blank" rel="noopener">MDN</a> 上其實有個非常詳盡的解說，所以這篇文章主要在於整理重點以及在實際操作上時常發生的問題。</p>
+<h2 id="同源政策（same-origin-policy）"><a href="#同源政策（same-origin-policy）" class="headerlink" title="同源政策（same-origin policy）"></a>同源政策（same-origin policy）</h2><p>為了防止 javascript 在網頁上隨地撒野，同源政策規定了某些特定的資源、程式碼，必須在<strong>同源</strong>的情況下才可以存取。</p>
+<p>那麼，什麼是同源呢？一份 <code>document</code> 的來源，由 protocol, host, port 來定義。也就是說如果文件 1 來自 <code>http://kalan.com</code>，而文件 2 來自於 <code>https://kalan.com</code> 他們就不算同源；那如果是 subdomain 呢？像是 <code>https://api.foobar.com</code> 跟<code>https://app.foobar.com</code>。因為他們的 host 不同，所以也不算同一個 origin。</p>
+<p>而有些資源是本來就能夠透過跨來源取得的：</p>
+<ul>
+<li><code>&lt;img /&gt;</code></li>
+<li><code>&lt;video /&gt;</code>, <code>&lt;audio /&gt;</code></li>
+<li><code>&lt;iframe /&gt;</code>：可以透過定義 header 來防止他人嵌入</li>
+<li>透過 <code>&lt;link rel=&quot;stylesheet&quot; href /&gt;</code> 載入的 CSS 腳本</li>
+<li><code>&lt;script src=&quot;&quot; /&gt;</code> 載入的 Javascript</li>
+</ul>
+<p>而透過程式碼發出的跨來源請求則會受到同源政策的限制（如 Fetch, XHR）。</p>
+<p>很顯然地，這樣的政策太過嚴格了。如果都要限制在同源政策下的話，前後端開發會非常難以進行，也沒辦法用 XHR 的方式套用其他 SDK 的 API。也因此出現了 CORS（Cross-Origin Resource Sharing）的機制。</p>
+<h2 id="CORS（Cross-Origin-Resource-Sharing）"><a href="#CORS（Cross-Origin-Resource-Sharing）" class="headerlink" title="CORS（Cross-Origin Resource Sharing）"></a>CORS（Cross-Origin Resource Sharing）</h2><p>很多人都覺得 CORS 是前端才需要具備的知識。不過 CORS 通常需要後端設定相關的 header，並且了解背後所具備的含義才有辦法正確運作。</p>
+<p>那麼跨來源請求是怎麼運作的呢？主要是由兩個 Header 來做相對的存取控制，<code>Origin</code> 和 <code>Access-Control-Allow-Origin</code>。</p>
+<p>只要發送請求時的 Origin 和回應的 header 中 <code>Access-Control-Allow-Origin</code> 的值相同，或是<code>Access-Control-Allow-Origin: *</code> （代表允許任何網域存取資源）</p>
+<p>如果不符合 CORS 的話，會顯示下列訊息：</p>
+<p><img width="1439" alt="2019-01-18 10 12 54" src="https://user-images.githubusercontent.com/6581081/51367359-24674b80-1b25-11e9-9121-ab64e36e0e9e.png"></p>
+<p>如果你嘗試去讀取回傳的物件，還會得到 warning。</p>
+<p>那麼…，我們如果按照提示所講的，將 fetch mode 改成 <code>no-cors</code> 會發生什麼事呢？</p>
+<p>的確，我們把惱人的錯誤訊息給處理掉了，但是情況似乎沒有比較好一點。</p>
+<p><code>no-cors</code> 並不是萬靈丹，就算使用了這個 mode，CORS 也不會因為這樣就打開大門，也就是你的請求並不會成功送出。也因此出現了 <code>SyntaxError: Unexpected end of input</code> 這個錯誤。這個 mode 通常是跟 service worker 搭配使用的。</p>
+<p>從上面這個實驗當中我們可以得知，<strong>要解除 CORS 的封印只有一招</strong>，就是在伺服器端加上正確 <code>Control-Access-Allow-Origin</code>（host 必須跟 origin 相同或是 <code>*</code>）。</p>
+<p>另外，CORS 這個機制只會運作在 javascript 送出 XHR 或 fetch 時，一般像是 curl 或 postman 並沒有這個機制，所以也因此常常在測試 API endpoint 時會忽略這項事情，導致前後端在測試 API 時有出入發生。</p>
+<p>有些跨來源請求不會發生 preflight，而有些請求則會，MDN 上寫的條件蠻清楚的：</p>
+<ol>
+<li>必須是 GET, HEAD, POST 其中一種方法</li>
+<li>除了 user-agent 自動設置的 header 和特定的 header 之外，不包含其他 header。可接受的 <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#Simple_requests" target="_blank" rel="noopener">headers</a></li>
+<li>若有 <code>Content-Type</code>（注意是 request header ，<strong>不是 response header</strong>），則必須是下列的值 <code>application/x-www-form-encoded</code>, <code>text/plain</code>, <code>multipart/form-data</code></li>
+</ol>
+<p>也就是說如果不滿足以上條件的話，就會發出 preflight 請求。</p>
+<p>我們試著改變 <code>Content-Type</code> 為 <code>application/json</code> 來達成 preflight 的要件（不為 <code>application/x-www-form-encoded</code>, <code>text/plain</code>, <code>multipart/form-data</code>）。</p>
+<h2 id="Preflight"><a href="#Preflight" class="headerlink" title="Preflight"></a>Preflight</h2><p>所謂的 preflight 就是請求會先以 HTTP OPTION 的方式送去另外一個網域敲門，確認沒問題後才會送出真正的請求。一旦觸發了這個條件，要做的事情就會變得麻煩許多。</p>
+<ol>
+<li>你必須加入一個 OPTIONS 的相同 api endpoint，<strong>並且設定 Access-Control-Allow-Origin 來符合 CORS 要件</strong></li>
+<li>你必須加入 <code>Access-Control-Allow-Headers</code>，且必須包含<strong>所有</strong>不在條件內 header，否則無法通過。</li>
+</ol>
+<p>如果沒有通過 preflight check 的話，會得到錯誤訊息如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Access to fetch at &apos;http://localhost:3001/trigger-preflight&apos; from origin &apos;http://localhost:3000&apos; has been blocked by CORS policy:</span><br><span class="line">Request header field content-type is not allowed by Access-Control-Allow-Headers in preflight response.</span><br></pre></td></tr></table></figure>
+<p>或是你沒有在 <code>OPTIONS</code> 的回應標頭裡加上 <code>Access-Control-Allow-Origin</code>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Access to fetch at &apos;http://localhost:3001/trigger-preflight&apos; from origin &apos;http://localhost:3000&apos; has been blocked by CORS policy: Response to preflight request doesn&apos;t pass access control check: No &apos;Access-Control-Allow-Origin&apos; header is present on the requested resource. If an opaque response serves your needs, set the request&apos;s mode to &apos;no-cors&apos; to fetch the resource with CORS disabled.</span><br></pre></td></tr></table></figure>
+<p>如果成功的話，你會看到 network 裡頭有兩個請求，一個是 OPTIONS，另一個則是真正的請求。</p>
+<p>如果我們加上一個自製的 header 呢？根據 MDN 所定義的要件，也應該觸發 preflight 請求才對，我們加上一個 <code>X-Access-Token</code> 看看會發生什麼事。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">fetch(<span class="string">'http://localhost:3001/trigger-preflight'</span>, &#123;</span><br><span class="line">  headers: &#123; <span class="string">'X-Access-Token'</span>: <span class="string">'dontbeserious'</span> &#125;</span><br><span class="line">&#125;)</span><br><span class="line">  .then(<span class="function"><span class="params">res</span> =&gt;</span> res.json())</span><br><span class="line">  .then(log);</span><br></pre></td></tr></table></figure>
+<p><img width="1439" alt="2019-01-18 11 20 07" src="https://user-images.githubusercontent.com/6581081/51367415-71e3b880-1b25-11e9-9520-3da8a344c8db.png"></p>
+<p>的確無法通過 preflight，如果要通過的話，必須再把 <code>X-Access-Token</code> 加入 <code>Access-Control-Allow-Headers</code> 中。</p>
+<h2 id="附帶身份驗證的請求"><a href="#附帶身份驗證的請求" class="headerlink" title="附帶身份驗證的請求"></a>附帶身份驗證的請求</h2><p>cookie 並不能跨域傳遞，也就是說不同 origin 中的 cookie 沒辦法互相傳遞及存取，不然就天下大亂了。不過如果你在 a 網域送出了 b 網域的請求，且 b 網域回傳了 cookie 的訊息，那麼在 a 網域會以 b 網域的形式儲存一份 cookie，不過如果沒有設定 <code>withCredentials</code> 或是 <code>credentials: ‘include’</code> 的話，就算伺服器有回傳 <code>Set-Cookie</code>，一樣不會被寫入。像是下圖：</p>
+<p><img width="1046" alt="2019-01-18 1 10 06" src="https://user-images.githubusercontent.com/6581081/51367429-89bb3c80-1b25-11e9-8c37-bd3849bc8385.png"></p>
+<p><img width="1237" alt="2019-01-18 1 10 18" src="https://user-images.githubusercontent.com/6581081/51367439-950e6800-1b25-11e9-85a4-84a8ee182171.png"></p>
+<p>在一般情況下如果再使用 b 網域的 API，cookie 是不會自動被送出去的。這個情況下，你必須在 <code>XHR</code> 設定 <code>withCredentials</code> 或是 <code>fetch</code> 的選項中設置 <code>{ credentials: &#39;include&#39; }</code>，因為這也是一個跨域請求，所以也必須遵照 CORS 要件加入 <code>Access-Control-Allow-Origin</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fetch(<span class="string">`<span class="subst">$&#123;hostname&#125;</span>/cookie`</span>, &#123;</span><br><span class="line">  method: <span class="string">'POST'</span>,</span><br><span class="line">  credentials: <span class="string">'include'</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Access to fetch at &apos;http://localhost:3001/cookie&apos; from origin &apos;http://localhost:3000&apos; has been blocked by CORS policy: The value of the &apos;Access-Control-Allow-Origin&apos; header in the response must not be the wildcard &apos;*&apos; when the request&apos;s credentials mode is &apos;include&apos;.</span><br></pre></td></tr></table></figure>
+<p>為了避免安全性的問題，瀏覽器還有規範 <code>Access-Control-Allow-Origin</code> 不能是 <code>*</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Access to fetch at &apos;http://localhost:3001/cookie&apos; from origin &apos;http://localhost:3000&apos; has been blocked by CORS policy: The value of the &apos;Access-Control-Allow-Credentials&apos; header in the response is &apos;&apos; which must be &apos;true&apos; when the request&apos;s credentials mode is &apos;include&apos;.</span><br></pre></td></tr></table></figure>
+<p>不過光是這樣還不夠，瀏覽器會自動拒絕沒有 <code>Access-Control-Allow-Credentials</code> 的回應，也因此如果要能夠將身份訊息傳到跨網域的伺服器當中，必須額外加上 <code>Access-Control-Allow-Credentials: true</code>。如果都有設定成功，應該會像下圖這樣，在 Request Cookie 可以看到 cookie 被成功送出。</p>
+<p><img width="1049" alt="2019-01-18 1 11 37" src="https://user-images.githubusercontent.com/6581081/51368711-87f47780-1b2b-11e9-9f22-149a189c3c4e.png"></p>
+<p>好了，即使你成功設定了這些東西，你還是有可能沒辦法將 cookie 送到伺服器當中。關於這一點，可能是下列幾種情形：</p>
+<h5 id="1-使用者封鎖了此網域的-cookie"><a href="#1-使用者封鎖了此網域的-cookie" class="headerlink" title="1. 使用者封鎖了此網域的 cookie"></a>1. 使用者封鎖了此網域的 cookie</h5><p>可能使用者把你加入了黑名單，導致 cookie 無法成功送出</p>
+<p>解決方法：</p>
+<ul>
+<li>改網域</li>
+<li><del>檢討自己為什麼被使用者封鎖</del></li>
+</ul>
+<h5 id="2-使用者阻擋所有外部網站的-cookie"><a href="#2-使用者阻擋所有外部網站的-cookie" class="headerlink" title="2. 使用者阻擋所有外部網站的 cookie"></a>2. 使用者阻擋所有外部網站的 cookie</h5><p>Safari 有時會被開啟，在 debug 的時候嚐了不少苦頭。</p>
+<p><img src="https://user-images.githubusercontent.com/6581081/51367457-ab1c2880-1b25-11e9-985f-d00cd1d8e787.png" alt="2019-01-18 1 13 21"></p>
+<h2 id="後記"><a href="#後記" class="headerlink" title="後記"></a>後記</h2><p>要處理 CORS 是件吃力不討好的事情，尤其是有時忘記加上 Access-Control-Allow-Origin 或是 Access-Control-Allow-Credentials，再跑 CI/CD、部署可能又是一天後的事了。這次把一些常見的問題整理起來，希望之後如果再有類似的情形可以知道怎麼處理。</p>
+<p>不過現在有 AWS API gateway，可以幫你加上需要的 header 而不用動到主程式碼，或者乾脆一勞永逸掛一層 proxy 在同一個 domain 下之類的。</p>
+<h3 id="參考文章"><a href="#參考文章" class="headerlink" title="參考文章"></a>參考文章</h3><ul>
+<li><a href="https://developer.mozilla.org/zh-TW/docs/Web/HTTP/CORS" target="_blank" rel="noopener">https://developer.mozilla.org/zh-TW/docs/Web/HTTP/CORS</a></li>
+</ul>
+
+            </div>
+            <footer class="article-footer">
+              
+
+
+
+    <a data-url="http://kjj6198.github.io/2019/01/18/cors-and-cookie/" data-id="cjr1ni94l00143e5tdbx75mu2" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            </footer>
+  </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>關注我 :</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="user" href="https://about.me/kalan" target="_blank">
+                        <i class="icon fa fa-user"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="https://twitter.com/kalanyei" target="_blank">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://www.facebook.com/justkeiyi" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/kjj6198" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="linkedin" href="https://www.linkedin.com/in/%E6%84%B7%E5%A5%95-%E9%99%B3-8595b1128/" target="_blank">
+                        <i class="icon fa fa-linkedin"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="medium" href="https://medium.com/@Shurado" target="_blank">
+                        <i class="icon fa fa-medium"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/atom.xml" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2019/01/15/japan-software-noun/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">日本軟體業常見名詞轉換</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="no-thumbnail">
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2019/01/18/cors-and-cookie/" class="title">和 CORS 與 cookie 打交道</a></p>
+                            <p class="item-date"><time datetime="2019-01-18T06:13:25.660Z" itemprop="datePublished">2019-01-18</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Software/">Software</a></p>
+                            <p class="item-title"><a href="/2019/01/15/japan-software-noun/" class="title">日本軟體業常見名詞轉換</a></p>
+                            <p class="item-date"><time datetime="2019-01-15T09:52:38.627Z" itemprop="datePublished">2019-01-15</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/golang/">golang</a></p>
+                            <p class="item-title"><a href="/2018/09/03/golang-env-variable/" class="title">【golang 筆記】 如何為你的專案設定環境變數</a></p>
+                            <p class="item-date"><time datetime="2018-09-03T15:02:53.000Z" itemprop="datePublished">2018-09-03</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/讀書心得/">讀書心得</a></p>
+                            <p class="item-title"><a href="/2018/08/29/isaka-killer/" class="title">瓢蟲 - 伊坂殺手系列第二作</a></p>
+                            <p class="item-date"><time datetime="2018-08-28T16:24:39.000Z" itemprop="datePublished">2018-08-29</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/前端/vue/">vue</a></p>
+                            <p class="item-title"><a href="/2018/08/20/vuex-dynamic-import/" class="title">透過 vuex 與 webpack dynamic import 動態載入 module</a></p>
+                            <p class="item-date"><time datetime="2018-08-19T16:00:00.000Z" itemprop="datePublished">2018-08-20</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">分類</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AWS/">AWS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Software/">Software</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/golang/">golang</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/rails/">rails</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">22</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/前端/vue/">vue</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端週刊/">前端週刊</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日語學習/">日語學習</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/機器學習/">機器學習</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/演算法/">演算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/程式筆記/">程式筆記</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/讀書心得/">讀書心得</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/雜談/">雜談</a><span class="category-list-count">6</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">歸檔</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">六月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">二月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">一月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">十月 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">九月 2014</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit" style="text-align: center;">
+                <p>&copy; 2019 Kalan</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_shortname = 'frontendclothesline';
+    
+    
+    var disqus_url = 'http://kjj6198.github.io/2019/01/18/cors-and-cookie/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</body>
+</html>
