@@ -3,20 +3,25 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     
-    <title>標籤：: 空難 | 欠擬合 | UNder-fitting</title>
+    <title>react-hot-loader 無法使用 react-hooks | 欠擬合 | UNder-fitting</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-    <meta name="description" content="Fun Driven Frontend Developer 最近的夢想是能夠光榮地回鄉工作。 interested in #frontend #react #redux #rxjs #japanese #machine-learning">
+        <meta name="keywords" content="" />
+    
+    <meta name="description" content="雖然說 react-hooks 也有一陣子了，不過那個時候我還正在服役，只能乾瞪眼。前幾天想把自己的 boileraplate 更新一下，發現在使用 react-hot-loader 時會沒辦法使用 react-hooks 相關的 API（如 useEffect, useMemo 等等），會出現如下圖的錯誤： ​​ 查了一下 issue，發現維護者本人說：  Yes. RHL is 100% no">
 <meta name="keywords" content="前端 工程師 程式 機器學習 frontend frontend redux rxjs">
-<meta property="og:type" content="website">
-<meta property="og:title" content="欠擬合 | UNder-fitting">
-<meta property="og:url" content="http://kjj6198.github.io/tags/空難/index.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="react-hot-loader 無法使用 react-hooks">
+<meta property="og:url" content="http://kjj6198.github.io/2019/01/21/react-hot-loader-hooks/index.html">
 <meta property="og:site_name" content="欠擬合 | UNder-fitting">
-<meta property="og:description" content="Fun Driven Frontend Developer 最近的夢想是能夠光榮地回鄉工作。 interested in #frontend #react #redux #rxjs #japanese #machine-learning">
+<meta property="og:description" content="雖然說 react-hooks 也有一陣子了，不過那個時候我還正在服役，只能乾瞪眼。前幾天想把自己的 boileraplate 更新一下，發現在使用 react-hot-loader 時會沒辦法使用 react-hooks 相關的 API（如 useEffect, useMemo 等等），會出現如下圖的錯誤： ​​ 查了一下 issue，發現維護者本人說：  Yes. RHL is 100% no">
 <meta property="og:locale" content="zh-TW">
+<meta property="og:image" content="https://yaoya.s3.amazonaws.com/blog/2019-01-21-042437.png">
+<meta property="og:updated_time" content="2019-01-21T04:25:34.235Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="欠擬合 | UNder-fitting">
-<meta name="twitter:description" content="Fun Driven Frontend Developer 最近的夢想是能夠光榮地回鄉工作。 interested in #frontend #react #redux #rxjs #japanese #machine-learning">
+<meta name="twitter:title" content="react-hot-loader 無法使用 react-hooks">
+<meta name="twitter:description" content="雖然說 react-hooks 也有一陣子了，不過那個時候我還正在服役，只能乾瞪眼。前幾天想把自己的 boileraplate 更新一下，發現在使用 react-hot-loader 時會沒辦法使用 react-hooks 相關的 API（如 useEffect, useMemo 等等），會出現如下圖的錯誤： ​​ 查了一下 issue，發現維護者本人說：  Yes. RHL is 100% no">
+<meta name="twitter:image" content="https://yaoya.s3.amazonaws.com/blog/2019-01-21-042437.png">
     
 
     
@@ -142,56 +147,126 @@ ga('send', 'pageview');
                         <div class="main-body-header">
     <h1 class="header">
     
-    <i class="icon fa fa-tag"></i>標籤：: <em>空難</em>
+    <a class="page-title-link" href="/categories/前端/">前端</a>
     </h1>
 </div>
                         <div class="main-body-content">
-                            
-
+                            <article id="post-react-hot-loader-hooks" class="article article-single article-type-post" itemscope
+  itemprop="blogPost">
+  <div class="article-inner">
     
-    
-        
-        
-        <section class="archives-wrap">
-            <div class="archive-year-wrap">
-                <a href="/archives/2017" class="archive-year"><i class="icon fa fa-calendar-o"></i>2017</a>
-            </div>
-            <div class="archives">
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        <div class="article-meta">
-            <p class="category">
-            <a class="article-category-link" href="/categories/雜談/">雜談</a>
-            </p>
-            <p class="date"><time datetime="2017-08-05T12:00:07.000Z" itemprop="datePublished">2017-08-05</time></p>
-        </div>
+      <header class="article-header">
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2017/08/05/aircrash-extreme-weather/">飛機能飛嗎 — 天氣造成的空難</a>
+        react-hot-loader 無法使用 react-hooks
         </h1>
     
 
-        <p class="article-excerpt">
-            我並不是機師或是受過訓練的專業人士，只是剛好家住在機場附近，喜歡看看飛機了解一下空難而已，以上言論難免有錯誤之處，盡請斧正。另外本篇文章可能會造成閱讀者的情緒不安或焦躁，在閱讀前請三思
+      </header>
+      
+        
+          <div class="article-subtitle">
+            <a href="/2019/01/21/react-hot-loader-hooks/" class="article-date">
+    <time datetime="2019-01-21T03:06:17.453Z" itemprop="datePublished">2019-01-21</time>
+</a>
+              
+          </div>
+          
+            <div class="article-entry" itemprop="articleBody">
+              <p>雖然說 <code>react-hooks</code> 也有一陣子了，不過那個時候我還正在服役，只能乾瞪眼。前幾天想把自己的 boileraplate 更新一下，發現在使用 react-hot-loader 時會沒辦法使用 <code>react-hooks</code> 相關的 API（如 useEffect, useMemo 等等），會出現如下圖的錯誤：</p>
+<p>​​<img src="https://yaoya.s3.amazonaws.com/blog/2019-01-21-042437.png" alt="Object(...) is not function"></p>
+<p>查了一下 <a href="https://github.com/gaearon/react-hot-loader/issues/1088" target="_blank" rel="noopener">issue</a>，發現維護者本人說：</p>
+<blockquote>
+<p>Yes. RHL is 100% not compatible with hooks. There is just a few reasons behind it.</p>
+<ul>
+<li>SFC are being converted to Class components. There is reason - to be able to <code>forceUpdate</code> on HMR, as long there is no “update” method on SFC. I am looking for other way of forcing the update (like <a href="https://github.com/facebook/create-react-app/blob/abe07e9538f0d548eefc753949a80376c9b89f8c/packages/react-dev-utils/forceUpdateHook.js#L84" target="_blank" rel="noopener">this</a>. So RHL is <strong>killing SFC</strong>.</li>
+<li>“hotReplacementRender”. RHL is trying to do React’s job, and render the <em>old</em> and the <em>new</em> app, to merge them. So, obviously, that’s broken now.</li>
+</ul>
+<p>I am going to draft a PR, to mitigate both problems. It will work, but not today.</p>
+</blockquote>
+<p>看來是因爲 react-hot-loader 裡頭的機制造成的問題。雖然看了一下 README，官方表示已經可以支援 react-hooks，但我發現還是不行，仍然會出現一樣的問題。</p>
+<p>目前的解決方式是將 <code>react-hot-loader</code> 升級到 <code>4.6.3</code>，並且將 <code>react</code> 跟 <code>react-dom</code> 升級到 <code>16.8.0-alpha.1</code>。希望趕快發佈正式版本 QQ</p>
 
-最近這幾天長榮員工因尼莎颱風集體請天災假，除了引起廣大迴響跟在 PTT 上實況飛機降落情形外，好像也就這樣了。剛好天時地利，寫篇關於天氣造成的空難，希望能夠讓各位（以及自己）更了解天氣對飛機產生的影響。
-剛搬完新...
-        </p>
-    </div>
+            </div>
+            <footer class="article-footer">
+              
+
+
+
+    <a data-url="http://kjj6198.github.io/2019/01/21/react-hot-loader-hooks/" data-id="cjr5tvisw0023nm5t44l905yk" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            </footer>
+  </div>
 </article>
 
+    <section id="comments">
     
-        </div>
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
     
-
-
-    </div></section>
+    </section>
 
 
 
@@ -261,6 +336,19 @@ ga('send', 'pageview');
             
         </ul>
     </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2019/01/18/cors-and-cookie/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">和 CORS 與 cookie 打交道</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
     
     <div class="widgets-container">
         
@@ -360,11 +448,13 @@ ga('send', 'pageview');
     var disqus_shortname = 'frontendclothesline';
     
     
+    var disqus_url = 'http://kjj6198.github.io/2019/01/21/react-hot-loader-hooks/';
+    
     (function() {
     var dsq = document.createElement('script');
     dsq.type = 'text/javascript';
     dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
     </script>
