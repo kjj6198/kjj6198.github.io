@@ -3,20 +3,23 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     
-    <title>分類：: 前端週刊 | 欠擬合 | UNder-fitting</title>
+    <title>新的取消請求方式 - AbortController | 欠擬合 | UNder-fitting</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-    <meta name="description" content="Fun Driven Frontend Developer 最近的夢想是能夠光榮地回鄉工作。 interested in #frontend #react #redux #rxjs #japanese #machine-learning">
+        <meta name="keywords" content="" />
+    
+    <meta name="description" content="在前端當中，我們主要可以透過兩種方式來發送請求：XHR 跟 Fetch。XHR 是從，嗯…，很久以前就有的 API。不過因為設定上很麻煩，所以時常被包裝成更高階的 API 使用，像是 jQuery 的 getJSON、axios、RxJS 的 AjaxObservable 等等。 而近幾年隨著 Promise 逐漸流行的 Fetch API 可以大幅改進這些問題。除了回傳值為 Promise，方便">
 <meta name="keywords" content="前端 工程師 程式 機器學習 frontend frontend redux rxjs">
-<meta property="og:type" content="website">
-<meta property="og:title" content="欠擬合 | UNder-fitting">
-<meta property="og:url" content="http://kjj6198.github.io/categories/前端週刊/index.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="新的取消請求方式 - AbortController">
+<meta property="og:url" content="http://kjj6198.github.io/2019/01/21/abort-controller/index.html">
 <meta property="og:site_name" content="欠擬合 | UNder-fitting">
-<meta property="og:description" content="Fun Driven Frontend Developer 最近的夢想是能夠光榮地回鄉工作。 interested in #frontend #react #redux #rxjs #japanese #machine-learning">
+<meta property="og:description" content="在前端當中，我們主要可以透過兩種方式來發送請求：XHR 跟 Fetch。XHR 是從，嗯…，很久以前就有的 API。不過因為設定上很麻煩，所以時常被包裝成更高階的 API 使用，像是 jQuery 的 getJSON、axios、RxJS 的 AjaxObservable 等等。 而近幾年隨著 Promise 逐漸流行的 Fetch API 可以大幅改進這些問題。除了回傳值為 Promise，方便">
 <meta property="og:locale" content="zh-TW">
+<meta property="og:updated_time" content="2019-01-21T07:48:11.035Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="欠擬合 | UNder-fitting">
-<meta name="twitter:description" content="Fun Driven Frontend Developer 最近的夢想是能夠光榮地回鄉工作。 interested in #frontend #react #redux #rxjs #japanese #machine-learning">
+<meta name="twitter:title" content="新的取消請求方式 - AbortController">
+<meta name="twitter:description" content="在前端當中，我們主要可以透過兩種方式來發送請求：XHR 跟 Fetch。XHR 是從，嗯…，很久以前就有的 API。不過因為設定上很麻煩，所以時常被包裝成更高階的 API 使用，像是 jQuery 的 getJSON、axios、RxJS 的 AjaxObservable 等等。 而近幾年隨著 Promise 逐漸流行的 Fetch API 可以大幅改進這些問題。除了回傳值為 Promise，方便">
     
 
     
@@ -142,153 +145,129 @@ ga('send', 'pageview');
                         <div class="main-body-header">
     <h1 class="header">
     
-    <i class="icon fa fa-folder-open"></i>分類：: <em class="page-title-link">前端週刊</em>
+    <a class="page-title-link" href="/categories/前端/">前端</a>
     </h1>
 </div>
                         <div class="main-body-content">
-                            
+                            <article id="post-abort-controller" class="article article-single article-type-post" itemscope
+  itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+    
+        <h1 class="article-title" itemprop="name">
+        新的取消請求方式 - AbortController
+        </h1>
+    
 
-    
-    
+      </header>
+      
         
-        
-        <section class="archives-wrap">
-            <div class="archive-year-wrap">
-                <a href="/archives/2016" class="archive-year"><i class="icon fa fa-calendar-o"></i>2016</a>
+          <div class="article-subtitle">
+            <a href="/2019/01/21/abort-controller/" class="article-date">
+    <time datetime="2019-01-20T16:00:00.000Z" itemprop="datePublished">2019-01-21</time>
+</a>
+              
+          </div>
+          
+            <div class="article-entry" itemprop="articleBody">
+              <p>在前端當中，我們主要可以透過兩種方式來發送請求：<code>XHR</code> 跟 <code>Fetch</code>。XHR 是從，嗯…，很久以前就有的 API。不過因為設定上很麻煩，所以時常被包裝成更高階的 API 使用，像是 <code>jQuery</code> 的 <code>getJSON</code>、<code>axios</code>、RxJS 的 <code>AjaxObservable</code> 等等。</p>
+<p>而近幾年隨著 Promise 逐漸流行的 Fetch API 可以大幅改進這些問題。除了回傳值為 Promise，方便操作之外，API 也相當簡單。</p>
+<p>不過儘管如此，還是有一項致命的缺點。<strong>Fetch 無法取消請求</strong>，雖然我們可以透過 setTimeout 的方式讓回傳值被忽略，不過請求一樣會繼續等待。在 XHR 裡頭，我們可以用 <code>XMLHttpRequest.abort</code> 來做取消，但 fetch 當中並沒有類似的 API。</p>
+<p>直到最近！終於出現了新的救星，<code>AbortController</code></p>
+<blockquote>
+<p>The <strong>abort()</strong> method of the <a href="https://developer.mozilla.org/en-US/docs/Web/API/AbortController" target="_blank" rel="noopener"><code>AbortController</code></a> interface aborts a DOM request (e.g. a Fetch request) before it has completed. This is able to abort <a href="https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch" target="_blank" rel="noopener">fetch requests</a>, consumption of any response <a href="https://developer.mozilla.org/en-US/docs/Web/API/Body" target="_blank" rel="noopener"><code>Body</code></a>, and streams.</p>
+</blockquote>
+<p>使用方式很簡單</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> abortController = <span class="keyword">new</span> AbortController();</span><br><span class="line"><span class="keyword">const</span> signal = abortController.signal</span><br></pre></td></tr></table></figure>
+<p>然後再將 <code>signal</code> 傳入 fetch 就可以了。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fetch(<span class="string">'/long-running'</span>, &#123; <span class="attr">signal</span>: signal &#125;);</span><br></pre></td></tr></table></figure>
+<p>當你呼叫 <code>abortController.abort</code> 時，會透過 signal 傳到 fetch 裡頭。如果接收到 signal 時請求還沒完成，這個請求就會被取消。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fetch(<span class="string">'/long-running'</span>, &#123; <span class="attr">signal</span>: signal &#125;);</span><br><span class="line">setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> abortController.abort(), <span class="number">5000</span>);</span><br></pre></td></tr></table></figure>
+<p>如果在五秒內還沒完成請求，就會被取消。</p>
+<hr>
+<p>搭配 RxJS 包裝一下或許可以讓整個 API 更方便使用。不過目前<a href="https://caniuse.com/#search=AbortController" target="_blank" rel="noopener">瀏覽器的支援度</a>還沒有很好。</p>
+
             </div>
-            <div class="archives">
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        <div class="article-meta">
-            <p class="category">
-            <a class="article-category-link" href="/categories/前端週刊/">前端週刊</a>
-            </p>
-            <p class="date"><time datetime="2016-11-14T11:51:39.000Z" itemprop="datePublished">2016-11-14</time></p>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2016/11/14/javascript-note/">javascript 筆記</a>
-        </h1>
-    
+            <footer class="article-footer">
+              
 
-        <p class="article-excerpt">
-            這個禮拜不談「新」東西，多數會是關於網頁開發的重新思考。算是回過頭來漸漸補齊自己的技術債吧！比起前幾個禮拜所談的新東西，這一篇文章可能相對枯燥一點，當然篇幅也會比較長，但我認為這是必要的。
-這些東西在前端變化快速的時代下或許顯得不那麼重要，不過思考總是件好事。
-語義化標籤重新思考語義化這件事會有這個想法，是看到 instant article 的 html 架構，他們規範 instant arti...
-        </p>
-    </div>
+
+
+    <a data-url="http://kjj6198.github.io/2019/01/21/abort-controller/" data-id="cjr613xza0005n75tfnwvyn8k" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            </footer>
+  </div>
 </article>
 
+    <section id="comments">
     
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        <div class="article-meta">
-            <p class="category">
-            <a class="article-category-link" href="/categories/前端週刊/">前端週刊</a>
-            </p>
-            <p class="date"><time datetime="2016-11-13T16:00:00.000Z" itemprop="datePublished">2016-11-14</time></p>
-        </div>
         
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2016/11/14/webdevelopment-note3/">web development 筆記</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            這個禮拜在思考關於重構的東西，在前端還可以怎麼實踐。css 的部分已經有大致的雛形出來了，把相關的註解跟文件寫完之後再和大家分享心得。
-Get your ../../ outreference
-css 部分重構完之後，再來就是要對 js 下手了。目前比較困擾的幾個點有：
-
-component 初期的部分比較亂
-有些 flux、有些 redux
-
-再來是我認為最麻煩的，就是路徑管理的問題了，因為檔案...
-        </p>
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     </div>
-</article>
 
     
-        </div>
-    
-
-    
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        <div class="article-meta">
-            <p class="category">
-            <a class="article-category-link" href="/categories/前端週刊/">前端週刊</a>
-            </p>
-            <p class="date"><time datetime="2016-07-31T06:45:18.000Z" itemprop="datePublished">2016-07-31</time></p>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2016/07/31/javascript-note3/">webdevelopment 筆記</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            瀏覽器的字體渲染前陣子發現了 font-smoothing 的屬性，雖然 w3c 已經把他從標準刪除，但在 chrome 上面還是可以使用這個屬性。
-但令人好奇的是，其他瀏覽器的字體渲染方式呢？
-其實字型渲染是一個一直以來容易被忽略，卻又是極為重要的議題。因為網站的易讀性除了 layout 之外，再來就是字體了。
-為了確認網站在瀏覽器的一致性，稍微研究了一下字體渲染的方式。分享在這邊給大家做參考。...
-        </p>
-    </div>
-</article>
-
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        <div class="article-meta">
-            <p class="category">
-            <a class="article-category-link" href="/categories/前端週刊/">前端週刊</a>
-            </p>
-            <p class="date"><time datetime="2016-07-17T01:48:34.000Z" itemprop="datePublished">2016-07-17</time></p>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2016/07/17/javascript-note2/">javascript 筆記</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            別跟我說你懂 margin拿捏 margin 跟 padding 可以很容易地看出前端工程師對 CSS 的掌握程度。說真的超多眉眉角角的，不過看完文章發現原來 margin 的妙用這麼多。以後的實踐或許有比較容易的方法也說不定！
-MutationObserver這個鮮為人知的 API，被喜歡翻 MSDN 的我挖掘到了，基本上已經支持目前主流的瀏覽器（IE11+)。
-看完介紹會發現他很像事件，專門給...
-        </p>
-    </div>
-</article>
-
-    
-        </div>
-    
-
-
-    </div></section>
-
+    </section>
 
 
 
@@ -358,6 +337,19 @@ MutationObserver這個鮮為人知的 API，被喜歡翻 MSDN 的我挖掘到了
             
         </ul>
     </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2019/01/21/react-hot-loader-hooks/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">react-hot-loader 無法使用 react-hooks</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
     
     <div class="widgets-container">
         
@@ -457,11 +449,13 @@ MutationObserver這個鮮為人知的 API，被喜歡翻 MSDN 的我挖掘到了
     var disqus_shortname = 'frontendclothesline';
     
     
+    var disqus_url = 'http://kjj6198.github.io/2019/01/21/abort-controller/';
+    
     (function() {
     var dsq = document.createElement('script');
     dsq.type = 'text/javascript';
     dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
     </script>

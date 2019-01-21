@@ -8,7 +8,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://kjj6198.github.io/"/>
-  <updated>2019-01-21T04:26:10.098Z</updated>
+  <updated>2019-01-21T07:48:11.035Z</updated>
   <id>http://kjj6198.github.io/</id>
   
   <author>
@@ -17,6 +17,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>新的取消請求方式 - AbortController</title>
+    <link href="http://kjj6198.github.io/2019/01/21/abort-controller/"/>
+    <id>http://kjj6198.github.io/2019/01/21/abort-controller/</id>
+    <published>2019-01-20T16:00:00.000Z</published>
+    <updated>2019-01-21T07:48:11.035Z</updated>
+    
+    <content type="html"><![CDATA[<p>在前端當中，我們主要可以透過兩種方式來發送請求：<code>XHR</code> 跟 <code>Fetch</code>。XHR 是從，嗯…，很久以前就有的 API。不過因為設定上很麻煩，所以時常被包裝成更高階的 API 使用，像是 <code>jQuery</code> 的 <code>getJSON</code>、<code>axios</code>、RxJS 的 <code>AjaxObservable</code> 等等。</p><p>而近幾年隨著 Promise 逐漸流行的 Fetch API 可以大幅改進這些問題。除了回傳值為 Promise，方便操作之外，API 也相當簡單。</p><p>不過儘管如此，還是有一項致命的缺點。<strong>Fetch 無法取消請求</strong>，雖然我們可以透過 setTimeout 的方式讓回傳值被忽略，不過請求一樣會繼續等待。在 XHR 裡頭，我們可以用 <code>XMLHttpRequest.abort</code> 來做取消，但 fetch 當中並沒有類似的 API。</p><p>直到最近！終於出現了新的救星，<code>AbortController</code></p><blockquote><p>The <strong>abort()</strong> method of the <a href="https://developer.mozilla.org/en-US/docs/Web/API/AbortController" target="_blank" rel="noopener"><code>AbortController</code></a> interface aborts a DOM request (e.g. a Fetch request) before it has completed. This is able to abort <a href="https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch" target="_blank" rel="noopener">fetch requests</a>, consumption of any response <a href="https://developer.mozilla.org/en-US/docs/Web/API/Body" target="_blank" rel="noopener"><code>Body</code></a>, and streams.</p></blockquote><p>使用方式很簡單</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> abortController = <span class="keyword">new</span> AbortController();</span><br><span class="line"><span class="keyword">const</span> signal = abortController.signal</span><br></pre></td></tr></table></figure><p>然後再將 <code>signal</code> 傳入 fetch 就可以了。</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fetch(<span class="string">'/long-running'</span>, &#123; <span class="attr">signal</span>: signal &#125;);</span><br></pre></td></tr></table></figure><p>當你呼叫 <code>abortController.abort</code> 時，會透過 signal 傳到 fetch 裡頭。如果接收到 signal 時請求還沒完成，這個請求就會被取消。</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fetch(<span class="string">'/long-running'</span>, &#123; <span class="attr">signal</span>: signal &#125;);</span><br><span class="line">setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> abortController.abort(), <span class="number">5000</span>);</span><br></pre></td></tr></table></figure><p>如果在五秒內還沒完成請求，就會被取消。</p><hr><p>搭配 RxJS 包裝一下或許可以讓整個 API 更方便使用。不過目前<a href="https://caniuse.com/#search=AbortController" target="_blank" rel="noopener">瀏覽器的支援度</a>還沒有很好。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;在前端當中，我們主要可以透過兩種方式來發送請求：&lt;code&gt;XHR&lt;/code&gt; 跟 &lt;code&gt;Fetch&lt;/code&gt;。XHR 是從，嗯…，很久以前就有的 API。不過因為設定上很麻煩，所以時常被包裝成更高階的 API 使用，像是 &lt;code&gt;jQuery&lt;/code&gt;
+      
+    
+    </summary>
+    
+      <category term="前端" scheme="http://kjj6198.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>react-hot-loader 無法使用 react-hooks</title>
@@ -493,9 +516,9 @@
       <category term="前端" scheme="http://kjj6198.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
-      <category term="ramda" scheme="http://kjj6198.github.io/tags/ramda/"/>
-    
       <category term="javascript" scheme="http://kjj6198.github.io/tags/javascript/"/>
+    
+      <category term="ramda" scheme="http://kjj6198.github.io/tags/ramda/"/>
     
       <category term="function programming" scheme="http://kjj6198.github.io/tags/function-programming/"/>
     
@@ -524,36 +547,6 @@
     
     
       <category term="sass" scheme="http://kjj6198.github.io/tags/sass/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>飛機能飛嗎 — 天氣造成的空難</title>
-    <link href="http://kjj6198.github.io/2017/08/05/aircrash-extreme-weather/"/>
-    <id>http://kjj6198.github.io/2017/08/05/aircrash-extreme-weather/</id>
-    <published>2017-08-05T12:00:07.000Z</published>
-    <updated>2017-08-05T12:17:34.000Z</updated>
-    
-    <content type="html"><![CDATA[<p><em>我並不是機師或是受過訓練的專業人士，只是剛好家住在機場附近，喜歡看看飛機了解一下空難而已，以上言論難免有錯誤之處，盡請斧正。另外本篇文章可能會造成閱讀者的情緒不安或焦躁，在閱讀前請三思</em></p><p><img src="https://cdn-images-1.medium.com/max/2000/1*gHsRVWF0sgzs9OkDmN_7nQ.jpeg" alt="松山機場，飛機起飛"></p><p>最近這幾天長榮員工因尼莎颱風集體請天災假，除了引起廣大迴響跟在 PTT 上實況飛機降落情形外，好像也就這樣了。剛好天時地利，寫篇關於天氣造成的空難，希望能夠讓各位（以及自己）更了解天氣對飛機產生的影響。</p><p>剛搬完新家兩個月，大約在行天宮靠近飛機巷的位置，從窗外的陽台就能聽見、看見 20 幾架飛機降落，當天的颱風夜也是。</p><p>我對飛機跟機師一直以來都是抱持著景仰的心態，跟軟體開發不同，那是一個無法容忍 bug 的世界，任何一個失誤都會造成無法挽回的結果。同時，撰寫一個穩定的飛機內部程式，代碼數應該就超過 100 萬了吧？已經遠超出我目前寫過的代碼了。</p><h3 id="前言-—-你有勇氣嗎？"><a href="#前言-—-你有勇氣嗎？" class="headerlink" title="前言 — 你有勇氣嗎？"></a>前言 — 你有勇氣嗎？</h3><p><strong>在閱讀本篇文章之前，請先確認自己對空難的接受度。</strong></p><p>如果你是那種會在颱風夜的機場大呼小叫的乘客，希望你看完這篇文章後能夠學會閉嘴；如果你上飛機第一件事是睡覺而不是看一下逃生門在哪，希望你以後會記得。</p><h3 id="天氣對飛機造成的影響"><a href="#天氣對飛機造成的影響" class="headerlink" title="天氣對飛機造成的影響"></a>天氣對飛機造成的影響</h3><h4 id="風"><a href="#風" class="headerlink" title="風"></a>風</h4><p>現代的飛機設計通常都可以應付天氣惡劣的狀況。即使如此，在<strong>起飛</strong>、<strong>降落</strong>這兩個程序當中，仍然會有許多突發狀況。</p><p>起飛時，因為飛機在滿載燃油、乘客的狀況下起飛，又因為剛開始的速度不足，需要靠<a href="https://www.wikiwand.com/zh-tw/%E8%A5%9F%E7%BF%BC" target="_blank" rel="noopener">襟翼</a>、<a href="https://www.wikiwand.com/zh-tw/%E5%89%8D%E7%BC%98%E7%BC%9D%E7%BF%BC" target="_blank" rel="noopener">縫翼</a>這兩個機翼的幫忙來提昇受風面積、增加昇力，飛機才能夠順利起飛。</p><p>如果這時風向突然改變，從逆風變為順風，就有可能因為空速不足而導致升力降低。通常會提高機鼻以及增加動力來獲得升力。</p><p>但是在颱風這種極端天氣下，如果風速的變化相當劇烈，飛機很容易受到影響，如果來不及在風速改變時作出反應（飛機加速、減速都需要時間），很有可能來不及控制飛機就出事了。</p><p>下降時也是一樣，如果突然由逆風變順風，導致降落速度增加，甚至是風切變等狀況，在颱風的影響下所有的風速都會對飛機產生巨大的影響。</p><p>風切變簡單來說就是風速、風向在兩點之間的急劇變化。飛機這種龐然大物很容易受到風的影響，如果風速急劇變化，會導致飛機在短時間內有劇烈的速度、高度變化，這也是為什麼在颱風降落時會有大怒神的感覺。（相信我，你不會想要體驗的）</p><p>降落速度太快，飛機就會衝出跑道；速度太慢，飛機有可能失速而垂直落地。</p><blockquote><p><em>我搭飛機那麼多次遇到颱風也沒事啊</em></p></blockquote><p>當然，機長們受過專業的訓練，會盡量地往天氣最好的地方飛行，降落時也會無所不用其極地找出最佳的進場時機。但<a href="https://www.wikiwand.com/zh/%E4%B8%AD%E8%8F%AF%E8%88%AA%E7%A9%BA642%E8%99%9F%E7%8F%AD%E6%A9%9F%E7%A9%BA%E9%9B%A3" target="_blank" rel="noopener">中華航空642班機</a>就沒有那麼幸運了。</p><p>這台飛往香港的班機中，因為當天的天氣不佳，側風在下降時甚至超出標準，但機長仍然選擇降落，最後因為被起降架無法承受負荷而斷裂，右機翼斷裂往右翻滾，最後再跑道的草皮上停止。</p><p>看完你一定會想，WTF 都已經降落了還空難，怎麼那麼雖小？是的。</p><p>除了天氣本身會直接影響飛行之外，這場空難的最主要原因是機長與副機長並未按照標準程序操作。</p><p>蛤？不按照標準程序操作，機長跟副機長也太不專業了吧？在責怪機師不專業之前，我們先想想他們要承擔的責任有哪些。</p><ul><li>把乘客平安送到目的地</li><li>聽命公司的要求起飛（而非出自專業判斷）</li><li>若決定停飛，可能被公司檢討，可能會上明日報紙頭條，可能會被其他航空公司嘲笑</li><li>若決定不降落，可能會被公司檢討，受到乘客指責，明日上頭條</li></ul><p>有沒有發現什麼不對勁了？機師的判斷竟不全然來自專業，而是受到多方面的影響，這是多麽不合理的一件事情。</p><p>機師也是人，難免會夾雜情緒在裡頭。所以儘管天氣不允許，機師們還是得咬牙放手一搏。儘管現在現代飛機的設計已經相當進步，但我們真的能夠全身而退嗎？</p><p><img src="https://cdn-images-1.medium.com/max/1250/1*yUOg0sYd5bbnqpf-8gwrew.jpeg" alt="松山機場，飛機降落"></p><h3 id="霧、雨"><a href="#霧、雨" class="headerlink" title="霧、雨"></a>霧、雨</h3><p>霧跟雨是相當常見的天氣因素。霧最直接的影響就是能見度。飛機目前可以靠儀器降落系統（ILS）完成降落。這個精密的儀器能夠告訴飛機跑道的中線，以及下滑的軌道，至於更詳細的原理可以<a href="https://www.wikiwand.com/zh-tw/%E4%BB%AA%E8%A1%A8%E7%9D%80%E9%99%86%E7%B3%BB%E7%BB%9F" target="_blank" rel="noopener">參考維基百科</a>。</p><p>但是飛行員通常還是需要目視跑道，確認飛機飛在正確的路線上。關於目視跑道有一套規定，飛行員如果找不到跑道，最低能夠下降到某個標準高度。</p><p>如果在這個標準高度內仍然沒有找到跑道就要執行迷失進場（missing approach）程序並且重飛（Go around），但有時候因為機師過於自信、受外力影響、天氣影響等等原因，可能就會不遵守此程序。</p><p>像是<a href="https://www.wikiwand.com/zh-tw/2010%E5%B9%B4%E6%B3%A2%E5%85%B0%E7%A9%BA%E5%86%9B%E5%9B%BE-154%E5%9D%A0%E6%9C%BA%E4%BA%8B%E4%BB%B6#/.E4.BA.8B.E6.95.85.E8.B0.83.E6.9F.A5" target="_blank" rel="noopener">波蘭空軍圖-154墜機事件</a>就是一個相當經典的例子。</p><p>這架載著波蘭總統<a href="https://www.wikiwand.com/zh-tw/%E8%90%8A%E8%B5%AB%C2%B7%E5%8D%A1%E6%AC%BD%E6%96%AF%E5%9F%BA" target="_blank" rel="noopener">列赫·卡辛斯基</a>以及多個高層長官的飛機，企圖在俄羅斯斯摩棱斯克降落時墜毀。當時因為機場起大霧，能見度只有 500 公尺左右，因此塔台建議飛行員直接飛往備降機場。</p><p>但此建議被機長拒絕，並且嘗試到 100 公尺高度時若不能降落在使用自動駕駛儀重飛。</p><p>結果導致機翼撞上樹梢墜落至地面解體，起火燃燒。機上乘客與機組人員 97 名全部遇難。</p><p>當時調查人員的結果認為，當時飛行員承受了間接壓力。有波蘭外交部禮賓司長、波蘭空軍司令官在後頭盯著你，硬著頭皮也要開下去。結果就釀成悲劇了。</p><p>前幾年發生的<a href="https://www.wikiwand.com/zh/%E5%BE%A9%E8%88%88%E8%88%AA%E7%A9%BA222%E8%99%9F%E7%8F%AD%E6%A9%9F%E7%A9%BA%E9%9B%A3#/.E4.BA.8B.E6.95.85.E5.8E.9F.E5.9B.A0" target="_blank" rel="noopener">復興航空222號班機空難</a>也是因為能見度影響、飛行員未遵守盲降標準而讓飛機在高度過低的情況下撞上樹林。（當然除了未遵守標準降落還有其他因素綜合在一起才導致這場悲劇）。</p><h4 id="其他因能見度導致的空難"><a href="#其他因能見度導致的空難" class="headerlink" title="其他因能見度導致的空難"></a>其他因能見度導致的空難</h4><ul><li><a href="https://www.wikiwand.com/zh/%E6%96%B0%E5%8A%A0%E5%9D%A1%E8%88%AA%E7%A9%BA006%E8%99%9F%E7%8F%AD%E6%A9%9F%E7%A9%BA%E9%9B%A3" target="_blank" rel="noopener">新加坡航空006號班機空難</a></li></ul><p><img src="https://cdn-images-1.medium.com/max/1250/1*bs5ghlNGIT6QyXHsuo6OFA.jpeg" alt="松山機場，飛機降落"></p><h3 id="冰雹"><a href="#冰雹" class="headerlink" title="冰雹"></a>冰雹</h3><p>冰雹對飛機來說是個相當可怕的夢魘，因為時速高達 800 ~ 900 公里的飛機，撞到冰雹可不是鬧著玩的。如果撞到擋風玻璃有可能會導致碎裂，被引擎吸入也可能導致引擎故障。<a href="https://www.wikiwand.com/zh-tw/%E5%8D%97%E6%96%B9%E8%88%AA%E7%A9%BA242%E8%99%9F%E7%8F%AD%E6%A9%9F%E7%A9%BA%E9%9B%A3" target="_blank" rel="noopener">南方航空242號班機空難</a>就是因為在暴風雨區被冰雹侵襲，導致兩具引擎熄火故障，最後因迫降失敗而墜毀在公路上。</p><h3 id="其他因天氣因素而觸發的空難"><a href="#其他因天氣因素而觸發的空難" class="headerlink" title="其他因天氣因素而觸發的空難"></a>其他因天氣因素而觸發的空難</h3><p>如果你對因天氣引起的空難有興趣，可以參考<a href="https://zh.wikipedia.org/wiki/Category:%E5%A4%A9%E6%B0%A3%E5%9B%A0%E7%B4%A0%E8%A7%B8%E7%99%BC%E7%9A%84%E8%88%AA%E7%A9%BA%E4%BA%8B%E6%95%85" target="_blank" rel="noopener">維基百科的連結</a>，或許可以給你更多的啟發。</p><p>事實上儘管是天氣因素影響，但仍然有 80% 的空難是因為人為錯誤而發生的。關於空難，很常見的心態是：<strong>「這次不一樣」</strong></p><p>因為科技進步，所以這次不會墜機；</p><p>因為有XXX輔助，所以這次不會墜機；</p><p>因為已經建立了標準程序，所以這次不會墜機；</p><p>因為已經…，所以這次不會…。</p><p>這次不一樣實在是個可怕的心態。</p><h3 id="如果不幸發生空難"><a href="#如果不幸發生空難" class="headerlink" title="如果不幸發生空難"></a>如果不幸發生空難</h3><p>人生總是充滿著意外，僅管搭飛機的意外次數已經遠小於車禍（兩位受過正規訓練的機師、精密儀器輔助的飛機），要讓飛機墜毀是一件不容易的事。但我們還是要以防萬一。</p><ul><li>在每趟飛行前記得保旅行平安險及旅行不便險，確保飛機在任何狀況下延誤，或是不幸發生空難時，能夠獲得最大的保障。至於如何挑選保險就看各位的需求了。</li><li>如果在飛機上發生空難，請先保護自己再去想辦法救別人。確定氧氣罩戴好能夠吸到氧氣，再來幫助別人。</li><li><strong>在起飛前靜下心來聽空服員解釋逃生設備以及使用方式，他們很有可能救你一命。</strong></li><li>採取防撞姿勢，雙手抱頭向前彎曲，頭貼在前方的座椅上，將撞擊力道降到最低。（以上描述僅為示意，詳細的防撞姿勢以空服員指導為準）</li><li>平時就當一位合格的旅客，不吵鬧、不喧嘩、不對空服員、地勤大呼小叫、多積點陰德。讓服務你的人心情舒適是確保整趟旅程品質的不二法門。</li></ul><h3 id="接下來可以怎麼做？"><a href="#接下來可以怎麼做？" class="headerlink" title="接下來可以怎麼做？"></a>接下來可以怎麼做？</h3><ul><li>僅靠政府、民航局來監督航空公司已經不太可靠。但人民團結起來的力量不容忽視，為了自己的生命著想，希望你能多關注這方面的議題，適時發聲與撻伐（記得理性溝通），讓航空公司想要說幹話的時候先三思。</li><li>嚴格遵守飛安標準。關於起飛與降落有一套標準規範（根據飛機與航空公司各有不同），必須要求航空公司嚴格遵守。</li><li>建立配套措施，讓颱風天仍然得上班的行業有個安心工作的環境。</li></ul><h3 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h3><h4 id="1-尊重專業"><a href="#1-尊重專業" class="headerlink" title="1. 尊重專業"></a>1. 尊重專業</h4><p>無論何時我們都應該尊重專業，不僅是機上的機師，各行各業皆如此。不過尊重專業的前提是對方要是位專業人士。</p><h4 id="2-讓錯誤被大家看見"><a href="#2-讓錯誤被大家看見" class="headerlink" title="2. 讓錯誤被大家看見"></a>2. 讓錯誤被大家看見</h4><p>空難不應該是大家說聲 R.I.P 就了事了，如果幾十人甚至幾百人的生命只能換來 R.I.P 的話是很令人扼腕的結局。每場空難都是相當珍貴的經驗。</p><h4 id="3-創造讓機組人員能夠安心的環境"><a href="#3-創造讓機組人員能夠安心的環境" class="headerlink" title="3. 創造讓機組人員能夠安心的環境"></a>3. 創造讓機組人員能夠安心的環境</h4><p>這在現在的台灣或許還是天方夜譚。但對於不合理的工時、環境、要求的公司，我們應該要能夠抵制或是拒乘，讓雙方的談判籌碼對等，才有扭轉的空間。而機師能夠心無旁騖地，依照自己的專業而非高層壓力做判斷。做得好就鼓勵，不按照程序飛行的機師我們也要幹到爆，讓他們知道背後都是有雙眼睛在監督著的。</p><h4 id="4-不要讓天氣控制了情緒"><a href="#4-不要讓天氣控制了情緒" class="headerlink" title="4.不要讓天氣控制了情緒"></a>4.不要讓天氣控制了情緒</h4><p>大家都想搭飛機，前往目的地。但無論如何，安全仍然是最重要的事，我們能做的是緩和自己的情緒。</p><hr><p>停飛不是兒戲，不管對機長、航空公司、乘客來講都是個耗時、花費金錢的決定。</p><p>如果機師不需要再背負上層壓力；如果對於惡劣天氣的應對不是先試試看再說；如果公司講幹話、做蠢事能夠受到制裁，或許大家都可以過得輕鬆一點。</p><p>好吧講太遠了。</p><p>最後如果你對飛機、空難有興趣的話，可以搜尋看看 Discovery 的空中浩劫，你會發現空難的原因五花八門，遠超乎你的想像。有把飛機給小孩開結果墜機的；有兩台飛機在跑道上互撞直接罹難的；有在天空上沒有燃油最後滑翔到機場的；有起飛時踩著煞車硬要飛結果墜機的；有自動駕駛跟駕駛操作衝突而墜機的；有飛機不聽話結果墜機的；有因為貨艙放太多酒精結果燒起來而墜機的……，或許這些看似與我們無關的空難，能夠對你有些幫助。</p><blockquote><p>本篇文章無意對任何機師、機組人員提出批評，只是分享個人觀點以及整理因天氣因素發生的空難事件。</p></blockquote><hr><p><strong>最後，祝福每位機師跟乘客旅途愉快。</strong></p><blockquote><p>Bon Vayage!</p></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;&lt;em&gt;我並不是機師或是受過訓練的專業人士，只是剛好家住在機場附近，喜歡看看飛機了解一下空難而已，以上言論難免有錯誤之處，盡請斧正。另外本篇文章可能會造成閱讀者的情緒不安或焦躁，在閱讀前請三思&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://cdn-images
-      
-    
-    </summary>
-    
-      <category term="雜談" scheme="http://kjj6198.github.io/categories/%E9%9B%9C%E8%AB%87/"/>
-    
-    
-      <category term="飛機" scheme="http://kjj6198.github.io/tags/%E9%A3%9B%E6%A9%9F/"/>
-    
-      <category term="空難" scheme="http://kjj6198.github.io/tags/%E7%A9%BA%E9%9B%A3/"/>
-    
-      <category term="天氣" scheme="http://kjj6198.github.io/tags/%E5%A4%A9%E6%B0%A3/"/>
     
   </entry>
   
