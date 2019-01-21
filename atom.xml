@@ -8,7 +8,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://kjj6198.github.io/"/>
-  <updated>2019-01-21T04:25:34.235Z</updated>
+  <updated>2019-01-21T04:26:10.098Z</updated>
   <id>http://kjj6198.github.io/</id>
   
   <author>
@@ -22,8 +22,8 @@
     <title>react-hot-loader 無法使用 react-hooks</title>
     <link href="http://kjj6198.github.io/2019/01/21/react-hot-loader-hooks/"/>
     <id>http://kjj6198.github.io/2019/01/21/react-hot-loader-hooks/</id>
-    <published>2019-01-21T03:06:17.453Z</published>
-    <updated>2019-01-21T04:25:34.235Z</updated>
+    <published>2019-01-20T16:00:00.000Z</published>
+    <updated>2019-01-21T04:26:10.098Z</updated>
     
     <content type="html"><![CDATA[<p>雖然說 <code>react-hooks</code> 也有一陣子了，不過那個時候我還正在服役，只能乾瞪眼。前幾天想把自己的 boileraplate 更新一下，發現在使用 react-hot-loader 時會沒辦法使用 <code>react-hooks</code> 相關的 API（如 useEffect, useMemo 等等），會出現如下圖的錯誤：</p><p>​​<img src="https://yaoya.s3.amazonaws.com/blog/2019-01-21-042437.png" alt="Object(...) is not function"></p><p>查了一下 <a href="https://github.com/gaearon/react-hot-loader/issues/1088" target="_blank" rel="noopener">issue</a>，發現維護者本人說：</p><blockquote><p>Yes. RHL is 100% not compatible with hooks. There is just a few reasons behind it.</p><ul><li>SFC are being converted to Class components. There is reason - to be able to <code>forceUpdate</code> on HMR, as long there is no “update” method on SFC. I am looking for other way of forcing the update (like <a href="https://github.com/facebook/create-react-app/blob/abe07e9538f0d548eefc753949a80376c9b89f8c/packages/react-dev-utils/forceUpdateHook.js#L84" target="_blank" rel="noopener">this</a>. So RHL is <strong>killing SFC</strong>.</li><li>“hotReplacementRender”. RHL is trying to do React’s job, and render the <em>old</em> and the <em>new</em> app, to merge them. So, obviously, that’s broken now.</li></ul><p>I am going to draft a PR, to mitigate both problems. It will work, but not today.</p></blockquote><p>看來是因爲 react-hot-loader 裡頭的機制造成的問題。雖然看了一下 README，官方表示已經可以支援 react-hooks，但我發現還是不行，仍然會出現一樣的問題。</p><p>目前的解決方式是將 <code>react-hot-loader</code> 升級到 <code>4.6.3</code>，並且將 <code>react</code> 跟 <code>react-dom</code> 升級到 <code>16.8.0-alpha.1</code>。希望趕快發佈正式版本 QQ</p>]]></content>
     
