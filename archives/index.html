@@ -23,6 +23,8 @@
         <link rel="alternate" href="/atom.xml" title="欠擬合 | UNder-fitting" type="application/atom+xml" />
     
 
+    <link rel="canonical" href="https://blog.kalan.dev"/>
+
     
         <link rel="icon" href="/imgs/favicon.ico" />
     
@@ -65,8 +67,7 @@ ga('send', 'pageview');
                     <img src="https://pbs.twimg.com/profile_images/915528631065047040/5-Do3QWr_400x400.jpg" alt="" class="avatar">
                     
                         <h2 class="subtitle-wrap">
-                            <p class="subtitle">Fun Driven Frontend Developer 最近的夢想是能夠光榮地回鄉工作。
-如果你也對日劇、機器學習、日文、前後端開發、React、程式、咖啡有興趣，或許我們可以聊聊
+                            <p class="subtitle">部落格已搬遷到 blog.kalan.dev
 </p>
                         </h2>
                     
@@ -166,6 +167,28 @@ ga('send', 'pageview');
     <div class="article-summary-inner">
         <div class="article-meta">
             <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2019-01-21T09:48:14.033Z" itemprop="datePublished">2019-01-21</time></p>
+        </div>
+        
+        <p class="article-excerpt">
+            在說明尾遞迴優化之前，我們先來瞧瞧什是尾調用。當函式的 return 結果是調用另外一個函數的結果，就稱之為尾調用，像是下面這個例子：
+12345678910function a(x) &#123;  return x&#125;function b(y) &#123;   const result = y + 1;   return a(result);&#125;console.log(b(1...
+        </p>
+    </div>
+</article>
+
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        <div class="article-meta">
+            <p class="category">
             <a class="article-category-link" href="/categories/前端/">前端</a>
             </p>
             <p class="date"><time datetime="2019-01-20T16:00:00.000Z" itemprop="datePublished">2019-01-21</time></p>
@@ -185,10 +208,14 @@ ga('send', 'pageview');
 </article>
 
     
+        </div>
+    
 
     
     
     
+    
+        <div class="article-row">
     
         <article class="article article-summary">
     <div class="article-summary-inner">
@@ -216,14 +243,10 @@ Yes. RHL is 100% no...
 </article>
 
     
-        </div>
-    
 
     
     
     
-    
-        <div class="article-row">
     
         <article class="article article-summary">
     <div class="article-summary-inner">
@@ -249,10 +272,14 @@ Yes. RHL is 100% no...
 </article>
 
     
+        </div>
+    
 
     
     
     
+    
+        <div class="article-row">
     
         <article class="article article-summary">
     <div class="article-summary-inner">
@@ -289,8 +316,6 @@ Yes. RHL is 100% no...
     </div>
 </article>
 
-    
-        </div>
     
 
     
@@ -795,37 +820,6 @@ Reac...
 
     
 
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        <div class="article-meta">
-            <p class="category">
-            <a class="article-category-link" href="/categories/前端/">前端</a>
-            </p>
-            <p class="date"><time datetime="2017-08-18T09:11:38.000Z" itemprop="datePublished">2017-08-18</time></p>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2017/08/18/Sass/">你可能不知道的 Sass 技巧</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            我發現有許多前端工程師只把 sass 當作有變數、nested class 跟 &amp; 的 CSS 來撰寫。
-在 Sass 當中有許多好用的函式跟功能，如果不知道如何使用的話，對一個強大的預處理器來說，這是件相當可惜的事情。Sass3.5 的更新加強了對 css variable 的支持。
-在考慮使用 CSS in Javascript 或是引入 PostCSS 的 plugin 之前，先看看...
-        </p>
-    </div>
-</article>
-
-    
-        </div>
-    
-
 
     </div></section>
 
@@ -914,6 +908,14 @@ Reac...
                 
                     <li>
                         <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2019/01/21/尾遞迴優化/" class="title"></a></p>
+                            <p class="item-date"><time datetime="2019-01-21T09:48:14.033Z" itemprop="datePublished">2019-01-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
                             <p class="item-title"><a href="/2019/01/21/abort-controller/" class="title">新的取消請求方式 - AbortController</a></p>
                             <p class="item-date"><time datetime="2019-01-20T16:00:00.000Z" itemprop="datePublished">2019-01-21</time></p>
@@ -944,14 +946,6 @@ Reac...
                         </div>
                     </li>
                 
-                    <li>
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/golang/">golang</a></p>
-                            <p class="item-title"><a href="/2018/09/03/golang-env-variable/" class="title">【golang 筆記】 如何為你的專案設定環境變數</a></p>
-                            <p class="item-date"><time datetime="2018-09-03T15:02:53.000Z" itemprop="datePublished">2018-09-03</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -972,7 +966,7 @@ Reac...
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">歸檔</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">六月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">二月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">一月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">十月 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">九月 2014</a><span class="archive-list-count">1</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">六月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">二月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">一月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">十月 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">九月 2014</a><span class="archive-list-count">1</span></li></ul>
         </div>
     </div>
 

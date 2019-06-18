@@ -3,20 +3,25 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     
-    <title>分類：: 日語學習 | 欠擬合 | UNder-fitting</title>
+    <title>欠擬合 | UNder-fitting</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-    <meta name="description" content="Fun Driven Frontend Developer 最近的夢想是能夠光榮地回鄉工作。 interested in #frontend #react #redux #rxjs #japanese #machine-learning">
+        <meta name="keywords" content="" />
+    
+    <meta name="description" content="在說明尾遞迴優化之前，我們先來瞧瞧什是尾調用。當函式的 return 結果是調用另外一個函數的結果，就稱之為尾調用，像是下面這個例子： 12345678910function a(x) &amp;#123;  return x&amp;#125;function b(y) &amp;#123;   const result = y + 1;   return a(result);&amp;#125;console.log(b(1">
 <meta name="keywords" content="前端 工程師 程式 機器學習 frontend frontend redux rxjs">
-<meta property="og:type" content="website">
+<meta property="og:type" content="article">
 <meta property="og:title" content="欠擬合 | UNder-fitting">
-<meta property="og:url" content="http://kjj6198.github.io/categories/日語學習/index.html">
+<meta property="og:url" content="http://kjj6198.github.io/2019/01/21/尾遞迴優化/index.html">
 <meta property="og:site_name" content="欠擬合 | UNder-fitting">
-<meta property="og:description" content="Fun Driven Frontend Developer 最近的夢想是能夠光榮地回鄉工作。 interested in #frontend #react #redux #rxjs #japanese #machine-learning">
+<meta property="og:description" content="在說明尾遞迴優化之前，我們先來瞧瞧什是尾調用。當函式的 return 結果是調用另外一個函數的結果，就稱之為尾調用，像是下面這個例子： 12345678910function a(x) &amp;#123;  return x&amp;#125;function b(y) &amp;#123;   const result = y + 1;   return a(result);&amp;#125;console.log(b(1">
 <meta property="og:locale" content="zh-TW">
+<meta property="og:image" content="https://yaoya.s3.amazonaws.com/blog/2019-01-21-101214.jpg">
+<meta property="og:updated_time" content="2019-01-21T10:30:19.243Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="欠擬合 | UNder-fitting">
-<meta name="twitter:description" content="Fun Driven Frontend Developer 最近的夢想是能夠光榮地回鄉工作。 interested in #frontend #react #redux #rxjs #japanese #machine-learning">
+<meta name="twitter:description" content="在說明尾遞迴優化之前，我們先來瞧瞧什是尾調用。當函式的 return 結果是調用另外一個函數的結果，就稱之為尾調用，像是下面這個例子： 12345678910function a(x) &amp;#123;  return x&amp;#125;function b(y) &amp;#123;   const result = y + 1;   return a(result);&amp;#125;console.log(b(1">
+<meta name="twitter:image" content="https://yaoya.s3.amazonaws.com/blog/2019-01-21-101214.jpg">
     
 
     
@@ -143,101 +148,118 @@ ga('send', 'pageview');
                         <div class="main-body-header">
     <h1 class="header">
     
-    <i class="icon fa fa-folder-open"></i>分類：: <em class="page-title-link">日語學習</em>
+    未分類
     </h1>
 </div>
                         <div class="main-body-content">
-                            
+                            <article id="post-尾遞迴優化" class="article article-single article-type-post" itemscope
+  itemprop="blogPost">
+  <div class="article-inner">
+    
+        
+          <div class="article-subtitle">
+            <a href="/2019/01/21/尾遞迴優化/" class="article-date">
+    <time datetime="2019-01-21T09:48:14.033Z" itemprop="datePublished">2019-01-21</time>
+</a>
+              
+          </div>
+          
+            <div class="article-entry" itemprop="articleBody">
+              <p>在說明尾遞迴優化之前，我們先來瞧瞧什是尾調用。當函式的 return 結果是調用另外一個函數的結果，就稱之為尾調用，像是下面這個例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params">x</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> x</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">b</span>(<span class="params">y</span>) </span>&#123;</span><br><span class="line">   <span class="keyword">const</span> result = y + <span class="number">1</span>;</span><br><span class="line">   <span class="keyword">return</span> a(result);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(b(<span class="number">10</span>));</span><br></pre></td></tr></table></figure>
+<p>在 javascript 當中，每次呼叫一個函數，就會為這個函數調用建立一個 scope，這個 scope 儲存了裡頭會用到的變數跟要 return 的 address（這樣才知道這個值要回傳給哪個函數）。我們通常稱這個 scope 叫做 <strong>stack frame</strong>。</p>
+<p>所以執行上面的函數，javascript 的 stack 裡頭大概會長這樣。</p>
+<p><img src="https://yaoya.s3.amazonaws.com/blog/2019-01-21-101214.jpg" alt="IMG_0208"></p>
+<p>之後就 pop 出來執行。</p>
+<p>為了方便瀏覽，我們把 global frame 拿掉。</p>
+<p><img src="https://yaoya.s3.amazonaws.com/blog/2019-01-21-101302.jpg" alt="IMG_0209"></p>
+<p>從上圖中我們可以發現到 <code>b(y)</code> 這個函式其實有點多餘，他其實在第一個 stack 中就已經決定好 value 了，只是等著 pop 出來而已。那麼，其實我們在呼叫 <code>a(x)</code> 的時候就可以先讓 <code>b(y)</code> 跳出來了。</p>
+<h3 id="尾呼叫的好處"><a href="#尾呼叫的好處" class="headerlink" title="尾呼叫的好處"></a>尾呼叫的好處</h3><p>所以看起來就只是，嗯..讓 <code>b(y)</code> 提早跳出來？</p>
+<p>現在可以進入正題，尾遞迴優化了。所謂的尾遞迴就是在函式的最後調用自己。相信大家在寫遞迴函式的時候，如果遞迴條件沒有寫好，或是參數太大的時候，就會遇到下面這種情形。</p>
+<p><img src="https://yaoya.s3.amazonaws.com/blog/2019-01-21-101614.png" alt="螢幕快照 2019-01-21 下午6.15.48"></p>
+<p>原因很簡單，因為 stack 裡頭的大小不可能無限增長，所以一旦參數變大，stack 也會跟著變大，如果超出瀏覽器定義的大小就會噴錯了。</p>
+<p>以下的函式並沒有符合尾調用，因為這邊的 <code>n + sum(n - 1)</code> 並不是對自己的函式調用。</p>
+<h2 id="支援度"><a href="#支援度" class="headerlink" title="支援度"></a>支援度</h2><p>雖然有尾遞迴優化，不過現在好像很少瀏覽器有支援就是了。不過能夠使用尾遞迴優化的函數都可以用 loop 代替。</p>
 
-    
-    
-        
-        
-        <section class="archives-wrap">
-            <div class="archive-year-wrap">
-                <a href="/archives/2017" class="archive-year"><i class="icon fa fa-calendar-o"></i>2017</a>
             </div>
-            <div class="archives">
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        <div class="article-meta">
-            <p class="category">
-            <a class="article-category-link" href="/categories/日語學習/">日語學習</a>
-            </p>
-            <p class="date"><time datetime="2017-10-07T13:47:12.000Z" itemprop="datePublished">2017-10-07</time></p>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2017/10/07/jlpt-learning/">自學四年通過日檢 N2 心得</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            前言從大學開始，因為高中畢業後對日本文化相當有興趣，所以開始自學五十音。先談談我的背景：
-
-高職電子科畢業
-科大資管系
-
-大學選修初階日文跟進階日文，不過進度本身已超過課程許多。期間雖然一直想報名日檢，但礙於自身實力與經濟考量，所以直到大學快畢業後才報考日檢。
-以下是我這次的日檢成績：
-
-日本語能力檢定 N2 (134/180)
-日本語能力檢定 N3 (163/180)
+            <footer class="article-footer">
+              
 
 
 
-這並不是很亮眼的成績...
-        </p>
-    </div>
+    <a data-url="http://kjj6198.github.io/2019/01/21/尾遞迴優化/" data-id="cjx13gord003ffo5txvcpgvk6" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            </footer>
+  </div>
 </article>
 
+    <section id="comments">
     
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        <div class="article-meta">
-            <p class="category">
-            <a class="article-category-link" href="/categories/日語學習/">日語學習</a>
-            </p>
-            <p class="date"><time datetime="2017-07-13T16:00:00.000Z" itemprop="datePublished">2017-07-14</time></p>
-        </div>
         
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2017/07/14/what-is-yaoya/">做了一份週刊 - 日語八百屋</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            自學日文也已經三年多了，做了一份周刊，叫做日語八百屋。
-
-粉絲專頁
-Medium
-
-什麼是日語八百屋？八百屋的由來源自於日語的八百屋（やおや），除了大家熟知的「蔬菜店」之外，也有「很多」的意思在裡頭。
-我的目標很簡單：「滿足日文、日本、日劇愛好者們的求知慾以及資訊焦慮症。幫助減少學習阻礙、資訊不對稱、增加日本文化知識，內容涵蓋了日語學習、日本旅行、日本文化、動漫、語言學習技巧等等。」
-學語言，多的...
-        </p>
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     </div>
-</article>
 
     
-        </div>
-    
-
-
-    </div></section>
-
+    </section>
 
 
 
@@ -307,6 +329,19 @@ Medium
             
         </ul>
     </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2019/01/21/abort-controller/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">新的取消請求方式 - AbortController</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
     
     <div class="widgets-container">
         
@@ -406,11 +441,13 @@ Medium
     var disqus_shortname = 'frontendclothesline';
     
     
+    var disqus_url = 'http://kjj6198.github.io/2019/01/21/尾遞迴優化/';
+    
     (function() {
     var dsq = document.createElement('script');
     dsq.type = 'text/javascript';
     dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
     </script>
